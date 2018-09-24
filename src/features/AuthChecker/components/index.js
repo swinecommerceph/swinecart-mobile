@@ -13,9 +13,9 @@ import Spinner from 'react-native-spinkit';
 class AuthChecker extends PureComponent {
 
   componentDidMount() {
-    setTimeout(() => {
-      this.props.navigation.navigate('Shop');
-    }, 3000);
+    // setTimeout(() => {
+    //   this.props.navigation.navigate('Shop');
+    // }, 3000);
   }
 
   render() {
@@ -23,7 +23,7 @@ class AuthChecker extends PureComponent {
       <Container style={{ flex: 1 }}>
         <Content contentContainerStyle={[styles.container]}>
           <Spinner
-            type='ChasingDots'
+            type='ThreeBounce'
             color='#ffffff'
             size={100}
           />
