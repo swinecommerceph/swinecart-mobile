@@ -4,28 +4,41 @@ import {
   Text,
   StyleSheet
 } from 'react-native';
-
+import  {
+  Container,
+  Content
+} from 'native-base'
+import Spinner from 'react-native-spinkit';
 
 class AuthChecker extends PureComponent {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('Breeder');
+      this.props.navigation.navigate('Shop');
     }, 3000);
   }
 
   render() {
     return (
-      <View style={[styles.container]}>
-        <Text>Checking if theres a logged in user...</Text>
-      </View>
+      <Container style={{ flex: 1 }}>
+        <Content contentContainerStyle={[styles.container]}>
+          <Spinner
+            type='ChasingDots'
+            color='#ffffff'
+            size={100}
+          />
+        </Content>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#00af66',
   }
 });
 
