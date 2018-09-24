@@ -6,11 +6,11 @@ import {
 } from 'react-native';
 
 
-class Products extends PureComponent {
+class Shop extends PureComponent {
   render() {
     return (
       <View style={[styles.container]}>
-        <Text>Products!!</Text>
+        <Text>Shop</Text>
       </View>
     );
   }
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Products;
+export default Shop;

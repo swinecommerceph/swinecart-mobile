@@ -6,14 +6,16 @@ import {
 } from 'react-navigation';
 
 import AuthChecker from '../../features/AuthChecker';
-import Products from '../../features/Products';
+import Shop from '../../features/Shop';
+import Login from '../../features/Login';
 
 import BreederTabNavigator from '../navigators/BreederTabNavigator';
 
 const RootNavigator = createSwitchNavigator({
   AuthChecker: AuthChecker,
-  Products: Products,
-  Breeder: BreederTabNavigator
+  PublicShop: Shop,
+  Breeder: BreederTabNavigator,
+  Login: Login
 }, {
   initialRouteName: 'AuthChecker'
 });
