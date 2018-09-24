@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  AsyncStorage
 } from 'react-native';
 import  {
   Container,
@@ -16,6 +17,29 @@ class AuthChecker extends PureComponent {
     // setTimeout(() => {
     //   this.props.navigation.navigate('Shop');
     // }, 3000);
+    // const data = JSON.stringify({ name: 'Gio', role: 'Breeder' });
+    // AsyncStorage.setItem('user', data);
+    // AsyncStorage.removeItem('user');
+    this.checkUser();
+  }
+
+  checkUser = async () => {
+    const data = await AsyncStorage.getItem('user');
+    const user = JSON.parse(data);
+    if(user) {
+      const { role } = user;
+      // setUser in UserStore
+      // check role of user
+      // navigate to screen according to role
+      setTimeout(() => {
+        this.props.navigation.navigate(role);
+      }, 500);
+    }
+    else {
+      setTimeout(() => {
+        this.props.navigation.navigate('PublicShop');
+      }, 500);
+    }
   }
 
   render() {

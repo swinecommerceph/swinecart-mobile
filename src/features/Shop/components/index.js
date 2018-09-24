@@ -10,7 +10,7 @@ class Shop extends PureComponent {
   render() {
     return (
       <View style={[styles.container]}>
-        <Text>Products!!</Text>
+        <Text>Shop</Text>
       </View>
     );
   }

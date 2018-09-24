@@ -7,13 +7,15 @@ import {
 
 import AuthChecker from '../../features/AuthChecker';
 import Shop from '../../features/Shop';
+import Login from '../../features/Login';
 
 import BreederTabNavigator from '../navigators/BreederTabNavigator';
 
 const RootNavigator = createSwitchNavigator({
   AuthChecker: AuthChecker,
-  Shop: Shop,
-  Breeder: BreederTabNavigator
+  PublicShop: Shop,
+  Breeder: BreederTabNavigator,
+  Login: Login
 }, {
   initialRouteName: 'AuthChecker'
 });
