@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import {
   Container, Content, Header, Body, Title, StyleProvider, Form, Item, Text,
-  Input, Button, Label, View, Icon, Footer, FooterTab
+  Input, Button, View, Icon, ScrollView
 } from 'native-base';
 
 import Divider from 'react-native-divider';
@@ -28,6 +28,14 @@ class Login extends PureComponent {
     this.delay(() => {
       alert('Letz go!');
     });
+  }
+
+  facebookLogin = () => {
+    alert('Facebook Login');
+  }
+
+  googleLogin = () => {
+    alert('Google Login');
   }
 
   render() {
@@ -108,10 +116,16 @@ class Login extends PureComponent {
                 </Divider>
               </View>
               <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }]}>
-                <Button style={[flatButton, sideBySide, { backgroundColor: '#3B5998' }]}>
+                <Button
+                  style={[flatButton, sideBySide, { backgroundColor: '#3B5998' }]}
+                  onPress={this.facebookLogin}
+                >
                   <Icon type='FontAwesome' name='facebook-square' />
                 </Button>
-                <Button style={[flatButton, sideBySide, { backgroundColor: '#DB3236' }]}>
+                <Button 
+                  style={[flatButton, sideBySide, { backgroundColor: '#DB3236' }]}
+                  onPress={this.googleLogin}
+                >
                   <Icon type='FontAwesome' name='google' />
                 </Button>
               </View>
