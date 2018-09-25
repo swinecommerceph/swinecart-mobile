@@ -1,7 +1,4 @@
 import {
-  View
-} from 'react-native';
-import {
   createSwitchNavigator
 } from 'react-navigation';
 

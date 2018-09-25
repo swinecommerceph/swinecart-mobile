@@ -7,11 +7,11 @@ import {
 
 import BreederScreen from '../../features/BreederScreen';
 
-const BreederTabNavigator = createBottomTabNavigator({
+const navigator = createBottomTabNavigator({
   'home' : BreederScreen
 },
 {
   initialRouteName: 'home'
 });
 
-export default BreederTabNavigator;
+export default navigator;
