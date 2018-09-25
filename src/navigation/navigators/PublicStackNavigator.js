@@ -4,12 +4,14 @@ import {
 
 import Shop from '../../features/Shop';
 import Login from '../../features/Login';
+import Register from '../../features/Register';
 
 const navigator = createStackNavigator({
   Shop: Shop,
-  Login: Login
+  Login: Login,
+  Register: Register
 }, {
-  initialRouteName: 'Shop',
+  initialRouteName: 'Login',
   navigationOptions: ({ navigation }) => {
     return {
       header: null

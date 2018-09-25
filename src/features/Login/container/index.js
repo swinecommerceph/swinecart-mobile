@@ -3,22 +3,8 @@ import {
   StyleSheet
 } from 'react-native';
 import {
-  Container,
-  Content,
-  Header,
-  Body,
-  Title,
-  StyleProvider,
-  Form,
-  Item,
-  Text,
-  Input,
-  Button,
-  Label,
-  View,
-  Icon,
-  Footer,
-  FooterTab
+  Container, Content, Header, Body, Title, StyleProvider, Form, Item, Text,
+  Input, Button, Label, View, Icon, Footer, FooterTab
 } from 'native-base';
 
 import Divider from 'react-native-divider';
@@ -26,14 +12,22 @@ import Divider from 'react-native-divider';
 import commonColor from '../../../../native-base-theme/variables/commonColor';
 import getTheme from '../../../../native-base-theme/components';
 
-
 class Login extends PureComponent {
-  
 
-  navigateTo(route) {
-    setTimeout(() => {
+  delay = fn => {
+    setTimeout(() => fn(), 10);
+  }
+
+  navigateTo = route =>  {
+    this.delay(() => {
       this.props.navigation.navigate(route);
-    }, 10);
+    });
+  }
+
+  login = () =>  {
+    this.delay(() => {
+      alert('Letz go!');
+    });
   }
 
   render() {
@@ -74,13 +68,20 @@ class Login extends PureComponent {
                 </Item>
                 <Item style={[fullInput]}>
                   <Input placeholder='Password' style={[openSansSemiBold]} secureTextEntry={true} />
-                  <Button style={[flatButton, { backgroundColor: 'transparent' }]}>
+                  <Button 
+                    style={[flatButton, { backgroundColor: 'transparent' }]}
+                    onPress={() => this.navigateTo('ForgotPassword')}
+                  >
                     <Text uppercase={false} style={[openSansSemiBold, { fontSize: 9, color: '#000000' }]}>
                       Forgot Password?
                     </Text>
                   </Button>
                 </Item>
-                <Button block style={[backgroundPrimary, flatButton, { marginTop: 20 }]}>
+                <Button 
+                  block 
+                  style={[backgroundPrimary, flatButton, { marginTop: 20 }]}
+                  onPress={this.login}
+                >
                   <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Login</Text>
                 </Button>
               </Form>
@@ -90,7 +91,7 @@ class Login extends PureComponent {
               <Button 
                 block 
                 style={[flatButton, { backgroundColor: 'transparent', alignItems: 'center' }]} 
-                onPress={() => this.navigateTo('Register')} 
+                onPress={() => this.navigateTo('Register')}
               >
                 <Text uppercase={false} style={[openSansBold, { fontSize: 14, color: '#000000' }]}>
                   Tap here to create a Customer account!
