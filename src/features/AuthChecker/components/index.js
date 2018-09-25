@@ -39,7 +39,7 @@ class AuthChecker extends PureComponent {
     }
     else {
       setTimeout(() => {
-        this.props.navigation.navigate('Login');
+        this.props.navigation.navigate('Public');
       }, 500);
     }
   }
