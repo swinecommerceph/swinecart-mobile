@@ -1,21 +1,16 @@
 import {
-  View
-} from 'react-native';
-import {
   createSwitchNavigator
 } from 'react-navigation';
 
 import AuthChecker from '../../features/AuthChecker';
-import Shop from '../../features/Shop';
-import Login from '../../features/Login';
 
 import BreederTabNavigator from '../navigators/BreederTabNavigator';
+import PublicStackNavigator from '../navigators/PublicStackNavigator';
 
 const RootNavigator = createSwitchNavigator({
   AuthChecker: AuthChecker,
-  PublicShop: Shop,
-  Breeder: BreederTabNavigator,
-  Login: Login
+  Public: PublicStackNavigator,
+  Breeder: BreederTabNavigator
 }, {
   initialRouteName: 'AuthChecker'
 });
