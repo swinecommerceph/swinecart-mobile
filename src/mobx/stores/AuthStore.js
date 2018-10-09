@@ -1,22 +1,21 @@
 import {
-  observable, computed, action, configure, toJS
+  observable, action, toJS
 } from 'mobx';
 
 import {
-  AsyncStorage
-} from 'react-native';
-
-import {
-  Auth
+  Auth, Navigation
 } from '../../services';
+
+import CommonStore from './CommonStore';
+import UserStore from './UserStore';
 
 class AuthStore {
 
   @observable loading = false;
 
   @observable values = {
-    email: '',
-    password: ''
+    email: 'dean.wilkinson@kutch.org',
+    password: 'secret12'
   };
 
   @action setEmail(email) {
@@ -35,8 +34,10 @@ class AuthStore {
   @action async login() {
     this.loading = true;
     try {
-      const data = await Auth.login(this.values);
-      console.log(toJS(this.values));
+      const { data: { data: { access_token : token } } } = await Auth.login(this.values);
+      await CommonStore.setToken(token);
+      await UserStore.getUser();
+      Navigation.navigate(UserStore.userRole);
     }
     catch(e) {
       console.error(e);

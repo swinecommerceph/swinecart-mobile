@@ -42,7 +42,6 @@ const navigator = createBottomTabNavigator({
   initialRouteName: 'ManageProducts',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
-    console.log(routeName);
     return {
       tabBarIcon: ({ focused }) => {
         return <Icon 

@@ -1,6 +1,9 @@
+import React, { Component } from 'react';
 import {
   createSwitchNavigator
 } from 'react-navigation';
+
+import Navigation from '../../services/navigation';
 
 import AuthChecker from '../../features/AuthChecker';
 
@@ -15,4 +18,11 @@ const RootNavigator = createSwitchNavigator({
   initialRouteName: 'AuthChecker'
 });
 
-export default RootNavigator;
+class Root extends Component {
+  state = {};
+  render() {
+    return <RootNavigator ref={r => Navigation.setTopLevelNavigator(r)} />;
+  }
+}
+
+export default Root;
