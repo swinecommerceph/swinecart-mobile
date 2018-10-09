@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet
 } from 'react-native';
@@ -7,12 +7,18 @@ import {
   Input, Button, View, Icon, ScrollView
 } from 'native-base';
 
+import {
+  observer, inject
+} from 'mobx-react';
+
 import Divider from 'react-native-divider';
 
 import commonColor from '../../../../native-base-theme/variables/commonColor';
 import getTheme from '../../../../native-base-theme/components';
 
-class Login extends PureComponent {
+@inject(['AuthStore'])
+@observer
+class Login extends Component {
 
   delay = fn => {
     setTimeout(() => fn(), 10);
@@ -24,10 +30,16 @@ class Login extends PureComponent {
     });
   }
 
-  login = () =>  {
-    this.delay(() => {
-      alert('Letz go!');
-    });
+  login = async () =>  {
+    this.props.AuthStore.login();
+  }
+
+  handleEmailChange = value => {
+    this.props.AuthStore.setEmail(value);
+  }
+
+  handlePasswordChange = value => {
+    this.props.AuthStore.setPassword(value);
   }
 
   facebookLogin = () => {
@@ -72,10 +84,10 @@ class Login extends PureComponent {
             <View style={{ marginVertical: 10 }}>
               <Form>
                 <Item style={[fullInput]}>
-                  <Input placeholder='Email' style={[openSansSemiBold]} />
+                  <Input placeholder='Email' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
                 </Item>
                 <Item style={[fullInput]}>
-                  <Input placeholder='Password' style={[openSansSemiBold]} secureTextEntry={true} />
+                  <Input placeholder='Password' style={[openSansSemiBold]} secureTextEntry={true} onChangeText={this.handlePasswordChange}/>
                   <Button 
                     style={[flatButton, { backgroundColor: 'transparent' }]}
                     onPress={() => this.navigateTo('ForgotPassword')}

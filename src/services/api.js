@@ -4,28 +4,41 @@ import {
   API_URL
 } from 'react-native-dotenv';
 
+import CommonStore from '../mobx/stores/CommonStore';
+
 // const API_URL = 'http://swinecart.test/api';
 
 console.log('API_URL', API_URL);
 
 const instance = axios.create({
   baseURL: API_URL,
-  timeout: 2000,
-  headers: { 
-    Accept: 'application/json',
-    'Content-Type': 'application/x-www-form-urlencoded' 
-  },
+  timeout: 2000
 });
+
+instance.interceptors.request.use(
+  config => {
+    const token = CommonStore.token;
+    if(token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  err => {
+    return Promise.reject(err);
+  }
+);
 
 instance.interceptors.response.use(
   response => response,
   err => {
     if(err && err.response && err.response.status === 401) {
-      
+      console.log(err.request);
     }
-    return err;
+    return Promise.reject(err);
   }
 );
+
+
 
 const api = {
   get(url, options = {}) {

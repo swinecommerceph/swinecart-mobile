@@ -24,24 +24,23 @@ class AuthChecker extends PureComponent {
   }
 
   checkToken = async () => {
-    const data = await AsyncStorage.getItem('token');
-    const token = JSON.parse(data);
-    if(token) {
-      // get /me in api then check if token is valid or not
-      // if token is valid get role and navigate to role screen
-      // const { role } = user;
-      // setUser in UserStore
-      // check role of user
-      // navigate to screen according to role
-      // setTimeout(() => {
-      //   this.props.navigation.navigate(role);
-      // }, 500);
-    }
-    else {
+    // const token = await AsyncStorage.getItem('token');
+    // if(token) {
+    //   // get /me in api then check if token is valid or not
+    //   // if token is valid get role and navigate to role screen
+    //   // const { role } = user;
+    //   // setUser in UserStore
+    //   // check role of user
+    //   // navigate to screen according to role
+    //   // setTimeout(() => {
+    //   //   this.props.navigation.navigate(role);
+    //   // }, 500);
+    // }
+    // else {
       setTimeout(() => {
         this.props.navigation.navigate('Public');
       }, 500);
-    }
+    // }
   }
 
   render() {
