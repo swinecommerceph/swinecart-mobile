@@ -1,1 +1,6 @@
-import http from './http';
+
+import Auth from './auth';
+
+export {
+  Auth
+};

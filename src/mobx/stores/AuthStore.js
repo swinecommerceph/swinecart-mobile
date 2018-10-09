@@ -1,11 +1,14 @@
 import {
-  observable, computed, action, configure
+  observable, computed, action, configure, toJS
 } from 'mobx';
 
 import {
   AsyncStorage
 } from 'react-native';
 
+import {
+  Auth
+} from '../../services';
 
 class AuthStore {
 
@@ -29,8 +32,15 @@ class AuthStore {
     this.values.password = '';
   }
 
-  @action login() {
+  @action async login() {
     this.loading = true;
+    try {
+      const data = await Auth.login(this.values);
+      console.log(toJS(this.values));
+    }
+    catch(e) {
+      console.error(e);
+    }
   }
 
 }
