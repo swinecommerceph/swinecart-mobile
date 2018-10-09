@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import {
-  View,
-  Text,
   StyleSheet,
   AsyncStorage
 } from 'react-native';
@@ -10,6 +8,8 @@ import  {
   Content
 } from 'native-base'
 import Spinner from 'react-native-spinkit';
+
+import { Navigation } from '../../../services/';
 
 class AuthChecker extends PureComponent {
 
@@ -38,7 +38,7 @@ class AuthChecker extends PureComponent {
     // }
     // else {
       setTimeout(() => {
-        this.props.navigation.navigate('Public');
+        Navigation.navigate('Public');
       }, 500);
     // }
   }

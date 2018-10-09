@@ -3,7 +3,7 @@ import {
 } from 'mobx';
 
 import {
-  Auth
+  Auth, Navigation
 } from '../../services';
 
 import CommonStore from './CommonStore';
@@ -37,6 +37,7 @@ class AuthStore {
       const { data: { data: { access_token : token } } } = await Auth.login(this.values);
       await CommonStore.setToken(token);
       await UserStore.getUser();
+      Navigation.navigate(UserStore.userRole);
     }
     catch(e) {
       console.error(e);

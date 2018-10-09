@@ -77,7 +77,7 @@ class Login extends Component {
             <View style={{ alignItems: 'center' }}>
               <Text style={[openSansBold, { fontSize: 22 }]}>Welcome!</Text>
               <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
-                Login to your Customer account!
+                Login to your account!
               </Text>
             </View>
 
