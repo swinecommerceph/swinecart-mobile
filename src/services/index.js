@@ -1,6 +1,8 @@
 
 import Auth from './auth';
+import Navigation from './navigation';
 
 export {
-  Auth
+  Auth,
+  Navigation
 };

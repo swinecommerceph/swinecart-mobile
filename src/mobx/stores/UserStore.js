@@ -1,20 +1,29 @@
 import {
-  observable, computed, action, configure
+  observable, action, toJS, autorun, runInAction, computed
 } from 'mobx';
 
 import {
-  AsyncStorage
-} from 'react-native';
-
+  Auth
+} from '../../services';
 class UserStore {
 
-  @observable currentUser;
+  @observable user;
   @observable loadinguser;
   @observable updatingUser;
 
-  @action getUser() {
-
+  @action async getUser() {
+    const { data: { user }  } = await Auth.me();
+    runInAction(() => {
+      this.user = user;
+    });
   }
+  
+  @computed get userRole() {
+    const role = this.user.userable_type.split('\\')[2];
+    return role;
+  }
+
+  reactToUserChange = autorun(() => { console.log('User:', toJS(this.user)) });
 
 }
 
