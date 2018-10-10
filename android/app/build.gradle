@@ -99,7 +99,7 @@ android {
 
     defaultConfig {
         applicationId "com.swinecart"
-        minSdkVersion rootProject.ext.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
@@ -122,7 +122,7 @@ android {
             reset()
             include 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a' //select ABIs to build APKs for
             universalApk true //generate an additional APK that contains all the ABIs
-}
+        }
     }
     buildTypes {
         release {
@@ -150,12 +150,19 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'org.webkit:android-jsc:r225067'
+    }
+}
+
 dependencies {
     compile project(':react-native-spinkit')
     compile project(':react-native-splash-screen')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    compile 'org.webkit:android-jsc:r174650'
 }
 
 // Run this once to be able to run the application with BUCK
