@@ -14,8 +14,8 @@ class AuthStore {
   @observable loading = false;
 
   @observable values = {
-    email: 'dean.wilkinson@kutch.org',
-    password: 'secret12'
+    email: '',
+    password: ''
   };
 
   @action setEmail(email) {
@@ -42,6 +42,12 @@ class AuthStore {
     catch(e) {
       console.error(e);
     }
+  }
+
+  @action async logout() {
+    await Auth.logout();
+    CommonStore.setToken(null);
+    UserStore.forgetUser();
   }
 
 }

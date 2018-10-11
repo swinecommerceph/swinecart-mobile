@@ -5,6 +5,9 @@ import {
 } from 'react-native-dotenv';
 
 import CommonStore from '../mobx/stores/CommonStore';
+import UserStore from '../mobx/stores/UserStore';
+
+import Navigation from './navigation';
 
 // const API_URL = 'http://swinecart.test/api';
 
@@ -30,9 +33,11 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   response => response,
-  err => {
+  async (err) => {
     if(err && err.response && err.response.status === 401) {
-      console.log(err.request);
+      await CommonStore.removeToken(null);
+      await UserStore.forgetUser();
+      Navigation.navigate('Public');
     }
     return Promise.reject(err);
   }

@@ -86,7 +86,7 @@ apply from: "../../node_modules/react-native/react.gradle"
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = true
+def enableSeparateBuildPerCPUArchitecture = false
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
@@ -99,12 +99,15 @@ android {
 
     defaultConfig {
         applicationId "com.swinecart"
-        minSdkVersion rootProject.ext.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         ndk {
         }
+        testBuildType System.getProperty('testBuildType', 'debug')  //this will later be used to control the test apk build type
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        missingDimensionStrategy "minReactNative", "minReactNative46" //read note
     }
     signingConfigs {
         release {
@@ -120,9 +123,9 @@ android {
         abi {
             enable true
             reset()
-            include 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a' //select ABIs to build APKs for
-            universalApk true //generate an additional APK that contains all the ABIs
-}
+            // include 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a' //select ABIs to build APKs for
+            // universalApk true //generate an additional APK that contains all the ABIs
+        }
     }
     buildTypes {
         release {
@@ -148,14 +151,29 @@ android {
             }
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'org.webkit:android-jsc:r225067'
+    }
 }
 
 dependencies {
-    compile project(':react-native-spinkit')
-    compile project(':react-native-splash-screen')
+    implementation project(':react-native-spinkit')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'org.webkit:android-jsc:r174650'
+    
+    androidTestImplementation(project(path: ":detox"))
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test:rules:1.0.1'
 }
 
 // Run this once to be able to run the application with BUCK
