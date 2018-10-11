@@ -8,6 +8,9 @@ const auth = {
   },
   me() {
     return API.get(`${URL_PREFIX}/me`);
+  },
+  logout() {
+    return API.get(`${URL_PREFIX}/logout`);
   }
 }
 

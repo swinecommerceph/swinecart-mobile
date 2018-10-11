@@ -22,6 +22,13 @@ class CommonStore {
     });
   }
 
+  @action async removeToken() {
+    await AsyncStorage.removeItem('token');
+    runInAction(() => {
+      this.token = null;
+    });
+  }
+
   reactToTokenChange = autorun(() => { console.log('Token: ', this.token) });
 
 }

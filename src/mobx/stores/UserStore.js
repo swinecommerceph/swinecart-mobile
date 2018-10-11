@@ -18,9 +18,17 @@ class UserStore {
     });
   }
   
+  @action forgetUser() {
+    this.user = undefined;
+  }
+
+
   @computed get userRole() {
-    const role = this.user.userable_type.split('\\')[2];
-    return role;
+    if(this.user) {
+      const role = this.user.userable_type.split('\\')[2]
+      return role;
+    }
+    return undefined;
   }
 
   reactToUserChange = autorun(() => { console.log('User:', toJS(this.user)) });

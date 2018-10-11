@@ -44,6 +44,12 @@ class AuthStore {
     }
   }
 
+  @action async logout() {
+    await Auth.logout();
+    CommonStore.setToken(null);
+    UserStore.forgetUser();
+  }
+
 }
 
 export default new AuthStore();

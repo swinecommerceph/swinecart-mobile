@@ -27,19 +27,16 @@ class AuthChecker extends Component {
     const { 
       CommonStore, UserStore
     } = this.props;
+    
     const token = await AsyncStorage.getItem('token');
 
     if(token) {
       await CommonStore.setToken(token);
       await UserStore.getUser();
-      setTimeout(() => {
-        Navigation.navigate(UserStore.userRole);
-      }, 500);
+      Navigation.navigate(UserStore.userRole);
     }
     else {
-      setTimeout(() => {
-        Navigation.navigate('Public');
-      }, 300);
+      Navigation.navigate('Public');
     }
   }
 
