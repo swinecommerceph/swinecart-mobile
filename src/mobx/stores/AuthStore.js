@@ -14,8 +14,8 @@ class AuthStore {
   @observable loading = false;
 
   @observable values = {
-    email: 'dean.wilkinson@kutch.org',
-    password: 'secret12'
+    email: '',
+    password: ''
   };
 
   @action setEmail(email) {

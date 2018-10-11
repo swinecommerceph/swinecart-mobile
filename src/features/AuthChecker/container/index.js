@@ -24,10 +24,11 @@ class AuthChecker extends Component {
   }
 
   checkToken = async () => {
-    const token = await AsyncStorage.getItem('token');
     const { 
       CommonStore, UserStore
     } = this.props;
+    const token = await AsyncStorage.getItem('token');
+
     if(token) {
       await CommonStore.setToken(token);
       await UserStore.getUser();

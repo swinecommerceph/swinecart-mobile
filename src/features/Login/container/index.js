@@ -84,10 +84,10 @@ class Login extends Component {
             <View style={{ marginVertical: 10 }}>
               <Form>
                 <Item style={[fullInput]}>
-                  <Input placeholder='Email' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
+                  <Input placeholder='Email' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} testID='email' />
                 </Item>
                 <Item style={[fullInput]}>
-                  <Input placeholder='Password' style={[openSansSemiBold]} secureTextEntry={true} onChangeText={this.handlePasswordChange}/>
+                  <Input placeholder='Password' style={[openSansSemiBold]} secureTextEntry={true} onChangeText={this.handlePasswordChange} testID='password'/>
                   <Button 
                     style={[flatButton, { backgroundColor: 'transparent' }]}
                     onPress={() => this.navigateTo('ForgotPassword')}
