@@ -2,7 +2,7 @@ import API from './api';
 
 const URL_PREFIX = '/auth'
 
-const auth = {
+const service = {
   login({ email, password }) {
     return API.post(`${URL_PREFIX}/login`, { email, password });
   },
@@ -14,4 +14,4 @@ const auth = {
   }
 }
 
-export default auth;
+export default service;
