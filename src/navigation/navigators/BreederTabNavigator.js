@@ -8,10 +8,11 @@ import {
 } from 'native-base';
 
 import Profile from '../../features/Profile';
-import Messaging from '../../features/Messaging';
 import Notifications from '../../features/Notifications';
 import ManageProducts from '../../features/ManageProducts';
 import Dashboard from '../../features/Dashboard';
+
+import MessagingStackNavigator from './MessagingStackNavigator';
 
 const iconMapping = {
   ManageProducts: 'credit-card',
@@ -19,6 +20,17 @@ const iconMapping = {
   Messaging: 'message-square',
   Notifications: 'bell',
   Profile: 'user'
+};
+
+MessagingStackNavigator.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
 };
 
 const navigator = createBottomTabNavigator({
@@ -29,7 +41,7 @@ const navigator = createBottomTabNavigator({
     screen: Dashboard
   },
   'Messaging': {
-    screen: Messaging
+    screen: MessagingStackNavigator
   },
   'Notifications': {
     screen: Notifications
