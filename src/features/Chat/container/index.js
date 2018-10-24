@@ -16,16 +16,16 @@ import {
   observer, inject
 } from 'mobx-react';
 
+import {
+  toJS
+} from 'mobx';
+
 import commonColor from '../../../../native-base-theme/variables/commonColor';
 import getTheme from '../../../../native-base-theme/components';
 
-@inject(['AuthStore'])
+@inject(['MessageStore'])
 @observer
 class Chat extends Component {
-
-  state = {
-    messages: [],
-  }
 
   renderBubble = props => {
     return (
@@ -42,26 +42,11 @@ class Chat extends Component {
     );
   }
   componentWillMount() {
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
-          },
-        },
-      ],
-    })
   }
 
   onSend(messages = []) {
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
-    }))
+    console.log(messages);
+    this.props.MessageStore.addMessage(messages);
   }
 
   render() {
@@ -84,7 +69,7 @@ class Chat extends Component {
             <GiftedChat
               renderBubble={this.renderBubble}
               showAvatarForEveryMessage={false}
-              messages={this.state.messages}
+              messages={toJS(this.props.MessageStore.messages)}
               onSend={messages => this.onSend(messages)}
               user={{
                 _id: 1,
