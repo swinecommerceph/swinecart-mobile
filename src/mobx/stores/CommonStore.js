@@ -6,11 +6,6 @@ import {
   AsyncStorage
 } from 'react-native';
 
-import {
-  Auth
-} from '../../services';
-
-
 class CommonStore {
 
   @observable token = null;
