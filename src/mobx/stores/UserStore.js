@@ -22,6 +22,9 @@ class UserStore {
     this.user = undefined;
   }
 
+  @computed get userId() {
+    return this.user && this.user.id;
+  }
 
   @computed get userRole() {
     if(this.user) {

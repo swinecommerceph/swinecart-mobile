@@ -15,6 +15,7 @@ import {
 
 import { Navigation } from '../../../services/';
 
+import initChat from '../../../boot/initChat';
 @inject('UserStore', 'CommonStore')
 @observer
 class AuthChecker extends Component {
@@ -33,6 +34,7 @@ class AuthChecker extends Component {
     if(token) {
       await CommonStore.setToken(token);
       await UserStore.getUser();
+      initChat();
       Navigation.navigate(UserStore.userRole);
     }
     else {
