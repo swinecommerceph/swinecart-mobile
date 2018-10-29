@@ -41,7 +41,9 @@ class Chat extends Component {
       />
     );
   }
-  componentWillMount() {
+
+  componentDidMount() {
+    this.props.MessageStore.getMessages();
   }
 
   onSend(messages = []) {
@@ -50,6 +52,8 @@ class Chat extends Component {
   }
 
   render() {
+
+    const { MessageStore } = this.props;
 
     const {
       contentStyle, openSansBold
@@ -61,7 +65,7 @@ class Chat extends Component {
           <Header noShadow androidStatusBarColor='#ffffff'>
             <Body style={{ flex: 1, alignItems: 'center' }}>
               <Title style={[openSansBold, { color: '#000000' }]}>
-                Chat
+                {MessageStore.selectedUser.name}
               </Title>
             </Body>
           </Header>

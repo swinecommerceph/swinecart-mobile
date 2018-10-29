@@ -10,14 +10,26 @@ class Message {
   }
 
   static toGCFormat(message) {
-    const { message: text, from, from_id } = message;
 
-    return {
-      _id: uuid.v4(),
-      text,
-      user: {
-        _id: from_id,
-        name: from
+    if(message.from) {
+      const { message: text, from_id } = message;
+      return {
+        _id: uuid.v4(),
+        text,
+        user: {
+          _id: from_id
+        }
+      }
+    }
+    else {
+      const { message: text, direction, customer_id, breeder_id } = message;
+      const senderId = direction === 0? customer_id : breeder_id;
+      return {
+        _id: uuid.v4(),
+        text,
+        user: {
+          _id: senderId
+        }
       }
     }
   }
