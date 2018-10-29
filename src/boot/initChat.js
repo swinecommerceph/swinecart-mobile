@@ -3,6 +3,7 @@ import {
 } from 'react-native-dotenv';
 
 import UserStore from '../mobx/stores/UserStore';
+import MessageStore from '../mobx/stores/MessageStore';
 
 export default function()  {
   const userId = UserStore.userId;
@@ -20,14 +21,15 @@ export default function()  {
         direction: null
       };
 
+      MessageStore.setSocket(ws);
       ws.send(JSON.stringify(message));
     }
 
     ws.onmessage = ({ data }) => {
       const message = JSON.parse(data);
       const { to } = message;
-      if(userId === +to) {
-        console.log(message);
+      if(userId === parseInt(to)) {
+        MessageStore.handleReceivedMessage(message);
       }
 
     }

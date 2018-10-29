@@ -69,10 +69,12 @@ class Chat extends Component {
             <GiftedChat
               renderBubble={this.renderBubble}
               showAvatarForEveryMessage={false}
+              renderAvatar={null}
               messages={toJS(this.props.MessageStore.messages)}
               onSend={messages => this.onSend(messages)}
               user={{
-                _id: 1,
+                _id: 42,
+                name: 'PigCard'
               }}
             />
           </View>
