@@ -4,7 +4,7 @@ import {
 } from 'react-navigation';
 
 import {
-  Icon
+  Icon, Badge, View, Text
 } from 'native-base';
 
 import Profile from '../../features/Profile';
@@ -56,10 +56,27 @@ const navigator = createBottomTabNavigator({
     const { routeName } = navigation.state;
     return {
       tabBarIcon: ({ focused }) => {
-        return <Icon 
-          type='Feather' 
-          name={iconMapping[routeName]} 
-          style={{ color: focused ? '#00af66' : '#000000' }}/>
+        if(routeName === 'Notifications') {
+          return (
+            <View>
+              {
+                // <Badge style={{ width: 21, height: 21, marginTop: -9, marginBottom: -15, marginLeft: -15 }}>
+                // <Text style={{ fontSize: 14, lineHeight: 21 }}>10</Text>
+                // </Badge>
+              }
+              <Icon
+                type='Feather'
+                name={iconMapping[routeName]}
+                style={{ color: focused ? '#00af66' : '#000000' }} />
+            </View>
+          );
+        }
+        else {
+          return <Icon
+            type='Feather'
+            name={iconMapping[routeName]}
+            style={{ color: focused ? '#00af66' : '#000000' }} />
+        }
       }
     }
   },
