@@ -10,6 +10,7 @@ module.exports = {
         'navigation': './src/navigation',
         'utils': './src/utils',
         'constants': './src/constants',
+        'components': './src/components',
         'validationSchemas': './src/validationSchemas',
       }
     }]

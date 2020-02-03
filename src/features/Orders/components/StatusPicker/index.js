@@ -20,7 +20,11 @@ function StatusPicker({ themedStyle, jumpTo }) {
   }, []);
 
   return (
-    <Block row middle center padding>
+    <Block 
+      row middle center padding
+      backgroundColor='white1'
+      borderBottomWidth={1} borderBottomColor='gray1'
+    >
       <Text semibold color='gray5' marginRight={1}>
         Order Status
       </Text>
@@ -36,7 +40,7 @@ function StatusPicker({ themedStyle, jumpTo }) {
 }
 
 export default withStyles(memo(StatusPicker), () => ({
-  selectContainer: {  
+  selectContainer: {
     width: 200,
   },
   selectTextStyle: {

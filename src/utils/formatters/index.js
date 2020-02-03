@@ -8,7 +8,6 @@ import isSameDay from 'date-fns/isSameDay';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import parseISO from 'date-fns/parseISO';
 
-
 export function capitalizeWords(string) {
   return startCase(string);
 }
