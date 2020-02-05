@@ -13,7 +13,7 @@ class Toast {
       hideOnPress: false,
       delay: 0,
       containerStyle: {
-        borderRadius: 50,
+        borderRadius: 5,
         backgroundColor: colors.black1,
         padding: sizes.padding / 2
       },

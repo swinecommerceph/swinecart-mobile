@@ -15,10 +15,11 @@ function HeaderBarButton(props) {
   );
 
   return (
-    <TopNavigationAction
-      icon={renderIcon}
-      onPress={onPress}
-    />
+    null
+    // <TopNavigationAction
+    //   icon={renderIcon}
+    //   onPress={onPress}
+    // />
   );
 
 }

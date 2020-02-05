@@ -16,7 +16,7 @@ function Container() {
   return (
     <Fragment>
       <LoadingOverlay show={isLoggingIn} />
-      <Block flex={1}>
+      <Block flex={1} backgroundColor='white1'>
         <Block flex={1} middle padding={1}>
           <Logo />
           <LoginForm />
