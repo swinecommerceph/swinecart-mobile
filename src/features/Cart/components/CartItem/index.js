@@ -4,12 +4,10 @@ import { useStoreActions } from 'easy-peasy'
 
 import { NavigationService } from 'services';
 
-import { Block, ProductAvatar, Text } from 'shared';
+import { Block, ProductInfo, Text } from 'atoms';
+import { ProductAvatar } from 'molecules';
 
-import { 
-  ProductInfo,
-  ProductActions,
-} from './components';
+import { ProductActions } from './components';
 
 function CartItem({ data, listIndex }) {
 
@@ -25,10 +23,7 @@ function CartItem({ data, listIndex }) {
       borderBottomWidth={1}
       borderBottomColor='gray1'
     >
-      <ProductAvatar 
-        shape='rounded' 
-        image={imageUrl} size={90}
-      />
+      <ProductAvatar image={imageUrl} shape='rounded' size={96} />
       <Block flex={1} marginLeft={1}>
         <ProductInfo
           name={name}

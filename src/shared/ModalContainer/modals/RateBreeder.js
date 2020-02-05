@@ -2,9 +2,8 @@ import React, { memo } from 'react';
 
 import { NavigationService } from 'services';
 
-import Block from '../../Block';
-import Button from '../../Button';
-import Text from '../../Text';
+import { Block, Button, Text } from 'atoms';
+
 import StarRating from '../../StarRating';
 
 import { formatDateNeeded, formatDeliveryDate } from 'utils/formatters';

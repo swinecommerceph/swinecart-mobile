@@ -1,8 +1,7 @@
 import React, { memo } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import Block from '../../Block';
-import Button from '../../Button';
-import Text from '../../Text';
+
+import { Block, Button, Text } from 'atoms';
 
 function ReserveProduct(props) {
 

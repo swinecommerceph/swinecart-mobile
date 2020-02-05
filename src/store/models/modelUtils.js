@@ -6,7 +6,7 @@ export const initialState = {
   page: 1,
   hasError: false,
   isLoadingMore: false,
-  isLoading: false,
+  isLoading: true,
   isRefreshing: false,
 };
 

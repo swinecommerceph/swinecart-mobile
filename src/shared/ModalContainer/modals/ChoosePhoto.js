@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import { Image } from 'react-native';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import Block from '../../Block';
-import Button from '../../Button';
+
+import { Block, Button, Text } from 'atoms';
 
 function ChoosePhoto(props) {
 

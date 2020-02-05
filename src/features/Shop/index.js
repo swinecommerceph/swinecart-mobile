@@ -16,7 +16,7 @@ function Container() {
 
   return (
     <Fragment>
-      <HeaderBar title='Shop' />
+      <HeaderBar title='Shop' hasShadow />
       <ShopList />
     </Fragment>
   );

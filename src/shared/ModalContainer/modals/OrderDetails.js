@@ -2,9 +2,7 @@ import React, { memo } from 'react';
 
 import { NavigationService } from 'services';
 
-import Block from '../../Block';
-import Button from '../../Button';
-import Text from '../../Text';
+import { Block, Button, Text } from 'atoms';
 
 import { formatDateNeeded, formatDeliveryDate } from 'utils/formatters';
 
@@ -24,7 +22,6 @@ function OrderDetails (props) {
   const onPressClose = () => {
     hideModal();
   };
-
 
   return (
     <Block backgroundColor='white1' borderRadius={5}>

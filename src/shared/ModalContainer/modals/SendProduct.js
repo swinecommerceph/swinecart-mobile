@@ -3,9 +3,7 @@ import { Calendar } from '@ui-kitten/components';
 import { useStoreActions } from 'easy-peasy';
 import addDays from 'date-fns/addDays';
 
-import Block from '../../Block';
-import Button from '../../Button';
-import Text from '../../Text';
+import { Block, Button, Text } from 'atoms';
 
 import { formatDeliveryDate } from 'utils/formatters';
 

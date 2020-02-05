@@ -1,8 +1,7 @@
 import React, { Fragment, memo } from 'react';
 import { Spinner } from '@ui-kitten/components';
 
-import Block from '../Block';
-import Button from '../Button';
+import { Button, Block } from 'atoms';
 
 function ListFooter({ isLoadingMore, onPressLoadMore }) {
   return (

@@ -7,7 +7,7 @@ import BreederTab from './BreederTab';
 import CustomerNavigator from './Customer';
 
 const navigatorConfig = {
-  initialRouteName: 'AuthChecker'
+  initialRouteName: 'AuthChecker',
 };
 
 const routes = {

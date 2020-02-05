@@ -5,7 +5,6 @@ export { default as Block } from './Block';
 export { default as Input } from './Input';
 export { default as Checkbox } from './Checkbox';
 export { default as Select } from './Select';
-export { default as Button } from './Button';
 export { default as IconButton } from './IconButton';
 export { default as StatusBar } from './StatusBar';
 export { default as LoadingOverlay } from './LoadingOverlay';

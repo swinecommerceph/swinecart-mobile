@@ -3,19 +3,18 @@ import {
   TopNavigation, withStyles
 } from '@ui-kitten/components';
 
-import { colors, textStyles, shadowStyles } from 'constants/theme';
+import { colors, textStyles, shadows } from 'constants/theme';
 
 function HeaderBar(props) {
 
   const {
-    title, hasShadow = false, leftControl = null, rightControls = null,
+    title, leftControl = null, rightControls = null,
     backgroundColor = 'primary',
     themedStyle
   } = props;
 
   const headerBarStyle = [
-    { backgroundColor: colors[backgroundColor] },
-    hasShadow && shadowStyles.shadow1,
+    { backgroundColor: colors[backgroundColor] }
   ];
 
   return (
@@ -33,9 +32,10 @@ function HeaderBar(props) {
 
 }
 
-export default withStyles(memo(HeaderBar, () => true), theme => ({
+export default withStyles(memo(HeaderBar, () => true), () => ({
   headerBar: {
     backgroundColor: colors.primary,
+    ...shadows.shadow1
   },
   titleStyle: {
     ...textStyles.headline,

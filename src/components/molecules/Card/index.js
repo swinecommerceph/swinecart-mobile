@@ -7,8 +7,8 @@ function Card({ children }) {
     <Block
       row padding={1}
       backgroundColor='white1'
-      borderBottomWidth={1}
-      borderBottomColor='gray1'
+      borderBottomWidth={2}
+      borderBottomColor='gray2'
     >
       {children}
     </Block>
