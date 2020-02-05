@@ -20,7 +20,11 @@ function StatusPicker({ themedStyle, jumpTo }) {
   }, []);
 
   return (
-    <Block row middle center padding>
+    <Block 
+      row middle center padding={1}
+      backgroundColor='white1'
+      borderBottomWidth={1} borderBottomColor='gray1'
+    >
       <Text semibold color='gray5' marginRight={1}>
         Order Status
       </Text>
