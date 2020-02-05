@@ -29,7 +29,7 @@ function CartItem({ data }) {
           farmLocation={farmLocation}
         />
         {
-          !isDeleted &&
+          isDeleted &&
           <MessageBox
             marginTop={1}
             status='info'
