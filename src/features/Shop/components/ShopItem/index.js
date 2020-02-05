@@ -1,21 +1,19 @@
 import React, { memo } from 'react';
 
 import { Block } from 'atoms';
-import { Card, ProductInfo } from 'molecules';
+import { Card, ProductInfo, ProductAvatar } from 'molecules';
 
-import {
-  ProductActions,
-} from './components';
+import { ProductActions } from './components';
 
 function ShopItem({ data }) {
 
-  const { 
+  const {
     imageUrl, name, type, breed, age, breederName, farmLocation
   } = data;
 
   return (
     <Card>
-      {/* <ProductAvatar shape='rounded' image={imageUrl} size={128} /> */}
+      <ProductAvatar shape='rounded' image={imageUrl} size={112} />
       <Block marginLeft={1}>
         <ProductInfo
           name={name}

@@ -18,7 +18,7 @@ function ProductActions({ data }) {
       <Button size='small' status='basic' onPress={onPressView}>
         View All Info
       </Button>
-      <Button size='small' onPress={onPressAdd} marginTop={0.5}>
+      <Button size='small' status='primary' onPress={onPressAdd} marginTop={0.5}>
         Add to SwineCart
       </Button>
     </Block>

@@ -5,6 +5,7 @@ import { Block } from 'atoms';
 function Card({ children }) {
   return (
     <Block
+      flex={1}
       row padding={1}
       backgroundColor='white1'
       borderBottomWidth={2}

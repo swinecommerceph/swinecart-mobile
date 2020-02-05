@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Spinner } from '@ui-kitten/components';
 
-import Block from '../Block';
+import { Block } from 'atoms';
 
 function LoadingView() {
   return (

@@ -38,7 +38,7 @@ export default {
     if (!state.items) {
       state.items = [];
     }
-    state.items.push(payload);
+    state.items.unshift(payload);
   }),
 
   removeItem: action((state, payload) => {

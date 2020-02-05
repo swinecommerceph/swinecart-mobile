@@ -3,32 +3,50 @@ import { useStoreActions } from 'easy-peasy';
 
 import { ModalService, NavigationService } from 'services';
 
-import { Block, Button, Text } from 'shared';
+import { Block, Button, Text } from 'atoms';
+import { Fragment } from 'react';
 
 function ProductActions({ data }) {
 
   const { product } = data;
   const { isDeleted } = product;
 
-  const onPressPrimaryAction = () => {
+  const onPressRequest = () => {
     ModalService.showModal('RequestProduct', { ...data });
   };
 
-  const onPressCancel = () => {
+  const onPressRemove = () => {
     ModalService.showModal('RemoveFromCart', { ...data });
+  };
+
+  const onPressViewInfo = () => {
+    alert('View Info');
   };
 
   return (
     <Block marginTop={1} alignSelf='flex-start'>
       {
         !isDeleted && 
-        <Button size='small' status='primary' onPress={onPressPrimaryAction}>
-          Request Product
+        <Fragment>
+          <Button size='small' status='basic' onPress={onPressViewInfo}>
+            View All Info
+          </Button>
+          <Block row marginTop={1}>
+            <Button size='small' status='primary' onPress={onPressRequest} marginRight={0.5}>
+              Request
+            </Button>
+            <Button size='small' status='basic' appearance='outline' onPress={onPressRemove}>
+              Remove
+            </Button>
+          </Block>
+        </Fragment>
+      }
+      {
+        isDeleted &&
+        <Button size='small' status='basic' appearance='outline' onPress={onPressRemove}>
+          Remove
         </Button>
       }
-      <Button size='small' status='primary' appearance='outline' onPress={onPressCancel} marginTop={isDeleted ? 0 : 0.5}>
-        Remove From Cart
-      </Button>
     </Block>
   );
 

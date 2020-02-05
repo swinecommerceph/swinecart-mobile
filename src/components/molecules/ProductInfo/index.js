@@ -5,11 +5,11 @@ import { addS } from 'utils/formatters';
 
 function ProductInfo({ name, type, breed, age, breederName, farmLocation }) {
   return (
-    <Block>
-      <Text bold color='black1' size={18}>
+    <Block alignSelf='flex-start'>
+      <Text bold color='black1' size={18} numberOfLines={3}>
         {capitalizeWords(name)}
       </Text>
-      <Text normal size={14}>
+      <Text normal size={14} numberOfLines={2}>
         {capitalizeWords(type)} - {breed}
       </Text>
       {

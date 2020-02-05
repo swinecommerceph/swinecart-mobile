@@ -16,7 +16,11 @@ function Block(props) {
     borderBottomRadius,
     borderTopRadius,
     borderWidth, borderColor,
-    backgroundColor, borderBottomWidth, borderBottomColor,
+    borderBottomWidth, borderBottomColor,
+    borderLeftWidth, borderLeftColor,
+    borderRightWidth, borderRightColor,
+    borderTopWidth, borderTopColor,
+    backgroundColor,
     themedStyle, children
   } = props;
 
@@ -54,6 +58,15 @@ function Block(props) {
 
     borderBottomWidth && { borderBottomWidth },
     borderBottomColor && { borderBottomColor: colors[borderBottomColor] },
+
+    borderLeftWidth && { borderLeftWidth },
+    borderLeftColor && { borderLeftColor: colors[borderLeftColor] },
+
+    borderRightWidth && { borderRightWidth },
+    borderRightColor && { borderRightColor: colors[borderRightColor] },
+
+    borderTopWidth && { borderTopWidth },
+    borderTopColor && { borderTopColor: colors[borderTopColor] },
 
     borderWidth && { borderWidth },
     borderColor && { borderColor: colors[borderColor] },
