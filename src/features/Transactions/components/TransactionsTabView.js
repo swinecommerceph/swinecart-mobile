@@ -76,7 +76,7 @@ class TransactionsTabView extends PureComponent {
 
 export default withStyles(TransactionsTabView, () => ({
   tabBarStyle: {
-    ...shadows.shadow3,
+    ...shadows.shadow2,
     backgroundColor: colors.primary,
     height: 56
   },

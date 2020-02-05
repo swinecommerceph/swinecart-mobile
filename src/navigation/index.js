@@ -4,15 +4,19 @@ import AuthChecker from 'features/AuthChecker';
 
 import PublicStack from './PublicStack';
 import BreederTab from './BreederTab';
-import CustomerTab from './CustomerTab';
+import CustomerNavigator from './Customer';
 
-const RootNavigator = createSwitchNavigator({
+const navigatorConfig = {
+  initialRouteName: 'AuthChecker'
+};
+
+const routes = {
   Public: PublicStack,
   AuthChecker: AuthChecker,
   Breeder: BreederTab,
-  Customer: CustomerTab,
-}, {
-    initialRouteName: 'AuthChecker'
-});
+  Customer: CustomerNavigator,
+};
+
+const RootNavigator = createSwitchNavigator(routes, navigatorConfig);
 
 export default createAppContainer(RootNavigator);

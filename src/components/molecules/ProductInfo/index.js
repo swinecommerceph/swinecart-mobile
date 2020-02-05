@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
-import { Block, Text } from 'components/basic';
-import { addS, capitalizeWords } from 'utils/formatters';
+import { capitalizeWords } from 'utils/formatters';
+import { Block, Text } from 'shared';
+import { addS } from 'utils/formatters';
 
 function ProductInfo({ name, type, breed, age, breederName, farmLocation }) {
   return (
@@ -19,7 +20,7 @@ function ProductInfo({ name, type, breed, age, breederName, farmLocation }) {
       }
       {
         !age &&
-        <Text italic size={12} color='gray5'>Age not indicated</Text>
+        <Text italic size={12} color='gray5'>Birthdate not indicated</Text>
       }
       <Text bold color='black1' size={14} marginTop={0.5}>
         {breederName}

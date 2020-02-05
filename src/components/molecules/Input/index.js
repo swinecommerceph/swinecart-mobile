@@ -6,7 +6,7 @@ import { sizes, colors } from 'constants/theme';
 
 import { computeLineHeight } from 'utils';
 
-import Icon from '../Icon';
+import { Icon } from 'atoms';
 
 function Input(props) {
 

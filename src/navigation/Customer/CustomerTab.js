@@ -3,11 +3,19 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import CartStack from './CartStack';
 import ShopStack from './ShopStack';
 import TransactionsStack from './TransactionsStack';
-import InboxStack from './InboxStack';
+import InboxStack from '../InboxStack';
 
 import { CustomerTabBar } from 'shared';
 
-const navigator = createBottomTabNavigator({
+const navigatorConfig = {
+  initialRouteName: 'ShopStack',
+  tabBarComponent: CustomerTabBar,
+  defaultNavigationOptions: ({ navigation }) => {
+  },
+  lazy: true,
+};
+
+const routes = {
   'ShopStack': {
     screen: ShopStack,
   },
@@ -17,19 +25,14 @@ const navigator = createBottomTabNavigator({
   'TransactionsStack': {
     screen: TransactionsStack,
   },
-  'InboxStack': {
-    screen: InboxStack,
-  },
+  // 'InboxStack': {
+  //   screen: InboxStack,
+  // },
   // 'BreederProfileStack': {
   //   screen: CartStack,
   // },
-},
-  {
-    initialRouteName: 'TransactionsStack',
-    tabBarComponent: CustomerTabBar,
-    defaultNavigationOptions: ({ navigation }) => {
-    },
-    lazy: true,
-  });
+};
+
+const navigator = createBottomTabNavigator(routes, navigatorConfig);
 
 export default navigator;

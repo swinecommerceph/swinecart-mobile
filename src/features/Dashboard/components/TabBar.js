@@ -43,7 +43,7 @@ function TabBar(props) {
 
 export default withStyles(memo(TabBar), () => ({
   tabBarStyle: {
-    ...shadows.shadow3,
+    ...shadows.shadow2,
     backgroundColor: colors.primary,
     height: 56
   },

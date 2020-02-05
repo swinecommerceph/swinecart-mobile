@@ -5,7 +5,7 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { enableScreens } from 'react-native-screens';
 import { StoreProvider } from 'easy-peasy';
  
-import RootNavigator from 'navigation/navigators';
+import RootNavigator from 'navigation';
 import StatusBar from 'shared/StatusBar';
 import ModalContainer from 'shared/ModalContainer';
 import { NavigationService, ModalService } from 'services';

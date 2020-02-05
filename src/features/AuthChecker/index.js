@@ -1,5 +1,6 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreActions } from 'easy-peasy';
+import { Spinner } from '@ui-kitten/components';
 import { Block, Text } from 'shared';
 
 function Container() {
@@ -13,9 +14,10 @@ function Container() {
   return (
     <Fragment>
       <Block flex={1} center middle backgroundColor='primary'>
-        <Text color='white1' size={24}>
+        {/* <Text color='white1' size={24}>
           Loading...
-        </Text>
+        </Text> */}
+        <Spinner size='giant' status='basic' />
       </Block>
     </Fragment>
   )

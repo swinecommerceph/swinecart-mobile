@@ -113,7 +113,7 @@ const sizes = {
 
 const shadows = {
   shadow1: {
-    shadowColor: colors.gray2,
+    shadowColor: colors.gray1,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -124,7 +124,7 @@ const shadows = {
     elevation: 2,
   },
   shadow2: {
-    shadowColor: colors.gray2,
+    shadowColor: colors.gray1,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -134,17 +134,6 @@ const shadows = {
 
     elevation: 1,
   },
-  shadow3: {
-    shadowColor: colors.gray2,
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.00,
-
-    elevation: 1,
-  }
 }
 
 
