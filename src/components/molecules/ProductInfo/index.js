@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
-import { capitalizeWords } from 'utils/formatters';
-import { Block, Text } from 'shared';
-import { addS } from 'utils/formatters';
+
+import { Block, Text } from 'atoms';
+import { addS, capitalizeWords } from 'utils/formatters';
 
 function ProductInfo({ name, type, breed, age, breederName, farmLocation }) {
   return (

@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { useStoreActions } from 'easy-peasy';
 
 import { ModalService, NavigationService } from 'services';
 
@@ -6,11 +7,15 @@ import { Block, Button } from 'atoms';
 
 function ProductActions({ data }) {
 
+  const setCurrentId = useStoreActions(actions => actions.productDetails.setCurrentId);
+
   const onPressAdd = () => {
     ModalService.showModal('AddToCart', { ...data });
   };
 
   const onPressView = () => {
+    setCurrentId(data.id);
+    NavigationService.navigate('ProductView');
   };
 
   return (

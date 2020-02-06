@@ -7,14 +7,15 @@ import { colors, sizes } from 'constants/theme';
 function ContainerView(props) {
 
   const { 
-    themedStyle,
+    themedStyle, flex,
     backgroundColor = colors.gray2,
     padding, paddingBottom = 1, paddingLeft, paddingRight, paddingTop, paddingHorizontal, paddingVertical,
     ...restProps 
   } = props;
 
   const contentContainerStyle = [
-
+    !flex && { flex: 0 },
+    flex && { flex },
     padding && { padding: sizes.padding * padding },
     paddingBottom && { paddingBottom: sizes.padding * paddingBottom },
     paddingLeft && { paddingLeft: sizes.padding * paddingLeft },

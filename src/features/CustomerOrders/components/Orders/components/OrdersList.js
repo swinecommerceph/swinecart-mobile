@@ -12,11 +12,11 @@ function OrdersList({ status }) {
     getItems({ status, isRefresh: false });
   }, []);
 
-  const { getItems, getMoreItems } = useStoreActions(actions => actions.transactions);
+  const { getItems, getMoreItems } = useStoreActions(actions => actions.customerOrders);
 
   const {
     items, isRefreshing, isLoading, isLoadingMore
-  } = useStoreState(state => state.transactions.ordersByStatus[status]);
+  } = useStoreState(state => state.customerOrders.ordersByStatus[status]);
 
   const keyExtractor = item => {
     return `${item.id}`;
@@ -41,7 +41,7 @@ function OrdersList({ status }) {
         data={items}
         Component={OrderItem}
         keyExtractor={keyExtractor}
-        emptyListMessage={'No Orders Yet!'}
+        emptyListMessage={'No Items Yet!'}
         isRefreshing={isRefreshing}
         onPressLoadMore={onPressLoadMore}
         onRefresh={onRefresh}

@@ -22,13 +22,12 @@ function OfficeInfo() {
 
   // console.dir('Loading', isLoading);
   // console.dir('Error', hasError);
-  
+
   if (isLoading) {
     return (
       <LoadingView />
     );
   }
-  
   else if (hasError) {
     return (
       <LoadingView />

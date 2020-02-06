@@ -8,5 +8,5 @@ export const orderObject = {
   hasError: false,
   isLoadingMore: false,
   isRefreshing: false,
-  isLoading: false,
+  isLoading: true,
 };

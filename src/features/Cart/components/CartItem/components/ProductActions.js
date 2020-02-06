@@ -8,6 +8,7 @@ import { Fragment } from 'react';
 
 function ProductActions({ data }) {
 
+  const setCurrentId = useStoreActions(actions => actions.productDetails.setCurrentId);
   const { product } = data;
   const { isDeleted } = product;
 
@@ -20,7 +21,8 @@ function ProductActions({ data }) {
   };
 
   const onPressViewInfo = () => {
-    alert('View Info');
+    setCurrentId(product.id);
+    NavigationService.navigate('ProductView');
   };
 
   return (

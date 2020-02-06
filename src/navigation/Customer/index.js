@@ -1,1 +1,1 @@
-export { default } from './CustomerTab';
+export { default } from './CustomerStack';

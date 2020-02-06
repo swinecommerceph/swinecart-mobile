@@ -3,6 +3,7 @@ export { default as AuthChecker } from './AuthChecker';
 export { default as Inbox } from './Inbox';
 export { default as Chat } from './Chat';
 
+export { default as ProductView } from './ProductView';
 
 // Breeder Features
 export { default as Orders } from './Orders';
@@ -17,4 +18,4 @@ export { default as Reviews } from './Reviews';
 // Customer Features
 export { default as Cart } from './Cart';
 export { default as Shop } from './Shop';
-export { default as Transactions } from './Transactions';
+export { default as CustomerOrders } from './CustomerOrders';

@@ -2,13 +2,13 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import CartStack from './CartStack';
 import ShopStack from './ShopStack';
-import TransactionsStack from './TransactionsStack';
+import CustomerOrdersStack from './CustomerOrderStack';
 import InboxStack from '../InboxStack';
 
 import { CustomerTabBar } from 'shared';
 
 const navigatorConfig = {
-  initialRouteName: 'CartStack',
+  initialRouteName: 'ShopStack',
   tabBarComponent: CustomerTabBar,
   defaultNavigationOptions: ({ navigation }) => {
   },
@@ -22,8 +22,8 @@ const routes = {
   'CartStack': {
     screen: CartStack,
   },
-  'TransactionsStack': {
-    screen: TransactionsStack,
+  'CustomerOrdersStack': {
+    screen: CustomerOrdersStack,
   },
   // 'InboxStack': {
   //   screen: InboxStack,

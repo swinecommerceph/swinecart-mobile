@@ -1,17 +1,24 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
 import {
-  Transactions
+  ProductView
 } from 'features';
 
-const navigator = createStackNavigator({
-  Transactions: Transactions,
-}, {
-  initialRouteName: 'Transactions',
+import CustomerTab from './CustomerTab';
+
+const navigatorConfig = {
+  initialRouteName: 'CustomerTab',
   headerMode: 'none',
   defaultNavigationOptions: {
   }
-});
+};
+
+const routes = {
+  CustomerTab: CustomerTab,
+  ProductView: ProductView,
+};
+
+const navigator = createStackNavigator(routes, navigatorConfig);
 
 navigator.navigationOptions = ({ navigation }) => {
   return {

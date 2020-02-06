@@ -24,7 +24,7 @@ function CustomerTabBar({ navigation }) {
     >
       <BottomNavigationTab title='Shop' iconName='shopping-bag' />
       <BottomNavigationTab title='SwineCart' iconName='shopping-cart' />
-      {/* <BottomNavigationTab title='Transactions' iconName='list' /> */}
+      <BottomNavigationTab title='Orders' iconName='list' />
       {/* <BottomNavigationTab title='Inbox' iconName='inbox' /> */}
       {/* <BottomNavigationTab title='Profile' iconName='person' /> */}
     </UKBottomNavigation>

@@ -5,13 +5,7 @@ import routes from 'constants/routes';
 import { ToastService, TransactionService } from 'services';
 import { orderObject, getOrderObject } from './utils';
 
-const LIMIT = 5;
-
-const prevStatus = {
-  'reserved': 'requested',
-  'onDelivery': 'reserved',
-  'sold': 'onDelivery',
-};
+const LIMIT = 10;
 
 export default {
   // State
@@ -41,6 +35,17 @@ export default {
   // Actions
 
   updateStatus: action((state, payload) => {
+
+  }),
+
+  addItem: action((state, payload) => {
+
+    const { item, status } = payload;
+
+    if (!getOrderObject(state, status).items) {
+      getOrderObject(state, status).items = [];
+    }
+    getOrderObject(state, status).items.unshift(item);
 
   }),
 
@@ -87,6 +92,41 @@ export default {
   }),
 
   // Side Effects
+
+  requestItem: thunk(async (actions, payload, { getStoreActions }) => {
+
+    const { removeItem: removeCartItem } = getStoreActions().cart;
+
+    const { 
+      cartItemId, type, currentQuantity, currentDate, currentRequest 
+    } = payload;
+
+    const requestData = {
+      requestQuantity: type === 'semen' ? currentQuantity : 1,
+      dateNeeded: type === 'semen' ? currentDate : '',
+      specialRequest: currentRequest
+    };
+
+    const [error, data] = await to(TransactionService.requestItem(cartItemId, requestData));
+
+    if (error) {
+      ToastService.show('Please try again later!', null);
+    }
+
+    else {
+
+      const { item } = data.data;
+
+      actions.addItem({
+        item,
+        status: 'requested'
+      });
+
+      removeCartItem(cartItemId);
+    }
+
+  }),
+
   getItems: thunk(async (actions, payload) => {
 
     const { status, isRefresh } = payload;
@@ -96,8 +136,6 @@ export default {
       : actions.setLoadingByStatus({ isLoading: true, status });
 
     const [error, data] = await to(TransactionService.getItems(status, 1, LIMIT));
-
-    // console.dir(error, data);
 
     if (error) {
       ToastService.show('Please try again later!', null);

@@ -7,9 +7,9 @@ import routes from 'constants/routes';
 
 function StatusPicker({ themedStyle, jumpTo }) {
 
-  const currentStatus = useStoreState(state => state.orders.currentStatus);
-  const status = useStoreState(state => state.orders.status());
-  const setCurrentStatus = useStoreActions(actions => actions.orders.setCurrentStatus);
+  const currentStatus = useStoreState(state => state.customerOrders.currentStatus);
+  const status = useStoreState(state => state.customerOrders.status());
+  const setCurrentStatus = useStoreActions(actions => actions.customerOrders.setCurrentStatus);
 
   useEffect(() => {
     jumpTo(currentStatus.key);

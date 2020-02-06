@@ -37,6 +37,7 @@ function Modal(props) {
       onBackdropPress={onBackdropPress}
       onBackButtonPress={onBackButtonPress}
       onModalHide={onModalHide}
+      avoidKeyboard={true}
       style={themedStyle.modal}
     >
       <ModalComponent hideModal={hideModal} data={data} />

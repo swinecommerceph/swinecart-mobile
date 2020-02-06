@@ -4,7 +4,7 @@ const URL_PREFIX = 'customer/transactions';
 
 const service = {
   requestItem(id, requestData) {
-    return API.put(`${URL_PREFIX}/${id}`, requestData);
+    return API.post(`${URL_PREFIX}/${id}`, requestData);
   },
   getItems(status, page = 1, limit = 10) {
     const statusText = {
