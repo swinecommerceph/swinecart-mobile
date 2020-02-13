@@ -15,7 +15,7 @@ import store from './store';
 
 import customMapping from './constants/customMapping.json';
 
-enableScreens();
+// enableScreens();
 
 function App() {
 

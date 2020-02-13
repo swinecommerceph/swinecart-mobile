@@ -8,7 +8,7 @@ import InboxStack from '../InboxStack';
 import { CustomerTabBar } from 'shared';
 
 const navigatorConfig = {
-  initialRouteName: 'ShopStack',
+  initialRouteName: 'CustomerOrdersStack',
   tabBarComponent: CustomerTabBar,
   defaultNavigationOptions: ({ navigation }) => {
   },

@@ -5,3 +5,4 @@ export { default as ProductAvatar } from './ProductAvatar';
 export { default as MessageBox } from './MessageBox';
 export { default as Stepper } from './Stepper';
 export { default as TextArea } from './TextArea';
+export { default as ListFooter } from './ListFooter';

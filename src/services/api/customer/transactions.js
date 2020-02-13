@@ -14,6 +14,9 @@ const service = {
       'sold': 'sold',
     };
     return API.get(`${URL_PREFIX}`, { status: statusText[status], page, limit });
+  },
+  getHistory(page = 1, limit = 10) {
+    return API.get(`${URL_PREFIX}/history`, { page, limit });
   }
 }
 

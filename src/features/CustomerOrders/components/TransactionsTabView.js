@@ -13,7 +13,7 @@ import History from './History';
 class TransactionsTabView extends PureComponent {
 
   state = {
-    index: 0,
+    index: 1,
     routes: [
       { key: 'orders', title: 'Orders', },
       { key: 'history', title: 'History', },

@@ -5,7 +5,7 @@ import routes from 'constants/routes';
 import { ToastService, TransactionService } from 'services';
 import { orderObject, getOrderObject } from './utils';
 
-const LIMIT = 10;
+const LIMIT = 2;
 
 export default {
   // State
@@ -60,9 +60,8 @@ export default {
     }
   }),
 
-  setOrders: action((state, payload) => {
+  setItems: action((state, payload) => {
     const { items, status, page } = payload;
-
     getOrderObject(state, status).items = items;
     getOrderObject(state, status).page = page;
   }),
@@ -144,7 +143,7 @@ export default {
 
       const { items } = data.data;
 
-      actions.setOrders({
+      actions.setItems({
         items,
         status,
         page: 2
@@ -157,7 +156,35 @@ export default {
 
   }),
 
-  getMoreItems: thunk(async (actions, payload, { getStoreState }) => {
+
+  getMoreItems: thunk(async (actions, payload, { getState }) => {
+
+    const { status } = payload;
+    const { items, page } = getOrderObject(getState(), status);
+
+    actions.setLoadingMoreByStatus({ isLoadingMore: true, status });
+
+    const [error, data] = await to(TransactionService.getItems(status, page, LIMIT));
+
+    if (error) {
+      ToastService.show('Please try again later!', null);
+    }
+    else {
+      const { items: moreItems } = data.data;
+
+      if (moreItems && moreItems.length > 0) {
+        actions.setItems({
+          items: [...items, ...moreItems],
+          status,
+          page: page + 1
+        })
+      }
+      else {
+        ToastService.show('No more orders to load!', null);
+      }
+    }
+
+    actions.setLoadingMoreByStatus({ isLoadingMore: false, status });
 
   }),
 

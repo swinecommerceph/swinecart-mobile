@@ -4,6 +4,7 @@ export { default as Inbox } from './Inbox';
 export { default as Chat } from './Chat';
 
 export { default as ProductView } from './ProductView';
+export { default as HistoryDetails } from './HistoryDetails';
 
 // Breeder Features
 export { default as Orders } from './Orders';
