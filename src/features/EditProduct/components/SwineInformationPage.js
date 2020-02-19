@@ -1,13 +1,8 @@
 import React, { Fragment, memo, useEffect, useState } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import {
-  Block,
-  Text,
-  Button,
-  Select, Input,
-  ContainerView,
-} from 'shared';
+import { Input, ContainerView, Select } from 'molecules'
+import { Block, Button, Text, Checkbox } from 'atoms';
 
 import { houseTypes, types } from 'constants/enums';
 

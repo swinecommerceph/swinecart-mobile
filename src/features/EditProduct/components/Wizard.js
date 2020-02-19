@@ -35,7 +35,7 @@ function Wizard() {
     <Fragment>
       {currentStep === 1 && <ProductInformationPage formik={formik} /> }
       {currentStep === 2 && <SwineInformationPage formik={formik} /> }
-      {currentStep === 3 && <ProductMedia formik={formik} /> }
+      {/* {currentStep === 3 && <ProductMedia formik={formik} /> } */}
       <FormFooter
         onSubmit={formik.handleSubmit}
         validateForm={formik.validateForm}

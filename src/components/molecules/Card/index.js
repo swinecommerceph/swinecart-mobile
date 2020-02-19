@@ -9,7 +9,7 @@ function Card({ children }) {
       row padding={1}
       backgroundColor='white1'
       borderBottomWidth={2}
-      borderBottomColor='gray2'
+      borderBottomColor='gray1'
     >
       {children}
     </Block>

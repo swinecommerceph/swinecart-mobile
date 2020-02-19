@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { useStoreState } from 'easy-peasy';
-import { Block, Text } from 'shared';
+import { Block, Text } from 'atoms';
 
 function FormHeader() {
 

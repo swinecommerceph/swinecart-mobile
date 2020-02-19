@@ -4,18 +4,21 @@ import {
   ProductView
 } from 'features';
 
-import CustomerTab from './CustomerTab';
+import { ProductMedia } from 'screens';
+
+import BreederTab from './BreederTab';
 
 const navigatorConfig = {
-  initialRouteName: 'CustomerTab',
+  initialRouteName: 'BreederTab',
   headerMode: 'none',
   defaultNavigationOptions: {
   }
 };
 
 const routes = {
-  CustomerTab: CustomerTab,
+  BreederTab: BreederTab,
   ProductView: ProductView,
+  // ProductMedia: ProductMedia,
 };
 
 const navigator = createStackNavigator(routes, navigatorConfig);

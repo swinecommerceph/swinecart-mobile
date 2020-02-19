@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
-import { TopNavigationAction, Icon } from '@ui-kitten/components';
+import { TopNavigationAction } from '@ui-kitten/components';
+
+import { Icon } from 'atoms';
 
 function HeaderBarButton(props) {
 
@@ -8,18 +10,17 @@ function HeaderBarButton(props) {
   const renderIcon = () => (
     <Icon 
       name={iconName} 
-      fill='#ffffff'
-      width={26}
-      height={26}
+      color='#ffffff'
+      size={26}
     />
   );
 
   return (
-    null
-    // <TopNavigationAction
-    //   icon={renderIcon}
-    //   onPress={onPress}
-    // />
+    // null
+    <TopNavigationAction
+      icon={renderIcon}
+      onPress={onPress}
+    />
   );
 
 }

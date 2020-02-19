@@ -8,7 +8,7 @@ const service = {
     return API.get(`${URL_PREFIX}`, { page, limit });
   },
   getProductDetails(id) {
-    return API.get(`${URL_PREFIX}/${id}/details`);
+    return API.get(`${URL_PREFIX}/${id}/details`);s
   },
   addProduct(data) {
     return API.post(`${URL_PREFIX}`, data);
@@ -21,6 +21,21 @@ const service = {
   },
   getProductMedia(id) {
     return API.get(`${URL_PREFIX}/${id}/media`);
+  },
+  getProductMedia(id) {
+    return API.get(`${URL_PREFIX}/${id}/media`);
+  },
+  addMedia(id, photo) {
+    const data = new FormData();
+    data.append('file', photo);
+    API.addContentType('multipart/form-data;');
+    return API.post(`${URL_PREFIX}/${id}/media`, { file: data });
+  },
+  setPrimaryPicture(id, data) {
+    return API.patch(`${URL_PREFIX}/${id}/media`, data);
+  },
+  deleteMedia(id, data) {
+    return API.delete(`${URL_PREFIX}/${id}/media`, data);
   },
 }
 

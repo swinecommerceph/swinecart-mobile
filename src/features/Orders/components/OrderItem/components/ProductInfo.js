@@ -1,7 +1,7 @@
 import React, { Fragment, memo } from 'react';
 import { capitalizeWords } from 'utils/formatters';
 
-import { Text } from 'shared';
+import { Text } from 'atoms';
 
 function ProductInfo({ name, type, breed }) {
   return (

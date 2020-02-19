@@ -1,5 +1,5 @@
 import React, { Fragment, memo } from 'react';
-import { Text } from 'shared';
+import { Text } from 'atoms';
 import { addS, formatStatusTime } from 'utils/formatters';
 
 const statusTexts = {

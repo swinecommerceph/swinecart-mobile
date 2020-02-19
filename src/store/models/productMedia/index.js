@@ -1,16 +1,14 @@
 import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 import { ProductsService, ToastService } from 'services';
-import { initialState } from './modelUtils';
+import { initialState } from '../modelUtils';
 
 const LIMIT = 10;
 
-let id = 0;
-
 export default {
   ...initialState,
-  
-  currentProduct: { id: 20 },
+
+  currentProduct: { id: 45 },
   // Computed Values
 
   // Actions
@@ -46,18 +44,34 @@ export default {
     state.isLoadingMore = payload;
   }),
 
+  removeItem: action((state, payload) => {
+    state.items = state.items.filter(item => item.id !== payload);
+  }),
+
   // Side Effects
+  deletePhoto: thunk(async (actions, payload, { getState }) => {
+
+    const { currentProduct: { id } } = getState();
+
+    const [error, data] = await to(ProductsService.deleteMedia(id, {
+      mediaId: payload
+    }));
+
+    if (error) {
+
+    }
+    else {
+      actions.removeItem(payload);
+    }
+
+    
+  }),
   uploadPhoto: thunk(async (actions, payload, { getState }) => {
-    const { items } = getState();
+    
+    const { items, currentProduct: { id } } = getState();
 
-    const newPhoto = {
-      id: ++id,
-      link: payload.uri
-    };
-
-    actions.setItems({
-      items: [...(items || []), newPhoto]
-    });
+    const [error, data] = await to(ProductsService.addMedia(id, payload));
+    console.dir(error, data);
   }),
   getItems: thunk(async (actions, payload, { getState }) => {
 
@@ -78,10 +92,8 @@ export default {
       const { images } = data.data;
       actions.setItems({ items: images });
     }
-
     isRefresh
       ? actions.setRefreshing(false)
       : actions.setLoading(false);
-
   }),
 };

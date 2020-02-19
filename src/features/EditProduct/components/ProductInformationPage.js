@@ -1,6 +1,7 @@
 import React, { Fragment, memo } from 'react';
 
-import { Block, Input, Text, ContainerView, Select, Checkbox } from 'shared';
+import { Input, ContainerView, Select } from 'molecules'
+import { Block, Text, Checkbox } from 'atoms';
 
 import { types  } from 'constants/enums';
 

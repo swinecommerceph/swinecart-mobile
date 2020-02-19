@@ -60,6 +60,10 @@ const api = {
     base.setHeader('Authorization', token ? `Bearer ${token}` : null);
   },
 
+  addContentType(contentType) {
+    base.setHeader('Content-Type', contentType);
+  },
+
   async get(url, params = {}, options = {}) {
     const response = await base.get(url, params, options);
     return promiseHandler(response);

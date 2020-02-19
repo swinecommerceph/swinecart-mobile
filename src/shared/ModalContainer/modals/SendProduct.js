@@ -23,7 +23,6 @@ function SendProduct(props) {
   const { customerName } = reservation;
 
   const onSelect = date => {
-    console.dir(date);
     setCurrentDate(date);
   };
 

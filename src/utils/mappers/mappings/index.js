@@ -20,7 +20,8 @@ export const Product = {
   age: 'age',
   is_unique: 'isUnique',
   quantity: 'quantity',
-  status: 'status'
+  status: 'status',
+  imageUrl: 'imageUrl'
 };
 
 export const Order = {

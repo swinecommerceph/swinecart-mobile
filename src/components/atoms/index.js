@@ -4,3 +4,4 @@ export { default as Icon } from './Icon';
 export { default as Button } from './Button';
 export { default as HeaderBar } from './HeaderBar';
 export { default as StarRating } from './StarRating';
+export { default as Checkbox } from './Checkbox';

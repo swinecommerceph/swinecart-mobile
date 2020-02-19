@@ -1,7 +1,7 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreActions } from 'easy-peasy';
 import { Spinner } from '@ui-kitten/components';
-import { Block, Text } from 'shared';
+import { Block } from 'atoms';
 
 function Container() {
 

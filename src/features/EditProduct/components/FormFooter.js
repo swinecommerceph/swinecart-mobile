@@ -8,7 +8,7 @@ import { NavigationService, ToastService } from 'services';
 import {
   Block,
   Button,
-} from 'shared';
+} from 'atoms';
 
 const fields = [
   ['name', 'minPrice', 'maxPrice', 'quantity'],

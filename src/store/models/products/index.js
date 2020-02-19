@@ -8,7 +8,7 @@ import { productMapper } from 'utils/mappers/responseMappers';
 import { initialState } from '../modelUtils';
 
 
-const LIMIT = 5;
+const LIMIT = 10;
 
 export default {
   // State

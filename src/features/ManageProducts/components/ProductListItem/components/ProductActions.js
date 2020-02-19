@@ -31,9 +31,9 @@ function ProductActions({ data }) {
         <Button size='small' status='basic' onPress={onPressDelete} marginRight={0.5}>
           Delete
         </Button>
-        <Button size='small' status='basic' onPress={onPressEdit}>
+        {/* <Button size='small' status='basic' onPress={onPressEdit}>
           Edit
-        </Button>
+        </Button> */}
       </Block>
     </Block>
   );
