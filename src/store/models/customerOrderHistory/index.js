@@ -36,6 +36,29 @@ export default {
 
   // Side Effects
 
+  reviewBreeder: thunk(async (actions, payload, { getStoreActions }) => {
+
+    const { 
+      breederId, itemId
+    } = payload;
+
+    const requestData = {
+      item_id: itemId, ...payload
+    };
+
+    const [error, data] = await to(TransactionService.reviewBreeder(breederId, requestData));
+
+    console.dir(error, data);
+
+    if (error) {
+
+    }
+    else {
+      getStoreActions().customerOrders.removeItem({ status: 'sold', id: itemId });
+    }
+
+  }),
+
   getItems: thunk(async (actions, payload) => {
 
     const { isRefresh } = payload;
@@ -74,7 +97,7 @@ export default {
     const { page: currentPage, items: currentItems } = getState();
 
     actions.setLoadingMore(true);
-
+    console.dir(currentPage);
     const [error, data] = await to(TransactionService.getHistory(currentPage, LIMIT));
 
     if (error) {
@@ -85,7 +108,7 @@ export default {
 
       if (moreItems && moreItems.length > 0) {
         actions.setItems({
-          items: [...currentItems, moreItems],
+          items: [...currentItems, ...moreItems],
           page: currentPage + 1
         });
       }

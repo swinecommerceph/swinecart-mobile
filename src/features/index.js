@@ -12,7 +12,7 @@ export { default as EditProduct } from './EditProduct';
 export { default as ProductRequests } from './ProductRequests';
 export { default as ProductDetails } from './ProductDetails';
 export { default as BreederProfile } from './BreederProfile';
-export { default as BreederProducts } from './BreederProducts';
+export { default as ManageProducts } from './ManageProducts';
 export { default as Dashboard } from './Dashboard';
 export { default as Reviews } from './Reviews';
 

@@ -1,12 +1,16 @@
 import React, { memo } from 'react';
 import { useStoreState } from 'easy-peasy';
 import { TouchableOpacity } from 'react-native';
+import { ModalService } from 'services';
 
 import {
-  Block, UserAvatar, Text, Button
+  UserAvatar
 } from 'shared';
 
-import { ModalService } from 'services';
+import {
+  Block, Text, Button
+} from 'atoms';
+
 
 function RequestItem({ data }) {
 

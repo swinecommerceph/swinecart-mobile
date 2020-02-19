@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { useStoreActions } from 'easy-peasy';
 import { NavigationService, ModalService } from 'services';
 
-import { Button, Block } from 'shared';
+import { Button, Block } from 'atoms';
 
 function OrderActions(props) {
 

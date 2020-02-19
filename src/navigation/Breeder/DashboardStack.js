@@ -4,15 +4,19 @@ import {
   Dashboard, Reviews
 } from 'features';
 
-const navigator = createStackNavigator({
-  Dashboard: Dashboard,
-  Reviews: Reviews,
-}, {
-    initialRouteName: 'Dashboard',
+const navigatorConfig = {
+  initialRouteName: 'Dashboard',
   headerMode: 'none',
   defaultNavigationOptions: {
   }
-});
+};
+
+const routes = {
+  Dashboard: Dashboard,
+  Reviews: Reviews,
+};
+
+const navigator = createStackNavigator(routes, navigatorConfig);
 
 navigator.navigationOptions = ({ navigation }) => {
   return {

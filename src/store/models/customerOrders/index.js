@@ -5,7 +5,7 @@ import routes from 'constants/routes';
 import { ToastService, TransactionService } from 'services';
 import { orderObject, getOrderObject } from './utils';
 
-const LIMIT = 2;
+const LIMIT = 5;
 
 export default {
   // State
@@ -51,11 +51,11 @@ export default {
 
   removeItem: action((state, payload) => {
 
-    const { reservationId, status } = payload;
+    const { id, status } = payload;
 
     if (getOrderObject(state, status).items) {
       getOrderObject(state, status).items = getOrderObject(state, status).items.filter(p => {
-        return p.reservation.id !== reservationId;
+        return p.id !== id;
       });
     }
   }),

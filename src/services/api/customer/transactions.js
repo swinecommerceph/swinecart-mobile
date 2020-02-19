@@ -17,6 +17,9 @@ const service = {
   },
   getHistory(page = 1, limit = 10) {
     return API.get(`${URL_PREFIX}/history`, { page, limit });
+  },
+  reviewBreeder(id, requestData) {
+    return API.post(`${URL_PREFIX}/reviews/${id}`, requestData);
   }
 }
 

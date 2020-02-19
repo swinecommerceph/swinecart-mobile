@@ -1,17 +1,17 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
 import {
-  BreederProducts,
+  ManageProducts,
   EditProduct,
   ProductDetails,
 } from 'features';
 
 const navigator = createStackNavigator({
-  BreederProducts: BreederProducts,
+  ManageProducts: ManageProducts,
   EditProduct: EditProduct,
   ProductDetails: ProductDetails,
 }, {
-    initialRouteName: 'BreederProducts',
+    initialRouteName: 'ManageProducts',
     headerMode: 'none',
     defaultNavigationOptions: {
   }

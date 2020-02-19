@@ -4,13 +4,17 @@ import {
   BreederProfile
 } from 'features';
 
-const navigator = createStackNavigator({
-  Profile: BreederProfile,
-}, {
+const navigatorConfig = {
   initialRouteName: 'Profile',
   headerMode: 'none',
   defaultNavigationOptions: {
   }
-});
+};
+
+const routes = {
+  Profile: BreederProfile,
+};
+
+const navigator = createStackNavigator(routes, navigatorConfig);
 
 export default navigator;

@@ -3,7 +3,7 @@ import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 import AuthChecker from 'features/AuthChecker';
 
 import PublicStack from './PublicStack';
-import BreederTab from './BreederTab';
+import BreederNavigator from './Breeder';
 import CustomerNavigator from './Customer';
 
 const navigatorConfig = {
@@ -13,7 +13,7 @@ const navigatorConfig = {
 const routes = {
   Public: PublicStack,
   AuthChecker: AuthChecker,
-  Breeder: BreederTab,
+  Breeder: BreederNavigator,
   Customer: CustomerNavigator,
 };
 

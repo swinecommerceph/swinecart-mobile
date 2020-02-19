@@ -1,18 +1,25 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
 import {
-  Orders, ProductRequests
+  ProductView, HistoryDetails
 } from 'features';
 
-const navigator = createStackNavigator({
-  Orders: Orders,
-  ProductRequests: ProductRequests,
-}, {
-  initialRouteName: 'Orders',
+import BreederTab from './BreederTab';
+
+const navigatorConfig = {
+  initialRouteName: 'BreederTab',
   headerMode: 'none',
   defaultNavigationOptions: {
   }
-});
+};
+
+const routes = {
+  BreederTab: BreederTab,
+  ProductView: ProductView,
+  HistoryDetails: HistoryDetails,
+};
+
+const navigator = createStackNavigator(routes, navigatorConfig);
 
 navigator.navigationOptions = ({ navigation }) => {
   return {

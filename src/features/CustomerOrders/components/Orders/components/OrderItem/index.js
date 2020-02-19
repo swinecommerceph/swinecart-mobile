@@ -4,7 +4,9 @@ import { useStoreActions } from 'easy-peasy'
 
 import { NavigationService } from 'services';
 
-import { Block, ProductAvatar } from 'shared';
+import { Card, ProductAvatar } from 'molecules';
+
+import { Block } from 'atoms';
 
 import {
   ProductInfo,
@@ -21,12 +23,7 @@ function OrderItem({ data, listIndex }) {
   } = product;
 
   return (
-    <Block
-      row padding={1}
-      backgroundColor='white1'
-      borderBottomWidth={1}
-      borderBottomColor='gray1'
-    >
+    <Card>
       <ProductAvatar
         shape='rounded'
         image={imageUrl} size={90}
@@ -41,9 +38,9 @@ function OrderItem({ data, listIndex }) {
           farmLocation={farmLocation}
         />
         <OrderStatus status={status} statusTime={statusTime} />
-        {status === 'sold' && <ProductActions /> }
+        {status === 'sold' && <ProductActions data={data} /> }
       </Block>
-    </Block>
+    </Card>
   );
 
 }

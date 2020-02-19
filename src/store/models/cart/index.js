@@ -62,6 +62,7 @@ export default {
     else {
       const { item } = data.data;
       actions.addItem(item);
+      ToastService.show('Product added to your SwineCart', null);
     }
 
 

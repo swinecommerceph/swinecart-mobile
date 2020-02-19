@@ -2,14 +2,14 @@ import React, { memo, useEffect, useCallback } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { Select, withStyles } from '@ui-kitten/components';
 
-import { Block, Text } from 'shared';
+import { Block, Text } from 'atoms';
 import routes from 'constants/routes';
 
 function StatusPicker({ themedStyle, jumpTo }) {
 
-  const currentStatus = useStoreState(state => state.transactions.currentStatus);
-  const status = useStoreState(state => state.transactions.status());
-  const setCurrentStatus = useStoreActions(actions => actions.transactions.setCurrentStatus);
+  const currentStatus = useStoreState(state => state.orders.currentStatus);
+  const status = useStoreState(state => state.orders.status());
+  const setCurrentStatus = useStoreActions(actions => actions.orders.setCurrentStatus);
 
   useEffect(() => {
     jumpTo(currentStatus.key);

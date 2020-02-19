@@ -3,12 +3,12 @@ import { useStoreActions } from 'easy-peasy';
 
 import { ModalService, NavigationService } from 'services';
 
-import { Block, Button } from 'shared';
+import { Block, Button } from 'atoms';
 
-function ProductActions() {
+function ProductActions({ data }) {
 
   const onPressPrimaryAction = () => {
-    ModalService.showModal('RateBreeder', {});
+    ModalService.showModal('RateBreeder', { ...data });
   };
 
   return (

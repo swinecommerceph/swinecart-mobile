@@ -15,7 +15,6 @@ function ProductActions({ data }) {
 
   const onPressView = () => {
     setCurrentId(data.id);
-    NavigationService.navigate('ProductView');
   };
 
   return (

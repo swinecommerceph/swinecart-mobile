@@ -45,14 +45,15 @@ export default {
 
   onNotification: thunk((actions, payload, { getStoreActions, getStoreState }) => {
     const { type } = payload;
-    
+    console.dir(payload);
+
     if (type === 'notification') {
       actions.getItems({ isRefresh: true });
     }
     else if (type === 'db-productRequest') {
 
       const { id, customer_name, name } = payload.body;
-
+      
       const title = 'Product Request';
       const message = `${customer_name} requested for Product ${name}.`;
 
@@ -77,6 +78,33 @@ export default {
       PushNotificationService.showLocalNotification(title, message);
       getStoreActions().ratings.getData();
       getStoreActions().reviews.getItems({ isRefresh: true });
+    }
+    else if (type === 'sc-reserved') {
+      const title = 'Product Reserved';
+      const message = `Breeder reserved a product for you.`;
+
+      PushNotificationService.showLocalNotification(title, message);
+      // getStoreActions().customerOrders.setCurrentStatus(routes[1]);
+      getStoreActions().customerOrders.getItems({ status: 'requested', isRefresh: false });
+      getStoreActions().customerOrders.getItems({ status: 'reserved', isRefresh: false });
+    }
+    else if (type === 'sc-onDelivery') {
+      const title = 'Product On Delivery';
+      const message = `Product is now on delivery.`;
+
+      PushNotificationService.showLocalNotification(title, message);
+      // getStoreActions().customerOrders.setCurrentStatus(routes[2]);
+      getStoreActions().customerOrders.getItems({ status: 'reserved', isRefresh: false });
+      getStoreActions().customerOrders.getItems({ status: 'onDelivery', isRefresh: false });
+    }
+    else if (type === 'sc-sold') {
+      const title = 'Product Sold';
+      const message = `Product Sold`;
+
+      PushNotificationService.showLocalNotification(title, message);
+      // getStoreActions().customerOrders.setCurrentStatus(routes[3]);
+      getStoreActions().customerOrders.getItems({ status: 'onDelivery', isRefresh: false });
+      getStoreActions().customerOrders.getItems({ status: 'sold', isRefresh: false });
     }
 
   }),
