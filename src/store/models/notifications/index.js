@@ -175,6 +175,4 @@ export default {
     actions.setLoadingMore(false);
 
   }),
-
-
 };

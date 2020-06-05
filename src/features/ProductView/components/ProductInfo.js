@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import upperFirst from 'lodash/upperFirst';
-import { Block, Text } from 'shared';
+import { Block, Text } from 'atoms';
 
 import { addS, capitalizeWords, formatBirthdate } from 'utils/formatters';
 

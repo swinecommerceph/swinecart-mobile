@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Image } from 'react-native';
 import { withStyles } from '@ui-kitten/components';
-import { Block } from 'shared';
+import { Block } from 'atoms';
 
 function ProductPrimaryImage({ themedStyle, photoURL }) {
 
@@ -10,7 +10,7 @@ function ProductPrimaryImage({ themedStyle, photoURL }) {
   };
 
   return (
-    <Block padding={1}>
+    <Block>
       <Block row center middle
         overflow='hidden'
         width={'100%'}

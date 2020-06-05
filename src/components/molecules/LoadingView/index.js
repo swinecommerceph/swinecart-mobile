@@ -5,7 +5,7 @@ import { Block } from 'atoms';
 
 function LoadingView() {
   return (
-    <Block flex={1} center middle backgroundColor='gray2'>
+    <Block flex={1} center middle backgroundColor='gray6'>
       <Spinner 
         size='giant'
       />

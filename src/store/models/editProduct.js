@@ -41,7 +41,7 @@ export default {
   // State
   isLoading: false,
   currentStep: 1,
-  maxSteps: 3,
+  maxSteps: 2,
   data: {
     ...formInitialState
   },
@@ -121,10 +121,11 @@ export default {
     else {
       const { product } = data.data;
       ToastService.show('Product successfully added!', () => {
+        actions.resetForm();
         getStoreActions().products.addItem(product);
         getStoreActions().productMedia.setCurrentProduct(product);
         actions.setLoading(false);
-        actions.nextStep();
+        NavigationService.back();
       });
     }
 

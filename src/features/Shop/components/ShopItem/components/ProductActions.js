@@ -7,7 +7,7 @@ import { Block, Button } from 'atoms';
 
 function ProductActions({ data }) {
 
-  const setCurrentId = useStoreActions(actions => actions.productDetails.setCurrentId);
+  const setCurrentId = useStoreActions(actions => actions.productView.setCurrentId);
 
   const onPressAdd = () => {
     ModalService.showModal('AddToCart', { ...data });
@@ -15,6 +15,7 @@ function ProductActions({ data }) {
 
   const onPressView = () => {
     setCurrentId(data.id);
+    NavigationService.navigate('ProductView');
   };
 
   return (

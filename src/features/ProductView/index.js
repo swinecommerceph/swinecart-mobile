@@ -11,10 +11,10 @@ import {
 
 function Container() {
 
-  const isLoading = useStoreState(state => state.productDetails.isLoading);
-  const currentId = useStoreState(state => state.productDetails.currentId);
-  const data = useStoreState(state => state.productDetails.data);
-  const getDetails = useStoreActions(actions => actions.productDetails.getData);
+  const isLoading = useStoreState(state => state.productView.isLoading);
+  const currentId = useStoreState(state => state.productView.currentId);
+  const data = useStoreState(state => state.productView.data);
+  const getDetails = useStoreActions(actions => actions.productView.getData);
 
   useEffect(() => {
     getDetails();

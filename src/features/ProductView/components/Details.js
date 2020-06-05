@@ -11,7 +11,7 @@ import OtherDetails from './OtherDetails';
 
 function Details() {
 
-  const data = useStoreState(state => state.productDetails.data);
+  const data = useStoreState(state => state.productView.data);
 
   const { product_info, swine_info, other_details, farm, breeder } = data;
   const { primary_image } = product_info;

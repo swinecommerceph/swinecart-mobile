@@ -9,7 +9,6 @@ import {
 const navigator = createStackNavigator({
   ManageProducts: ManageProducts,
   EditProduct: EditProduct,
-  ProductDetails: ProductDetails,
 }, {
     initialRouteName: 'ManageProducts',
     headerMode: 'none',

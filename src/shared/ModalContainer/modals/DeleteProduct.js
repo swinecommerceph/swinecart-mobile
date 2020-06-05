@@ -10,7 +10,7 @@ function CancelTransaction(props) {
   const { product } = data;
   const { name } = product;
 
-  const deleteProduct = useStoreActions(actions => actions.products.deleteProduct);
+  const deleteProduct = useStoreActions(actions => actions.manageProducts.deleteProduct);
 
   const onPressPrimaryAction = () => {
     deleteProduct(product);

@@ -6,7 +6,7 @@ import { Button, Block } from 'atoms';
 function ListFooter({ isLoadingMore, onPressLoadMore }) {
   return (
     <Fragment>
-      <Block flex={1} center middle padding={1} backgroundColor='color-primary-transparent-100'>
+      <Block flex={1} center middle padding={1} backgroundColor='gray6'>
         { isLoadingMore 
             ? 
               <Spinner size='giant' />

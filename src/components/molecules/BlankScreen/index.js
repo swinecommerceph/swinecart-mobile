@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import Block from '../Block';
+import { Block } from 'atoms';
 
 function BlankScreen() {
   return (

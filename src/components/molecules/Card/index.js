@@ -8,8 +8,10 @@ function Card({ children }) {
       flex={1}
       row padding={1}
       backgroundColor='white1'
-      borderBottomWidth={2}
-      borderBottomColor='gray1'
+      borderTopWidth={0.5}
+      borderTopColor='gray7'
+      borderBottomWidth={0.5}
+      borderBottomColor='gray7'
     >
       {children}
     </Block>

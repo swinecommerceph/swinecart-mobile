@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import upperFirst from 'lodash/upperFirst';
 import {
   Block, Text
-} from 'shared';
+} from 'atoms';
 
 function FarmFrom({ data }) {
   const {

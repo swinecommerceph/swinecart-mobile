@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import {
   Block, Text
-} from 'shared';
+} from 'atoms';
 
 import SwineInfoRow from './SwineInfoRow';
 

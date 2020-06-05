@@ -8,7 +8,7 @@ import { ProductList } from './components';
 
 function Container() {
 
-  const getProducts = useStoreActions(actions => actions.products.getItems);
+  const getProducts = useStoreActions(actions => actions.manageProducts.getItems);
 
   useEffect(() => {
     getProducts({ isRefresh: false });

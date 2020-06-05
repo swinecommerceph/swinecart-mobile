@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import trim from 'lodash/trim';
 import {
   Block, Text
-} from 'shared';
+} from 'atoms';
 
 function OtherDetails({ data }) {
 

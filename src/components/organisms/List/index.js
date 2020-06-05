@@ -59,11 +59,9 @@ function List(props) {
 
 export default withStyles(memo(List), () => ({
   containerStyle: {
-    backgroundColor: colors.gray2,
+    backgroundColor: colors.gray6,
   },
   contentContainerStyle: {
     flexGrow: 1
-  },
-  ListFooterStyle: {
   }
 }));

@@ -2,7 +2,9 @@ import React, { memo, useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { ModalService } from 'services';
-import { Block, ProductAvatar } from 'atoms';
+
+import { ProductAvatar } from 'molecules';
+import { Block } from 'atoms';
 
 import {
   ProductInfo,

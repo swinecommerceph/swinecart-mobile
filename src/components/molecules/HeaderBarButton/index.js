@@ -8,8 +8,8 @@ function HeaderBarButton(props) {
   const { iconName, onPress } = props;
 
   const renderIcon = () => (
-    <Icon 
-      name={iconName} 
+    <Icon
+      name={iconName}
       color='#ffffff'
       size={26}
     />

@@ -8,7 +8,7 @@ import { Fragment } from 'react';
 
 function ProductActions({ data }) {
 
-  const setCurrentId = useStoreActions(actions => actions.productDetails.setCurrentId);
+  const setCurrentId = useStoreActions(actions => actions.productView.setCurrentId);
   const { product } = data;
   const { isDeleted } = product;
 
