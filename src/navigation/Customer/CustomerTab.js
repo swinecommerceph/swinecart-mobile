@@ -25,9 +25,9 @@ const routes = {
   'CustomerOrdersStack': {
     screen: CustomerOrdersStack,
   },
-  // 'InboxStack': {
-  //   screen: InboxStack,
-  // },
+  'InboxStack': {
+    screen: InboxStack,
+  },
   // 'BreederProfileStack': {
   //   screen: CartStack,
   // },

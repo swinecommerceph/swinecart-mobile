@@ -2,7 +2,7 @@ import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 
 import routes from 'constants/routes';
-import { ToastService, TransactionService } from 'services';
+import { ToastService, TransactionService, NavigationService } from 'services';
 import { orderObject, getOrderObject } from './utils';
 
 const LIMIT = 5;
@@ -116,12 +116,16 @@ export default {
 
       const { item } = data.data;
 
-      actions.addItem({
-        item,
-        status: 'requested'
+      ToastService.show('Successfully requested the product!', () => {
+        actions.addItem({
+          item,
+          status: 'requested'
+        });
+        removeCartItem(cartItemId);
+
+        NavigationService.back();
       });
 
-      removeCartItem(cartItemId);
     }
 
   }),

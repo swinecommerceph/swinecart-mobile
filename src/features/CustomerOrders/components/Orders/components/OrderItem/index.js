@@ -1,6 +1,4 @@
 import React, { memo } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { useStoreActions } from 'easy-peasy'
 
 import { NavigationService } from 'services';
 

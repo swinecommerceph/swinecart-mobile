@@ -10,6 +10,8 @@ function ContainerView(props) {
     themedStyle, flex,
     backgroundColor = colors.gray2,
     padding, paddingBottom = 1, paddingLeft, paddingRight, paddingTop, paddingHorizontal, paddingVertical,
+    showsHorizontalScrollIndicator = true, 
+    showsVerticalScrollIndicator = false, 
     ...restProps 
   } = props;
 
@@ -41,7 +43,7 @@ function ContainerView(props) {
       alwaysBounceVertical={false}
       alwaysBounceHorizontal={false}
       // showsHorizontalScrollIndicator={false}
-      showsVerticalScrollIndicator={false}
+      showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       {...restProps}
     />
   )

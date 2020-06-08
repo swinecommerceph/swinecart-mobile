@@ -13,7 +13,8 @@ function ProductActions({ data }) {
   const { isDeleted } = product;
 
   const onPressRequest = () => {
-    ModalService.showModal('RequestProduct', { ...data });
+    NavigationService.navigate('RequestProduct', { data });
+    // ModalService.showModal('RequestProduct', { ...data });
   };
 
   const onPressRemove = () => {

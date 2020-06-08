@@ -106,6 +106,17 @@ export default {
       getStoreActions().customerOrders.getItems({ status: 'onDelivery', isRefresh: false });
       getStoreActions().customerOrders.getItems({ status: 'sold', isRefresh: false });
     }
+    else if (type === 'sc-cancelTransaction') {
+      const title = 'Transaction Cancelled';
+      const message = `A breeder cancelled a transaction with you.`;
+
+      console.dir(payload.item_id);
+
+      PushNotificationService.showLocalNotification(title, message);
+      // getStoreActions().customerOrders.setCurrentStatus(routes[3]);
+      // getStoreActions().customerOrders.getItems({ status: 'onDelivery', isRefresh: false });
+      // getStoreActions().customerOrders.getItems({ status: 'sold', isRefresh: false });
+    }
 
   }),
 

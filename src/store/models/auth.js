@@ -34,38 +34,36 @@ export default {
 
     actions.setLoggingIn({ isLoggingIn: true });
 
-    const response = await to(AuthService.login({ email, password }));
+    const [ error, data ] = await to(AuthService.login({ email, password }));
 
-    console.dir(response);
-
-    // if (error) {
-    //   const { problem } = error;
-    //   if (problem === 'TIMEOUT_ERROR') {
-    //     ToastService.show('Please try again later!', null);
-    //   }
-    //   else if (problem === 'CLIENT_ERROR') {
-    //     ToastService.show('Invalid Email or Password!', null);
-    //   }
-    //   // else if (problem === 'NETWORK_ERROR') {
-    //   //   ToastService.show('Please try again later!', null);
-    //   // }
-    //   else {
-    //     ToastService.show('Please try again later!', null);
-    //   }
+    if (error) {
+      const { problem } = error;
+      if (problem === 'TIMEOUT_ERROR') {
+        ToastService.show('Please try again later!', null);
+      }
+      else if (problem === 'CLIENT_ERROR') {
+        ToastService.show('Invalid Email or Password!', null);
+      }
+      else if (problem === 'NETWORK_ERROR') {
+        ToastService.show('Please try again later!', null);
+      }
+      else {
+        ToastService.show('Please try again later!', null);
+      }
       
 
-    //   actions.setLoggingIn({ isLoggingIn: false });
-    // }
-    // else {
-    //   ToastService.show('Successfully logged in!', () => {
-    //     const { token } = data.data;
-    //     Api.setAuthToken(token);
-    //     actions.setToken({ token });
-    //     actions.saveTokenToStorage({ token });
-    //     getStoreActions().user.getAccountType({ token });
-    //   });
+      actions.setLoggingIn({ isLoggingIn: false });
+    }
+    else {
+      ToastService.show('Successfully logged in!', () => {
+        const { token } = data.data;
+        Api.setAuthToken(token);
+        actions.setToken({ token });
+        actions.saveTokenToStorage({ token });
+        getStoreActions().user.getAccountType({ token });
+      });
       
-    // }
+    }
 
   }),
 
@@ -74,7 +72,7 @@ export default {
     actions.setLoggingIn({ isLoggingIn: false });
     actions.setLoggingOut({ isLoggingOut: true });
 
-    const [error, data] = await to(AuthService.logout());
+    const [ error, data ] = await to(AuthService.logout());
   
     if (error) {
       const { problem } = error;

@@ -1,10 +1,8 @@
-import React, { Fragment, memo, useState } from 'react';
+import React, { Fragment, memo } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useFormik } from 'formik';
 
-import {
-  Input
-} from 'shared';
+import { Input } from 'molecules';
 
 import { LoginSchema } from 'validationSchemas';
 

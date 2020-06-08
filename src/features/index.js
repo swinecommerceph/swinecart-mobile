@@ -20,3 +20,4 @@ export { default as Reviews } from './Reviews';
 export { default as Cart } from './Cart';
 export { default as Shop } from './Shop';
 export { default as CustomerOrders } from './CustomerOrders';
+export { default as RequestProduct } from './RequestProduct';

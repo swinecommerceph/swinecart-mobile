@@ -23,7 +23,7 @@ const iconColors = {
 
 function Notification({ data }) {
 
-  const { message, read_at, created_at, type } = data;
+  const { message, readAt, createdAt, type } = data;
 
   const setCurrentStatus = useStoreActions(actions => actions.orders.setCurrentStatus);
   const setCurrentRoute = useStoreActions(actions => actions.dashboard.setCurrentRoute);
@@ -41,7 +41,7 @@ function Notification({ data }) {
     }
   };
 
-  const textColor = read_at ? 'gray5': 'black1';
+  const textColor = readAt ? 'gray5': 'black1';
 
   return (
     <TouchableOpacity
@@ -54,13 +54,13 @@ function Notification({ data }) {
         borderBottomWidth={1}
         borderBottomColor='gray1'
       > 
-        {/* <Icon name={iconNames[type]} color={read_at ? 'gray5' : iconColors[type]} size={30}/> */}
+        {/* <Icon name={iconNames[type]} color={readAt ? 'gray5' : iconColors[type]} size={30}/> */}
         <Block flex={1} marginLeft={1}>
           <Text semibold size={13} numberOfLines={3} color={textColor}>
             {message}
           </Text>
           <Text normal size={12} color={textColor}>
-            {formatCreatedAt(created_at)}
+            {formatCreatedAt(createdAt)}
           </Text>
         </Block>
       </Block>

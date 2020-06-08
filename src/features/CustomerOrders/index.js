@@ -1,6 +1,6 @@
-import React, { Fragment, memo, useEffect } from 'react';
-import { useStoreState, useStoreActions } from 'easy-peasy';
-import { HeaderBar, LoadingOverlay } from 'shared';
+import React, { Fragment, memo } from 'react';
+
+import { HeaderBar } from 'atoms';
 
 import { TransactionsTabView } from './components';
 
@@ -8,6 +8,7 @@ function Container() {
 
   return (
     <Fragment>
+      <HeaderBar title='Transactions' />
       <TransactionsTabView />
     </Fragment>
   );
