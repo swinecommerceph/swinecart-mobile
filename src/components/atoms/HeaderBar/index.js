@@ -23,7 +23,7 @@ function HeaderBar(props) {
         style={headerBarStyle}
         title={title}
         titleStyle={themedStyle.titleStyle}
-        alignment='left'
+        alignment='center'
         leftControl={leftControl}
         rightControls={rightControls}
       />
