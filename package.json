@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "react-native start --reset-cache --max-workers=20",
+    "start": "react-native start --reset-cache --max-workers=30",
     "dev:android": "react-native run-android",
     "clean:android": "cd android && ./gradlew clean && cd ..",
     "build:android": "cd android && ./gradlew clean && ./gradlew bundleRelease",
