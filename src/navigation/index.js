@@ -6,6 +6,8 @@ import PublicStack from './PublicStack';
 import BreederNavigator from './Breeder';
 import CustomerNavigator from './Customer';
 
+import { TestScreen } from 'features';
+
 const navigatorConfig = {
   initialRouteName: 'AuthChecker',
 };
@@ -15,6 +17,7 @@ const routes = {
   AuthChecker: AuthChecker,
   Breeder: BreederNavigator,
   Customer: CustomerNavigator,
+  TestScreen: TestScreen
 };
 
 const RootNavigator = createSwitchNavigator(routes, navigatorConfig);

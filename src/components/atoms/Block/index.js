@@ -21,21 +21,24 @@ function Block(props) {
     borderRightWidth, borderRightColor,
     borderTopWidth, borderTopColor,
     backgroundColor,
-    themedStyle, children
+    eva: { style },
+    children
   } = props;
 
+  console.dir(props);
+
   const blockStyle = [
-    themedStyle.defaultStyle,
+    style.defaultStyle,
     !flex && { flex: 0 },
     flex && { flex },
     flexGrow && { flexGrow },
     flexShrink && { flexShrink },
     space && { justifyContent: `space-${space}` },
-    row && themedStyle.row,
-    center && themedStyle.center,
-    left && themedStyle.left,
-    middle && themedStyle.middle,
-    right && themedStyle.right,
+    row && style.row,
+    center && style.center,
+    left && style.left,
+    middle && style.middle,
+    right && style.right,
     alignSelf && { alignSelf },
 
     shadow && { ...shadows[shadow] },

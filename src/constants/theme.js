@@ -1,8 +1,9 @@
-import { light } from '@eva-design/eva';
+import * as eva from '@eva-design/eva';
+
 
 const colors = {
 
-  ...light,
+  ...eva.light,
 
   "color-primary-100": "#C6F7DF",
   "color-primary-200": "#90F0C9",
@@ -99,7 +100,7 @@ const colors = {
 
 const textStyles = {
   headline: {
-    fontFamily: 'OpenSans-Bold',
+    fontFamily: 'OpenSans-SemiBold',
     fontWeight: 'normal',
     fontSize: 18,
     lineHeight: 23,

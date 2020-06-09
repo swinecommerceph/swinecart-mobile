@@ -21,3 +21,7 @@ export { default as Cart } from './Cart';
 export { default as Shop } from './Shop';
 export { default as CustomerOrders } from './CustomerOrders';
 export { default as RequestProduct } from './RequestProduct';
+
+
+// TestScreen
+export { default as TestScreen } from './TestScreen';
