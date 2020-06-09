@@ -8,7 +8,7 @@ function ContainerView(props) {
 
   const { 
     themedStyle, flex,
-    backgroundColor = colors.gray2,
+    backgroundColor = 'gray2',
     padding, paddingBottom = 1, paddingLeft, paddingRight, paddingTop, paddingHorizontal, paddingVertical,
     showsHorizontalScrollIndicator = true, 
     showsVerticalScrollIndicator = false, 
@@ -29,7 +29,7 @@ function ContainerView(props) {
 
   const scrollViewStyle = [
     themedStyle.container,
-    { backgroundColor }
+    { backgroundColor: colors[backgroundColor] }
   ];
 
   return (

@@ -1,12 +1,10 @@
 import React, { Fragment, memo, useEffect, useState } from 'react';
 import { useStoreActions } from 'easy-peasy';
-import { Calendar } from '@ui-kitten/components';
+import { Calendar, Datepicker } from '@ui-kitten/components';
 import addYears from 'date-fns/addYears';
 
-import { Block, Button, Text, HeaderBar } from 'atoms';
+import { Block, Button, Text } from 'atoms';
 import { Stepper, TextArea, ContainerView } from 'molecules';
-
-import { formatDeliveryDate } from 'utils/formatters';
 
 function RequestProduct({ data }) {
   
@@ -34,18 +32,48 @@ function RequestProduct({ data }) {
 
   return (
     <Fragment>
-      <ContainerView showsVerticalScrollIndicator={true}>
-        <Block backgroundColor='white1' flex={1}>
+      <ContainerView 
+        backgroundColor='white1'
+        padding={1}
+        showsVerticalScrollIndicator={true}
+      >
           <Block padding={1}>
-            <Text normal size={16} textAlign='center'>
+            <Text normal size={18} textAlign='center'>
               Requesting
-              <Text bold size={16} textAlign='center'>
+              <Text bold size={18} textAlign='center'>
                 {` ${name} `}
               </Text>
               sends a request to the breeder for buying the product.
             </Text>
           </Block>
-          <Block paddingHorizontal={1}>
+          <Block>
+            {
+              type === 'semen' &&
+              <Fragment>
+                <Block row marginVertical={0.5} flex={1} padding={0.5}>
+                  <Block middle>
+                    <Text bold size={14} textAlign='left' middle>
+                      Quantity: {currentQuantity}
+                    </Text>
+                  </Block>
+                  <Block marginLeft={0.5} center>
+                    <Stepper
+                      onValueChange={setQuantity}
+                      stepValue={2}
+                      minValue={2}
+                      initialValue={currentQuantity}
+                    />
+                  </Block>
+                </Block>
+                <Block marginBottom={0.5}>
+                  <Datepicker
+                    label={'Date Needed'}
+                    date={currentDate}
+                    onSelect={onChangeDate}
+                  />
+                </Block>
+              </Fragment>
+            }
             <Block marginBottom={0.5}>
               <TextArea
                 label='Special Request'
@@ -53,39 +81,6 @@ function RequestProduct({ data }) {
                 onChangeText={setRequest}
               />
             </Block>
-            {
-              type === 'semen' &&
-              <Fragment>
-                <Block>
-                  <Block row justifyContent='center' alignContent='center'>
-                    <Text bold size={14} textAlign='left'>
-                      Quantity: {currentQuantity}
-                    </Text>
-                    <Block marginLeft={0.5}>
-                      <Stepper
-                        onValueChange={setQuantity}
-                        stepValue={2}
-                        minValue={2}
-                        initialValue={currentQuantity}
-                      />
-                    </Block>
-                  </Block>
-                </Block>
-                <Block>
-                  <Block row marginBottom={1}>
-                    <Text bold size={14} textAlign='left'>
-                      Date Needed: {formatDeliveryDate(currentDate)}
-                    </Text>
-                  </Block>
-                  <Calendar
-                    date={currentDate}
-                    onSelect={onChangeDate}
-                    min={today}
-                    max={addYears(today, 5)}
-                  />
-                </Block>
-              </Fragment>
-            }
           </Block>
           <Block row center right padding={1}>
             <Block flex={1}>
@@ -94,7 +89,6 @@ function RequestProduct({ data }) {
               </Button>
             </Block>
           </Block>
-        </Block>
       </ContainerView>
     </Fragment>
   );

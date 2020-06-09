@@ -4,13 +4,13 @@ import NumberStepper from 'react-native-custom-stepper';
 import { colors } from 'constants/theme';
 
 function Stepper(props) {
-
+  console.dir(props);
   return (
     <Fragment>
       <NumberStepper
         {...props}
         maxValue={10000}
-        buttonsFontSize={25}
+        buttonsFontSize={30}
         buttonsBackgroundColor={colors.primary}
         // labelBackgroundColor={colors.primary}
       />
