@@ -1,7 +1,7 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { HeaderBar } from 'atoms';
+import { HeaderBar, Text } from 'atoms';
 
 function Container() {
 

@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { Block, Button } from 'atoms';
+import { Button } from 'atoms';
 
 function LoginButton({ disabled, onSubmit }) {
   return (

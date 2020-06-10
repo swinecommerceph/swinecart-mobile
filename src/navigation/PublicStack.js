@@ -1,8 +1,6 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
-import {
-  Login
-} from 'features';
+import Login from 'features/Login';
 
 
 const navigator = createStackNavigator({

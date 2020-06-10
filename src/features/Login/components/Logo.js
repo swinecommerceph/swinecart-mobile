@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
-import { Image } from 'react-native';
-import { Block, Text } from 'shared';
 import { APP_URL } from 'react-native-dotenv';
+import { Image } from 'react-native';
+
+import { Block } from 'atoms';
 
 function Logo() {
   return (

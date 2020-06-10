@@ -9,11 +9,13 @@ function Button(props) {
   const {
     padding, paddingBottom, paddingLeft, paddingRight, paddingTop, paddingHorizontal, paddingVertical,
     margin, marginBottom, marginLeft, marginRight, marginTop, marginHorizontal, marginVertical,
-    themedStyle, style, ...otherProps
+    eva, style, ...otherProps
   } = props;
 
+  console.dir(props);
+
   const buttonStyle = [
-    themedStyle.buttonStyle,
+    eva.style.buttonStyle,
 
     padding && { padding: sizes.padding * padding },
     paddingBottom && { paddingBottom: sizes.padding * paddingBottom },
@@ -35,21 +37,11 @@ function Button(props) {
 
   return (
     <UKButton
-      textStyle={themedStyle.buttonText}
-      style={buttonStyle}
-      {...otherProps}
+      // textStyle={eva.style.buttonText}
+      // style={buttonStyle}
+      {...props}
     />
   );
 }
 
-export default withStyles(memo(Button), () => ({
-  buttonText: {
-    fontFamily: 'OpenSans-Bold',
-    fontSize: 15,
-    fontWeight: 'normal',
-    lineHeight: computeLineHeight(15)
-  },
-  buttonStyle: {
-    borderWidth: 0,
-  }
-}));
+export default memo(Button);

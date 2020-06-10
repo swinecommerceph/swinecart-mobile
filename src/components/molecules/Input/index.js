@@ -15,7 +15,8 @@ function Input(props) {
   const {
     name, values, touched, errors, label, placeholder,
     onChange, isPassword,
-    themedStyle, ...otherProps
+    eva,
+    ...otherProps
   } = props;
 
   
@@ -46,10 +47,10 @@ function Input(props) {
       status={hasError ? 'danger' : 'primary'}
       caption={hasError ? errors[name] : null}
       value={`${values[name] || ''}`}
-      style={themedStyle.input}
-      textStyle={themedStyle.inputText}
-      labelStyle={themedStyle.labelText}
-      captionTextStyle={themedStyle.captionText}
+      style={eva.style.input}
+      textStyle={eva.style.inputText}
+      labelStyle={eva.style.labelText}
+      captionTextStyle={eva.style.captionText}
       onChangeText={onChangeText}
       icon={isPassword ? renderIcon : null}
       onIconPress={isPassword ? onIconPress : null}

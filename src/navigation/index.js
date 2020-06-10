@@ -9,7 +9,7 @@ import CustomerNavigator from './Customer';
 import { TestScreen } from 'features';
 
 const navigatorConfig = {
-  initialRouteName: 'AuthChecker',
+  initialRouteName: 'TestScreen',
 };
 
 const routes = {

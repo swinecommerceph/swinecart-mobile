@@ -1,16 +1,12 @@
 import React, { Fragment, memo } from 'react';
-import { TopNavigation, Text, Divider } from '@ui-kitten/components';
+import { TopNavigation, Divider } from '@ui-kitten/components';
 
-import { colors, textStyles } from 'constants/theme';
+import { colors } from 'constants/theme';
+
+import { Text } from 'atoms';
 
 const headerBarStyle = {
   backgroundColor: colors.primary
-};
-
-const titleStyle = {
-  ...textStyles.headline,
-  color: colors.white1,
-  textAlign: 'left'
 };
 
 function HeaderBar(props) {
@@ -24,11 +20,9 @@ function HeaderBar(props) {
       <TopNavigation
         style={headerBarStyle}
         title={
-          evaProps => (
-            <Text {...evaProps} style={[evaProps.style, titleStyle]}>
-              {title}
-            </Text>
-          )
+          <Text semibold size={16} color='white1' textAlign='left'>
+            {title}
+          </Text>
         }
         alignment='start'
       />

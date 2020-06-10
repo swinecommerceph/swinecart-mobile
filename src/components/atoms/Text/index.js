@@ -12,7 +12,8 @@ function Text(props) {
     textAlign,
     padding, paddingBottom, paddingLeft, paddingRight, paddingTop, paddingHorizontal, paddingVertical,
     margin, marginBottom, marginLeft, marginRight, marginTop, marginHorizontal, marginVertical,
-    themedStyle, ...otherProps 
+    eva,
+    children
   } = props;
 
   const lineHeight = useMemo(() => {
@@ -22,11 +23,11 @@ function Text(props) {
   const textStyles = [
     size && { fontSize: size, lineHeight },
     color && { color: colors[color] },
-    normal && themedStyle.normal,
-    !normal && themedStyle.normal,
-    semibold && themedStyle.semibold,
-    bold && themedStyle.bold,
-    italic && themedStyle.italic,
+    normal && eva.style.normal,
+    !normal && eva.style.normal,
+    semibold && eva.style.semibold,
+    bold && eva.style.bold,
+    italic && eva.style.italic,
 
     textAlign && { textAlign },
 
@@ -49,11 +50,11 @@ function Text(props) {
   ];
 
   return (
-    <UKText 
-      {...otherProps}
+    <UKText
+      children={children}
       style={textStyles}
     />
-  );  
+  );
 
 }
 

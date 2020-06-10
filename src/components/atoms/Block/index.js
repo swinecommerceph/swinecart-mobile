@@ -25,8 +25,6 @@ function Block(props) {
     children
   } = props;
 
-  console.dir(props);
-
   const blockStyle = [
     style.defaultStyle,
     !flex && { flex: 0 },
