@@ -1,8 +1,7 @@
 import React, { useMemo, useCallback, memo, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { withStyles, Input as UKInput } from '@ui-kitten/components';
 import isEqual from 'react-fast-compare';
-
-import { colors } from 'constants/theme';
 
 import { computeLineHeight } from 'utils';
 
@@ -19,25 +18,27 @@ function Input(props) {
     ...otherProps
   } = props;
 
-  
+
   const hasError = useMemo(() => !!(errors[name]), [ errors[name] ]);
 
   const onChangeText = useCallback(value => {
     onChange(name, value);
   }, [ values[name] ]);
 
-  const renderIcon = () => (
-    <Icon 
-      name={ isVisible ? 'eye' : 'eye-off' } 
-      size={26} 
-      color={colors.gray5}
-      marginHorizontal={0.5}
-    />
-  );
-
   const onIconPress = () => {
     setIsVisible(!isVisible);
   };
+
+  const renderIcon = () => (
+    <TouchableOpacity onPress={onIconPress} activeOpacity={1.0}>
+      <Icon
+        name={isVisible ? 'eye' : 'eye-off'}
+        size={26}
+        color='gray5'
+        marginHorizontal={0.5}
+      />
+    </TouchableOpacity>
+  );
 
   return (
     <UKInput
@@ -51,11 +52,9 @@ function Input(props) {
       }
       status={hasError ? 'danger' : 'primary'}
       value={`${values[name] || ''}`}
-      style={style.input}
       textStyle={style.inputText}
       onChangeText={onChangeText}
-      icon={isPassword ? renderIcon : null}
-      onIconPress={isPassword ? onIconPress : null}
+      accessoryRight={isPassword ? renderIcon : null}
       secureTextEntry={isPassword ? isVisible : false}
       {...otherProps}
     />

@@ -11,6 +11,7 @@ function Icon(props) {
   } = props;
 
   const iconStyle = [
+    { width: size, height: size },
     padding && { padding: sizes.padding * padding },
     paddingBottom && { paddingBottom: sizes.padding * paddingBottom },
     paddingLeft && { paddingLeft: sizes.padding * paddingLeft },
@@ -29,11 +30,9 @@ function Icon(props) {
   ];
 
   return (
-    <UKIcon 
+    <UKIcon
       name={name}
       fill={colors[color] ? colors[color] : color }
-      width={size}
-      height={size}
       style={iconStyle}
     />
   );
