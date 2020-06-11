@@ -6,7 +6,7 @@ import {
 import { shadows } from 'constants/theme';
 import { NavigationService } from 'services';
 
-import BottomNavigationTab from '../BottomNavigationTab';
+import BottomNavigationTab from 'molecules/BottomNavigationTab';
 
 function BreederTabBar({ navigation }) {
 

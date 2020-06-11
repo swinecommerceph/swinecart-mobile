@@ -5,7 +5,7 @@ import ShopStack from './ShopStack';
 import CustomerOrdersStack from './CustomerOrderStack';
 import InboxStack from '../InboxStack';
 
-import CustomerTabBar from 'shared/CustomerTabBar';
+import CustomerTabBar from 'molecules/CustomerTabBar';
 
 const navigatorConfig = {
   initialRouteName: 'InboxStack',

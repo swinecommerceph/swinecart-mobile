@@ -20,7 +20,6 @@ export { default as UserAvatar } from './UserAvatar';
 export { default as HeaderBar } from './HeaderBar';
 export { default as HeaderBarButton } from './HeaderBarButton';
 export { default as BreederTabBar } from './BreederTabBar';
-export { default as CustomerTabBar } from './CustomerTabBar';
 export { default as BackButton } from './BackButton';
 export { default as ModalContainer } from './ModalContainer';
 

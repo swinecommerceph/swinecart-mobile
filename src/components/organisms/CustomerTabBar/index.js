@@ -5,12 +5,11 @@ import {
 
 import { NavigationService } from 'services';
 
-import BottomNavigationTab from '../BottomNavigationTab';
+import { BottomNavigationTab } from 'molecules';
 
 function CustomerTabBar({ navigation }) {
 
   const onTabSelect = selectedIndex => {
-    // console.dir(selectedIndex, navigation);
     const { [selectedIndex]: selectedRoute } = navigation.state.routes;
     NavigationService.navigate(selectedRoute.routeName);
   };
@@ -26,7 +25,7 @@ function CustomerTabBar({ navigation }) {
         <BottomNavigationTab title='Shop' iconName='shopping-bag' />
         <BottomNavigationTab title='SwineCart' iconName='shopping-cart' />
         <BottomNavigationTab title='Transactions' iconName='list' />
-        <BottomNavigationTab title='Inbox' iconName='inbox' />
+        <BottomNavigationTab title='Messages' iconName='inbox' />
         {/* <BottomNavigationTab title='Profile' iconName='person' /> */}
       </UKBottomNavigation>
     </Fragment>

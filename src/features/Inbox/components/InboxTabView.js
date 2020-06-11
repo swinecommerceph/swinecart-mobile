@@ -16,12 +16,12 @@ class InboxTabView extends PureComponent {
     index: 0,
     routes: [
       { key: 'chatList', title: 'Chats', },
-      { key: 'notificationList', title: 'Notifications', },
+      // { key: 'notificationList', title: 'Notifications', },
     ]
   };
 
-  chatListRoute = () =>  <ChatList />;
-  notificationListRoute = () => <NotificationList />;
+  chatListRoute = () => <ChatList />;
+  // notificationListRoute = () => <NotificationList />;
 
   getLabelText = ({ route }) => route.title;
 
@@ -36,17 +36,17 @@ class InboxTabView extends PureComponent {
         {...props}
         useNativeDriver={true}
         getLabelText={this.getLabelText}
-        labelStyle={this.props.themedStyle.labelStyle}
-        indicatorStyle={this.props.themedStyle.indicatorStyle}
-        style={this.props.themedStyle.tabBarStyle}
-        tabStyle={this.props.themedStyle.tabStyle}
+        labelStyle={this.props.eva.style.labelStyle}
+        indicatorStyle={this.props.eva.style.indicatorStyle}
+        style={this.props.eva.style.tabBarStyle}
+        tabStyle={this.props.eva.style.tabStyle}
       />
     )
   }
 
   renderScene = SceneMap({
     chatList: this.chatListRoute,
-    notificationList: this.notificationListRoute,
+    // notificationList: this.notificationListRoute,
   });
 
   renderLazyPlaceholder = () => {

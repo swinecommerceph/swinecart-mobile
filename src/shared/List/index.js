@@ -10,7 +10,7 @@ import ListFooter from '../ListFooter';
 function List(props) {
 
   const {
-    themedStyle, Component, keyExtractor, emptyListMessage, isRefreshing,
+    eva, Component, keyExtractor, emptyListMessage, isRefreshing,
     isLoadingMore, onPressLoadMore, onRefresh, data
   } = props;
 
@@ -44,7 +44,7 @@ function List(props) {
       maxToRenderPerBatch={10}
       ListEmptyComponent={renderListEmptyComponent}
       ListFooterComponent={renderFooterComponent}
-      ListFooterComponentStyle={themedStyle.ListFooterStyle}
+      ListFooterComponentStyle={eva.style.ListFooterStyle}
       showsVerticalScrollIndicator={false}
       refreshControl={
         <RefreshControl
@@ -52,8 +52,8 @@ function List(props) {
           onRefresh={onRefresh} 
         />
       }
-      style={themedStyle.containerStyle}
-      contentContainerStyle={themedStyle.contentContainerStyle}
+      style={eva.style.containerStyle}
+      contentContainerStyle={eva.style.contentContainerStyle}
     />
   );
 }

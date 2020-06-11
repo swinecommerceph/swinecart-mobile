@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 
-import Block from '../Block';
-import Text from '../Text';
+import { Block, Text } from 'atoms';
 
 function EmptyListMessage({ message }) {
   return (

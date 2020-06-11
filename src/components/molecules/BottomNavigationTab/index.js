@@ -15,7 +15,7 @@ function BottomNavigationTab(props) {
 
   return (
     <UKBottomNavigationTab
-      title={<Text bold size={12} color={color}>{title}</Text>}
+      title={<Text semibold size={12} color={color}>{title}</Text>}
       icon={renderIcon}
       style={style}
       onSelect={onSelect}
