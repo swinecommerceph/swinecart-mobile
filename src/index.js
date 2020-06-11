@@ -16,8 +16,6 @@ import { colors } from 'constants/theme';
 
 import store from './store';
 
-import customMapping from './constants/customMapping.json';
-
 // enableScreens();
 
 function App() {

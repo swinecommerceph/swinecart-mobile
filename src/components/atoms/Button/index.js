@@ -1,21 +1,21 @@
 import React, { memo } from 'react';
-import { withStyles, Button as UKButton } from '@ui-kitten/components';
+import { Button as UKButton } from '@ui-kitten/components';
 
 import { sizes } from 'constants/theme';
-import { computeLineHeight } from 'utils';
+
+import Text from '../Text';
 
 function Button(props) {
 
   const {
     padding, paddingBottom, paddingLeft, paddingRight, paddingTop, paddingHorizontal, paddingVertical,
     margin, marginBottom, marginLeft, marginRight, marginTop, marginHorizontal, marginVertical,
-    eva, style, ...otherProps
+    style, children,
+    appearance = 'filled', status = 'primary',
+    ...otherProps
   } = props;
 
-  console.dir(props);
-
   const buttonStyle = [
-    eva.style.buttonStyle,
 
     padding && { padding: sizes.padding * padding },
     paddingBottom && { paddingBottom: sizes.padding * paddingBottom },
@@ -32,15 +32,25 @@ function Button(props) {
     marginTop && { marginTop: sizes.margin * marginTop },
     marginHorizontal && { marginHorizontal: sizes.margin * marginHorizontal },
     marginVertical && { marginVertical: sizes.margin * marginVertical },
-    style
+
   ];
+
+  const color =
+    appearance === 'outline'
+      ? status
+      : status === 'basic'
+        ? 'black1'
+        : appearance === 'ghost' ? 'primary' : 'white1';
 
   return (
     <UKButton
-      // textStyle={eva.style.buttonText}
-      // style={buttonStyle}
-      {...props}
-    />
+      appearance={appearance}
+      status={status}
+      style={buttonStyle} 
+      {...otherProps}
+    >
+      <Text semibold color={color} size={16}>{children}</Text>
+    </UKButton>
   );
 }
 

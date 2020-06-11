@@ -82,7 +82,9 @@ const colors = {
   "color-danger-transparent-600": "rgba(226, 27, 67, 0.48)",
 
   primary: '#00695C',
-
+  success: '#07BA63',
+  info: '#0B67EF',
+  warning: '#FFE30F',
   danger: '#E21B43',
 
   'white1': '#FFFFFF',
