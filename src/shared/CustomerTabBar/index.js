@@ -3,7 +3,6 @@ import {
   BottomNavigation as UKBottomNavigation,
 } from '@ui-kitten/components';
 
-import { shadows } from 'constants/theme';
 import { NavigationService } from 'services';
 
 import BottomNavigationTab from '../BottomNavigationTab';
@@ -11,14 +10,14 @@ import BottomNavigationTab from '../BottomNavigationTab';
 function CustomerTabBar({ navigation }) {
 
   const onTabSelect = selectedIndex => {
-    const { [selectedIndex]: selectedRoute } = navigation.state.routes;
-    NavigationService.navigate(selectedRoute.routeName);
+    console.dir(selectedIndex);
+    // const { [selectedIndex]: selectedRoute } = navigation.state.routes;
+    // NavigationService.navigate(selectedRoute.routeName);
   };
 
   return (
     <UKBottomNavigation
-      // style={shadows.shadow2}
-      appearance='noIndicator'
+      // appearance='noIndicator'
       selectedIndex={navigation.state.index}
       onSelect={onTabSelect}
     >

@@ -12,13 +12,14 @@ const headerBarStyle = {
 function HeaderBar(props) {
 
   const {
-    title,
+    title, accessoryLeft
   } = props;
 
   return (
     <Fragment>
       <TopNavigation
         style={headerBarStyle}
+        accessoryLeft={accessoryLeft}
         title={
           <Text semibold size={16} color='white1' textAlign='left'>
             {title}

@@ -1,53 +1,26 @@
-import React, { memo, useMemo, useCallback } from 'react';
+import React, { memo } from 'react';
 import { 
-  BottomNavigationTab as UKBottomNavigationTab, withStyles
+  BottomNavigationTab as UKBottomNavigationTab
 } from '@ui-kitten/components';
 
-import { colors } from 'constants/theme';
-
-import { computeLineHeight } from 'utils';
-
-import Icon from '../Icon';
+import { Text, Icon } from 'atoms';
 
 function BottomNavigationTab(props) {
 
-  const {
-    title, style, selected, iconName,
-    onSelect, themedStyle
-  } = props;
+  const { title, style, selected, iconName, onSelect } = props;
 
-  const renderIcon = useCallback(() => (
-    <Icon
-      name={iconName}
-      color={selected ? colors.primary : colors.gray4}
-      size={24}
-    />
-  ), [ selected ]);
+  const color = selected ? 'primary' : 'gray4';
 
-  const titleStyle = useMemo(() => {
-    return [
-      themedStyle.tabText,
-      {
-        color: selected ? colors.primary : colors.gray4,
-      }
-    ]
-  }, [ selected ]);
+  const renderIcon = () => <Icon name={iconName} color={color} size={22} />;
 
   return (
     <UKBottomNavigationTab
-      title={title}
-      titleStyle={titleStyle}
+      title={<Text bold size={12} color={color}>{title}</Text>}
       icon={renderIcon}
-      style={[style, themedStyle.tabStyle]}
+      style={style}
       onSelect={onSelect}
     />
   );
 };
 
-export default withStyles(memo(BottomNavigationTab), () => ({
-  tabText: {
-    fontFamily: 'OpenSans-Bold',
-    fontSize: 12,
-    lineHeight: computeLineHeight(12)
-  }
-}));
+export default memo(BottomNavigationTab);

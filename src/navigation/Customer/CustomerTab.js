@@ -1,11 +1,11 @@
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import CartStack from './CartStack';
-import ShopStack from './ShopStack';
+// import CartStack from './CartStack';
+// import ShopStack from './ShopStack';
 import CustomerOrdersStack from './CustomerOrderStack';
-import InboxStack from '../InboxStack';
+// import InboxStack from '../InboxStack';
 
-import { CustomerTabBar } from 'shared';
+import CustomerTabBar from 'shared/CustomerTabBar';
 
 const navigatorConfig = {
   initialRouteName: 'CustomerOrdersStack',
@@ -16,19 +16,19 @@ const navigatorConfig = {
 };
 
 const routes = {
-  'ShopStack': {
-    screen: ShopStack,
-  },
-  'CartStack': {
-    screen: CartStack,
-  },
+  // 'ShopStack': {
+  //   screen: ShopStack,
+  // },
+  // 'CartStack': {
+  //   screen: CartStack,
+  // },
   'CustomerOrdersStack': {
     screen: CustomerOrdersStack,
   },
-  'InboxStack': {
-    screen: InboxStack,
-  },
-  // 'BreederProfileStack': {
+  // 'InboxStack': {
+  //   screen: InboxStack,
+  // },
+  // // 'BreederProfileStack': {
   //   screen: CartStack,
   // },
 };

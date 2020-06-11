@@ -5,7 +5,7 @@ import { Icon } from 'atoms';
 
 function HeaderBarButton(props) {
 
-  const { iconName, onPress } = props;
+  const { iconName, onPress = null } = props;
 
   const renderIcon = () => (
     <Icon
