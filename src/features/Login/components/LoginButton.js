@@ -5,7 +5,7 @@ import { Button } from 'atoms';
 function LoginButton({ disabled, onSubmit }) {
   return (
     <Button
-      size='medium'
+      size='small'
       disabled={disabled}
       onPress={onSubmit}
       marginTop={1}

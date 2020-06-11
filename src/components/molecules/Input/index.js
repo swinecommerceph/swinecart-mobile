@@ -2,11 +2,11 @@ import React, { useMemo, useCallback, memo, useState } from 'react';
 import { withStyles, Input as UKInput } from '@ui-kitten/components';
 import isEqual from 'react-fast-compare';
 
-import { sizes, colors } from 'constants/theme';
+import { colors } from 'constants/theme';
 
 import { computeLineHeight } from 'utils';
 
-import { Icon } from 'atoms';
+import { Icon, Text } from 'atoms';
 
 function Input(props) {
 
@@ -15,7 +15,7 @@ function Input(props) {
   const {
     name, values, touched, errors, label, placeholder,
     onChange, isPassword,
-    eva,
+    eva: { style },
     ...otherProps
   } = props;
 
@@ -41,16 +41,18 @@ function Input(props) {
 
   return (
     <UKInput
-      size='small'
+      size='medium'
       placeholder={placeholder}
-      label={label}
+      label={<Text semibold size={12}>{label}</Text>}
+      caption={
+        <Text semibold size={12} color={hasError ? 'danger' : 'primary'}>
+          {hasError ? errors[name] : null}
+        </Text>
+      }
       status={hasError ? 'danger' : 'primary'}
-      caption={hasError ? errors[name] : null}
       value={`${values[name] || ''}`}
-      style={eva.style.input}
-      textStyle={eva.style.inputText}
-      labelStyle={eva.style.labelText}
-      captionTextStyle={eva.style.captionText}
+      style={style.input}
+      textStyle={style.inputText}
       onChangeText={onChangeText}
       icon={isPassword ? renderIcon : null}
       onIconPress={isPassword ? onIconPress : null}
@@ -62,26 +64,10 @@ function Input(props) {
 }
 
 export default withStyles(memo(Input, isEqual), () => ({
-  input: {
-    marginBottom: sizes.margin
-  },
   inputText: {
     fontFamily: 'OpenSans-SemiBold',
     fontWeight: 'normal',
-    fontSize: 16,
-    lineHeight: computeLineHeight(16)
-  },
-  labelText: {
-    fontFamily: 'OpenSans-SemiBold',
-    fontWeight: 'normal',
-    color: colors.primary,
     fontSize: 14,
     lineHeight: computeLineHeight(14)
   },
-  captionText: {
-    fontFamily: 'OpenSans-SemiBold',
-    fontWeight: 'normal',
-    fontSize: 14,
-    lineHeight: computeLineHeight(14)
-  }
 }));
