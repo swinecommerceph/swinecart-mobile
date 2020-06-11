@@ -1,12 +1,14 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
-import {
-  Cart, RequestProduct
-} from 'features';
+// import {
+//   Cart, RequestProduct
+// } from 'features';
+
+import Cart from 'features/Cart';
 
 const navigator = createStackNavigator({
   Cart: Cart,
-  RequestProduct: RequestProduct,
+  // RequestProduct: RequestProduct,
 }, {
   initialRouteName: 'Cart',
   headerMode: 'none',

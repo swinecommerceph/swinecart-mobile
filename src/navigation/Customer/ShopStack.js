@@ -1,8 +1,10 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
-import {
-  Shop
-} from 'features';
+// import {
+//   Shop
+// } from 'features';
+
+import Shop from 'features/Shop';
 
 const navigator = createStackNavigator({
   Shop: Shop,
