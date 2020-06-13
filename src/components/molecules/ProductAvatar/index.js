@@ -1,28 +1,34 @@
 import React, { memo } from 'react';
 import { Avatar } from '@ui-kitten/components';
 
-import { Block } from 'atoms';
+import { Block, Image } from 'atoms';
+
+const borderRadMultiplier = {
+  'round' : 0.5,
+  'rounded' : 0.3,
+  'square': 0
+};
+
+const fallbackUrls = {
+  'boar': 'https://swinecart.work/images/product/medium/boar_default.jpg',
+  'sow': 'https://swinecart.work/images/product/medium/sow_default.jpg',
+  'semen': 'https://swinecart.work/images/product/medium/semen_default.jpg',
+  'gilt': 'https://swinecart.work/images/product/medium/gilt_default.jpg',
+};
 
 function ProductAvatar(props) {
 
-  const { image, shape = 'round', size = 96 } = props;
+  const { image, type = 'boar', shape = 'round', size = 96 } = props;
 
   const imageStyle = [
     {
       width: size,
-      height: size
+      height: size,
+      overflow: 'hidden'
     }
   ];
 
-  const source = {
-    uri: image
-  };
-
-  const borderRadius = shape === 'round'
-    ? size * 0.5
-    : shape === 'rounded'
-      ? size * 0.3
-      : 0;
+  const borderRadius = size * borderRadMultiplier[shape];
 
   return (
     <Block
@@ -32,9 +38,10 @@ function ProductAvatar(props) {
       borderColor='gray2' height={size} width={size}
       borderRadius={borderRadius}
     >
-      <Avatar
-        shape={shape}
-        source={source}
+      <Image
+        imageUrl={image}
+        fallbackUrl={fallbackUrls[type]}
+        resizeMode='cover'
         style={imageStyle}
       />
     </Block>

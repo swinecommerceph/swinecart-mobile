@@ -1,6 +1,5 @@
 import { action } from 'easy-peasy';
 
-
 export const initialState = {
   items: null,
   page: 1,

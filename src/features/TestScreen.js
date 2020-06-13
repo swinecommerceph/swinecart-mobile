@@ -1,18 +1,19 @@
 import React, { Fragment, memo, useEffect } from 'react';
-import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { HeaderBar, Button, Block } from 'atoms';
+import { Button, Block, Image } from 'atoms';
+
+const imageUrl = 'https://swinecart.work/images/product/medium/boar_pietrain1.jpg';
+const fallbackUrl = 'https://swinecart.work/images/product/medium/boar_default.jpg'
 
 function Container() {
 
   return (
     <Fragment>
-      <HeaderBar title='SwineCart' />
       <Block flex={1} padding={1}>
-        <Button size='small' appearance='filled' marginBottom={1}>Login</Button>
-        <Button status='basic' marginBottom={1}>Login</Button>
-        <Button appearance='outline' marginBottom={1}>Login</Button>
-        <Button appearance='ghost' marginBottom={1}>Login</Button>
+        <Image
+          imageUrl={imageUrl}
+          fallbackUrl={fallbackUrl}
+        />
       </Block>
     </Fragment>
   );

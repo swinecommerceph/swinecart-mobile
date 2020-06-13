@@ -1,12 +1,11 @@
 import React, { memo } from 'react';
-import { Spinner } from '@ui-kitten/components';
 
-import { Block } from 'atoms';
+import { Block, Loader } from 'atoms';
 
 function LoadingView() {
   return (
     <Block flex={1} center middle backgroundColor='gray6'>
-      <Spinner 
+      <Loader
         size='giant'
       />
     </Block>

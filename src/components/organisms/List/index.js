@@ -9,8 +9,9 @@ import { EmptyListMessage, ListFooter } from 'molecules';
 function List(props) {
 
   const {
-    themedStyle, Component, keyExtractor, emptyListMessage, isRefreshing,
-    isLoadingMore, onPressLoadMore, onRefresh, data
+    Component, keyExtractor, emptyListMessage, isRefreshing,
+    isLoadingMore, onPressLoadMore, onRefresh, data,
+    eva
   } = props;
 
   const renderItem = useCallback(({ item, index }) => {
@@ -29,7 +30,13 @@ function List(props) {
   const renderFooterComponent = useCallback(() => {
     return (
       <Fragment>
-        {data.length > 0 && <ListFooter isLoadingMore={isLoadingMore} onPressLoadMore={onPressLoadMore} />}
+        {
+          data.length > 0 &&
+          <ListFooter
+            isLoadingMore={isLoadingMore} 
+            onPressLoadMore={onPressLoadMore} 
+          />
+        }
       </Fragment>
     )
   }, [ data, isLoadingMore ]);
@@ -43,7 +50,7 @@ function List(props) {
       maxToRenderPerBatch={10}
       ListEmptyComponent={renderListEmptyComponent}
       ListFooterComponent={renderFooterComponent}
-      ListFooterComponentStyle={themedStyle.ListFooterStyle}
+      ListFooterComponentStyle={eva.style.ListFooterStyle}
       showsVerticalScrollIndicator={false}
       refreshControl={
         <RefreshControl
@@ -51,8 +58,8 @@ function List(props) {
           onRefresh={onRefresh} 
         />
       }
-      style={themedStyle.containerStyle}
-      contentContainerStyle={themedStyle.contentContainerStyle}
+      style={eva.style.containerStyle}
+      contentContainerStyle={eva.style.contentContainerStyle}
     />
   );
 }

@@ -1,7 +1,6 @@
 import React, { Fragment, memo } from 'react';
-import { Spinner } from '@ui-kitten/components';
 
-import { Button, Block } from 'atoms';
+import { Button, Block, Loader } from 'atoms';
 
 function ListFooter({ isLoadingMore, onPressLoadMore }) {
   return (
@@ -9,7 +8,7 @@ function ListFooter({ isLoadingMore, onPressLoadMore }) {
       <Block flex={1} center middle padding={1} backgroundColor='gray6'>
         { isLoadingMore 
             ? 
-              <Spinner size='giant' />
+              <Loader size='giant' />
             :
               <Button
                 size='tiny'

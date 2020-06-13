@@ -1,6 +1,6 @@
 import React, { memo, Fragment } from 'react';
 import {
-  BottomNavigation as UKBottomNavigation, Divider
+  BottomNavigation as UKBottomNavigation
 } from '@ui-kitten/components';
 
 import { NavigationService } from 'services';
@@ -16,7 +16,6 @@ function CustomerTabBar({ navigation }) {
 
   return (
     <Fragment>
-      <Divider />
       <UKBottomNavigation
         // appearance='noIndicator'
         selectedIndex={navigation.state.index}

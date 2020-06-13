@@ -40,14 +40,14 @@ class PubSubClient {
   }
 
   onError(data) {
-    console.dir('Error', data);
+    // console.dir('Error', data);
   }
 
   onMessage({ data }) {
     const [typeIndex, ...messageData] = JSON.parse(data);
     const type = types[typeIndex];
 
-    console.dir(data);
+    // console.dir(data);
 
     if (type === 'welcome') {
       this.send([typesByIndex['subscribe'], this.topic]);

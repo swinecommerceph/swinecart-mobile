@@ -3,35 +3,19 @@ import to from 'await-to-js';
 
 import { ShopService, ToastService } from 'services';
 
-import { initialState } from '../modelUtils';
+import { addGenericModel } from '../../utils';
 
-const LIMIT = 5;
+const LIMIT = 10;
 
 export default {
+
+  ...(addGenericModel()),
+
   // State
-  ...initialState,
 
   // Computed Values
 
   // Actions
-
-  setItems: action((state, payload) => {
-    const { items, page } = payload;
-    state.items = items;
-    state.page = page;
-  }),
-
-  setLoading: action((state, payload) => {
-    state.isLoading = payload;
-  }),
-
-  setLoadingMore: action((state, payload) => {
-    state.isLoadingMore = payload;
-  }),
-
-  setRefreshing: action((state, payload) => {
-    state.isRefreshing = payload;
-  }),
 
   // Side Effects
 
@@ -46,6 +30,13 @@ export default {
     const [error, data] = await to(ShopService.getItems(1, LIMIT));
   
     if (error) {
+  
+      const { problem, status } = error;
+
+      if (status === 500) {
+        actions.setFetchingError(true);
+      }
+
     }
     else {
 
@@ -73,10 +64,13 @@ export default {
     const [error, data] = await to(ShopService.getItems(currentPage, LIMIT));
 
     if (error) {
+
       const { problem, status } = error;
+
       if (status === 500) {
-        ToastService.show('Please try again later!', null);
+        actions.setFetchingError(true);
       }
+
     }
     else {
       const { products } = data.data;

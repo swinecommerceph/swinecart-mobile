@@ -27,7 +27,6 @@ function HeaderBar(props) {
         }
         alignment='start'
       />
-      <Divider />
     </Fragment>
   )
 

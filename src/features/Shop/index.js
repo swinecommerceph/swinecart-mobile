@@ -2,11 +2,11 @@ import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
 import { HeaderBar, HeaderBarButton } from 'molecules';
-// import { LoadingOverlay } from 'atoms';
+import { LoadingOverlay } from 'atoms';
 
-// import {
-//   ShopList
-// } from './components';
+import {
+  ShopList
+} from './components';
 
 const accessoryLeft = () => (
   <HeaderBarButton iconName='menu' />
@@ -14,16 +14,16 @@ const accessoryLeft = () => (
 
 function Container() {
 
-  // const getItems = useStoreActions(actions => actions.shop.getItems);
+  const getItems = useStoreActions(actions => actions.shop.getItems);
 
   useEffect(() => {
-    // getItems({ isRefresh:false });
+    getItems({ isRefresh: false });
   }, []);
 
   return (
     <Fragment>
       <HeaderBar title='Shop' accessoryLeft={accessoryLeft} />
-      {/* <ShopList /> */}
+      <ShopList />
     </Fragment>
   );
 }

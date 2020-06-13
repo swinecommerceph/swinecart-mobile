@@ -6,7 +6,7 @@ import PublicStack from './PublicStack';
 // import BreederNavigator from './Breeder';
 import CustomerNavigator from './Customer';
 
-import { TestScreen } from 'features';
+import TestScreen from 'features/TestScreen';
 
 const navigatorConfig = {
   initialRouteName: 'AuthChecker',

@@ -13,7 +13,7 @@ function ShopItem({ data }) {
 
   return (
     <Card>
-      <ProductAvatar shape='rounded' image={imageUrl} size={112} />
+      <ProductAvatar shape='rounded' image={imageUrl} size={112} type={type} />
       <Block marginLeft={1}>
         <ProductInfo
           name={name}
