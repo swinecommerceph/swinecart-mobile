@@ -47,8 +47,6 @@ function ProductAvatar(props) {
     [ type ]
   );
 
-  console.dir(imageSource, fallbackSource);
-
   return (
     <Block
       overflow='hidden'
