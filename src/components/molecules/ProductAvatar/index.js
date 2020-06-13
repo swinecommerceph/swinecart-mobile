@@ -1,5 +1,4 @@
-import React, { memo } from 'react';
-import { Avatar } from '@ui-kitten/components';
+import React, { memo, useMemo } from 'react';
 
 import { Block, Image } from 'atoms';
 
@@ -18,7 +17,12 @@ const fallbackUrls = {
 
 function ProductAvatar(props) {
 
-  const { image, type = 'boar', shape = 'round', size = 96 } = props;
+  const { 
+    image: productImageUrl, 
+    type = 'boar',
+    shape = 'round',
+    size = 96
+  } = props;
 
   const imageStyle = [
     {
@@ -28,7 +32,22 @@ function ProductAvatar(props) {
     }
   ];
 
-  const borderRadius = size * borderRadMultiplier[shape];
+  const borderRadius = useMemo(
+    () => size * borderRadMultiplier[shape],
+    [ shape, size ]
+  );
+
+  const imageSource = useMemo(
+    () => ({ uri: productImageUrl }), 
+    [ productImageUrl ]
+  );
+
+  const fallbackSource = useMemo(
+    () => ({ uri: fallbackUrls[type] }),
+    [ type ]
+  );
+
+  console.dir(imageSource, fallbackSource);
 
   return (
     <Block
@@ -39,8 +58,8 @@ function ProductAvatar(props) {
       borderRadius={borderRadius}
     >
       <Image
-        imageUrl={image}
-        fallbackUrl={fallbackUrls[type]}
+        imageSource={imageSource}
+        fallbackSource={fallbackSource}
         resizeMode='cover'
         style={imageStyle}
       />

@@ -1,22 +1,24 @@
-import React, { Fragment, memo, useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Image as RNImage } from 'react-native';
 
 function Image(props) {
 
   const {
-    imageUrl, fallbackUrl,
+    imageSource, fallbackSource,
     ...otherProps
   } = props;
 
-  const [ uri, setURI ] = useState(imageUrl);
+  const [ source, setSource ] = useState(imageSource);
 
   const onError = () => {
-    setURI(fallbackUrl);
+    setSource(fallbackSource);
   };
+
+  console.dir('Image: Fallback Source', fallbackSource);
 
   return (
     <RNImage 
-      source={{ uri: uri }}
+      source={source}
       onError={onError}
       {...otherProps}
     />
