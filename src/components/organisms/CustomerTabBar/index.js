@@ -18,6 +18,7 @@ function CustomerTabBar({ navigation }) {
     <Fragment>
       <Divider />
       <UKBottomNavigation
+        // appearance='noIndicator'
         selectedIndex={navigation.state.index}
         onSelect={onTabSelect}
       >

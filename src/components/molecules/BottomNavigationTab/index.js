@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { 
   BottomNavigationTab as UKBottomNavigationTab
 } from '@ui-kitten/components';
@@ -9,9 +9,9 @@ function BottomNavigationTab(props) {
 
   const { title, style, selected, iconName, onSelect } = props;
 
-  const color = selected ? 'primary' : 'gray4';
+  const color = useMemo(() => selected ? 'primary' : 'gray4', [ selected ]);
 
-  const renderIcon = () => <Icon name={iconName} color={color} size={22} />;
+  const renderIcon = () => <Icon name={iconName} color={color} size={22} />
 
   return (
     <UKBottomNavigationTab

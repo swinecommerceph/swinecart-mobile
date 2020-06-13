@@ -12,3 +12,4 @@ export { default as LoadingView } from './LoadingView';
 export { default as BlankScreen } from './BlankScreen';
 export { default as HeaderBarButton } from './HeaderBarButton';
 export { default as HeaderBar } from './HeaderBar';
+export { default as BottomNavigationTab } from './BottomNavigationTab';
