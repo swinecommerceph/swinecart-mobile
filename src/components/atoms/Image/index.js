@@ -14,8 +14,6 @@ function Image(props) {
     setSource(fallbackSource);
   };
 
-  console.dir('Image: Fallback Source', fallbackSource);
-
   return (
     <RNImage 
       source={source}
