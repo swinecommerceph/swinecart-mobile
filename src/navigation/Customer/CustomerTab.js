@@ -28,9 +28,6 @@ const routes = {
   'InboxStack': {
     screen: InboxStack,
   },
-  // // 'BreederProfileStack': {
-  //   screen: CartStack,
-  // },
 };
 
 const navigator = createBottomTabNavigator(routes, navigatorConfig);

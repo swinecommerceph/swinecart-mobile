@@ -18,7 +18,6 @@ function CustomerTabBar({ navigation }) {
     <Fragment>
       <Divider />
       <UKBottomNavigation
-        // appearance='noIndicator'
         selectedIndex={navigation.state.index}
         onSelect={onTabSelect}
       >
@@ -26,7 +25,6 @@ function CustomerTabBar({ navigation }) {
         <BottomNavigationTab title='SwineCart' iconName='shopping-cart' />
         <BottomNavigationTab title='Transactions' iconName='list' />
         <BottomNavigationTab title='Messages' iconName='inbox' />
-        {/* <BottomNavigationTab title='Profile' iconName='person' /> */}
       </UKBottomNavigation>
     </Fragment>
   );
