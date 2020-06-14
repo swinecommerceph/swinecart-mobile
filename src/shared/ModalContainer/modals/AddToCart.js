@@ -9,6 +9,7 @@ function AddToCart(props) {
 
   // Props
   const { data, hideModal } = props;
+
   const {
     id, name
   } = data;

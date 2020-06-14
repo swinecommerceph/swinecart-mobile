@@ -1,8 +1,7 @@
 import React, { memo } from 'react';
 import trim from 'lodash/trim';
-import {
-  Block, Text
-} from 'atoms';
+
+import { Block, Text } from 'atoms';
 
 function OtherDetails({ data }) {
 

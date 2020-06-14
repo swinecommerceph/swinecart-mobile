@@ -1,8 +1,7 @@
 import React, { memo } from 'react';
 import upperFirst from 'lodash/upperFirst';
-import { Block, Text } from 'atoms';
-
 import { addS, capitalizeWords, formatBirthdate } from 'utils/formatters';
+import { Block, Text } from 'atoms';
 
 function ProductInfo({ data, breeder, farm }) {
   const { name, type, breed, birthdate, age } = data;

@@ -7,7 +7,7 @@ import { colors, sizes } from 'constants/theme';
 function ContainerView(props) {
 
   const { 
-    themedStyle, flex,
+    eva, flex,
     backgroundColor = colors.gray2,
     padding, paddingBottom = 1, paddingLeft, paddingRight, paddingTop, paddingHorizontal, paddingVertical,
     showsHorizontalScrollIndicator = true, 
@@ -28,7 +28,7 @@ function ContainerView(props) {
   ];
 
   const scrollViewStyle = [
-    themedStyle.container,
+    eva.style.container,
     { backgroundColor }
   ];
 

@@ -8,7 +8,7 @@ function Modal(props) {
 
   const [ isVisible, setVisible ] = useState(true);
 
-  const { themedStyle, destroyModal, ModalComponent, data } = props;
+  const { eva, destroyModal, ModalComponent, data } = props;
 
   const hideModal = () => {
     setVisible(false);
@@ -38,7 +38,7 @@ function Modal(props) {
       onBackButtonPress={onBackButtonPress}
       onModalHide={onModalHide}
       avoidKeyboard={true}
-      style={themedStyle.modal}
+      style={eva.style.modal}
     >
       <ModalComponent hideModal={hideModal} data={data} />
     </RNModal>

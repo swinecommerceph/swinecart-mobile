@@ -1,6 +1,6 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { ContainerView } from 'shared';
+import { ContainerView } from 'molecules';
 
 import ProductPrimaryImage from './ProductPrimaryImage';
 import ProductInfo from './ProductInfo';

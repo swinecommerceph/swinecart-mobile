@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 import { withStyles } from '@ui-kitten/components';
 import { Block } from 'atoms';
 
-function ProductPrimaryImage({ themedStyle, photoURL }) {
+function ProductPrimaryImage({ eva, photoURL }) {
 
   const source = {
     uri: photoURL
@@ -19,7 +19,7 @@ function ProductPrimaryImage({ themedStyle, photoURL }) {
         backgroundColor='gray2'
       >
         <Image
-          style={themedStyle.imageStyle}
+          style={eva.style.imageStyle}
           source={source}
           resizeMode='cover'
         />

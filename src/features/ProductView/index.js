@@ -1,9 +1,7 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { HeaderBar } from 'atoms';
-
-import { LoadingView, BlankScreen } from 'shared';
+import { HeaderBar, LoadingView, BlankScreen, BackButton } from 'molecules';
 
 import {
   Details
@@ -29,7 +27,8 @@ function Container() {
     return (
       <Fragment>
         <HeaderBar
-          title='Details'
+          title='Product Details'
+          accessoryLeft={BackButton}
         />
         <Details />
       </Fragment>
