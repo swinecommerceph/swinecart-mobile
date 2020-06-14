@@ -20,6 +20,7 @@ function Details() {
     <ContainerView paddingBottom={0}>
       <ProductPrimaryImage
         photoURL={primary_image}
+        type={product_info.type}
       />
       <ProductInfo data={product_info} breeder={breeder} farm={farm} />
       <SwineInfo data={swine_info} />

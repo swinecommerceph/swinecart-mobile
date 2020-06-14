@@ -3,9 +3,9 @@ import { useStoreActions } from 'easy-peasy';
 
 import { HeaderBar, HeaderBarButton } from 'molecules';
 
-// import {
-//   CartList
-// } from './components';
+import {
+  CartList
+} from './components';
 
 const accessoryLeft = () => (
   <HeaderBarButton iconName='menu' />
@@ -13,16 +13,16 @@ const accessoryLeft = () => (
 
 function Container() {
 
-  // const getCartItems = useStoreActions(actions => actions.cart.getItems);
+  const getCartItems = useStoreActions(actions => actions.cart.getItems);
 
   useEffect(() => {
-    // getCartItems({ isRefresh: false });
+    getCartItems({ isRefresh: false });
   }, []);
 
   return (
     <Fragment>
       <HeaderBar title='SwineCart' accessoryLeft={accessoryLeft} />
-      {/* <CartList /> */}
+      <CartList />
     </Fragment>
   );
 }
