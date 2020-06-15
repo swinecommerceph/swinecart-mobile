@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useCallback, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { IndexPath, Select, SelectItem, withStyles } from '@ui-kitten/components';
 
@@ -6,16 +6,9 @@ import routes from 'constants/routes';
 
 import { Block, Text } from 'atoms';
 
-const options = routes.map(({ key, title }) => {
-  return (
-    <SelectItem
-      key={key}
-      title={<Text semibold>{title}</Text>}
-    />
-  )
-});
-
-console.dir(options, routes);
+const options = routes.map(({ key, title }) => (
+  <SelectItem key={key} title={<Text semibold>{title}</Text>} />)
+);
 
 function StatusPicker({ eva, jumpTo }) {
 
@@ -26,20 +19,24 @@ function StatusPicker({ eva, jumpTo }) {
   const [selectedIndex, setIndex] = useState(new IndexPath(0));
 
   useEffect(() => {
-  }, [])
+    jumpTo(routes[selectedIndex.row].key);
+  }, [selectedIndex])
 
-  const onSelect = useCallback(index => {
+  const onSelect = index => {
     setIndex(index);
-    console.dir(index);
-  }, []);
+  };
 
-  const value = routes[selectedIndex].title;
+  const value = useMemo(
+    () => routes[selectedIndex.row].title,
+    [selectedIndex]
+  );
 
   return (
     <Block 
       row middle center padding={1}
       backgroundColor='white1'
-      borderBottomWidth={1} borderBottomColor='gray1'
+      borderBottomWidth={1}
+      borderBottomColor='gray1'
     >
       <Text semibold color='gray5' marginRight={1}>
         Order Status

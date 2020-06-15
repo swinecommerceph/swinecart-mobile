@@ -129,14 +129,6 @@ export default {
         actions.setIsRequestingItem(false);
         NavigationService.back();
       });
-      
-      // ToastService.show('Product successfully reserved!', () => {
-      //   getStoreActions().orders.updateStatus(product);
-      //   getStoreActions().orders.setCurrentStatus(routes[1]);
-      //   actions.setLoading(false);
-      //   NavigationService.back();
-      // });
-
     }
 
   }),

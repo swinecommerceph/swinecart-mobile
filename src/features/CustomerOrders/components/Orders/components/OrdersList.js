@@ -41,7 +41,7 @@ function OrdersList({ status }) {
         data={items}
         Component={OrderItem}
         keyExtractor={keyExtractor}
-        emptyListMessage={'No Items Yet!'}
+        emptyListMessage={'There are no orders placed yet.'}
         isRefreshing={isRefreshing}
         onPressLoadMore={onPressLoadMore}
         onRefresh={onRefresh}
