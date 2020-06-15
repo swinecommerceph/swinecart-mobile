@@ -18,7 +18,7 @@ const fallbackUrls = {
 function ProductAvatar(props) {
 
   const { 
-    image: productImageUrl, 
+    image: productImageUrl,
     type = 'boar',
     shape = 'round',
     size = 96

@@ -8,7 +8,7 @@ import InboxStack from '../InboxStack';
 import CustomerTabBar from 'organisms/CustomerTabBar';
 
 const navigatorConfig = {
-  initialRouteName: 'CartStack',
+  initialRouteName: 'InboxStack',
   tabBarComponent: CustomerTabBar,
   defaultNavigationOptions: ({ navigation }) => {
   },

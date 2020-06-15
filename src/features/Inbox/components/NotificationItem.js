@@ -2,11 +2,10 @@ import React, { memo } from 'react';
 import { useStoreActions } from 'easy-peasy';
 import { TouchableOpacity } from 'react-native';
 
-import { Block, Icon, Text } from 'shared';
+import { Block, Icon, Text } from 'atoms';
 
 import { NavigationService } from 'services';
 import { formatCreatedAt } from 'utils/formatters';
-import { colors } from 'constants/theme';
 import routes from 'constants/routes';
 
 const iconNames = {

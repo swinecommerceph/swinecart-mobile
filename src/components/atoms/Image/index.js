@@ -10,7 +10,7 @@ function Image(props) {
 
   const [ source, setSource ] = useState(imageSource);
 
-  const onError = () => {
+  const onError = ({ nativeEvent: { error } } )=> {
     setSource(fallbackSource);
   };
 

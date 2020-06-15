@@ -31,15 +31,18 @@ class TransactionsTabView extends PureComponent {
   };
 
   renderTabBar = (props) => {
+
+    const { style } = this.props.eva;
+
     return (
       <TabBar
         {...props}
         useNativeDriver={true}
         getLabelText={this.getLabelText}
-        labelStyle={this.props.themedStyle.labelStyle}
-        indicatorStyle={this.props.themedStyle.indicatorStyle}
-        style={this.props.themedStyle.tabBarStyle}
-        tabStyle={this.props.themedStyle.tabStyle}
+        labelStyle={style.labelStyle}
+        indicatorStyle={style.indicatorStyle}
+        style={style.tabBarStyle}
+        tabStyle={style.tabStyle}
       />
     )
   }

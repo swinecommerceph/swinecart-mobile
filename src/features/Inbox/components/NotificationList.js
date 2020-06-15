@@ -1,6 +1,8 @@
 import React, { memo, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { List, LoadingView, BlankScreen } from 'shared';
+
+import { List } from 'organisms';
+import { LoadingView, BlankScreen } from 'molecules';
 
 import NotificationItem from './NotificationItem';
 

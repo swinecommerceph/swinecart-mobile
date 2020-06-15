@@ -24,7 +24,9 @@ function OrderItem({ data, listIndex }) {
     <Card>
       <ProductAvatar
         shape='rounded'
-        image={imageUrl} size={90}
+        image={imageUrl}
+        size={80}
+        type={type}
       />
       <Block marginLeft={1}>
         <ProductInfo

@@ -1,10 +1,10 @@
 import React, { memo, useEffect } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-import { List, LoadingView, BlankScreen } from 'shared';
+import { List } from 'organisms';
+import { LoadingView, BlankScreen } from 'molecules';
 
 import OrderItem from './OrderItem';
-
 
 function OrdersList({ status }) {
 

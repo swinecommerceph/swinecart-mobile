@@ -16,12 +16,12 @@ class InboxTabView extends PureComponent {
     index: 0,
     routes: [
       { key: 'chatList', title: 'Chats', },
-      // { key: 'notificationList', title: 'Notifications', },
+      { key: 'notificationList', title: 'Notifications', },
     ]
   };
 
   chatListRoute = () => <ChatList />;
-  // notificationListRoute = () => <NotificationList />;
+  notificationListRoute = () => <NotificationList />;
 
   getLabelText = ({ route }) => route.title;
 
@@ -46,7 +46,7 @@ class InboxTabView extends PureComponent {
 
   renderScene = SceneMap({
     chatList: this.chatListRoute,
-    // notificationList: this.notificationListRoute,
+    notificationList: this.notificationListRoute,
   });
 
   renderLazyPlaceholder = () => {

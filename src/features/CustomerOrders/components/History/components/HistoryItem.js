@@ -1,13 +1,10 @@
 import React, { memo } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { useStoreActions } from 'easy-peasy'
 
 import { NavigationService, ModalService } from 'services';
 
 import { Card, ProductInfo, ProductAvatar } from 'molecules';
 
-import { Block, Text, Button } from 'atoms';
-
+import { Block, Button } from 'atoms';
 
 function HistoryItem({ data, listIndex }) {
 
@@ -25,7 +22,9 @@ function HistoryItem({ data, listIndex }) {
     <Card>
       <ProductAvatar
         shape='rounded'
-        image={imageUrl} size={90}
+        image={imageUrl}
+        type={type}
+        size={80}
       />
       <Block marginLeft={1}>
         <ProductInfo

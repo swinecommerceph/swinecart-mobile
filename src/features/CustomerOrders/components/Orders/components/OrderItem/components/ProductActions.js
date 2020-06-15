@@ -1,7 +1,6 @@
-import React, { memo, useMemo } from 'react';
-import { useStoreActions } from 'easy-peasy';
+import React, { memo } from 'react';
 
-import { ModalService, NavigationService } from 'services';
+import { ModalService } from 'services';
 
 import { Block, Button } from 'atoms';
 

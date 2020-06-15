@@ -1,6 +1,4 @@
-import React, { Fragment, memo, useEffect } from 'react';
-import { useStoreState, useStoreActions } from 'easy-peasy';
-// import { Block, Text } from 'shared';
+import React, { Fragment, memo } from 'react';
 
 import {
   OrdersTabView

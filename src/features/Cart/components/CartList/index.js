@@ -4,7 +4,6 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 import { List } from 'organisms';
 import { LoadingView, BlankScreen } from 'molecules';
 
-
 import CartItem from '../CartItem';
 
 function CartList() {

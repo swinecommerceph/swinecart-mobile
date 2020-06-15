@@ -1,6 +1,6 @@
 import React, { Fragment, memo } from 'react';
-import { Text } from 'shared';
 import { formatStatusTime } from 'utils/formatters';
+import { Text } from 'atoms';
 
 const statusTexts = {
   'requested': 'Requested',
