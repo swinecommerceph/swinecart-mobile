@@ -1,6 +1,9 @@
 import React, { memo } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { List, LoadingView, BlankScreen } from 'shared';
+
+import { List } from 'organisms';
+import { LoadingView, BlankScreen } from 'molecules';
+
 
 import CartItem from '../CartItem';
 

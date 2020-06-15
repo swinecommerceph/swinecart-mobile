@@ -12,7 +12,7 @@ function LoadingOverlay(props) {
   return (
     <RNSpinner
       visible={show}
-      customIndicator={<Spinner size='giant' />}
+      customIndicator={<Spinner size='giant' status='basic' />}
       textStyle={eva.style.textStyle}
     />
   );

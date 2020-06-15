@@ -1,19 +1,25 @@
 import React, { Fragment, memo, useEffect, useState } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { Block, Button, Text, HeaderBar } from 'atoms';
+
+import { HeaderBar, BackButton } from 'molecules';
+
+import { LoadingOverlay } from 'atoms';
 
 import {
-  RequestProduct
+  RequestForm,
 } from './components';
 
 function Container({ navigation }) {
+
+  const isLoading = useStoreState(state => state.customerOrders.isRequestingItem);
 
   const data = navigation.getParam('data');
 
   return (
     <Fragment>
-      <HeaderBar title='Request Product' />
-      <RequestProduct data={data} />
+      <LoadingOverlay show={isLoading} />
+      <HeaderBar title='Request Product' accessoryLeft={BackButton} />
+      <RequestForm data={data} />
     </Fragment>
   );
 }

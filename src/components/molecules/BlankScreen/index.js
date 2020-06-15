@@ -4,7 +4,7 @@ import { Block } from 'atoms';
 
 function BlankScreen() {
   return (
-    <Block flex={1} center middle backgroundColor='gray2' />
+    <Block flex={1} center middle backgroundColor='gray6' />
   );
 }
 

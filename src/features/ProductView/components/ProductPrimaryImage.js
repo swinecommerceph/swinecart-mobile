@@ -20,8 +20,10 @@ function ProductPrimaryImage({ eva, photoURL, type }) {
     uri: fallbackUrls[type]
   };
 
+  console.dir(type);
+
   return (
-    <Block>
+    <Block row>
       <Block row center middle
         overflow='hidden'
         width={'100%'}

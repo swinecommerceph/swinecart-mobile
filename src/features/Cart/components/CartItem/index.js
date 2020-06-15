@@ -1,15 +1,12 @@
 import React, { memo } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { useStoreActions } from 'easy-peasy'
 
-import { NavigationService } from 'services';
-
-import { Block } from 'atoms';
 import { Card, ProductInfo, ProductAvatar, MessageBox } from 'molecules';
+import { Block } from 'atoms';
 
 import { ProductActions } from './components';
 
 function CartItem({ data }) {
+
   const { product } = data;
 
   const {
@@ -18,7 +15,7 @@ function CartItem({ data }) {
 
   return (
     <Card>
-      <ProductAvatar shape='round' image={imageUrl} size={96} />
+      <ProductAvatar shape='round' type={type} image={imageUrl} size={96} />
       <Block flex={1} marginLeft={1}>
         <ProductInfo
           name={name}

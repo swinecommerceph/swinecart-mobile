@@ -97,6 +97,8 @@ const colors = {
   'gray5': '#8F9BB3',
   'gray6': '#F5F5F5',
   'gray7': '#E0E0E0',
+  'gray8': '#C8CCCF',
+
   black1: '#000000',
 };
 

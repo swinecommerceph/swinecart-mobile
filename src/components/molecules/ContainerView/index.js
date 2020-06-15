@@ -8,7 +8,7 @@ function ContainerView(props) {
 
   const { 
     eva, flex,
-    backgroundColor = colors.gray2,
+    backgroundColor = 'gray6',
     padding, paddingBottom = 1, paddingLeft, paddingRight, paddingTop, paddingHorizontal, paddingVertical,
     showsHorizontalScrollIndicator = true, 
     showsVerticalScrollIndicator = false, 
@@ -29,7 +29,7 @@ function ContainerView(props) {
 
   const scrollViewStyle = [
     eva.style.container,
-    { backgroundColor }
+    { backgroundColor: colors[backgroundColor] }
   ];
 
   return (

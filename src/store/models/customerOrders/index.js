@@ -10,6 +10,7 @@ const LIMIT = 5;
 export default {
   // State
   currentStatus: routes[0],
+  isRequestingItem: false, 
   ordersById: {
 
   },
@@ -90,9 +91,15 @@ export default {
     getOrderObject(state, status).hasError = hasError;
   }),
 
+  setIsRequestingItem: action((state, payload) => {
+    state.isRequestingItem = payload;
+  }),
+
   // Side Effects
 
   requestItem: thunk(async (actions, payload, { getStoreActions }) => {
+
+    actions.setIsRequestingItem(true);
 
     const { removeItem: removeCartItem } = getStoreActions().cart;
 
@@ -117,14 +124,18 @@ export default {
       const { item } = data.data;
 
       ToastService.show('Successfully requested the product!', () => {
-        actions.addItem({
-          item,
-          status: 'requested'
-        });
+        actions.addItem({ item, status: 'requested' });
         removeCartItem(cartItemId);
-
+        actions.setIsRequestingItem(false);
         NavigationService.back();
       });
+      
+      // ToastService.show('Product successfully reserved!', () => {
+      //   getStoreActions().orders.updateStatus(product);
+      //   getStoreActions().orders.setCurrentStatus(routes[1]);
+      //   actions.setLoading(false);
+      //   NavigationService.back();
+      // });
 
     }
 

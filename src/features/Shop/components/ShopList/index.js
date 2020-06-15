@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { LoadingView, BlankScreen } from 'shared';
 
 import { List } from 'organisms';
+import { LoadingView, BlankScreen } from 'molecules';
 
 import ShopItem from '../ShopItem';
 

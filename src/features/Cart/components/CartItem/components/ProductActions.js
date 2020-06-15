@@ -1,10 +1,9 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, Fragment } from 'react';
 import { useStoreActions } from 'easy-peasy';
 
 import { ModalService, NavigationService } from 'services';
 
-import { Block, Button, Text } from 'atoms';
-import { Fragment } from 'react';
+import { Block, Button } from 'atoms';
 
 function ProductActions({ data }) {
 
@@ -14,7 +13,6 @@ function ProductActions({ data }) {
 
   const onPressRequest = () => {
     NavigationService.navigate('RequestProduct', { data });
-    // ModalService.showModal('RequestProduct', { ...data });
   };
 
   const onPressRemove = () => {
