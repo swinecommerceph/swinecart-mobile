@@ -1,28 +1,24 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useMemo, Fragment } from 'react';
 import Timeline from 'react-native-timeline-flatlist';
-
-import { Block, HeaderBar } from 'atoms';
-import { Fragment } from 'react';
 
 import { formatStatusTime } from 'utils/formatters';
 
+import { HeaderBar, BackButton } from 'molecules';
+import { Block } from 'atoms';
+
 function HistoryDetails(props) {
 
-  // Props
-  const history = props.navigation.getParam('logs').map(log => {
-
-    const { status, createdAt } = log;
-
-    return {
+  const history = useMemo(() => (
+    props.navigation.getParam('logs').map(({ status, createdAt }) => ({
       title: status,
       description: `Updated on ${formatStatusTime(createdAt)}`
-    }
-  });
+    }))
+  ), []);
 
   return (
     <Fragment>
-      <HeaderBar title='Order History' />
-      <Block flex={1} padding>
+      <HeaderBar title='Order History' accessoryLeft={BackButton} />
+      <Block flex={1} padding={1}>
         <Timeline
           data={history}
           timeContainerStyle={{ minWidth: 72 }}

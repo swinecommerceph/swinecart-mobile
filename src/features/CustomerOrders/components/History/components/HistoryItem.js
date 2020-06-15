@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { NavigationService, ModalService } from 'services';
+import { NavigationService } from 'services';
 
 import { Card, ProductInfo, ProductAvatar } from 'molecules';
 
