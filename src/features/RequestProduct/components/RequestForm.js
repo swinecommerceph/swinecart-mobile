@@ -2,8 +2,8 @@ import React, { Fragment, memo, useState } from 'react';
 import { useStoreActions } from 'easy-peasy';
 import { Calendar } from '@ui-kitten/components';
 
-import { Block, Button, Text } from 'atoms';
 import { Stepper, TextArea, ContainerView } from 'molecules';
+import { Block, Button, Text } from 'atoms';
 
 import ProductDetails from './ProductDetails';
 
