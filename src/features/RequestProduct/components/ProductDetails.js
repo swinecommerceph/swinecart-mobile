@@ -12,7 +12,12 @@ function ProductDetails({ product }) {
   return (
     <Fragment>
       <Block row flex={1} marginBottom={2}>
-        <ProductAvatar shape='rounded' image={imageUrl} size={144} />
+        <ProductAvatar
+          type={type}
+          shape='rounded'
+          image={imageUrl}
+          size={144}
+        />
         <Block flex={1} marginLeft={1}>
           <ProductInfo
             name={name}

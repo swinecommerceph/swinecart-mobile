@@ -2,7 +2,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import {
   ProductView,
-  HistoryDetails
+  HistoryDetails,
+  FilterItems
 } from 'features';
 
 import CustomerTab from './CustomerTab';
@@ -18,6 +19,7 @@ const routes = {
   CustomerTab: CustomerTab,
   ProductView: ProductView,
   HistoryDetails: HistoryDetails,
+  FilterItems: FilterItems,
 };
 
 const navigator = createStackNavigator(routes, navigatorConfig);

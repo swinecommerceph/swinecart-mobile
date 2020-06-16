@@ -4,8 +4,8 @@ import { Block, Text } from 'atoms';
 
 function EmptyListMessage({ message }) {
   return (
-    <Block flex={1} center middle backgroundColor='gray6'>
-      <Text bold color='gray4' size={20}>
+    <Block flex={1} center middle backgroundColor='gray6' padding={1}>
+      <Text bold color='gray4' size={16} textAlign='center'>
         {message}
       </Text>
     </Block>

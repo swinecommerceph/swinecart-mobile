@@ -12,7 +12,7 @@ const headerBarStyle = {
 function HeaderBar(props) {
 
   const {
-    title, accessoryLeft
+    title, accessoryLeft, accessoryRight
   } = props;
 
   return (
@@ -20,6 +20,7 @@ function HeaderBar(props) {
       <TopNavigation
         style={headerBarStyle}
         accessoryLeft={accessoryLeft}
+        accessoryRight={accessoryRight}
         title={
           <Text semibold size={16} color='white1' textAlign='left'>
             {title}

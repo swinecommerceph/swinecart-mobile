@@ -35,7 +35,7 @@ function CartList() {
         data={items}
         Component={CartItem}
         keyExtractor={keyExtractor}
-        emptyListMessage={'No Items Yet'}
+        emptyListMessage={'There are no items in your cart yet.'}
         isRefreshing={isRefreshing}
         onPressLoadMore={onPressLoadMore}
         onRefresh={onRefresh}

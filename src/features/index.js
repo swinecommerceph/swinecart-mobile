@@ -19,6 +19,7 @@ export { default as HistoryDetails } from './HistoryDetails';
 // Customer Features
 export { default as Cart } from './Cart';
 export { default as Shop } from './Shop';
+export { default as FilterItems } from './FilterItems';
 export { default as CustomerOrders } from './CustomerOrders';
 export { default as RequestProduct } from './RequestProduct';
 

@@ -13,7 +13,6 @@ export { default as LoadingView } from './LoadingView';
 export { default as BlankScreen } from './BlankScreen';
 export { default as StarRating } from './StarRating';
 
-export { default as ProductAvatar } from './ProductAvatar';
 export { default as UserAvatar } from './UserAvatar';
 
 // Navigation

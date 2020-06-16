@@ -52,7 +52,7 @@ function ChatList() {
         data={chats}
         Component={ChatItem}
         keyExtractor={keyExtractor}
-        emptyListMessage={'No Messages'}
+        emptyListMessage={'There are no messages yet.'}
         isRefreshing={isRefreshing}
         onPressLoadMore={onPressLoadMore}
         onRefresh={onRefresh}

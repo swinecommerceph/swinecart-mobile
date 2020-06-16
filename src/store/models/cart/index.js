@@ -12,6 +12,7 @@ export default {
   // State
   ...initialState,
 
+  isAddingItem: false,
   // Computed Values
 
   // Actions
@@ -34,6 +35,10 @@ export default {
     state.isRefreshing = payload;
   }),
 
+  setIsAddingItem: action((state, payload) => {
+    state.isAddingItem = payload;
+  }),
+
   addItem: action((state, payload) => {
     if (!state.items) {
       state.items = [];
@@ -49,20 +54,26 @@ export default {
   // Side Effects
 
   addToCart: thunk(async (actions, payload) => {
+
+    actions.setIsAddingItem(true);
+
     const [error, data] = await to(CartService.addItem(payload));
 
     if (error) {
       const { data, problem } = error;
       if (problem === 'CLIENT_ERROR') {
         ToastService.show(data.error, () => {
-
         });
+        actions.setIsAddingItem(false);
       }
     }
     else {
       const { item } = data.data;
-      actions.addItem(item);
-      ToastService.show('Product added to your SwineCart', null);
+
+      ToastService.show('Product added to your SwineCart', () => {
+        actions.addItem(item);
+        actions.setIsAddingItem(false);
+      });
     }
 
 

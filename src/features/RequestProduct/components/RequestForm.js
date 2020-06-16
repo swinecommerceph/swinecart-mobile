@@ -22,7 +22,7 @@ function RequestProduct({ data }) {
   const { type } = product;
 
   const onPressPrimaryAction = () => {
-    requestItem({ 
+    requestItem({
       cartItemId, type, currentQuantity, currentDate, currentRequest
     });
   };
@@ -80,8 +80,8 @@ function RequestProduct({ data }) {
           </Block>
           <Block row center marginTop={1}>
             <Block flex={1}>
-              <Button size='tiny' status='info' onPress={onPressPrimaryAction}>
-                Request
+              <Button size='small' onPress={onPressPrimaryAction}>
+                Submit
               </Button>
             </Block>
           </Block>

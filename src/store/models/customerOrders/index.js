@@ -124,8 +124,9 @@ export default {
       const { item } = data.data;
 
       ToastService.show('Successfully requested the product!', () => {
-        actions.addItem({ item, status: 'requested' });
+        // actions.addItem({ item, status: 'requested' });
         removeCartItem(cartItemId);
+        actions.getItems({ status: 'requested', isRefresh: true });
         actions.setIsRequestingItem(false);
         NavigationService.back();
       });
