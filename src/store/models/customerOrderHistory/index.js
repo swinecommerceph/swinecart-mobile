@@ -48,8 +48,6 @@ export default {
 
     const [error, data] = await to(TransactionService.reviewBreeder(breederId, requestData));
 
-    console.dir(error, data);
-
     if (error) {
 
     }
@@ -97,7 +95,6 @@ export default {
     const { page: currentPage, items: currentItems } = getState();
 
     actions.setLoadingMore(true);
-    console.dir(currentPage);
     const [error, data] = await to(TransactionService.getHistory(currentPage, LIMIT));
 
     if (error) {

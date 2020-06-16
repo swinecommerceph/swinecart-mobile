@@ -45,7 +45,6 @@ export default {
     }
     else {
       const { product } = data.data;
-      console.dir(product);
       actions.setData(product);
     }
 

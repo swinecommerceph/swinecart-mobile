@@ -45,7 +45,6 @@ export default {
 
   onNotification: thunk((actions, payload, { getStoreActions, getStoreState }) => {
     const { type } = payload;
-    console.dir(payload);
 
     if (type === 'notification') {
       actions.getItems({ isRefresh: true });

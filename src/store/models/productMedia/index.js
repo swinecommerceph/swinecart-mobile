@@ -71,7 +71,7 @@ export default {
     const { items, currentProduct: { id } } = getState();
 
     const [error, data] = await to(ProductsService.addMedia(id, payload));
-    console.dir(error, data);
+    // console.dir(error, data);
   }),
   getItems: thunk(async (actions, payload, { getState }) => {
 
