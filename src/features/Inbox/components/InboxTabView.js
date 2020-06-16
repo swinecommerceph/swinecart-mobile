@@ -3,7 +3,7 @@ import { withStyles } from '@ui-kitten/components';
 import { Dimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
-import { EmptyListMessage } from 'shared';
+import { EmptyListMessage } from 'molecules';
 
 import { shadows, colors } from 'constants/theme';
 

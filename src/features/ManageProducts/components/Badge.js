@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Block, Text } from 'shared';
+import { Block, Text } from 'atoms';
 
 function Badge({ text, ...otherProps }) {
   return (

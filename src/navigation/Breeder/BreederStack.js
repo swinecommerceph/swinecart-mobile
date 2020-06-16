@@ -4,7 +4,7 @@ import {
   ProductView
 } from 'features';
 
-import { ProductMedia } from 'screens';
+// import { ProductMedia } from 'screens';
 
 import BreederTab from './BreederTab';
 

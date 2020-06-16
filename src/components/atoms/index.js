@@ -8,3 +8,4 @@ export { default as LoadingOverlay } from './LoadingOverlay';
 export { default as Loader } from './Loader';
 export { default as Image } from './Image';
 export { default as Select } from './Select';
+export { default as StatusBar } from './StatusBar';

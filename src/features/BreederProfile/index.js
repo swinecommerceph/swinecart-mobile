@@ -2,8 +2,10 @@ import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import { 
-  HeaderBar, LoadingOverlay
-} from 'shared';
+  HeaderBar,
+} from 'molecules';
+
+import { LoadingOverlay } from 'atoms';
 
 import { OfficeInfo, Settings } from './components';
 

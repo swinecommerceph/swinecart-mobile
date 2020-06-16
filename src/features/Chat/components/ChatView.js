@@ -1,7 +1,7 @@
 import React, { Fragment, memo } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { LoadingView } from 'shared';
+import { LoadingView } from 'molecules';
 
 function ChatView() {
 

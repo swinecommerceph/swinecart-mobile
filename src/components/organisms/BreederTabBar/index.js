@@ -17,16 +17,13 @@ function BreederTabBar({ navigation }) {
 
   return (
     <UKBottomNavigation
-      style={shadows.shadow1}
-      appearance='noIndicator'
       selectedIndex={navigation.state.index}
       onSelect={onTabSelect}
     >
       <BottomNavigationTab title='Products' iconName='shopping-bag' />
-      <BottomNavigationTab title='Orders' iconName='list' />
+      <BottomNavigationTab title='Orders' iconName='car' />
       <BottomNavigationTab title='Dashboard' iconName='grid' />
       <BottomNavigationTab title='Inbox' iconName='inbox' />
-      <BottomNavigationTab title='Profile' iconName='person' />
     </UKBottomNavigation>
   );
 

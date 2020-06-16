@@ -1,14 +1,11 @@
 import React, { Fragment, memo, useEffect, useState } from 'react';
-import { useStoreActions, useStoreState } from 'easy-peasy';
 import { TouchableOpacity } from 'react-native';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+
 import { ModalService } from 'services';
 
-import {
-  Block,
-  Button,
-  Text,
-  ProductAvatar
-} from 'shared';
+import { ProductAvatar } from 'molecules';
+import { Block, Button } from 'atoms';
 
 
 function ProductMediaItem({ data }) {

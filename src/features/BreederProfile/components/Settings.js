@@ -5,7 +5,7 @@ import { shadows } from 'constants/theme';
 
 import {
   HeaderBarButton
-} from 'shared';
+} from 'molecules';
 
 function Settings(props) {
 

@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Block, Text } from 'shared';
+
+import { Block, Text } from 'atoms';
 
 function StatCard({ title, data, onPress }) {
 

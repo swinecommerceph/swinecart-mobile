@@ -1,8 +1,9 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreActions } from 'easy-peasy';
-import { HeaderBar, HeaderBarButton } from 'shared';
 
 import { NavigationService } from 'services';
+
+import { HeaderBar, HeaderBarButton } from 'molecules';
 
 import { ProductList } from './components';
 

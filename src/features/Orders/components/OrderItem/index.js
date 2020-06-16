@@ -19,7 +19,7 @@ function OrderItem({ data }) {
 
   const onPressView = useCallback(() => {
     ModalService.showModal('OrderDetails', { product, reservation });
-  }, []);
+  }, [ product, reservation ]);
 
   return (
     <TouchableOpacity

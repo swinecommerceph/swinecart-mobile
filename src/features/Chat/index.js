@@ -1,6 +1,7 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { HeaderBar, BackButton, LoadingView } from 'shared';
+
+import { HeaderBar, BackButton, LoadingView } from 'molecules';
 
 import { ChatView } from './components';
 

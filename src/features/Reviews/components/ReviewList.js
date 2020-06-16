@@ -1,38 +1,29 @@
 import React, { memo } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { List, LoadingView, BlankScreen } from 'shared';
+
+import { LoadingView, BlankScreen } from 'molecules';
+import { List } from 'organisms';
 
 import ReviewItem from './ReviewItem';
 
 function ReviewList() {
 
-  const getReviews = useStoreActions(actions => actions.reviews.getItems);
-  const getMoreReviews = useStoreActions(actions => actions.reviews.getMoreItems);
+  const { 
+    getItems, getMoreItems
+  } = useStoreActions(actions => actions.reviews);
 
-  const reviews = useStoreState(state =>
-    state.reviews.items
-  );
-
-  const isRefreshing = useStoreState(state =>
-    state.reviews.isRefreshing
-  );
-
-  const isLoadingMore = useStoreState(state =>
-    state.reviews.isLoadingMore
-  );
-
-  const isLoading = useStoreState(state =>
-    state.reviews.isLoading
-  );
+  const {
+    items, isRefreshing, isLoadingMore, isLoading
+  } = useStoreState(state => state.reviews);
 
   const keyExtractor = item => `${item.id}`;
 
   const onPressLoadMore = () => {
-    getMoreReviews();
+    getMoreItems();
   };
 
   const onRefresh = () => {
-    getReviews({ isRefresh: true });
+    getItems({ isRefresh: true });
   };
 
   if (isLoading) {
@@ -40,13 +31,13 @@ function ReviewList() {
       <LoadingView />
     );
   }
-  else if (!isLoading && reviews) {
+  else if (!isLoading && items) {
     return (
       <List
-        data={reviews}
+        data={items}
         Component={ReviewItem}
         keyExtractor={keyExtractor}
-        emptyListMessage={'No Reviews'}
+        emptyListMessage={'There are no reviews yet.'}
         isRefreshing={isRefreshing}
         onPressLoadMore={onPressLoadMore}
         onRefresh={onRefresh}

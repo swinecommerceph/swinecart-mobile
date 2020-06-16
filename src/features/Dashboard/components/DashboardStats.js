@@ -1,7 +1,8 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { NavigationEvents } from 'react-navigation';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { ContainerView, LoadingView, BlankScreen } from 'shared';
+
+import { ContainerView, LoadingView, BlankScreen } from 'molecules';
 
 import ProductInventoryStats from './ProductInventoryStats';
 import ProductManagementStats from './ProductManagementStats';

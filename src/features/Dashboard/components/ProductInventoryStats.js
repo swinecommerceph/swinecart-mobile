@@ -1,8 +1,9 @@
 import React, { Fragment, memo } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import routes from 'constants/routes';
-import { Text } from 'shared';
 import { NavigationService } from 'services';
+import routes from 'constants/routes';
+
+import { Text } from 'atoms';
 
 import StatCard from './StatCard';
 

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Dimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
-import { EmptyListMessage } from 'shared';
+import { EmptyListMessage } from 'molecules';
 
 import DashboardStats from './DashboardStats';
 import RatingsAndReviews from './RatingsAndReviews';

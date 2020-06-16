@@ -1,9 +1,10 @@
 import React, { Fragment, memo, useState } from 'react';
 import trim from 'lodash/trim';
 import upperFirst from 'lodash/upperFirst';
-import { Block, Text, IconButton } from 'shared';
 
 import { formatStatusTime } from 'utils/formatters';
+
+import { Block, Text } from 'atoms';
 
 import SubRating from './SubRating';
 
@@ -29,7 +30,7 @@ function ReviewItem({ data }) {
           <Text bold size={12} color='gray4' numberOfLines={1} marginLeft={0.5}>{`(${upperFirst(customerProvince)})`}</Text>
         </Block>
         <Block center right>
-          <IconButton iconName={iconName} iconColor='white1' status='primary' onPress={onPress} size='small' />
+          {/* <IconButton iconName={iconName} iconColor='white1' status='primary' onPress={onPress} size='small' /> */}
         </Block>
       </Block>
       {

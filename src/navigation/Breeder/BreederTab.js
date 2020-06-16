@@ -1,15 +1,14 @@
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import ProfileStack from './ProfileStack';
 import OrdersStack from './OrdersStack';
 import InboxStack from '../InboxStack';
 import DashboardStack from './DashboardStack';
 import ManageProductsStack from './ManageProductsStack';
 
-import { BreederTabBar } from 'shared';
+import BreederTabBar from 'organisms/BreederTabBar';
 
 const navigatorConfig = {
-  initialRouteName: 'ManageProductsStack',
+  initialRouteName: 'OrdersStack',
   tabBarComponent: BreederTabBar,
   defaultNavigationOptions: ({ navigation }) => {
   },
@@ -28,9 +27,6 @@ const routes = {
   },
   'InboxStack': {
     screen: InboxStack,
-  },
-  'ProfileStack': {
-    screen: ProfileStack,
   },
 };
 

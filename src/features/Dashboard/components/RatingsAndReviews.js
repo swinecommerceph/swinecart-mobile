@@ -1,6 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import { useStoreActions } from 'easy-peasy';
-import { ContainerView } from 'shared';
+
+import { ContainerView } from 'molecules';
 
 import Ratings from './Ratings';
 import Reviews from './Reviews';

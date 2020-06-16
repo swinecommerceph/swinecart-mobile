@@ -1,18 +1,16 @@
 import React, { useEffect, memo, Fragment } from 'react';
-
-import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
-
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import * as eva from '@eva-design/eva';
-
 import { enableScreens } from 'react-native-screens';
 import { StoreProvider } from 'easy-peasy';
- 
-import RootNavigator from 'navigation';
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+
 import { NavigationService, ModalService } from 'services';
-import StatusBar from 'shared/StatusBar';
-import ModalContainer from 'shared/ModalContainer';
+import RootNavigator from 'navigation';
 import { colors } from 'constants/theme';
+
+import StatusBar from 'atoms/StatusBar';
+import ModalContainer from 'organisms/ModalContainer';
 
 import store from './store';
 

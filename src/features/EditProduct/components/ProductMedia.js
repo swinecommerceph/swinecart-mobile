@@ -4,10 +4,7 @@ import { useStoreState, useStoreActions } from 'easy-peasy';
 
 import { ModalService } from 'services';
 
-import {
-  Block,
-  Button
-} from 'shared';
+import { Block, Button } from 'atoms';
 
 import ProductMediaList from './ProductMediaList';
 

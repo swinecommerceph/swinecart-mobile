@@ -1,5 +1,6 @@
 import React, { Fragment, memo } from 'react';
-import { HeaderBar, BackButton } from 'shared';
+
+import { HeaderBar, BackButton } from 'molecules';
 
 import {
   ReviewList
@@ -8,7 +9,7 @@ import {
 function Container() {
   return (
     <Fragment>
-      <HeaderBar title='Reviews' leftControl={<BackButton />} />
+      <HeaderBar title='Reviews' accessoryLeft={BackButton} />
       <ReviewList />
     </Fragment>
   );

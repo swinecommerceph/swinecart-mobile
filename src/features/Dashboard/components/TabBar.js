@@ -8,7 +8,7 @@ import { shadows, colors } from 'constants/theme';
 function TabBar(props) {
 
   const {
-    themedStyle, jumpTo,
+    eva, jumpTo,
     ...otherProps
   } = props;
 
@@ -31,10 +31,10 @@ function TabBar(props) {
       jumpTo={jumpTo}
       useNativeDriver={true}
       getLabelText={getLabelText}
-      labelStyle={themedStyle.labelStyle}
-      indicatorStyle={themedStyle.indicatorStyle}
-      style={themedStyle.tabBarStyle}
-      tabStyle={themedStyle.tabStyle}
+      labelStyle={eva.style.labelStyle}
+      indicatorStyle={eva.style.indicatorStyle}
+      style={eva.style.tabBarStyle}
+      tabStyle={eva.style.tabStyle}
       onTabPress={onTabPress}
     />
   );

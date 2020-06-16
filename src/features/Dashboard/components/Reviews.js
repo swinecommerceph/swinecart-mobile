@@ -1,8 +1,10 @@
 import React, { Fragment, memo } from 'react';
 import { useStoreState } from 'easy-peasy'
-import { Block, Button, Text } from 'atoms';
-import { LoadingView, BlankScreen } from 'shared';
+
 import { NavigationService } from 'services';
+
+import { LoadingView, BlankScreen } from 'molecules';
+import { Block, Button, Text } from 'atoms';
 
 import ReviewItem from './ReviewItem';
 

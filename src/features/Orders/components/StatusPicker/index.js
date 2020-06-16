@@ -1,40 +1,55 @@
-import React, { memo, useEffect, useCallback } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { Select, withStyles } from '@ui-kitten/components';
+import { IndexPath, Select, SelectItem, withStyles } from '@ui-kitten/components';
 
-import { Block, Text } from 'atoms';
 import routes from 'constants/routes';
 
-function StatusPicker({ themedStyle, jumpTo }) {
+import { Block, Text } from 'atoms';
 
-  const currentStatus = useStoreState(state => state.orders.currentStatus);
-  const status = useStoreState(state => state.orders.status());
-  const setCurrentStatus = useStoreActions(actions => actions.orders.setCurrentStatus);
+const options = routes.map(({ key, title }) => (
+  <SelectItem key={key} title={<Text semibold>{title}</Text>} />)
+);
+
+
+function StatusPicker({ eva, jumpTo }) {
+
+  // const currentStatus = useStoreState(state => state.orders.currentStatus);
+  // const status = useStoreState(state => state.orders.status());
+  // const setCurrentStatus = useStoreActions(actions => actions.orders.setCurrentStatus);
+
+  const [selectedIndex, setIndex] = useState(new IndexPath(0));
 
   useEffect(() => {
-    jumpTo(currentStatus.key);
-  }, [currentStatus])
+    jumpTo(routes[selectedIndex.row].key);
+  }, [selectedIndex])
 
-  const onSelect = useCallback(option => {
-    setCurrentStatus(option);
-  }, []);
+  const onSelect = index => {
+    setIndex(index);
+  };
+
+  const value = useMemo(
+    () => routes[selectedIndex.row].title,
+    [selectedIndex]
+  );
 
   return (
-    <Block 
-      row middle center padding
+    <Block
+      row middle center padding={1}
       backgroundColor='white1'
-      borderBottomWidth={1} borderBottomColor='gray1'
+      borderBottomWidth={1}
+      borderBottomColor='gray1'
     >
       <Text semibold color='gray5' marginRight={1}>
         Order Status
       </Text>
       <Select
-        data={routes}
-        selectedOption={status}
+        selectedIndex={selectedIndex}
         onSelect={onSelect}
-        style={themedStyle.selectContainer}
-        textStyle={themedStyle.selectTextStyle}
-      />
+        value={<Text semibold>{value}</Text>}
+        style={eva.style.selectContainer}
+      >
+        {options}
+      </Select>
     </Block>
   );
 }
@@ -42,9 +57,5 @@ function StatusPicker({ themedStyle, jumpTo }) {
 export default withStyles(memo(StatusPicker), () => ({
   selectContainer: {
     width: 200,
-  },
-  selectTextStyle: {
-    fontFamily: 'OpenSans-Bold',
-    fontWeight: 'normal'
   }
 }));

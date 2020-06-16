@@ -1,11 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import {
-  LoadingView,
-  ContainerView,
-  EmptyListMessage,
-} from 'shared';
+import { LoadingView, ContainerView, EmptyListMessage } from 'molecules';
 
 import ProductMediaItem from './ProductMediaItem';
 

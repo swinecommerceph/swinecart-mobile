@@ -1,7 +1,7 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { LoadingView, BlankScreen, LoadingOverlay } from 'shared';
+import { LoadingView, BlankScreen, LoadingOverlay } from 'molecules';
 
 import {
   Wizard, FormHeader

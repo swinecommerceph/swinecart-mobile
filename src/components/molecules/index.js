@@ -15,3 +15,4 @@ export { default as HeaderBar } from './HeaderBar';
 export { default as BottomNavigationTab } from './BottomNavigationTab';
 export { default as BackButton } from './BackButton';
 export { default as EmptyListMessage } from './EmptyListMessage';
+export { default as UserAvatar } from './UserAvatar';

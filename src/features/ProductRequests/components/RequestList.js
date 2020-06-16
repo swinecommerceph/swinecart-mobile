@@ -2,7 +2,8 @@ import React, { useEffect, memo } from 'react';
 import { withNavigation } from 'react-navigation';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-import { List, LoadingView } from 'shared';
+import { LoadingView } from 'molecules';
+import { List } from 'organisms'
 
 import RequestItem from './RequestItem';
 

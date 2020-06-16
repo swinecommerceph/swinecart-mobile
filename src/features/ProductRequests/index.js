@@ -1,6 +1,8 @@
 import React, { Fragment, memo } from 'react';
 import { useStoreState } from 'easy-peasy';
-import { HeaderBar, BackButton, LoadingOverlay } from 'shared';
+
+import { HeaderBar, BackButton } from 'molecules';
+import { LoadingOverlay } from 'atoms';
 
 import { RequestList } from './components';
 
@@ -13,7 +15,7 @@ function Container() {
       <LoadingOverlay show={isLoading} />
       <HeaderBar 
         title='Product Requests'
-        leftControl={<BackButton />}
+        accessoryLeft={BackButton}
       />
       <RequestList />
     </Fragment>

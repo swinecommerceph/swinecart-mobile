@@ -1,6 +1,8 @@
 import React, { Fragment, memo } from 'react';
 import { useStoreState } from 'easy-peasy';
-import { Block, Text, StarRating, LoadingView, BlankScreen } from 'shared';
+
+import { LoadingView, BlankScreen } from 'molecules';
+import { Block, Text, StarRating } from 'atoms';
 
 import SubRating from './SubRating';
 

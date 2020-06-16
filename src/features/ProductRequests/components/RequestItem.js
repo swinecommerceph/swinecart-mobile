@@ -1,15 +1,12 @@
 import React, { memo } from 'react';
-import { useStoreState } from 'easy-peasy';
 import { TouchableOpacity } from 'react-native';
+import { useStoreState } from 'easy-peasy';
+
 import { ModalService } from 'services';
 
-import {
-  UserAvatar
-} from 'shared';
+import { UserAvatar } from 'molecules';
 
-import {
-  Block, Text, Button
-} from 'atoms';
+import { Block, Text, Button } from 'atoms';
 
 
 function RequestItem({ data }) {
@@ -28,7 +25,7 @@ function RequestItem({ data }) {
 
   return (
     <TouchableOpacity activeOpacity={0.50} onPress={onPressView}>
-      <Block 
+      <Block
         row padding center
         backgroundColor='white1'
         borderBottomWidth={1}
@@ -60,8 +57,8 @@ function RequestItem({ data }) {
               onPress={onPressReserve}
               marginTop={0.5}
             >
-              Reserve Product
-          </Button>
+              Reserve
+            </Button>
           </Block>
         </Block>
       </Block>
