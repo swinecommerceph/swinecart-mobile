@@ -1,14 +1,10 @@
 import React, { Fragment, memo } from 'react';
 import { useStoreState } from 'easy-peasy';
 
-import { HeaderBar, HeaderBarButton } from 'molecules';
+import { HeaderBar, DrawerButton } from 'molecules';
 import { LoadingOverlay } from 'atoms';
 
 import { OrdersTabView } from './components';
-
-const accessoryLeft = () => (
-  <HeaderBarButton iconName='menu' />
-);
 
 function Container() {
 
@@ -17,7 +13,7 @@ function Container() {
   return (
     <Fragment>
       <LoadingOverlay show={isLoading} />
-      <HeaderBar title='Orders' accessoryLeft={accessoryLeft} />
+      <HeaderBar title='Orders' accessoryLeft={DrawerButton} />
       <OrdersTabView />
     </Fragment>
   );

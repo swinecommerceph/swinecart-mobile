@@ -19,7 +19,8 @@ function OrderActions(props) {
 
   const onPressPrimaryAction = () => {
     if (status === 'reserved') {
-      ModalService.showModal('SendProduct', { product, reservation });
+      NavigationService.navigate('SendProduct', { product, reservation })
+      // ModalService.showModal('SendProduct', { product, reservation });
     }
     else {
       ModalService.showModal('ConfirmSold', { product, reservation });

@@ -29,7 +29,7 @@ function OrderItem({ data }) {
     >
       <Card>
         <ProductAvatar image={image} type={type} shape='rounded' size={96} />
-        <Block paddingHorizontal>
+        <Block flex={1} paddingHorizontal={1}>
           <ProductInfo name={name} type={type} breed={breed} />
           <OrderStatus status={status} requestCount={requestCount} reservation={reservation} />
           <OrderActions status={status} product={product} reservation={reservation} />

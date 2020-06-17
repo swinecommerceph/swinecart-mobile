@@ -26,7 +26,7 @@ function OrderDetails (props) {
   return (
     <Block backgroundColor='white1' borderRadius={5}>
       <Block center left padding={1} >
-        <Text bold size={20}>Reservation Details</Text>
+        <Text bold size={20}>Order Details</Text>
       </Block>
       <Block padding>
         <Block row>
@@ -41,11 +41,11 @@ function OrderDetails (props) {
           type === 'semen' &&
           <Block row>
             <Text semibold size={14} color='gray3' >Date Needed: </Text>
-            <Text semibold size={14}>{dateNeeded ? formatDateNeeded(dateNeeded) : 'Customer did not specify.'}</Text>
+            <Text semibold size={14}>{formatDateNeeded(dateNeeded)}</Text>
           </Block>
         }
         {
-          deliveryDate && 
+          deliveryDate &&
           <Block row>
             <Text semibold size={14} color='gray3' >Delivery Date: </Text>
             <Text semibold size={14}>{formatDeliveryDate(deliveryDate)}</Text>

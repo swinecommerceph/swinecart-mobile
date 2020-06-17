@@ -1,7 +1,8 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
 import {
-  ProductView
+  ProductView,
+  SendProduct
 } from 'features';
 
 // import { ProductMedia } from 'screens';
@@ -18,6 +19,7 @@ const navigatorConfig = {
 const routes = {
   BreederTab: BreederTab,
   ProductView: ProductView,
+  SendProduct: SendProduct,
   // ProductMedia: ProductMedia,
 };
 

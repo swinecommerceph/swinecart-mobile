@@ -14,6 +14,7 @@ export { default as ProductRequests } from './ProductRequests';
 export { default as ManageProducts } from './ManageProducts';
 export { default as Dashboard } from './Dashboard';
 export { default as Reviews } from './Reviews';
+export { default as SendProduct } from './SendProduct';
 
 // Customer Features
 export { default as Cart } from './Cart';

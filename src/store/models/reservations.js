@@ -46,16 +46,23 @@ export default {
       actions.setLoading(false);
     }
     else {
-      const { product } = data.data;
 
       ToastService.show('Product successfully reserved!', () => {
-        getStoreActions().orders.updateStatus(product);
-        getStoreActions().orders.setCurrentStatus(routes[1]);
+        getStoreActions().orders.getOrdersByStatus({
+          status: 'requested',
+          isRefresh: false
+        });
+
+        getStoreActions().orders.getOrdersByStatus({
+          status: 'reserved',
+          isRefresh: false
+        });
+
         actions.setLoading(false);
         NavigationService.back();
+
       });
     }
-    
   }),
 
   sendForDelivery: thunk(async (actions, payload, { getStoreActions }) => {
@@ -73,20 +80,28 @@ export default {
 
     actions.setLoading(true);
 
-    const [error, data] = await to(OrderService.sendForDelivery(requestData));
+    const [ error, data ] = await to(OrderService.sendForDelivery(requestData));
 
     if (error) {
       ToastService.show('Please try again later!', null);
       actions.setLoading(false);
     }
     else {
-      const { product } = data.data;
+
       ToastService.show('Product is now on delivery!', () => {
-        getStoreActions().orders.updateStatus(product);
-        getStoreActions().orders.setCurrentStatus(routes[2]);
+        getStoreActions().orders.getOrdersByStatus({
+          status: 'reserved',
+          isRefresh: false
+        });
+
+        getStoreActions().orders.getOrdersByStatus({
+          status: 'onDelivery',
+          isRefresh: false
+        });
+
         actions.setLoading(false);
+        NavigationService.back();
       });
-      
     }
   }),
 
@@ -104,21 +119,27 @@ export default {
 
     actions.setLoading(true);
 
-    const [error, data] = await to(OrderService.confirmSold(requestData));
-    
+    const [ error, data ] = await to(OrderService.confirmSold(requestData));
+
     if (error) {
       ToastService.show('Please try again later!', null);
       actions.setLoading(false);
     }
     else {
-      const { product } = data.data;
 
       ToastService.show('Product is now sold!', () => {
-        getStoreActions().orders.updateStatus(product);
-        getStoreActions().orders.setCurrentStatus(routes[3]);
+        getStoreActions().orders.getOrdersByStatus({
+          status: 'onDelivery',
+          isRefresh: false
+        });
+
+        getStoreActions().orders.getOrdersByStatus({
+          status: 'sold',
+          isRefresh: false
+        });
+
         actions.setLoading(false);
       });
-
     }
 
   }),
@@ -137,7 +158,7 @@ export default {
 
     actions.setLoading(true);
 
-    const [error, data] = await to(OrderService.cancelTransaction(requestData));
+    const [ error, data ] = await to(OrderService.cancelTransaction(requestData));
 
     if (error) {
       actions.setLoading(false);
@@ -145,12 +166,15 @@ export default {
     else {
 
       ToastService.show('Transaction cancelled!', () => {
-        getStoreActions().orders.removeItem({ reservationId: reservation.id, status });
+        getStoreActions().orders.getOrdersByStatus({
+          status,
+          isRefresh: false
+        });
+
         actions.setLoading(false);
       });
 
     }
-
 
   }),
 

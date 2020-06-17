@@ -17,7 +17,7 @@ function StatusPicker({ eva, jumpTo }) {
   // const status = useStoreState(state => state.orders.status());
   // const setCurrentStatus = useStoreActions(actions => actions.orders.setCurrentStatus);
 
-  const [selectedIndex, setIndex] = useState(new IndexPath(0));
+  const [selectedIndex, setIndex] = useState(new IndexPath(1));
 
   useEffect(() => {
     jumpTo(routes[selectedIndex.row].key);

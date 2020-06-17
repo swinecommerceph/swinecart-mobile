@@ -10,8 +10,8 @@ function Card({ children }) {
       backgroundColor='white1'
       borderTopWidth={0.5}
       borderTopColor='gray8'
-      borderBottomWidth={0.5}
-      borderBottomColor='gray8'
+      // borderBottomWidth={0.5}
+      // borderBottomColor='gray8'
     >
       {children}
     </Block>

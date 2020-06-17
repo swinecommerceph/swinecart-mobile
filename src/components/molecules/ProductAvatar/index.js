@@ -51,7 +51,7 @@ function ProductAvatar(props) {
     <Block
       overflow='hidden'
       flex={false} borderWidth={1}
-      backgroundColor='gray2'
+      backgroundColor='gray8'
       borderColor='gray2' height={size} width={size}
       borderRadius={borderRadius}
     >
