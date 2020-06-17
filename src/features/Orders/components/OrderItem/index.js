@@ -28,7 +28,7 @@ function OrderItem({ data }) {
       onPress={onPressView}
     >
       <Card>
-        <ProductAvatar image={image} />
+        <ProductAvatar image={image} type={type} shape='rounded' size={96} />
         <Block paddingHorizontal>
           <ProductInfo name={name} type={type} breed={breed} />
           <OrderStatus status={status} requestCount={requestCount} reservation={reservation} />

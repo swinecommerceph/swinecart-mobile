@@ -17,7 +17,7 @@ function ProductItem({ data, listIndex }) {
 
   return (
     <Card>
-      <ProductAvatar shape='rounded' image={imageUrl} size={128} />
+      <ProductAvatar image={imageUrl} type={type} shape='rounded' size={96} />
       <Block marginLeft={1}>
         <ProductInfo name={name} type={type} breed={breed} age={age} />
         <Block row marginVertical={0.5}>
