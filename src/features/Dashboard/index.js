@@ -3,14 +3,14 @@ import React, { Fragment, memo } from 'react';
 import { HeaderBar, DrawerButton } from 'molecules';
 
 import {
-  DashboardTabView
+  DashboardStats
 } from './components';
 
 function Container() {
   return (
     <Fragment>
       <HeaderBar title='Dashboard' accessoryLeft={DrawerButton} />
-      <DashboardTabView />
+      <DashboardStats />
     </Fragment>
   );
 }

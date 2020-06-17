@@ -51,14 +51,14 @@ function ProductAvatar(props) {
     <Block
       overflow='hidden'
       flex={false} borderWidth={1}
-      backgroundColor='gray8'
-      borderColor='gray2' height={size} width={size}
+      backgroundColor='white1'
+      borderColor='gray4' height={size} width={size}
       borderRadius={borderRadius}
     >
       <Image
         imageSource={imageSource}
         fallbackSource={fallbackSource}
-        resizeMode='cover'
+        resizeMode='contain'
         style={imageStyle}
       />
     </Block>

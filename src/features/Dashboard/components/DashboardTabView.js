@@ -13,7 +13,7 @@ class DashboardTabView extends PureComponent {
   state = {
     index: 0,
     routes: [
-      { key: 'stats', title: 'Stats', },
+      { key: 'stats', title: 'Product Status' },
       { key: 'reviews', title: 'Reviews', },
     ]
   };
