@@ -1,4 +1,4 @@
-import React, { useEffect, memo, Fragment } from 'react';
+import React, { useEffect, memo } from 'react';
 import { enableScreens } from 'react-native-screens';
 import { StoreProvider } from 'easy-peasy';
 import * as eva from '@eva-design/eva';

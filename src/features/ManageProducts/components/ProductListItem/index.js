@@ -20,7 +20,7 @@ function ProductItem({ data, listIndex }) {
       <ProductAvatar shape='rounded' image={imageUrl} size={128} />
       <Block marginLeft={1}>
         <ProductInfo name={name} type={type} breed={breed} age={age} />
-        <Block row marginVertical={1}>
+        <Block row marginVertical={0.5}>
           <StatusBadge status={status} />
           <StockBadge type={type} isUnique={isUnique} quantity={quantity} />
         </Block>

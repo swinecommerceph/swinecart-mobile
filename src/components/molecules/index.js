@@ -16,3 +16,5 @@ export { default as BottomNavigationTab } from './BottomNavigationTab';
 export { default as BackButton } from './BackButton';
 export { default as EmptyListMessage } from './EmptyListMessage';
 export { default as UserAvatar } from './UserAvatar';
+export { default as DrawerButton } from './DrawerButton';
+export { default as Badge } from './Badge';

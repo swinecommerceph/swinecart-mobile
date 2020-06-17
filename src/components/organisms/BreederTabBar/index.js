@@ -3,7 +3,6 @@ import {
   BottomNavigation as UKBottomNavigation,
 } from '@ui-kitten/components';
 
-import { shadows } from 'constants/theme';
 import { NavigationService } from 'services';
 
 import BottomNavigationTab from 'molecules/BottomNavigationTab';
@@ -23,7 +22,7 @@ function BreederTabBar({ navigation }) {
       <BottomNavigationTab title='Products' iconName='shopping-bag' />
       <BottomNavigationTab title='Orders' iconName='car' />
       <BottomNavigationTab title='Dashboard' iconName='grid' />
-      <BottomNavigationTab title='Inbox' iconName='inbox' />
+      <BottomNavigationTab title='Messages' iconName='email' />
     </UKBottomNavigation>
   );
 

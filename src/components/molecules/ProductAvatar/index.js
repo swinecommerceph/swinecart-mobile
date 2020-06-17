@@ -20,7 +20,7 @@ function ProductAvatar(props) {
   const { 
     image: productImageUrl,
     type = 'boar',
-    shape = 'round',
+    shape = 'rounded',
     size = 96
   } = props;
 

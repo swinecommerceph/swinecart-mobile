@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 
 import { ModalService } from 'services';
 
-import { ProductAvatar } from 'molecules';
+import { ProductAvatar, Card } from 'molecules';
 import { Block } from 'atoms';
 
 import {
@@ -27,14 +27,14 @@ function OrderItem({ data }) {
       activeOpacity={0.50}
       onPress={onPressView}
     >
-      <Block row padding backgroundColor='white1' borderBottomWidth={1} borderBottomColor='gray1'>
+      <Card>
         <ProductAvatar image={image} />
         <Block paddingHorizontal>
           <ProductInfo name={name} type={type} breed={breed} />
           <OrderStatus status={status} requestCount={requestCount} reservation={reservation} />
           <OrderActions status={status} product={product} reservation={reservation} />
         </Block>
-      </Block>
+      </Card>
     </TouchableOpacity>
   );
 }

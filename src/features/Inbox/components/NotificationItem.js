@@ -27,8 +27,6 @@ function Notification({ data }) {
   const setCurrentStatus = useStoreActions(actions => actions.orders.setCurrentStatus);
   const setCurrentRoute = useStoreActions(actions => actions.dashboard.setCurrentRoute);
 
-  console.dir(data);
-
   const onPressNotification = () => {
     switch(type) {
       case 'ProductRequested': 
@@ -56,14 +54,14 @@ function Notification({ data }) {
         borderBottomColor='gray1'
       > 
         {/* <Icon name={iconNames[type]} color={readAt ? 'gray5' : iconColors[type]} size={30}/> */}
-        {/* <Block flex={1} marginLeft={1}>
+        <Block flex={1} marginLeft={1}>
           <Text semibold size={13} numberOfLines={3} color={textColor}>
             {message}
           </Text>
           <Text normal size={12} color={textColor}>
             {formatCreatedAt(createdAt)}
           </Text>
-        </Block> */}
+        </Block>
       </Block>
     </TouchableOpacity>
   );

@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import Badge from '../../Badge';
+import { Badge } from 'molecules';
 
 function StockBadge({ type, isUnique, quantity }) {
 

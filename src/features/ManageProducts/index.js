@@ -3,7 +3,7 @@ import { useStoreActions } from 'easy-peasy';
 
 import { NavigationService } from 'services';
 
-import { HeaderBar, HeaderBarButton } from 'molecules';
+import { HeaderBar, DrawerButton } from 'molecules';
 
 import { ProductList } from './components';
 
@@ -21,14 +21,9 @@ function Container() {
 
   return (
     <Fragment>
-      <HeaderBar 
-        title='My Products'
-        leftControl={
-          <HeaderBarButton 
-            iconName='plus'
-            onPress={onPressAdd}
-          />
-        }
+      <HeaderBar
+        title='Products'
+        accessoryLeft={DrawerButton}
       />
       <ProductList />
     </Fragment>

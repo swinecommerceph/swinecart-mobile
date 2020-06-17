@@ -1,20 +1,20 @@
 import React, { memo } from 'react';
 
-import Badge from '../../Badge';
+import { Badge } from 'molecules';
 
 const statusMap = {
   'hidden': {
     text: 'Hidden',
-    bc: 'gray5'
+    backgroundColor: 'gray5'
   },
   'displayed': {
     text: 'Displayed',
-    bc: 'color-success-500'
+    backgroundColor: 'color-success-500'
 
   },
   'requested': {
     text: 'Requested',
-    bc: 'primary'
+    backgroundColor: 'primary'
   },
 }
 
@@ -29,7 +29,7 @@ function StatusBadge({ status }) {
       <Badge
         marginRight={0.5}
         text={statusMap[status].text}
-        backgroundColor={statusMap[status].bc}
+        backgroundColor={statusMap[status].backgroundColor}
       />
     );
   // }
