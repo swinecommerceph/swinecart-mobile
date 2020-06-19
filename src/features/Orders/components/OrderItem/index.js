@@ -24,7 +24,7 @@ function OrderItem({ data }) {
   return (
     <TouchableOpacity
       disabled={status === 'requested'}
-      activeOpacity={0.50}
+      activeOpacity={0.90}
       onPress={onPressView}
     >
       <Card>

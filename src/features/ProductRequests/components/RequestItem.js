@@ -4,10 +4,8 @@ import { useStoreState } from 'easy-peasy';
 
 import { ModalService } from 'services';
 
-import { UserAvatar } from 'molecules';
-
+import { UserAvatar, Card } from 'molecules';
 import { Block, Text, Button } from 'atoms';
-
 
 function RequestItem({ data }) {
 
@@ -24,13 +22,8 @@ function RequestItem({ data }) {
   };
 
   return (
-    <TouchableOpacity activeOpacity={0.50} onPress={onPressView}>
-      <Block
-        row padding center
-        backgroundColor='white1'
-        borderBottomWidth={1}
-        borderBottomColor='gray1'
-      >
+    <TouchableOpacity activeOpacity={0.90} onPress={onPressView}>
+      <Card>
         <UserAvatar userName={customerName} size={64} textSize={20} />
         <Block flex={1} marginLeft={1}>
           <Text
@@ -61,7 +54,7 @@ function RequestItem({ data }) {
             </Button>
           </Block>
         </Block>
-      </Block>
+      </Card>
     </TouchableOpacity>
   );
 }

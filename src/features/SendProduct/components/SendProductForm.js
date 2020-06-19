@@ -4,7 +4,7 @@ import { useStoreActions } from 'easy-peasy';
 import addDays from 'date-fns/addDays';
 import { Calendar } from '@ui-kitten/components';
 
-import { formatDateNeeded } from 'utils/formatters';
+import { formatDateNeeded, formatDeliveryDate } from 'utils/formatters';
 
 import { ContainerView } from 'molecules';
 import { Block, Text, Button } from 'atoms';
@@ -27,6 +27,7 @@ function Container({ product, orderDetails }) {
   );
     
   const onSelect = date => {
+    console.dir(date);
     setCurrentDate(date);
   };
     
@@ -81,7 +82,15 @@ function Container({ product, orderDetails }) {
           </Block>
         </Block>
       </Block>
-      <Block flex={1} center marginTop={1}>
+      <Block flex={1}>
+        <Block flex={1} row space='between' marginBottom={0.5}>
+          <Block flex={1}>
+            <Text bold size={12} textAlign='left' color='gray8'>Expected Date of Delivery</Text>
+          </Block>
+          <Block flex={1}>
+            <Text bold size={12} textAlign='center' numberOfLines={3}>{formatDeliveryDate(currentDate)}</Text>
+          </Block>
+        </Block>
         <Calendar
           date={currentDate}
           onSelect={onSelect}

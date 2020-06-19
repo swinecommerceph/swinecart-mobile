@@ -44,7 +44,7 @@ function Notification({ data }) {
 
   return (
     <TouchableOpacity
-      activeOpacity={0.50}
+      activeOpacity={0.90}
       onPress={onPressNotification}
     >
       <Block

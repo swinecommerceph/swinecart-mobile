@@ -22,7 +22,7 @@ function ChatItem({ data }) {
 
   return (
     <TouchableOpacity
-      activeOpacity={0.10}
+      activeOpacity={0.90}
       onPress={onPressConversation}
     >
       <Block 
