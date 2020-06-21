@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { useStoreActions } from 'easy-peasy';
+
 import { NavigationService, ModalService } from 'services';
 
 import { Button, Block } from 'atoms';
@@ -8,8 +9,10 @@ function OrderActions(props) {
 
   const { status, product, reservation } = props;
 
-  const setCurrentProduct = useStoreActions(actions => actions.orderRequests.setCurrentProduct);
-  const resetState = useStoreActions(actions => actions.orderRequests.resetState);
+  const {
+    setCurrentProduct,
+    resetState
+  } = useStoreActions(actions => actions.orderRequests);
 
   const onPressView = () => {
     resetState();
@@ -19,8 +22,7 @@ function OrderActions(props) {
 
   const onPressPrimaryAction = () => {
     if (status === 'reserved') {
-      NavigationService.navigate('SendProduct', { product, reservation })
-      // ModalService.showModal('SendProduct', { product, reservation });
+      NavigationService.navigate('SendProduct', { product, reservation });
     }
     else {
       ModalService.showModal('ConfirmSold', { product, reservation });
@@ -47,7 +49,7 @@ function OrderActions(props) {
         <Button size='small' onPress={onPressPrimaryAction}>
           { status === 'reserved' ? 'Send for Delivery' : 'Confirm Sold' }
         </Button>
-        <Button size='small' status='danger' onPress={onPressCancel} marginTop={0.5}>
+        <Button size='small' status='basic' onPress={onPressCancel} marginTop={0.5}>
           Cancel Transaction
         </Button>
       </Block>

@@ -85,7 +85,7 @@ function Container({ product, orderDetails }) {
       <Block flex={1}>
         <Block flex={1} row space='between' marginBottom={0.5}>
           <Block flex={1}>
-            <Text bold size={12} textAlign='left' color='gray8'>Expected Date of Delivery</Text>
+            <Text bold size={12} textAlign='left' color='gray8'>Estimated Date of Arrival</Text>
           </Block>
           <Block flex={1}>
             <Text bold size={12} textAlign='center' numberOfLines={3}>{formatDeliveryDate(currentDate)}</Text>

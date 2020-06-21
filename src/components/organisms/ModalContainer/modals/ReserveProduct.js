@@ -43,7 +43,7 @@ function ReserveProduct(props) {
           </Button>
         </Block>
         <Block flex={1}>
-          <Button size='tiny' status='info' onPress={onPressPrimaryAction}>
+          <Button size='tiny' status='primary' onPress={onPressPrimaryAction}>
             Yes, reserve it
           </Button>
         </Block>
