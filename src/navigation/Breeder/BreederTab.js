@@ -2,10 +2,13 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import OrdersStack from './OrdersStack';
 import InboxStack from '../InboxStack';
-import DashboardStack from './DashboardStack';
 import ManageProductsStack from './ManageProductsStack';
 
 import BreederTabBar from 'organisms/BreederTabBar';
+
+import {
+  Dashboard
+} from 'features'
 
 const navigatorConfig = {
   initialRouteName: 'OrdersStack',
@@ -22,8 +25,8 @@ const routes = {
   'OrdersStack': {
     screen: OrdersStack,
   },
-  'DashboardStack': {
-    screen: DashboardStack,
+  'Dashboard': {
+    screen: Dashboard,
   },
   'InboxStack': {
     screen: InboxStack,

@@ -1,1 +1,1 @@
-export { default } from './CustomerStack';
+export { default } from './CustomerDrawer';

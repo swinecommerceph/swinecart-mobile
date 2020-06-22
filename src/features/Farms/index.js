@@ -3,22 +3,10 @@ import { useStoreActions } from 'easy-peasy';
 
 import { HeaderBar, BackButton } from 'molecules';
 
-import {
-  ReviewList
-} from './components'
-
 function Container() {
-
-  const getItems = useStoreActions(actions => actions.reviews.getItems);
-
-  useEffect(() => {
-    getItems({ isRefresh: false });
-  }, []);
-
   return (
     <Fragment>
-      <HeaderBar title='Reviews' accessoryLeft={BackButton} />
-      <ReviewList />
+      <HeaderBar title='Farms' accessoryLeft={BackButton} />
     </Fragment>
   );
 }

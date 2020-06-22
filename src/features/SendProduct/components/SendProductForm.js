@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react';
-import { Dimensions } from "react-native";
+import { Dimensions } from 'react-native';
 import { useStoreActions } from 'easy-peasy';
 import addDays from 'date-fns/addDays';
 import { Calendar } from '@ui-kitten/components';

@@ -4,25 +4,22 @@ import { Block, Text, StarRating } from 'atoms';
 
 function SubRating(props) {
 
-  const { 
-    title, titleSize, textColor,
-    rating, ratingTextSize
-  } = props;
+  const { title, rating } = props;
 
   return (
     <Fragment>
       <Block row center>
         <Block flex={1} left>
-          <Text bold size={titleSize} color={textColor}>{title}</Text>
+          <Text semibold size={12} color='black1'>{title}</Text>
         </Block>
         <Block row center right>
           <StarRating
             disabled={true}
             maxStars={5}
             rating={rating}
-            starSize={30}
+            starSize={24}
           />
-          <Text bold size={ratingTextSize} color={textColor} marginLeft={0.5}>{`(${rating.toFixed(2)}/5)`}</Text>
+          <Text semibold size={10} color='gray8' marginLeft={0.5}>{`(${rating.toFixed(2)}/5.00)`}</Text>
         </Block>
       </Block>
     </Fragment>

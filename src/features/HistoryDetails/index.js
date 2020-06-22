@@ -8,12 +8,14 @@ import { Block } from 'atoms';
 
 function HistoryDetails(props) {
 
-  const history = useMemo(() => (
-    props.navigation.getParam('logs').map(({ status, createdAt }) => ({
+  const logs = props.navigation.getParam('logs');
+
+  const history = useMemo(() => {
+    return logs.map(({ status, createdAt }) => ({
       title: status,
       description: `Updated on ${formatStatusTime(createdAt)}`
-    }))
-  ), []);
+    }));
+  }, [ logs ] );
 
   return (
     <Fragment>

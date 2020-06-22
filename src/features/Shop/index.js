@@ -3,16 +3,12 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import { NavigationService } from 'services';
 
-import { HeaderBar, HeaderBarButton } from 'molecules';
+import { HeaderBar, HeaderBarButton, DrawerButton } from 'molecules';
 import { LoadingOverlay } from 'atoms';
 
 import {
   ShopList
 } from './components';
-
-const accessoryLeft = () => (
-  <HeaderBarButton iconName='menu' />
-);
 
 const accessoryRight = () => {
 
@@ -42,7 +38,7 @@ function Container() {
       <LoadingOverlay show={isLoading} />
       <HeaderBar
         title='Shop'
-        accessoryLeft={accessoryLeft}
+        accessoryLeft={DrawerButton}
         accessoryRight={accessoryRight}
       />
       <ShopList />

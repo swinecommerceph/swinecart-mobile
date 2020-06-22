@@ -1,11 +1,16 @@
 import React, { Fragment, memo, useState } from 'react';
+import { Dimensions } from 'react-native';
 import { useStoreActions } from 'easy-peasy';
 import { Calendar } from '@ui-kitten/components';
+
+import { formatDeliveryDate } from 'utils/formatters';
 
 import { Stepper, TextArea, ContainerView } from 'molecules';
 import { Block, Button, Text } from 'atoms';
 
 import ProductDetails from './ProductDetails';
+
+const screenWidth = Math.round(Dimensions.get('window').width);
 
 function RequestProduct({ data }) {
   
@@ -56,16 +61,19 @@ function RequestProduct({ data }) {
                 </Block>
               </Block>
               <Block marginBottom={1}>
-                <Block marginBottom={0.5}>
-                  <Text bold size={14} textAlign='left'>
-                    Date Needed: 
-                  </Text>
+                <Block flex={1} row space='between' marginBottom={0.5}>
+                  <Block flex={1}>
+                    <Text bold size={12} textAlign='left' color='gray8'>Estimated Date of Delivery</Text>
+                  </Block>
+                  <Block flex={1}>
+                    <Text bold size={12} textAlign='center' numberOfLines={3}>{formatDeliveryDate(currentDate)}</Text>
+                  </Block>
                 </Block>
                 <Block center>
                   <Calendar
                     date={currentDate}
                     onSelect={onChangeDate}
-                    style={{ minWidth: 379 }}
+                    style={{ width: screenWidth - 32, minWidth: screenWidth - 32 }}
                   />
                 </Block>
               </Block>

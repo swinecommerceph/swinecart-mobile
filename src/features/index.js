@@ -10,17 +10,21 @@ export { default as HistoryDetails } from './HistoryDetails';
 export { default as Orders } from './Orders';
 export { default as EditProduct } from './EditProduct';
 export { default as ProductRequests } from './ProductRequests';
-// export { default as BreederProfile } from './BreederProfile';
+export { default as BreederProfile } from './BreederProfile';
 export { default as ManageProducts } from './ManageProducts';
 export { default as Dashboard } from './Dashboard';
 export { default as Reviews } from './Reviews';
+export { default as Ratings } from './Ratings';
+export { default as Farms } from './Farms';
 export { default as SendProduct } from './SendProduct';
 
 // Customer Features
 export { default as Cart } from './Cart';
 export { default as Shop } from './Shop';
 export { default as FilterItems } from './FilterItems';
+export { default as OrderHistory } from './OrderHistory';
 export { default as CustomerOrders } from './CustomerOrders';
+export { default as CustomerProfile } from './CustomerProfile';
 export { default as RequestProduct } from './RequestProduct';
 
 // TestScreen

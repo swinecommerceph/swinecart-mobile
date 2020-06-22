@@ -3,22 +3,20 @@ import { useStoreActions } from 'easy-peasy';
 
 import { HeaderBar, BackButton } from 'molecules';
 
-import {
-  ReviewList
-} from './components'
+import { HistoryList } from './components';
 
 function Container() {
-
-  const getItems = useStoreActions(actions => actions.reviews.getItems);
 
   useEffect(() => {
     getItems({ isRefresh: false });
   }, []);
 
+  const getItems = useStoreActions(actions => actions.customerOrderHistory.getItems);
+
   return (
     <Fragment>
-      <HeaderBar title='Reviews' accessoryLeft={BackButton} />
-      <ReviewList />
+      <HeaderBar title='Order History' accessoryLeft={BackButton} />
+      <HistoryList />
     </Fragment>
   );
 }

@@ -35,7 +35,7 @@ function Notification({ data }) {
         break;
       case 'BreederRated': 
         setCurrentRoute('reviews');
-        NavigationService.navigate('DashboardStack'); 
+        NavigationService.navigate('Dashboard'); 
         break;
     }
   };

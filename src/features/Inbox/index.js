@@ -1,17 +1,12 @@
 import React, { Fragment, memo } from 'react';
-import { HeaderBar, HeaderBarButton } from 'molecules';
+import { HeaderBar, DrawerButton } from 'molecules';
 
 import { InboxTabView } from './components';
 
-const accessoryLeft = () => (
-  <HeaderBarButton iconName='menu' />
-);
-
 function Container() {
-
   return (
     <Fragment>
-      <HeaderBar title='Inbox' accessoryLeft={accessoryLeft} />
+      <HeaderBar title='Messages' accessoryLeft={DrawerButton} />
       <InboxTabView />
     </Fragment>
   );

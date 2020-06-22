@@ -15,7 +15,7 @@ function CartItem({ data }) {
 
   return (
     <Card>
-      <ProductAvatar shape='round' type={type} image={imageUrl} size={96} />
+      <ProductAvatar shape='rounded' type={type} image={imageUrl} size={96} />
       <Block flex={1} marginLeft={1}>
         <ProductInfo
           name={name}

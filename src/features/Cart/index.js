@@ -1,15 +1,11 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreActions } from 'easy-peasy';
 
-import { HeaderBar, HeaderBarButton } from 'molecules';
+import { HeaderBar, DrawerButton } from 'molecules';
 
 import {
   CartList
 } from './components';
-
-const accessoryLeft = () => (
-  <HeaderBarButton iconName='menu' />
-);
 
 function Container() {
 
@@ -21,7 +17,7 @@ function Container() {
 
   return (
     <Fragment>
-      <HeaderBar title='SwineCart' accessoryLeft={accessoryLeft} />
+      <HeaderBar title='SwineCart' accessoryLeft={DrawerButton} />
       <CartList />
     </Fragment>
   );

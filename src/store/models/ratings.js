@@ -9,7 +9,7 @@ export default {
 
   data: null,
 
-  isLoading: false,
+  isLoading: true,
 
   setLoading: action((state, payload) => {
     state.isLoading = payload;
