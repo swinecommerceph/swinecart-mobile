@@ -57,7 +57,7 @@ export default {
           status: 'reserved',
           isRefresh: false
         });
-
+        getStoreActions().orders.setIndex(1);
         actions.setLoading(false);
         NavigationService.back();
 
@@ -98,7 +98,7 @@ export default {
           status: 'onDelivery',
           isRefresh: false
         });
-
+        getStoreActions().orders.setIndex(2);
         actions.setLoading(false);
         NavigationService.back();
       });
@@ -137,7 +137,7 @@ export default {
           status: 'sold',
           isRefresh: false
         });
-
+        getStoreActions().orders.setIndex(3);
         actions.setLoading(false);
       });
     }

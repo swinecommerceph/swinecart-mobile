@@ -1,1 +1,1 @@
-export { default as TransactionsTabView } from './TransactionsTabView';
+export { default as OrdersTabView } from './Orders/components/OrdersTabView';

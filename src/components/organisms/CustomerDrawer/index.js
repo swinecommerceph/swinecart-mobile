@@ -41,6 +41,7 @@ function CustomerDrawer({ navigation }) {
       selectedIndex={selectedIndex}
       onSelect={onSelect}
     >
+      <DrawerItem title='Order History' iconName='person' />
       <DrawerItem title='Farms' iconName='person' />
       <DrawerItem title='Profile' iconName='person' />
     </Drawer>

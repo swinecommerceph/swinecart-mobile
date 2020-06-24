@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useMemo, useState } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { IndexPath, Select, SelectItem, withStyles } from '@ui-kitten/components';
+import { Select, SelectItem, withStyles } from '@ui-kitten/components';
 
 import routes from 'constants/routes';
 
@@ -13,23 +13,20 @@ const options = routes.map(({ key, title }) => (
 
 function StatusPicker({ eva, jumpTo }) {
 
-  // const currentStatus = useStoreState(state => state.orders.currentStatus);
-  // const status = useStoreState(state => state.orders.status());
-  // const setCurrentStatus = useStoreActions(actions => actions.orders.setCurrentStatus);
-
-  const [selectedIndex, setIndex] = useState(new IndexPath(1));
+  const currentIndex = useStoreState(state => state.orders.currentIndex);
+  const setIndex = useStoreActions(actions => actions.orders.setIndex);
 
   useEffect(() => {
-    jumpTo(routes[selectedIndex.row].key);
-  }, [selectedIndex])
+    jumpTo(routes[currentIndex.row].key);
+  }, [currentIndex])
 
-  const onSelect = index => {
-    setIndex(index);
+  const onSelect = ({ row }) => {
+    setIndex(row);
   };
 
   const value = useMemo(
-    () => routes[selectedIndex.row].title,
-    [selectedIndex]
+    () => routes[currentIndex.row].title,
+    [currentIndex]
   );
 
   return (
@@ -43,7 +40,7 @@ function StatusPicker({ eva, jumpTo }) {
         Order Status
       </Text>
       <Select
-        selectedIndex={selectedIndex}
+        selectedIndex={currentIndex}
         onSelect={onSelect}
         value={<Text semibold>{value}</Text>}
         style={eva.style.selectContainer}

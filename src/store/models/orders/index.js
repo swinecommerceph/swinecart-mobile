@@ -1,7 +1,7 @@
 import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
+import { IndexPath } from '@ui-kitten/components';
 
-import routes from 'constants/routes';
 import { ToastService, OrderService } from 'services';
 import { orderMapper } from 'utils/mappers/responseMappers';
 import { orderObject, getOrderObject } from './utils';
@@ -16,7 +16,7 @@ const prevStatus = {
 
 export default {
   // State
-  currentStatus: routes[0],
+  currentIndex: new IndexPath(0),
   ordersById: {
 
   },
@@ -35,9 +35,6 @@ export default {
     },
 
   },
-
-  // Computed Values
-  status: computed(state => () => routes.find(status  => status.key === state.currentStatus.key)),
 
   // Actions
 
@@ -78,8 +75,8 @@ export default {
     getOrderObject(state, status).page = page;
   }),
 
-  setCurrentStatus: action((state, payload) => {
-    state.currentStatus = payload;
+  setIndex: action((state, payload) => {
+    state.currentIndex = new IndexPath(payload);
   }),
 
   setLoadingMoreByStatus: action((state, payload) => {

@@ -1,20 +1,20 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
-import {
-  Inbox, Chat
-} from 'features';
+
+import OrderHistory from 'features/OrderHistory';
+import HistoryDetails from 'features/HistoryDetails';
 
 
 const navigatorConfig = {
-  initialRouteName: 'Inbox',
+  initialRouteName: 'OrderHistory',
   headerMode: 'none',
   defaultNavigationOptions: {
   }
 };
 
 const routes = {
-  Inbox: Inbox,
-  Chat: Chat,
+  OrderHistory: OrderHistory,
+  HistoryDetails: HistoryDetails,
 };
 
 const navigator = createStackNavigator(routes, navigatorConfig);
@@ -24,5 +24,6 @@ navigator.navigationOptions = ({ navigation }) => {
     tabBarVisible: navigation.state.index > 0 ? false : true,
   };
 };
+
 
 export default navigator;

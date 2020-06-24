@@ -25,7 +25,7 @@ function CustomerTabBar({ navigation }) {
       >
         <BottomNavigationTab title='Shop' iconName='shopping-bag' />
         <BottomNavigationTab title='SwineCart' iconName='shopping-cart' />
-        <BottomNavigationTab title='Order Tracking' iconName='car' />
+        <BottomNavigationTab title='Orders' iconName='car' />
         <BottomNavigationTab title='Messages' iconName='email' />
       </UKBottomNavigation>
     </Fragment>

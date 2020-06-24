@@ -2,13 +2,13 @@ import React, { Fragment, memo } from 'react';
 
 import { HeaderBar, DrawerButton } from 'molecules';
 
-import { TransactionsTabView } from './components';
+import { OrdersTabView } from './components';
 
 function Container() {
   return (
     <Fragment>
-      <HeaderBar title='Order Tracking' accessoryLeft={DrawerButton} />
-      <TransactionsTabView />
+      <HeaderBar title='Orders' accessoryLeft={DrawerButton} />
+      <OrdersTabView />
     </Fragment>
   );
 }

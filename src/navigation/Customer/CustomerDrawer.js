@@ -6,12 +6,11 @@ import {
   Farms,
   CustomerProfile,
   ProductView,
-  HistoryDetails,
-  OrderHistory,
   FilterItems
 } from 'features';
 
 import CustomerTab from './CustomerTab';
+import OrderHistoryStack from './OrderHistoryStack';
 
 const navigatorConfig = {
   initialRouteName: 'CustomerTab',
@@ -22,12 +21,11 @@ const navigatorConfig = {
 };
 
 const routes = {
-  // OrderHistory: OrderHistory,
+  OrderHistoryStack: OrderHistoryStack,
   Farms: Farms,
   CustomerProfile: CustomerProfile,
 
   ProductView: ProductView,
-  HistoryDetails: HistoryDetails,
   FilterItems: FilterItems,
   CustomerTab: CustomerTab,
 };

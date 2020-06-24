@@ -64,7 +64,7 @@ export default {
         getStoreActions().orderRequests.getItems({ isRefresh: true });
       }
 
-      getStoreActions().orders.setCurrentStatus(routes[0]);
+      getStoreActions().orders.setIndex(0);
       getStoreActions().orders.getOrdersByStatus({ status: 'requested', isRefresh: true });
     }
     else if (type === 'db-rated') {
@@ -83,7 +83,7 @@ export default {
       const message = `Breeder reserved a product for you.`;
 
       PushNotificationService.showLocalNotification(title, message);
-      // getStoreActions().customerOrders.setCurrentStatus(routes[1]);
+      getStoreActions().customerOrders.setIndex(1);
       getStoreActions().customerOrders.getItems({ status: 'requested', isRefresh: false });
       getStoreActions().customerOrders.getItems({ status: 'reserved', isRefresh: false });
     }
@@ -92,7 +92,7 @@ export default {
       const message = `Product is now on delivery.`;
 
       PushNotificationService.showLocalNotification(title, message);
-      // getStoreActions().customerOrders.setCurrentStatus(routes[2]);
+      getStoreActions().customerOrders.setIndex(2);
       getStoreActions().customerOrders.getItems({ status: 'reserved', isRefresh: false });
       getStoreActions().customerOrders.getItems({ status: 'onDelivery', isRefresh: false });
     }
@@ -101,7 +101,7 @@ export default {
       const message = `Product Sold`;
 
       PushNotificationService.showLocalNotification(title, message);
-      // getStoreActions().customerOrders.setCurrentStatus(routes[3]);
+      getStoreActions().customerOrders.setIndex(3);
       getStoreActions().customerOrders.getItems({ status: 'onDelivery', isRefresh: false });
       getStoreActions().customerOrders.getItems({ status: 'sold', isRefresh: false });
     }
@@ -109,10 +109,8 @@ export default {
       const title = 'Transaction Cancelled';
       const message = `A breeder cancelled a transaction with you.`;
 
-      console.dir(payload.item_id);
-
       PushNotificationService.showLocalNotification(title, message);
-      // getStoreActions().customerOrders.setCurrentStatus(routes[3]);
+      // getStoreActions().customerOrders.setIndex(3);
       // getStoreActions().customerOrders.getItems({ status: 'onDelivery', isRefresh: false });
       // getStoreActions().customerOrders.getItems({ status: 'sold', isRefresh: false });
     }

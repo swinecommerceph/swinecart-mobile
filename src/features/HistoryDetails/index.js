@@ -4,7 +4,6 @@ import Timeline from 'react-native-timeline-flatlist';
 import { formatStatusTime } from 'utils/formatters';
 
 import { HeaderBar, BackButton } from 'molecules';
-import { Block } from 'atoms';
 
 function HistoryDetails(props) {
 
@@ -12,7 +11,7 @@ function HistoryDetails(props) {
 
   const history = useMemo(() => {
     return logs.map(({ status, createdAt }) => ({
-      title: status,
+      title: status === 'Cancel_transaction' ? 'Cancel Transaction' : status,
       description: `Updated on ${formatStatusTime(createdAt)}`
     }));
   }, [ logs ] );
@@ -20,17 +19,19 @@ function HistoryDetails(props) {
   return (
     <Fragment>
       <HeaderBar title='Order History' accessoryLeft={BackButton} />
-      <Block flex={1} padding={1}>
-        <Timeline
-          data={history}
-          timeContainerStyle={{ minWidth: 72 }}
-          showTime={false}
-          lineColor='#00695C'
-          lineWidth={3}
-          circleColor='#00695C'
-          circleSize={24}
-        />
-      </Block>
+      <Timeline
+        data={history}
+        timeContainerStyle={{ minWidth: 72 }}
+        showTime={false}
+        lineColor='#00695C'
+        lineWidth={3}
+        circleColor='#00695C'
+        circleSize={24}
+        innerCircle='dot'
+        listViewContainerStyle={{ padding: 16 }}
+        titleStyle={{ fontFamily: 'OpenSans-SemiBold', fontWeight: 'normal', fontSize: 14 }}
+        descriptionStyle={{ fontFamily: 'OpenSans-Regular', fontWeight: 'normal', fontSize: 12, color: '#6F6F6F' }}
+      />
     </Fragment>
   );
 }

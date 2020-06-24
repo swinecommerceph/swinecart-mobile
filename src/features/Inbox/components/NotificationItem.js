@@ -6,7 +6,6 @@ import { Block, Icon, Text } from 'atoms';
 
 import { NavigationService } from 'services';
 import { formatCreatedAt } from 'utils/formatters';
-import routes from 'constants/routes';
 
 const iconNames = {
   'ProductRequested': 'alert-circle',
@@ -24,13 +23,13 @@ function Notification({ data }) {
 
   const { message, readAt, createdAt, type } = data;
 
-  const setCurrentStatus = useStoreActions(actions => actions.orders.setCurrentStatus);
+  const setIndex = useStoreActions(actions => actions.orders.setIndex);
   const setCurrentRoute = useStoreActions(actions => actions.dashboard.setCurrentRoute);
 
   const onPressNotification = () => {
     switch(type) {
       case 'ProductRequested': 
-        setCurrentStatus(routes[0]);
+        setIndex(0);
         NavigationService.navigate('OrdersStack');
         break;
       case 'BreederRated': 
