@@ -5,7 +5,7 @@ import { ShopService, ToastService } from 'services';
 
 import { addGenericModel } from '../../utils';
 
-const LIMIT = 10;
+const LIMIT = 100;
 
 export default {
 
@@ -19,7 +19,11 @@ export default {
 
   // Side Effects
 
-  getItems: thunk(async (actions, payload) => {
+  getItems: thunk(async (actions, payload, { getStoreState }) => {
+
+    const filters = getStoreState().filterItems.filters;
+
+    console.dir(filters);
 
     const { isRefresh } = payload;
 
@@ -27,8 +31,8 @@ export default {
       ? actions.setRefreshing(true)
       : actions.setLoading(true);
 
-    const [error, data] = await to(ShopService.getItems(1, LIMIT));
-  
+    const [error, data] = await to(ShopService.getItems(1, LIMIT, filters));
+    
     if (error) {
   
       const { problem, status } = error;
@@ -55,13 +59,14 @@ export default {
 
   }),
 
-  getMoreItems: thunk(async (actions, payload, { getState }) => {
+  getMoreItems: thunk(async (actions, payload, { getState, getStoreState }) => {
 
+    const filters = getStoreState().filterItems.filters;
     const { page: currentPage, items: currentItems } = getState();
 
     actions.setLoadingMore(true);
 
-    const [error, data] = await to(ShopService.getItems(currentPage, LIMIT));
+    const [error, data] = await to(ShopService.getItems(currentPage, LIMIT, filters));
 
     if (error) {
 

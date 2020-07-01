@@ -3,18 +3,18 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import { Block, Button, Text } from 'atoms';
 
-function RemoveFromCart(props) {
-
-  const removeFromCart = useStoreActions(actions => actions.cart.removeFromCart);
+function ReserveProduct(props) {
 
   // Props
   const { data, hideModal } = props;
-  const { id: cartItemId, product } = data;
-  const { name } = product;
+  const { customerName } = data;
+
+  const disapproveRequest = useStoreActions(actions => actions.reservations.disapproveRequest);
+  const currentProduct = useStoreState(state => state.orderRequests.currentProduct);
 
   const onPressPrimaryAction = () => {
-    removeFromCart(cartItemId);
     hideModal();
+    disapproveRequest(data);
   };
 
   const onPressClose = () => {
@@ -23,20 +23,20 @@ function RemoveFromCart(props) {
 
   return (
     <Block backgroundColor='white1' borderRadius={5}>
-      <Block padding={1}>
+      <Block padding>
         <Text normal size={18} textAlign='center'>
-          Are you sure you want to remove this Product from your SwineCart?
+          Disapprove this request?
         </Text>
       </Block>
       <Block row center right padding={1} >
         <Block flex={1} marginRight={1}>
-          <Button size='tiny'  status='basic' onPress={onPressPrimaryAction}>
-            Yes, remove
+          <Button size='tiny' status='basic' onPress={onPressClose}>
+            Close
           </Button>
         </Block>
         <Block flex={1}>
-          <Button size='tiny' status='info' onPress={onPressClose}>
-            No, keep it
+          <Button size='tiny' status='primary' onPress={onPressPrimaryAction}>
+            Disapprove
           </Button>
         </Block>
       </Block>
@@ -44,4 +44,4 @@ function RemoveFromCart(props) {
   );
 }
 
-export default memo(RemoveFromCart);
+export default memo(ReserveProduct);

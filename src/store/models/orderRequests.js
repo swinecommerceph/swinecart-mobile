@@ -46,7 +46,7 @@ export default {
   setLoadingMore: action((state, payload) => {
     state.isLoadingMore = payload;
   }),
-
+  
   // Side Effects
   getItems: thunk(async (actions, payload, { getState }) => {
 

@@ -39,12 +39,12 @@ function CancelTransaction(props) {
       </Block>
       <Block row center right padding={1} >
         <Block flex={1} marginRight={1}>
-          <Button size='tiny' appearance='ghost' status='basic' onPress={onPressClose}>
+          <Button size='tiny'  status='basic' onPress={onPressClose}>
             Close
           </Button>
         </Block>
         <Block flex={1}>
-          <Button size='tiny' status='danger' onPress={onPressPrimaryAction}>
+          <Button size='tiny' status='primary' onPress={onPressPrimaryAction}>
             Yes, cancel
           </Button>
         </Block>

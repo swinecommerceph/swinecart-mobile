@@ -26,7 +26,7 @@ export const Product = {
 
 export const Order = {
   status: 'status',
-  request_count: 'requestCount',
+  requestCount: 'requestCount',
   product: Product,
   reservation: Reservation,
 };

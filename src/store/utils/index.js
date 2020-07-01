@@ -27,6 +27,10 @@ export const addGenericModel = () => ({
     state.isLoading = payload;
   }),
 
+  setRefreshing: action((state, payload) => {
+    state.isRefreshing = payload;
+  }),
+
   setLoadingMore: action((state, payload) => {
     state.isLoadingMore = payload;
   }),

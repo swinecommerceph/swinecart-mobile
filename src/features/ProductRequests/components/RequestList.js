@@ -24,7 +24,7 @@ function RequestList() {
   const isLoadingMore = useStoreState(state => state.orderRequests.isLoadingMore);
   const isLoading = useStoreState(state => state.orderRequests.isLoading);
 
-  const keyExtractor = item => `${item.customerId}`;
+  const keyExtractor = item => `${item.swineCartId}`;
 
   const onPressLoadMore = () => {
     getMoreRequests();
@@ -46,7 +46,7 @@ function RequestList() {
         data={requests}
         Component={RequestItem}
         keyExtractor={keyExtractor}
-        emptyListMessage={'No Requests!'}
+        emptyListMessage={'There are no requests yet.'}
         isRefreshing={isRefreshing}
         onPressLoadMore={onPressLoadMore}
         onRefresh={onRefresh}

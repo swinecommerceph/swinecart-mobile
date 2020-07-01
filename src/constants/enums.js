@@ -1,8 +1,8 @@
 export const types = [
-  { key: 'boar', text: 'Boar' },
-  { key: 'sow', text: 'Sow' },
-  { key: 'gilt', text: 'Gilt' },
-  { key: 'semen', text: 'Semen' },
+  { key: 'boar', title: 'Boar' },
+  { key: 'sow', title: 'Sow' },
+  { key: 'gilt', title: 'Gilt' },
+  { key: 'semen', title: 'Semen' },
 ];
 
 export const houseTypes = [

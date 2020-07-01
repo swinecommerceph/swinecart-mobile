@@ -9,16 +9,27 @@ import { Block, Text, Button } from 'atoms';
 
 function RequestItem({ data }) {
 
-  const currentProduct = useStoreState(state => state.orderRequests.currentProduct);
+  const currentProduct = useStoreState(
+    state => state.orderRequests.currentProduct
+  );
 
   const { customerProvince, customerName } = data;
+  
+  console.dir(data);
 
   const onPressView = () => {
-    ModalService.showModal('OrderDetails', { product: currentProduct, reservation: data });
+    ModalService.showModal(
+      'OrderDetails',
+      { product: currentProduct, reservation: data }
+    );
   };
 
-  const onPressReserve = () => {
-    ModalService.showModal('ReserveProduct', { ...data });
+  const onPressApprove = () => {
+    ModalService.showModal('ApproveRequest', { ...data });
+  };
+
+  const onPressDisapprove = () => {
+    ModalService.showModal('DisapproveRequest', { ...data });
   };
 
   return (
@@ -44,14 +55,25 @@ function RequestItem({ data }) {
           >
             {customerProvince}
           </Text>
-          <Block alignSelf='flex-start'>
-            <Button
-              size='small'
-              onPress={onPressReserve}
-              marginTop={0.5}
-            >
-              Reserve
+          <Block flex={1} row alignSelf='flex-start' marginTop={0.5}>
+            <Block>
+              <Button
+                size='tiny'
+                onPress={onPressApprove}
+                marginRight={0.5}
+              >
+                Approve
+              </Button>
+            </Block>
+            <Block>
+              <Button
+                size='tiny'
+                status='basic'
+                onPress={onPressDisapprove}
+              >
+                Disapprove
             </Button>
+            </Block>
           </Block>
         </Block>
       </Card>

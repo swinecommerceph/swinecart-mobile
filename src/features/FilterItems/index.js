@@ -1,29 +1,30 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment, memo, useState } from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { ContainerView, HeaderBar, BackButton } from 'molecules';
-import { Block, Button, Text } from 'atoms';
+import { StateScreen } from 'organisms';
+import { HeaderBar, BackButton } from 'molecules';
+
+import { Form } from './components';
 
 function Container() {
 
+  const getFilterOptions = useStoreActions(actions => actions.filterItems.getFilterOptions);
+  const isLoading = useStoreState(state => state.filterItems.isLoading);
+
+  useState(() => {
+    getFilterOptions();
+  }, []);
+
   return (
     <Fragment>
-      <HeaderBar title='' accessoryLeft={BackButton} />
-      <ContainerView
-        showsVerticalScrollIndicator={true}
-        backgroundColor='white1'
-      >
-        <Block flex={1} padding={1}>
-          <Block row center marginTop={1}>
-            <Block flex={1}>
-              <Button size='small' onPress={null}>
-                Submit
-            </Button>
-            </Block>
-          </Block>
-        </Block>
-      </ContainerView>
+      <HeaderBar title='Search Products' accessoryLeft={BackButton} />
+      <StateScreen isLoading={isLoading} hasError={false}>
+        <Form />
+      </StateScreen>
     </Fragment>
   );
+
+  
 }
 
-export default memo(Container, () => true);
+export default memo(Container);

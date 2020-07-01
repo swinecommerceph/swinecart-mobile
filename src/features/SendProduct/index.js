@@ -23,4 +23,4 @@ function Container({ navigation }) {
   );
 }
 
-export default memo(Container, () => true);
+export default memo(Container);

@@ -66,7 +66,7 @@ function FormFooter({ onSubmit, validateForm }) {
       <HideWithKeyboard>
         <Block row center right padding={0.5}>
           <Block flex={1} marginRight={1}>
-            <Button size='large' appearance='ghost' status='basic' onPress={onPressPrev}>
+            <Button size='large'  status='basic' onPress={onPressPrev}>
               {(isFirstStep || isLastStep) ? 'Close' : 'Back'}
             </Button>
           </Block>

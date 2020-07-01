@@ -20,6 +20,39 @@ export default {
   }),
 
   // Side Effects
+
+  disapproveRequest: thunk(async (actions, payload, { getStoreActions }) => {
+  
+    const { swineCartId } = payload;
+
+    actions.setLoading(true);
+
+    const [error, data] = await to(OrderService.removeRequest(swineCartId));
+
+    if (error) {
+      ToastService.show('Please try again later!', null);
+      actions.setLoading(false);
+    }
+    else {
+
+      ToastService.show('Request Disapproved!', () => {
+        
+        getStoreActions().orders.getOrdersByStatus({
+          status: 'requested',
+          isRefresh: false
+        });
+
+        getStoreActions().orderRequests.getItems({
+          isRefresh: false
+        });
+
+        actions.setLoading(false);
+
+      });
+    }
+
+  }),
+
   reserveProduct: thunk(async (actions, payload, { getStoreActions }) => {
 
     const {
@@ -47,7 +80,7 @@ export default {
     }
     else {
 
-      ToastService.show('Product successfully reserved!', () => {
+      ToastService.show('Request Approved!', () => {
         getStoreActions().orders.getOrdersByStatus({
           status: 'requested',
           isRefresh: false
