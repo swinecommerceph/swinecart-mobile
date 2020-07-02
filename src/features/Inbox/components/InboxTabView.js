@@ -77,15 +77,17 @@ class InboxTabView extends PureComponent {
 export default withStyles(InboxTabView, () => ({
   tabBarStyle: {
     ...shadows.shadow2,
-    backgroundColor: colors.primary,
-    height: 56
+    backgroundColor: colors.white1,
+    height: 48
   },
   labelStyle: {
-    fontFamily: 'OpenSans-SemiBold',
-    fontSize: 15,
+    fontFamily: 'OpenSans-Bold',
+    fontWeight: 'normal',
+    fontSize: 14,
+    color: colors.primary
   },
   indicatorStyle: {
-    backgroundColor: 'white',
+    backgroundColor: colors.primary,
     height: 4
   },
 }));

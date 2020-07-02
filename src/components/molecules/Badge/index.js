@@ -9,7 +9,7 @@ function Badge({ text, ...otherProps }) {
       borderRadius={50}
       {...otherProps}
     >
-      <Text bold color='white1' size={12}>
+      <Text bold color='white1' size={14}>
         {text}
       </Text>
     </Block>

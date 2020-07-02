@@ -65,6 +65,10 @@ export default {
     state.data = { ...payload };
   }),
 
+  setStep: action((state, payload) => {
+    state.currentStep = clamp(payload, 0, state.maxSteps);
+  }),
+
   nextStep: action((state, payload) => {
     state.currentStep = clamp(state.currentStep + 1, 0, state.maxSteps);
   }),
@@ -120,9 +124,10 @@ export default {
     }
     else {
       const { product } = data.data;
-      console.dir(product);
       // ToastService.show('Product successfully added!', () => {
         actions.resetForm();
+        getStoreActions().manageProducts.getItems({ isRefresh: false });
+        actions.setStep(0);
         actions.setLoading(false);
         NavigationService.back();
       // });

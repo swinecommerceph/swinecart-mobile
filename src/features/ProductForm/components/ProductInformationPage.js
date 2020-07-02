@@ -3,7 +3,7 @@ import { IndexPath } from '@ui-kitten/components';
 
 import { types  } from 'constants/enums';
 
-import { Input, ContainerView, Select } from 'molecules'
+import { Input, ContainerView, Select } from 'molecules';
 
 
 import { Block, Text, Checkbox } from 'atoms';
@@ -87,22 +87,20 @@ function ProductInformationPage({ formik }) {
         <Block marginBottom={2}>
           <Checkbox
             name='isUnique'
-            text='Yes, this product is unique'
             errors={errors}
             touched={touched}
             values={values}
             onChange={setFieldValue}
-          />
+          >
+            <Text semibold size={14}>
+              Yes, it is unique. 
+            </Text>
+          </Checkbox>
         </Block>
         <Block marginBottom={0.5}>
           <Text bold size={16} color='primary' textAlign='left'>
             Quantity of Product to be Added
         </Text>
-        </Block>
-        <Block padding={1} backgroundColor='color-primary-100' marginBottom={0.5} borderRadius={5}>
-          <Text semibold size={14} color='color-primary-500' textAlign='center'>
-            Unique products will always have a quantity of one (1). 
-          </Text>
         </Block>
         <Block marginBottom={1}>
           <Input

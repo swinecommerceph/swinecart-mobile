@@ -18,6 +18,7 @@ const fields = [
 
 function FormFooter({ onSubmit, validateForm }) {
 
+  const setStep = useStoreActions(actions => actions.productForm.setStep);
   const nextStep = useStoreActions(actions => actions.productForm.nextStep);
   const prevStep = useStoreActions(actions => actions.productForm.prevStep);
   const currentStep = useStoreState(state => state.productForm.currentStep);
@@ -47,6 +48,7 @@ function FormFooter({ onSubmit, validateForm }) {
       }
     }
     else {
+      setStep(0);
       NavigationService.back();
     }
 

@@ -1,31 +1,40 @@
 import React, { memo } from 'react';
 
 import { Badge } from 'molecules';
+import { Block } from 'atoms';
 
 function StockBadge({ type, isUnique, quantity }) {
+  return (
+    <Block marginTop={0.5}>
+      {
+        type === 'semen'
+          ? null
+          : isUnique
+            ? (
+                <Badge
+                  text='Unique'
+                  backgroundColor='color-warning-700'
+                />
+              )
+            : quantity <= 0
+              ?
+                (
+                  <Badge
+                    text='Out of Stock'
+                    backgroundColor='color-danger-600'
+                  />
+                )
+              :
+                (
+                  <Badge 
+                    text={`Stock: ${quantity}`}
+                    backgroundColor='color-primary-600' 
+                  />
+                )
+      }
+    </Block>
+  );
 
-  if (type === 'semen') {
-    return null;
-  }
-  else {
-    if (isUnique) {
-      return (
-        <Badge text='Unique' backgroundColor='color-warning-700' />
-      );
-    }
-    else {
-      if (quantity <= 0) {
-        return (
-          <Badge text='Out of Stock' backgroundColor='color-danger-600' />
-        );
-      }
-      else {
-        return (
-          <Badge text={`Stock: ${quantity}`} backgroundColor='color-primary-600' />
-        );
-      }
-    }
-  }
 }
 
 export default memo(StockBadge);

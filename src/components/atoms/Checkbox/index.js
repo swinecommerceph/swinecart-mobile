@@ -1,11 +1,10 @@
 import React, { Fragment, memo, } from 'react';
-import { CheckBox as UKCheckbox, withStyles } from '@ui-kitten/components';
+import { CheckBox as UKCheckbox } from '@ui-kitten/components';
 
 function Checkbox(props) {
 
   const {
-    text, onChange, values, name,
-    eva
+    onChange, values, name, children,
   } = props;
 
   const onPressChange = checked => {
@@ -14,18 +13,12 @@ function Checkbox(props) {
 
   return (
     <UKCheckbox
-      text={text}
       checked={values[name]}
       onChange={onPressChange}
-      textStyle={eva.style.text}
-    />
+    >
+      {children}
+    </UKCheckbox>
   );
 }
 
-export default withStyles(memo(Checkbox), () => ({
-  text: {
-    fontFamily: 'OpenSans-SemiBold',
-    fontWeight: 'normal',
-    fontSize: 14
-  }
-}));
+export default memo(Checkbox);
