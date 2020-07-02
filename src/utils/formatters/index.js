@@ -8,6 +8,8 @@ import isSameDay from 'date-fns/isSameDay';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import parseISO from 'date-fns/parseISO';
 
+import _pluralize from 'pluralize';
+
 export function capitalizeWords(string) {
   return startCase(string);
 }
@@ -16,10 +18,9 @@ export function uppercaseWord(string) {
   return upperCase(string);
 }
 
-export function addS(value, string) {
+export function pluralize(value, string) {
   const val = parseInt(value);
-  if (val === 0 || val > 1) return `${string}s`;
-  else return string;
+  return _pluralize(string, val, true);
 }
 
 export function formatStatusTime(date) {

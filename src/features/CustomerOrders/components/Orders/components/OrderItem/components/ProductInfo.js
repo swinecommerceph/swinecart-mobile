@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { capitalizeWords, addS } from 'utils/formatters';
+import { capitalizeWords, pluralize } from 'utils/formatters';
 import { Block, Text } from 'atoms';
 
 function ProductInfo({ name, type, breed, age, breederName, farmLocation }) {
@@ -14,7 +14,7 @@ function ProductInfo({ name, type, breed, age, breederName, farmLocation }) {
       {
         age &&
         <Text normal size={12}>
-          {`${age} ${addS(age, 'day')} old`}
+          {`${pluralize(age, 'day')} old`}
         </Text>
       }
       {

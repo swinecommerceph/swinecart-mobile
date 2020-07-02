@@ -25,6 +25,7 @@
     "formik": "2.1.2",
     "lodash": "4.17.15",
     "moment": "2.26.0",
+    "pluralize": "8.0.0",
     "react": "16.9.0",
     "react-fast-compare": "2.0.4",
     "react-native": "0.61.5",

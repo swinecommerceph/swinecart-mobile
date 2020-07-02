@@ -37,4 +37,4 @@ function ProductList() {
   );
 }
 
-export default memo(ProductList, () => true);
+export default memo(ProductList);

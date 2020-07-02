@@ -21,7 +21,7 @@ function StockBadge({ type, isUnique, quantity }) {
       }
       else {
         return (
-          <Badge text={`Quantity: ${quantity}`} backgroundColor='color-info-600' />
+          <Badge text={`Stock: ${quantity}`} backgroundColor='color-primary-600' />
         );
       }
     }

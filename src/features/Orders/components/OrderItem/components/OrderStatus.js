@@ -1,6 +1,6 @@
 import React, { Fragment, memo } from 'react';
 import { Text } from 'atoms';
-import { addS, formatStatusTime } from 'utils/formatters';
+import { pluralize, formatStatusTime } from 'utils/formatters';
 
 const statusTexts = {
   'requested': 'Requested',
@@ -21,7 +21,7 @@ function OrderStatus({ status, reservation, requestCount }) {
       {
         status === 'requested' &&
         <Text normal color='gray3' size={14} textAlign='left'>
-          {`by ${requestCount} ${addS(requestCount, 'customer')}`}
+          {`by ${pluralize(requestCount, 'customer')}`}
         </Text>
       }
       {
