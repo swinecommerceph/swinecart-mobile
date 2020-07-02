@@ -42,10 +42,11 @@ export default {
     const [error, data] = await to(ProductsService.toggleStatus(element.id));
     
     if (error) {
+      ToastService.show('Something went wrong. Please try again later!');
     }
     else {
       const { status } = data.data;
-      ToastService.show(`Product ${element.name} is now ${status}`);
+      ToastService.show(`Product is now ${status}`);
       actions.toggleStatus({ index: payload, status });
     }
 
@@ -56,13 +57,12 @@ export default {
     const [error, data] = await to(ProductsService.deleteProduct(payload.id));
 
     if (error) {
-      ToastService.show('Please try again later!');
+      ToastService.show('Something went wrong. Please try again later!');
     }
     else {
-      ToastService.show(`Product deleted!`);
       actions.deleteItem(payload);
+      ToastService.show(`Product deleted!`);
     }
-
 
   }),
 
@@ -80,12 +80,7 @@ export default {
       actions.setFetchingError(true);
     }
     else {
-
-      const { products } = data.data;
-      const items = map(products, productMapper);
-
-      actions.setItems({ items, page: 2 });
-
+      actions.setItems({ items: data.data.products, page: 2 });
     }
 
     isRefresh
@@ -108,20 +103,10 @@ export default {
       actions.setFetchingError(true);
     }
     else {
-      const { products } = data.data;
-
-      if (products.length > 0) {
-        const items = map(products, productMapper);
-
-        actions.setItems({
-          items: [...(currentItems || []), ...items],
-          page: currentPage + 1
-        });
-      }
-      else {
-        ToastService.show('No more products to load!', null);
-      }
-
+      actions.setItems({
+        items: [...(currentItems), ...data.data.products],
+        page: currentPage + 1
+      });
     }
 
     actions.setLoadingMore(false);
