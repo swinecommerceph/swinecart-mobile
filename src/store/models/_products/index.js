@@ -3,9 +3,7 @@ import to from 'await-to-js';
 
 export default {
   // State
-  items: {
-
-  },
+  items: {},
   // Computed Values
 
   // Actions

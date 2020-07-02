@@ -1,44 +1,57 @@
 import React, { Fragment, memo, useEffect } from 'react';
+import { useFocusEffect } from 'react-navigation-hooks';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { HeaderBar, LoadingView, BlankScreen, BackButton } from 'molecules';
+import { StateScreen } from 'organisms';
+import { HeaderBar, BackButton } from 'molecules';
 
 import {
-  Details
+  Details 
 } from './components';
 
-function Container() {
+function Container({ navigation }) {
 
   const isLoading = useStoreState(state => state.productView.isLoading);
-  const currentId = useStoreState(state => state.productView.currentId);
-  const data = useStoreState(state => state.productView.data);
-  const getDetails = useStoreActions(actions => actions.productView.getData);
+  const {
+    getData, setLoading
+  } = useStoreActions(actions => actions.productView);
+
+  
+
+  // useFocusEffect(useCallback(() => {
+
+  //   const productId = navigation.getParam('id');
+  //   console.dir(productId);
+  //   // getData(productId);
+
+  //   return () => {
+  //     setLoading(true);
+  //   };
+
+  // }, [ navigation ]));
 
   useEffect(() => {
-    getDetails();
-  }, [currentId]);
+    const productId = navigation.getParam('id');
+    getData(productId);
 
-  if (isLoading) {
-    return (
-      <LoadingView />
-    );
-  }
-  else if (!isLoading && data) {
-    return (
-      <Fragment>
-        <HeaderBar
-          title='Product Details'
-          accessoryLeft={BackButton}
-        />
+    return () => {
+      setLoading(true);
+    };
+
+  }, [navigation]);
+
+  return (
+    <Fragment>
+      <HeaderBar
+        title='Product Details'
+        accessoryLeft={BackButton}
+      />
+      <StateScreen isLoading={isLoading} hasError={false}>
         <Details />
-      </Fragment>
-    );
-  }
-  else {
-    return (
-      <BlankScreen />
-    )
-  }
+      </StateScreen>
+    </Fragment>
+  );
+
 }
 
-export default memo(Container, () => true);
+export default memo(Container);

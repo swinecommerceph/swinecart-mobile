@@ -8,7 +8,9 @@ import { Form } from './components';
 
 function Container() {
 
-  const getFilterOptions = useStoreActions(actions => actions.filterItems.getFilterOptions);
+  const getFilterOptions = useStoreActions(
+    actions => actions.filterItems.getFilterOptions
+  );
   const isLoading = useStoreState(state => state.filterItems.isLoading);
 
   useState(() => {

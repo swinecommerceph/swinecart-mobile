@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { useStoreActions } from 'easy-peasy';
 
 import { ModalService, NavigationService } from 'services';
 
@@ -7,15 +6,12 @@ import { Block, Button } from 'atoms';
 
 function ProductActions({ data }) {
 
-  const setCurrentId = useStoreActions(actions => actions.productView.setCurrentId);
-
   const onPressAdd = () => {
     ModalService.showModal('AddToCart', { ...data });
   };
 
   const onPressView = () => {
-    setCurrentId(data.id);
-    NavigationService.navigate('ProductView');
+    NavigationService.navigate('ProductView', { id: data.id });
   };
 
   return (
@@ -23,7 +19,12 @@ function ProductActions({ data }) {
       <Button size='small' status='basic' onPress={onPressView}>
         View All Info
       </Button>
-      <Button size='small' status='primary' onPress={onPressAdd} marginTop={0.5}>
+      <Button
+        marginTop={0.5}
+        onPress={onPressAdd} 
+        size='small'
+        status='primary'
+      >
         Add to SwineCart
       </Button>
     </Block>

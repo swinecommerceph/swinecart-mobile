@@ -1,24 +1,18 @@
 import { action, thunk } from 'easy-peasy';
-import map from 'lodash/map';
 import to from 'await-to-js';
 
 import { ProductsService, ToastService } from 'services';
-import { productMapper } from 'utils/mappers/responseMappers';
 
 export default {
   // State
 
-  currentId: null,
   data: null,
-  isLoading: false,
+  isLoading: true,
+  hasFetchingError: false, 
 
   // Computed Values
 
   // Actions
-
-  setCurrentId: action((state, payload) => {
-    state.currentId = payload;
-  }),
 
   setData: action((state, payload) => {
     state.data = payload;
@@ -28,26 +22,25 @@ export default {
     state.isLoading = payload;
   }),
 
+  setHasFetchingError: action((state, payload) => {
+    state.hasFetchingError = payload;
+  }),
+
   // Side Effects
 
-
-  getData: thunk(async (actions, payload, { getState }) => {
-
-    const { currentId } = getState();
+  getData: thunk(async (actions, payload) => {
 
     actions.setLoading(true);
 
-    const [error, data] = await to(ProductsService.getProductDetails(currentId));
-
+    const [error, data] = await to(ProductsService.getProductDetails(payload));
 
     if (error) {
-
+      // setHasFetchingError(true);
     }
     else {
       const { product } = data.data;
       actions.setData(product);
     }
-
 
     actions.setLoading(false);
 
