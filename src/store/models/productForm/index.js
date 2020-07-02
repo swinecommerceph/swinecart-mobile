@@ -77,10 +77,10 @@ export default {
 
   addProduct: thunk(async (actions, payload, { getStoreActions }) => {
 
-    const { 
-      name, type, minPrice, maxPrice, isUnique, quantity, 
-      isPureBreed, breed, fatherBreed, motherBreed, 
-      birthDate, birthWeight, farmFrom, houseType, 
+    const {
+      name, type, minPrice, maxPrice, isUnique, quantity,
+      isPureBreed, breed, fatherBreed, motherBreed,
+      birthDate, birthWeight, farmFrom, houseType,
       adg,
       fcr,
       bft,
@@ -113,20 +113,19 @@ export default {
 
     actions.setLoading(true);
 
-    const [ error, data ] = await to(ProductsService.addProduct(requestData));
+    const [error, data] = await to(ProductsService.addProduct(requestData));
 
     if (error) {
       actions.setLoading(false);
     }
     else {
       const { product } = data.data;
-      ToastService.show('Product successfully added!', () => {
+      console.dir(product);
+      // ToastService.show('Product successfully added!', () => {
         actions.resetForm();
-        getStoreActions().products.addItem(product);
-        getStoreActions().productMedia.setCurrentProduct(product);
         actions.setLoading(false);
         NavigationService.back();
-      });
+      // });
     }
 
   }),

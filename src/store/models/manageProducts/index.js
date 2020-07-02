@@ -5,36 +5,17 @@ import to from 'await-to-js';
 import { ProductsService, ToastService } from 'services';
 import { productMapper } from 'utils/mappers/responseMappers';
 
-import { initialState } from '../modelUtils';
-
+import { addGenericModel } from '../../utils';
 
 const LIMIT = 10;
 
 export default {
   // State
-  ...initialState,
+  ...(addGenericModel()),
 
   // Computed Values
 
   // Actions
-
-  setItems: action((state, payload) => {
-    const { items, page } = payload;
-    state.items = items;
-    state.page = page;
-  }),
-
-  setLoading: action((state, payload) => {
-    state.isLoading = payload;
-  }),
-
-  setLoadingMore: action((state, payload) => {
-    state.isLoadingMore = payload;
-  }),
-
-  setRefreshing: action((state, payload) => {
-    state.isRefreshing = payload;
-  }),
 
   addItem: action((state, payload) => {
     if (!state.items) {
@@ -70,17 +51,16 @@ export default {
 
   }),
 
-  deleteProduct: thunk(async (actions, payload, { getState }) => {
-    const element = payload;
+  deleteProduct: thunk(async (actions, payload) => {
 
-    const [error, data] = await to(ProductsService.deleteProduct(element.id));
+    const [error, data] = await to(ProductsService.deleteProduct(payload.id));
 
     if (error) {
       ToastService.show('Please try again later!');
     }
     else {
-      ToastService.show(`Product ${element.name} is deleted!`);
-      actions.deleteItem(element);
+      ToastService.show(`Product deleted!`);
+      actions.deleteItem(payload);
     }
 
 
@@ -97,16 +77,14 @@ export default {
     const [error, data] = await to(ProductsService.getProducts(1, LIMIT));
 
     if (error) {
+      actions.setFetchingError(true);
     }
     else {
 
       const { products } = data.data;
       const items = map(products, productMapper);
 
-      actions.setItems({
-        items,
-        page: 2
-      });
+      actions.setItems({ items, page: 2 });
 
     }
 
@@ -122,13 +100,12 @@ export default {
 
     actions.setLoadingMore(true);
 
-    const [error, data] = await to(ProductsService.getProducts(currentPage, LIMIT));
+    const [error, data] = await to(
+      ProductsService.getProducts(currentPage, LIMIT)
+    );
 
     if (error) {
-      const { problem, status } = error;
-      if (status === 500) {
-        ToastService.show('Please try again later!', null);
-      }
+      actions.setFetchingError(true);
     }
     else {
       const { products } = data.data;

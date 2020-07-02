@@ -7,7 +7,7 @@ export { default as notifications } from './notifications';
 export { default as productView } from './productView';
 
 // Breeder Stores
-export { default as editProduct } from './editProduct';
+export { default as productForm } from './productForm';
 export { default as productMedia } from './productMedia';
 export { default as farms } from './farms';
 export { default as stats } from './stats';

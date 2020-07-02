@@ -8,10 +8,10 @@ import BreederTabBar from 'organisms/BreederTabBar';
 
 import {
   Dashboard
-} from 'features'
+} from 'features';
 
 const navigatorConfig = {
-  initialRouteName: 'OrdersStack',
+  initialRouteName: 'ManageProductsStack',
   tabBarComponent: BreederTabBar,
   defaultNavigationOptions: ({ navigation }) => {
   },

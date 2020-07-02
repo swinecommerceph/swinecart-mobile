@@ -1,33 +1,54 @@
 import React, { Fragment, memo, useEffect } from 'react';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import { NavigationService } from 'services';
 
-import { HeaderBar, DrawerButton } from 'molecules';
+import { StateScreen } from 'organisms';
+import { HeaderBar, DrawerButton, HeaderBarButton } from 'molecules';
 
 import { ProductList } from './components';
 
-function Container() {
-
-  const getProducts = useStoreActions(actions => actions.manageProducts.getItems);
-
-  useEffect(() => {
-    getProducts({ isRefresh: false });
-  }, []);
+const addButton = () => {
 
   const onPressAdd = () => {
-    NavigationService.navigate('EditProduct');
+    NavigationService.navigate('ProductForm', { mode: 'add' });
   };
+
+  return (
+    <HeaderBarButton
+      iconName='plus'
+      onPress={onPressAdd}
+    />
+  );
+};
+
+function Container() {
+
+  const {
+    isLoading, hasFetchingError
+  } = useStoreState(state => state.manageProducts);
+
+  const getItems = useStoreActions(actions => actions.manageProducts.getItems);
+
+  useEffect(() => {
+    getItems({ isRefresh: false });
+  }, []);
 
   return (
     <Fragment>
       <HeaderBar
-        title='Products'
+        title='Your Products'
         accessoryLeft={DrawerButton}
+        accessoryRight={addButton}
       />
-      <ProductList />
+      <StateScreen
+        isLoading={isLoading}
+        hasError={hasFetchingError}
+      >
+        <ProductList />
+      </StateScreen>
     </Fragment>
   );
 }
 
-export default memo(Container, () => true);
+export default memo(Container);

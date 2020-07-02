@@ -1,13 +1,22 @@
-import React, { Fragment, memo } from 'react';
-
-import { Input, ContainerView, Select } from 'molecules'
-import { Block, Text, Checkbox } from 'atoms';
+import React, { Fragment, memo, useState } from 'react';
+import { IndexPath } from '@ui-kitten/components';
 
 import { types  } from 'constants/enums';
 
+import { Input, ContainerView, Select } from 'molecules'
+
+
+import { Block, Text, Checkbox } from 'atoms';
+
+
 function ProductInformationPage({ formik }) {
 
+  const [ selectedType, setSelectedType ] = useState(new IndexPath)
   const { values, setFieldValue, errors, touched } = formik;
+
+  const onSelect = selectedIndex => {
+    console.dir(selectedIndex);
+  };
 
   return (
     <Fragment>
@@ -23,7 +32,7 @@ function ProductInformationPage({ formik }) {
           />
         </Block>
         <Block marginBottom={1}>
-          <Select
+          {/* <Select
             name='type'
             label='Type'
             placeholder='Choose Type'
@@ -31,7 +40,7 @@ function ProductInformationPage({ formik }) {
             setFieldValue={setFieldValue}
             values={values}
             errors={errors}
-          />
+          /> */}
         </Block>
         <Block marginBottom={0.5}>
           <Text semibold size={14} color='primary'>

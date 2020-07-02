@@ -5,7 +5,7 @@ import { ShopService, ToastService } from 'services';
 
 import { addGenericModel } from '../../utils';
 
-const LIMIT = 100;
+const LIMIT = 10;
 
 export default {
 
@@ -22,8 +22,6 @@ export default {
   getItems: thunk(async (actions, payload, { getStoreState }) => {
 
     const filters = getStoreState().filterItems.filters;
-
-    console.dir(filters);
 
     const { isRefresh } = payload;
 

@@ -12,9 +12,9 @@ import { ProductFormSchema } from 'validationSchemas';
 function Wizard() {
 
   const farms = useStoreState(state => state.farms.items);
-  const formData = useStoreState(state => state.editProduct.data);
-  const currentStep = useStoreState(state => state.editProduct.currentStep);
-  const addProduct = useStoreActions(actions => actions.editProduct.addProduct);
+  const formData = useStoreState(state => state.productForm.data);
+  const currentStep = useStoreState(state => state.productForm.currentStep);
+  const addProduct = useStoreActions(actions => actions.productForm.addProduct);
 
   const formik = useFormik({
     initialValues: {

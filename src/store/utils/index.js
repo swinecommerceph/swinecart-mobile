@@ -3,10 +3,10 @@ import { action } from 'easy-peasy';
 const initialState = {
   items: null,
   page: 1,
-  hasFetchingError: false,
-  isLoadingMore: false,
   isLoading: true,
   isRefreshing: false,
+  isLoadingMore: false,
+  hasFetchingError: false,
 };
 
 export const addGenericModel = () => ({

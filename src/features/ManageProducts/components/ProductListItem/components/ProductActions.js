@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { useStoreActions } from 'easy-peasy';
 
 import { ModalService, NavigationService } from 'services';
 
@@ -7,17 +6,12 @@ import { Block, Button } from 'atoms';
 
 function ProductActions({ data }) {
 
-  const setCurrentId = useStoreActions(
-    actions => actions.productView.setCurrentId
-  );
-
   const onPressEdit = () => {
     NavigationService.navigate('EditProduct');
   };
 
   const onPressView = () => {
-    setCurrentId(data.id);
-    NavigationService.navigate('ProductView');
+    NavigationService.navigate('ProductView', { id: data.id });
   };
 
   const onPressDelete = () => {
@@ -30,12 +24,17 @@ function ProductActions({ data }) {
         View More Info
       </Button>
       <Block row marginTop={0.5}>
-        <Button size='tiny' status='basic' onPress={onPressDelete} marginRight={0.5}>
-          Delete
-        </Button>
-        {/* <Button size='small' status='basic' onPress={onPressEdit}>
+        {/* <Button 
+          size='small'
+          status='basic'
+          onPress={onPressEdit}
+          marginRight={0.5}
+        >
           Edit
         </Button> */}
+        <Button size='tiny' status='basic' onPress={onPressDelete}>
+          Delete
+        </Button>
       </Block>
     </Block>
   );

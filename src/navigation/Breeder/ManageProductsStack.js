@@ -2,13 +2,12 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import {
   ManageProducts,
-  EditProduct,
-  ProductDetails,
+  ProductForm,
 } from 'features';
 
 const navigator = createStackNavigator({
   ManageProducts: ManageProducts,
-  EditProduct: EditProduct,
+  ProductForm: ProductForm,
 }, {
     initialRouteName: 'ManageProducts',
     headerMode: 'none',
@@ -18,7 +17,6 @@ const navigator = createStackNavigator({
 
 navigator.navigationOptions = ({ navigation }) => {
   return {
-    // tabBarVisible: false,
     tabBarVisible: navigation.state.index > 0 ? false : true,
   };
 };

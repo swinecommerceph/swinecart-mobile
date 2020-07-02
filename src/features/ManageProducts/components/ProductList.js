@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
 import { List } from 'organisms';
-import { LoadingView, BlankScreen } from 'molecules';
 
 import ProductListItem from './ProductListItem';
 
@@ -14,10 +13,9 @@ function ProductList() {
   } = useStoreActions(actions => actions.manageProducts);
 
   const {
-    items: products,
+    items,
     isRefreshing,
     isLoadingMore,
-    isLoading
   } = useStoreState(state => state.manageProducts);
 
   const keyExtractor = item => `${item.id}`;
@@ -25,30 +23,18 @@ function ProductList() {
   const onPressLoadMore = () => getMoreItems();
   const onRefresh = () => getItems({ isRefresh: true });
 
-  if (isLoading) {
-    return (
-      <LoadingView />
-    );
-  }
-  else if (!isLoading && products) {
-    return (
-      <List
-        data={products}
-        Component={ProductListItem}
-        keyExtractor={keyExtractor}
-        emptyListMessage={'No Products!'}
-        isRefreshing={isRefreshing}
-        onPressLoadMore={onPressLoadMore}
-        onRefresh={onRefresh}
-        isLoadingMore={isLoadingMore}
-      />
-    );
-  }
-  else {
-    return (
-      <BlankScreen />
-    );
-  }
+  return (
+    <List
+      data={items}
+      Component={ProductListItem}
+      keyExtractor={keyExtractor}
+      emptyListMessage={'No Products!'}
+      isRefreshing={isRefreshing}
+      onPressLoadMore={onPressLoadMore}
+      onRefresh={onRefresh}
+      isLoadingMore={isLoadingMore}
+    />
+  );
 }
 
 export default memo(ProductList, () => true);

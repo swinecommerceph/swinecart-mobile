@@ -18,11 +18,11 @@ const fields = [
 
 function FormFooter({ onSubmit, validateForm }) {
 
-  const nextStep = useStoreActions(actions => actions.editProduct.nextStep);
-  const prevStep = useStoreActions(actions => actions.editProduct.prevStep);
-  const currentStep = useStoreState(state => state.editProduct.currentStep);
-  const isLastStep = useStoreState(state => state.editProduct.isLastStep);
-  const isFirstStep = useStoreState(state => state.editProduct.isFirstStep);
+  const nextStep = useStoreActions(actions => actions.productForm.nextStep);
+  const prevStep = useStoreActions(actions => actions.productForm.prevStep);
+  const currentStep = useStoreState(state => state.productForm.currentStep);
+  const isLastStep = useStoreState(state => state.productForm.isLastStep);
+  const isFirstStep = useStoreState(state => state.productForm.isFirstStep);
 
   const checkForErrors = errors => {
     return (fields[currentStep - 1].some(field => {

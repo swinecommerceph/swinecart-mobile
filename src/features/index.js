@@ -8,7 +8,7 @@ export { default as HistoryDetails } from './HistoryDetails';
 
 // Breeder Features
 export { default as Orders } from './Orders';
-export { default as EditProduct } from './EditProduct';
+export { default as ProductForm } from './ProductForm';
 export { default as ProductRequests } from './ProductRequests';
 export { default as BreederProfile } from './BreederProfile';
 export { default as ManageProducts } from './ManageProducts';

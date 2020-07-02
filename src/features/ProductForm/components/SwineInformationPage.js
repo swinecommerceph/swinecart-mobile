@@ -82,7 +82,7 @@ function SwineInformationPage({ formik }) {
             onChange={setFieldValue}
           />
         </Block>
-        <Block marginBottom={1}>
+        {/* <Block marginBottom={1}>
           {
             farms && <Select
               name='farmFrom'
@@ -93,8 +93,8 @@ function SwineInformationPage({ formik }) {
               values={values}
             />
           }
-        </Block>
-        <Block marginBottom={1}>
+        </Block> */}
+        {/* <Block marginBottom={1}>
           <Select
             name='houseType'
             label='House Type'
@@ -103,7 +103,7 @@ function SwineInformationPage({ formik }) {
             setFieldValue={setFieldValue}
             values={values}
           />
-        </Block>
+        </Block> */}
         <Block marginBottom={1}>
           <Input
             label='Average Daily Gain (grams)'

@@ -5,7 +5,7 @@ function Checkbox(props) {
 
   const {
     text, onChange, values, name,
-    themedStyle
+    eva
   } = props;
 
   const onPressChange = checked => {
@@ -15,10 +15,9 @@ function Checkbox(props) {
   return (
     <UKCheckbox
       text={text}
-      style={{}}
       checked={values[name]}
       onChange={onPressChange}
-      textStyle={themedStyle.text}
+      textStyle={eva.style.text}
     />
   );
 }

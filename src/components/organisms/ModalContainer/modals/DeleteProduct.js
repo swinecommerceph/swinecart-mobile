@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreActions } from 'easy-peasy';
 
 import { Block, Button, Text } from 'atoms';
 
@@ -31,13 +31,6 @@ function CancelTransaction(props) {
           </Text>
           ?
         </Text>
-      </Block>
-      <Block padding={1}>
-        <Block padding={1} backgroundColor='color-danger-100' borderRadius={5}>
-          <Text normal size={14} textAlign='center' color='danger'>
-            Once you delete a product, it will no longer be available in your inventory.
-        </Text>
-        </Block>
       </Block>
       <Block row center right padding={1} >
         <Block flex={1} marginRight={1}>

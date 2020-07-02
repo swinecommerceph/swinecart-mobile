@@ -1,7 +1,8 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { LoadingView, BlankScreen, LoadingOverlay } from 'molecules';
+import { LoadingOverlay } from 'atoms';
+import { LoadingView, BlankScreen } from 'molecules';
 
 import {
   Wizard, FormHeader
@@ -10,7 +11,7 @@ import {
 function Container() {
 
   const isFetching = useStoreState(state => state.farms.isLoading);
-  const isLoading = useStoreState(state => state.editProduct.isLoading);
+  const isLoading = useStoreState(state => state.productForm.isLoading);
   const farms = useStoreState(state => state.farms.items);
   const getFarms = useStoreActions(actions => actions.farms.getItems);
 
