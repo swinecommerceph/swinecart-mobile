@@ -1,10 +1,9 @@
 import React, { memo } from 'react';
 
-import { Block, Text, Icon } from 'atoms';
+import { Block, Text } from 'atoms';
 
-function MessageBox({ status, message, ...otherProps }) {
+function MessageBox({ status, children, ...otherProps }) {
 
-  const borderColor = `color-${status}-500`;
   const backgroundColor = `color-${status}-100`;
   const color = `color-${status}-400`;
 
@@ -12,12 +11,10 @@ function MessageBox({ status, message, ...otherProps }) {
     <Block flex={false} padding={1}
       borderRadius={5} alignSelf='flex-start' 
       backgroundColor={backgroundColor}
-      borderLeftColor={borderColor}
-      borderLeftWidth={5}
       {...otherProps}
     >
-      <Text semibold size={12} textAlign='left' color={color} numberOfLines={3}>
-        {message}
+      <Text semibold size={12} textAlign='center' color={color} numberOfLines={3}>
+        {children}
       </Text>
     </Block>
   );

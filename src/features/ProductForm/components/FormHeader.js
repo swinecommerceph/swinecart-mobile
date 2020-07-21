@@ -9,7 +9,7 @@ function FormHeader() {
   return (
     <Block padding backgroundColor='gray2'>
       <Block>
-        <Text bold size={28} color='primary'>
+        <Text bold size={22} color='primary'>
           {currentTitle}
         </Text>
       </Block>

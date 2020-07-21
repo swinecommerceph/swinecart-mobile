@@ -37,7 +37,7 @@ function Container() {
   return (
     <Fragment>
       <HeaderBar
-        title='Your Products'
+        title='My Products'
         accessoryLeft={DrawerButton}
         accessoryRight={addButton}
       />

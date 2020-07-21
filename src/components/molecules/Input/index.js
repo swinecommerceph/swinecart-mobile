@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, memo, useState } from 'react';
+import React, { useMemo, useCallback, memo, useState, Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { withStyles, Input as UKInput } from '@ui-kitten/components';
 import isEqual from 'react-fast-compare';
@@ -12,7 +12,8 @@ function Input(props) {
   const [ isVisible, setIsVisible ] = useState(true);
 
   const {
-    name, values, touched, errors, label, placeholder,
+    name, values, touched, errors, label, placeholder, 
+    required = false, optional = false, 
     onChange, isPassword,
     eva: { style },
     ...otherProps
@@ -44,7 +45,13 @@ function Input(props) {
     <UKInput
       size='medium'
       placeholder={placeholder}
-      label={<Text semibold size={12}>{label}</Text>}
+      label={
+        <Fragment>
+          <Text semibold size={12}>{label}</Text>
+          {required && <Text italic size={12}>{' - Required'}</Text>}
+          {optional && <Text italic size={12}>{' - Optional'}</Text>}
+        </Fragment>
+      }
       caption={
         <Text semibold size={12} color={hasError ? 'danger' : 'primary'}>
           {hasError ? errors[name] : null}

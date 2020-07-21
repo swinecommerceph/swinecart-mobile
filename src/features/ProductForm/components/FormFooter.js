@@ -15,7 +15,6 @@ const fields = [
   ['breed', 'fatherBreed', 'motherBreed', 'birthWeight', 'adg', 'fcr', 'bft', 'lsba', 'leftTeats', 'rightTeats', 'otherDetails'],
 ];
 
-
 function FormFooter({ onSubmit, validateForm }) {
 
   const setStep = useStoreActions(actions => actions.productForm.setStep);
@@ -66,14 +65,14 @@ function FormFooter({ onSubmit, validateForm }) {
   return (
     <Fragment>
       <HideWithKeyboard>
-        <Block row center right padding={0.5}>
+        <Block row center right padding={0.5} backgroundColor='white1'>
           <Block flex={1} marginRight={1}>
-            <Button size='large'  status='basic' onPress={onPressPrev}>
+            <Button size='tiny'  status='basic' onPress={onPressPrev}>
               {(isFirstStep || isLastStep) ? 'Close' : 'Back'}
             </Button>
           </Block>
           <Block flex={1}>
-            <Button size='large' status='primary' onPress={onPressNext}>
+            <Button size='tiny' status='primary' onPress={onPressNext}>
               {isLastStep ? 'Finish' : 'Next'}
             </Button>
           </Block>
