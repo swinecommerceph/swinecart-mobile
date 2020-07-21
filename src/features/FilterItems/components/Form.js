@@ -1,9 +1,10 @@
 import React, { memo } from 'react';
+import { Divider } from '@ui-kitten/components';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { types } from 'constants/enums';
 import { NavigationService } from 'services';
 
-import { Select } from 'molecules';
+import { Select, Input } from 'molecules';
 import { Block, Button } from 'atoms';
 
 function Form() {
@@ -50,6 +51,18 @@ function Form() {
   return (
     <Block flex={1} padding={1}>
       <Block>
+        <Input
+          name='keyword'
+          label='Keyword'
+          placeholder='Name, breeder, type'
+          errors={{}}
+          touched={{}}
+          values={{}}
+          onChange={null}
+        />
+      </Block>
+      <Divider />
+      <Block marginTop={1}>
         <Select
           onSelect={onSelectType}
           selectedIndex={selectedType}
