@@ -4,6 +4,7 @@ import Timeline from 'react-native-timeline-flatlist';
 import { formatStatusTime } from 'utils/formatters';
 
 import { HeaderBar, BackButton } from 'molecules';
+import { Block } from 'atoms';
 
 function HistoryDetails(props) {
 
@@ -36,4 +37,4 @@ function HistoryDetails(props) {
   );
 }
 
-export default memo(HistoryDetails);
+export default memo(HistoryDetails, () => true);

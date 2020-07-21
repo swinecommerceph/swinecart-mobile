@@ -26,7 +26,7 @@ function Footer() {
         padding={1}
         backgroundColor='white1'
       >
-        <Text>Logout</Text>
+        <Text semibold size={14}>Logout</Text>
       </Block>
     </Fragment>
   )
