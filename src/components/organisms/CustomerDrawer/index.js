@@ -1,27 +1,52 @@
-import React, { memo, useMemo } from 'react';
-import { Drawer, DrawerItem as UKDrawerItem, IndexPath } from '@ui-kitten/components';
+import React, { memo, useMemo, Fragment } from 'react';
+import { useStoreState } from 'easy-peasy';
+import { 
+  Divider, Drawer, DrawerItem as UKDrawerItem, IndexPath 
+} from '@ui-kitten/components';
 
 import { NavigationService } from 'services';
-import { Text, Icon } from 'atoms';
+
+import { Text, Block } from 'atoms';
 
 function DrawerItem({ title, iconName, ...otherProps }) {
-
-  const renderIcon = () => (
-    <Icon
-      name={iconName}
-      color='black1'
-      size={22}
-    />
-  );
 
   return (
     <UKDrawerItem
       {...otherProps}
-      title={<Text semibold>{title}</Text>}
-    // accessoryLeft={renderIcon}
+      title={<Text semibold size={14}>{title}</Text>}
     />
   );
 }
+
+function Header() {
+
+  const user = useStoreState(state => state.user.data);
+
+  return (
+    <Block row flex={0.5} backgroundColor='primary'>
+      <Block padding={1} alignSelf='flex-end'>
+        <Text semibold color='white1' size={16} numberOfLines={1}>
+          {user.name}
+        </Text>
+      </Block>
+    </Block>
+  )
+};
+
+function Footer() {
+  return (
+    <Fragment>
+      <Divider />
+      <Block
+        padding={1}
+        backgroundColor='white1'
+      >
+        <Text>Logout</Text>
+      </Block>
+    </Fragment>
+  )
+};
+
 
 function CustomerDrawer({ navigation }) {
 
@@ -38,6 +63,8 @@ function CustomerDrawer({ navigation }) {
 
   return (
     <Drawer
+      header={Header}
+      footer={Footer}
       selectedIndex={selectedIndex}
       onSelect={onSelect}
     >
