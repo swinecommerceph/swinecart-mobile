@@ -18,21 +18,6 @@ function DrawerItem({ title, iconName, ...otherProps }) {
   );
 }
 
-function Header() {
-
-  const user = useStoreState(state => state.user.data);
-
-  return (
-    <Block row flex={0.5} backgroundColor='primary'>
-      <Block padding={1} alignSelf='flex-end'>
-        <Text semibold color='white1' size={16} numberOfLines={1}>
-          {user.name}
-        </Text>
-      </Block>
-    </Block>
-  )
-};
-
 function Footer() {
   return (
     <Fragment>
@@ -50,6 +35,8 @@ function Footer() {
 
 function CustomerDrawer({ navigation }) {
 
+  const { data, accountType } = useStoreState(state => state.user);
+
   const onSelect = ({ row: index }) => {
     const { [index]: selectedRoute } = navigation.state.routes;
     navigation.closeDrawer();
@@ -60,6 +47,21 @@ function CustomerDrawer({ navigation }) {
     () => new IndexPath(navigation.state.index),
     [navigation.state.index]
   );
+
+  function Header() {
+    return (
+      <Block row flex={0.5} backgroundColor='primary'>
+        <Block padding={1} alignSelf='flex-end'>
+          <Text semibold color='white1' size={16} numberOfLines={1}>
+            {data.name}
+          </Text>
+          <Text semibold color='white1' size={10} numberOfLines={1}>
+            {accountType}
+          </Text>
+        </Block>
+      </Block>
+    )
+  };
 
   return (
     <Drawer
@@ -74,5 +76,4 @@ function CustomerDrawer({ navigation }) {
     </Drawer>
   );
 };
-
 export default memo(CustomerDrawer);
