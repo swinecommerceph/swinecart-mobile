@@ -13,6 +13,7 @@ function TextArea(props) {
 
   return (
     <Input
+      textAlignVertical='top'
       multiline
       label={<Text semibold size={12}>{label}</Text>}
       textStyle={eva.style.textStyle}
@@ -28,6 +29,7 @@ export default withStyles(memo(TextArea), () => ({
     fontWeight: 'normal',
     fontSize: 14,
     lineHeight: computeLineHeight(14),
-    minHeight: 64
+    minHeight: 64,
+    marginHorizontal: 0,
   },
 }));
