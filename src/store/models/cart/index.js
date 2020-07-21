@@ -13,6 +13,7 @@ export default {
   ...initialState,
 
   isAddingItem: false,
+  isRemovingItem: false,
   // Computed Values
 
   // Actions
@@ -37,6 +38,10 @@ export default {
 
   setIsAddingItem: action((state, payload) => {
     state.isAddingItem = payload;
+  }),
+
+  setIsRemovingItem: action((state, payload) => {
+    state.isRemovingItem = payload;
   }),
 
   addItem: action((state, payload) => {
@@ -80,12 +85,25 @@ export default {
   }),
   removeFromCart: thunk(async (actions, payload) => {
     
+    actions.setIsRemovingItem(true);
+
     const [error, data] = await to(CartService.removeItem(payload));
     
     if (error) {
+      const { data, problem } = error;
+      if (problem === 'CLIENT_ERROR') {
+        ToastService.show(data.error, () => {
+        });
+        actions.setIsRemovingItem(false);
+      }
     }
     else {
-      actions.removeItem(payload);
+
+      ToastService.show('Product removed from your SwineCart!', () => {
+        actions.removeItem(payload);
+        actions.setIsRemovingItem(false);
+      });
+
     }
 
   }),

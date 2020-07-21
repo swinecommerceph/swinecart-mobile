@@ -21,7 +21,7 @@ function ProductActions({ data }) {
       </Button>
       <Button
         marginTop={0.5}
-        onPress={onPressAdd} 
+        onPress={onPressAdd}
         size='small'
         status='primary'
       >

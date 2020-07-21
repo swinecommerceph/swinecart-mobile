@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreActions } from 'easy-peasy';
 
 import { Block, Button, Text } from 'atoms';
 
@@ -11,7 +11,7 @@ function AddToCart(props) {
   const { data, hideModal } = props;
 
   const {
-    id, name
+    id
   } = data;
 
   const onPressPrimaryAction = () => {
@@ -26,22 +26,24 @@ function AddToCart(props) {
   return (
     <Block backgroundColor='white1' borderRadius={5}>
       <Block padding={1}>
-        <Text normal size={18} textAlign='center'>
-          Are you sure you want to add product:
-          <Text bold size={18} textAlign='center'>
-            {` ${name} `}
+        <Text normal size={16} textAlign='center'>
+          Are you sure you want to
+          <Text bold size={16} textAlign='center'>
+            {' add'}
           </Text>
-          to your SwineCart?
+        </Text>
+        <Text normal size={16} textAlign='center'>
+          this Product to your SwineCart?
         </Text>
       </Block>
       <Block row center right padding={1} >
         <Block flex={1} marginRight={1}>
-          <Button size='tiny'  status='basic' onPress={onPressClose}>
+          <Button size='tiny' status='basic' onPress={onPressClose}>
             Close
           </Button>
         </Block>
         <Block flex={1}>
-          <Button size='tiny' status='info' onPress={onPressPrimaryAction}>
+          <Button size='tiny' status='primary' onPress={onPressPrimaryAction}>
             Yes, add it
           </Button>
         </Block>

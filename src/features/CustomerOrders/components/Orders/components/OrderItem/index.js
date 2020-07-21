@@ -1,7 +1,5 @@
 import React, { memo } from 'react';
 
-import { NavigationService } from 'services';
-
 import { Card, ProductAvatar } from 'molecules';
 
 import { Block } from 'atoms';
@@ -12,7 +10,7 @@ import {
   ProductActions,
 } from './components';
 
-function OrderItem({ data, listIndex }) {
+function OrderItem({ data }) {
 
   const { status, statusTime, product, reservationDetails } = data;
 

@@ -6,8 +6,7 @@ import { ModalService, NavigationService } from 'services';
 import { Block, Button } from 'atoms';
 
 function ProductActions({ data }) {
-
-  const setCurrentId = useStoreActions(actions => actions.productView.setCurrentId);
+  
   const { product } = data;
   const { isDeleted } = product;
 
@@ -20,8 +19,7 @@ function ProductActions({ data }) {
   };
 
   const onPressViewInfo = () => {
-    setCurrentId(product.id);
-    NavigationService.navigate('ProductView');
+    NavigationService.navigate('ProductView', { id: product.id });
   };
 
   return (

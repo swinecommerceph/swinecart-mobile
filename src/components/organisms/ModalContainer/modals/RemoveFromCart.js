@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreActions } from 'easy-peasy';
 
 import { Block, Button, Text } from 'atoms';
 
@@ -10,7 +10,6 @@ function RemoveFromCart(props) {
   // Props
   const { data, hideModal } = props;
   const { id: cartItemId, product } = data;
-  const { name } = product;
 
   const onPressPrimaryAction = () => {
     removeFromCart(cartItemId);
@@ -24,18 +23,24 @@ function RemoveFromCart(props) {
   return (
     <Block backgroundColor='white1' borderRadius={5}>
       <Block padding={1}>
-        <Text normal size={18} textAlign='center'>
-          Are you sure you want to remove this Product from your SwineCart?
+        <Text normal size={16} textAlign='center'>
+          Are you sure you want to
+          <Text bold size={16} textAlign='center'>
+            {' remove'}
+          </Text>
+        </Text>
+        <Text normal size={16} textAlign='center'>
+          this Product from your SwineCart?
         </Text>
       </Block>
       <Block row center right padding={1} >
         <Block flex={1} marginRight={1}>
-          <Button size='tiny'  status='basic' onPress={onPressPrimaryAction}>
+          <Button size='tiny' status='basic' onPress={onPressPrimaryAction}>
             Yes, remove
           </Button>
         </Block>
         <Block flex={1}>
-          <Button size='tiny' status='info' onPress={onPressClose}>
+          <Button size='tiny' status='primary' onPress={onPressClose}>
             No, keep it
           </Button>
         </Block>
