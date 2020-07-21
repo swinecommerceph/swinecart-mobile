@@ -1,8 +1,9 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
-
-import CustomerOrders from 'features/CustomerOrders';
-
+import { 
+  CustomerOrders,
+  OrderDetails
+ } from 'features';
 
 const navigatorConfig = {
   initialRouteName: 'CustomerOrders',
@@ -13,6 +14,7 @@ const navigatorConfig = {
 
 const routes = {
   CustomerOrders: CustomerOrders,
+  OrderDetails: OrderDetails,
 };
 
 const navigator = createStackNavigator(routes, navigatorConfig);

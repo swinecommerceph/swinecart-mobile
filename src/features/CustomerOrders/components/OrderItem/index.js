@@ -12,7 +12,7 @@ import {
 
 function OrderItem({ data }) {
 
-  const { status, statusTime, product, reservationDetails } = data;
+  const { status, statusTime, product } = data;
 
   const {
     imageUrl, name, type, breed, age, breederName, farmLocation
@@ -36,7 +36,7 @@ function OrderItem({ data }) {
           farmLocation={farmLocation}
         />
         <OrderStatus status={status} statusTime={statusTime} />
-        {status === 'sold' && <ProductActions data={data} /> }
+        <ProductActions data={data} />
       </Block>
     </Card>
   );

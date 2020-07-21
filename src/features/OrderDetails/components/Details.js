@@ -1,40 +1,17 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { HeaderBar, BackButton, TextArea, ContainerView, ProductInfo, ProductAvatar } from 'molecules';
-import { Text, Block, Image } from 'atoms';
 
-function DetailRow({ label, value }) {
-  return (
-    <Block row space='between'>
-      <Text 
-        bold size={12} 
-        color='gray8'
-      >
-        {label}
-      </Text>
-      <Text 
-        bold size={12}
-        color='black2'
-        textAlign='center' numberOfLines={2}
-      >
-        {value}
-      </Text>
-    </Block>
-  );
-}
+const statusTexts = {
+  'requested': 'Requested',
+  'reserved': 'Reserved',
+  'on_delivery': 'On Delivery',
+  'sold': 'Sold',
+};
 
-function DetailBlock({ children }) {
-  return (
-    <Block
-      backgroundColor='white1'
-      padding={1}
-      marginBottom={1}
-    >
-      {children}
-    </Block>
-  );
-}
+function Details({ order }) {
 
-function Container() {
+  const { id, status, statusTime } = order;
+
   return (
     <Fragment>
       <HeaderBar
@@ -42,6 +19,20 @@ function Container() {
         accessoryLeft={BackButton}
       />
       <ContainerView flex={1} backgroundColor='gray9'>
+        <DetailBlock>
+          <DetailRow
+            label='Order No.'
+            value={id}
+          />
+          <DetailRow
+            label='Status'
+            value={statusTexts[status]}
+          />
+          <DetailRow
+            label='Last Updated'
+            value={statusTime}
+          />
+        </DetailBlock>
         <DetailBlock>
           <DetailRow
             label='Breeder Name'
@@ -57,7 +48,7 @@ function Container() {
           />
         </DetailBlock>
         <DetailBlock>
-          <DetailRow 
+          <DetailRow
             label='Quantity'
             value='50000'
           />
@@ -69,7 +60,7 @@ function Container() {
             label='Date Needed'
             value='July 2, 2010 (Saturday)'
           />
-          <TextArea 
+          <TextArea
             label='Special Request'
             disabled
             value='lorenlorenloren'
@@ -80,4 +71,4 @@ function Container() {
   );
 }
 
-export default memo(Container, () => true);
+export default memo(Details);

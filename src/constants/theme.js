@@ -95,12 +95,14 @@ const colors = {
   'gray3': '#6F6F6F',
   'gray4': '#CFCFCF',
   'gray5': '#8F9BB3',
-  // 'gray6': '#EDF1F7',
   'gray6': '#F5F5F5',
   'gray7': '#E0E0E0',
   'gray8': '#C8CCCF',
+  'gray9': '#F3F3F3',
 
   black1: '#000000',
+  black2: '#5D5D5D'
+  
 };
 
 const textStyles = {

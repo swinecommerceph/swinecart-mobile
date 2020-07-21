@@ -5,6 +5,7 @@ export { default as Chat } from './Chat';
 
 export { default as ProductView } from './ProductView';
 export { default as HistoryDetails } from './HistoryDetails';
+export { default as OrderDetails } from './OrderDetails';
 
 // Breeder Features
 export { default as Orders } from './Orders';

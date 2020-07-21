@@ -6,7 +6,7 @@ import {
   Farms,
   CustomerProfile,
   ProductView,
-  FilterItems
+  FilterItems,
 } from 'features';
 
 import CustomerTab from './CustomerTab';

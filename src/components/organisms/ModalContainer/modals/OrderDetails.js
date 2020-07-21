@@ -1,12 +1,16 @@
 import React, { memo } from 'react';
-
+import { Divider } from '@ui-kitten/components';
+import { useStoreState } from 'easy-peasy';
 import { NavigationService } from 'services';
 
-import { Block, Button, Text } from 'atoms';
+import { TextArea } from 'molecules';
+import { Text, Block, Button } from 'atoms';
 
 import { formatDateNeeded, formatDeliveryDate } from 'utils/formatters';
 
 function OrderDetails (props) {
+
+  const accountType = useStoreState(state => state.user.accountType);
 
   // Props
   const { data, hideModal } = props;
@@ -25,40 +29,50 @@ function OrderDetails (props) {
 
   return (
     <Block backgroundColor='white1' borderRadius={5}>
-      <Block center left padding={1} >
-        <Text bold size={20}>Order Details</Text>
+      <Block center left padding={1}>
+        <Text bold size={18}>Order Details</Text>
       </Block>
-      <Block padding>
+      <Divider />
+      <Block padding={1}>
+        {
+          accountType === 'Breeder' &&
+          (
+            <Block row>
+              <Text semibold size={12} color='gray8'>Customer Name: </Text>
+              <Text semibold size={12}>{customerName}</Text>
+            </Block>
+          )
+        }
         <Block row>
-          <Text semibold size={14} color='gray3' >Customer Name: </Text>
-          <Text semibold size={14}>{customerName}</Text>
-        </Block>
-        <Block row>
-          <Text semibold size={14} color='gray3' >Quantity: </Text>
-          <Text semibold size={14}>{quantity}</Text>
+          <Text semibold size={12} color='gray8'>Quantity: </Text>
+          <Text bold size={12}>{quantity}</Text>
         </Block>
         {
           type === 'semen' &&
           <Block row>
-            <Text semibold size={14} color='gray3' >Date Needed: </Text>
-            <Text semibold size={14}>{formatDateNeeded(dateNeeded)}</Text>
+            <Text semibold size={12} color='gray8'>Date Needed: </Text>
+            <Text semibold size={12}>{formatDateNeeded(dateNeeded)}</Text>
           </Block>
         }
         {
           deliveryDate &&
           <Block row>
-            <Text semibold size={14} color='gray3' >Delivery Date: </Text>
-            <Text semibold size={14}>{formatDeliveryDate(deliveryDate)}</Text>
+            <Text semibold size={12} color='gray8'>Delivery Date: </Text>
+            <Text semibold size={12}>{formatDeliveryDate(deliveryDate)}</Text>
           </Block> 
         }
-        <Block>
-          <Text semibold size={14} color='gray3' >Special Request: </Text>
-          <Text semibold size={14} textAlign='auto'>{specialRequest}</Text>
+        <Block marginTop={0.5}>
+          <TextArea
+            label='Special Request'
+            value={specialRequest}
+            disabled={true}
+          />
         </Block>
       </Block>
-      <Block row center right padding={1} >
+      <Divider />
+      <Block row center right padding={0.5}>
         <Block flex={1} marginRight={1}>
-          <Button size='tiny'  status='basic' onPress={onPressClose}>
+          <Button size='tiny' status='basic' onPress={onPressClose}>
             Close
           </Button>
         </Block>
