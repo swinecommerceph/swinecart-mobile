@@ -13,18 +13,18 @@ function Details() {
 
   const data = useStoreState(state => state.productView.data);
 
-  const { product_info, swine_info, other_details, farm, breeder } = data;
-  const { primary_image } = product_info;
+  const { productInfo, swineInfo, otherDetails, farm, breeder } = data;
+  const { primaryImageUrl } = productInfo;
 
   return (
     <ContainerView paddingBottom={0}>
       <ProductPrimaryImage
-        photoURL={primary_image}
-        type={product_info.type}
+        photoURL={primaryImageUrl}
+        type={productInfo.type}
       />
-      <ProductInfo data={product_info} breeder={breeder} farm={farm} />
-      <SwineInfo data={swine_info} />
-      <OtherDetails data={other_details} />
+      <ProductInfo data={productInfo} breeder={breeder} farm={farm} />
+      <SwineInfo data={swineInfo} />
+      <OtherDetails data={otherDetails} />
     </ContainerView>
   );
 }

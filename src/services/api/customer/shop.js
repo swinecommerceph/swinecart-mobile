@@ -6,18 +6,8 @@ const service = {
   getItems(page, limit, filters) {
     return API.get(`${URL_PREFIX}/products`, { page, limit, ...filters });
   },
-  getBreeds() {
-    return API.get(`${URL_PREFIX}/breeds`);
+  getFilters() {
+    return API.get(`${URL_PREFIX}/filters`);
   },
-  getBreeders() {
-    return API.get(`${URL_PREFIX}/breeders`);
-  },
-  getProductDetails(id) {
-    return API.get(`/breeder/products/${id}/details`);
-  },
-  getProductMedia(id) {
-    return API.get(`/breeder/products/${id}/media`);
-  }
 }
-
 export default service;

@@ -54,17 +54,15 @@ export default {
 
     actions.setLoading(true);
 
-    const [
-      [, { data: { breeds } }], [, { data: { breeders } }]
-    ] = await Promise.all([
-      to(ShopService.getBreeds()),
-      to(ShopService.getBreeders()),
-    ]);
+    const [ error, data ] = await to (ShopService.getFilters());
+
+    const { breeders, breeds } = data.data; 
 
     actions.setFilterOptions({ 
       breederOptions: breeders,
       breedOptions: breeds
     });
+
     actions.setLoading(false);
   
   }),

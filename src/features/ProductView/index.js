@@ -12,26 +12,15 @@ import {
 function Container({ navigation }) {
 
   const isLoading = useStoreState(state => state.productView.isLoading);
+
   const {
     getData, setLoading
   } = useStoreActions(actions => actions.productView);
 
-  
-
-  // useFocusEffect(useCallback(() => {
-
-  //   const productId = navigation.getParam('id');
-  //   console.dir(productId);
-  //   // getData(productId);
-
-  //   return () => {
-  //     setLoading(true);
-  //   };
-
-  // }, [ navigation ]));
+  const productId = navigation.getParam('id');
 
   useEffect(() => {
-    const productId = navigation.getParam('id');
+
     getData(productId);
 
     return () => {

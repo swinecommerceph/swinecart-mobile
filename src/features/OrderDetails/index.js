@@ -1,4 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, Fragment } from 'react';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+
+import { StateScreen } from 'organisms';
+import { HeaderBar, BackButton } from 'molecules';
 
 import {
   Details
@@ -6,12 +10,37 @@ import {
 
 function Container({ navigation }) {
 
-  const order = navigation.getParam('order');
+  const isLoading = useStoreState(state => state.orderDetails.isLoading);
+
+  const { id, status, statusTime } = navigation.getParam('order');
+
+  const {
+    getOrder, setLoading
+  } = useStoreActions(actions => actions.orderDetails);
+
+  useEffect(() => {
+
+    getOrder(id);
+
+    return () => {
+      setLoading(true);
+    };
+
+  }, [navigation]);
 
   return (
-    <Details
-      order={order}
-    />
+    <Fragment>
+      <HeaderBar
+        title='Order Details'
+        accessoryLeft={BackButton}
+      />
+      <StateScreen isLoading={isLoading}>
+        <Details
+          status={status}
+          statusTime={statusTime}
+        />
+      </StateScreen>
+    </Fragment>
   );
 }
 

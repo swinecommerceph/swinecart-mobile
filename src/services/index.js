@@ -20,4 +20,4 @@ export { default as FarmService } from './api/breeder/farms';
 
 export { default as ShopService } from './api/customer/shop';
 export { default as CartService } from './api/customer/cart';
-export { default as TransactionService } from './api/customer/transactions';
+export { default as TransactionService } from './api/customer/order';

@@ -135,7 +135,7 @@ export default {
       ? actions.setRefreshingByStatus({ isRefreshing: true, status })
       : actions.setLoadingByStatus({ isLoading: true, status });
 
-    const [error, data] = await to(TransactionService.getItems(status, 1, LIMIT));
+    const [error, data] = await to(TransactionService.getOrders(status, 1, LIMIT));
 
     if (error) {
       ToastService.show('Please try again later!', null);
@@ -157,7 +157,6 @@ export default {
 
   }),
 
-
   getMoreItems: thunk(async (actions, payload, { getState }) => {
 
     const { status } = payload;
@@ -165,7 +164,7 @@ export default {
 
     actions.setLoadingMoreByStatus({ isLoadingMore: true, status });
 
-    const [error, data] = await to(TransactionService.getItems(status, page, LIMIT));
+    const [error, data] = await to(TransactionService.getOrders(status, page, LIMIT));
 
     if (error) {
       ToastService.show('Please try again later!', null);

@@ -1,5 +1,7 @@
-import React, { Fragment, memo, useEffect } from 'react';
-import { HeaderBar, BackButton, TextArea, ContainerView, ProductInfo, ProductAvatar } from 'molecules';
+import React, { Fragment, memo } from 'react';
+import { useStoreState } from 'easy-peasy';
+import { TextArea, ContainerView } from 'molecules';
+import { formatStatusTime, formatDateNeeded } from 'utils/formatters';
 
 const statusTexts = {
   'requested': 'Requested',
@@ -8,17 +10,20 @@ const statusTexts = {
   'sold': 'Sold',
 };
 
-function Details({ order }) {
+import DetailBlock from './DetailBlock';
+import DetailRow from './DetailRow';
 
-  const { id, status, statusTime } = order;
+function Details({ status, statusTime }) {
+
+  const order = useStoreState(state => state.orderDetails.data);
+
+  const { id, breederInfo, details } = order;
+
+  console.dir(order);
 
   return (
     <Fragment>
-      <HeaderBar
-        title='Order Details'
-        accessoryLeft={BackButton}
-      />
-      <ContainerView flex={1} backgroundColor='gray9'>
+      <ContainerView flex={1} backgroundColor='gray10'>
         <DetailBlock>
           <DetailRow
             label='Order No.'
@@ -30,40 +35,50 @@ function Details({ order }) {
           />
           <DetailRow
             label='Last Updated'
-            value={statusTime}
+            value={formatStatusTime(statusTime)}
           />
         </DetailBlock>
         <DetailBlock>
           <DetailRow
             label='Breeder Name'
-            value='PICC'
+            value={breederInfo.name}
           />
           <DetailRow
             label='Province'
-            value='Ilocos Norte'
+            value={breederInfo.province}
           />
           <DetailRow
-            label='Province'
-            value='Ilocos Norte'
+            label='Landline Number'
+            value={breederInfo.landlineNumber}
+          />
+          <DetailRow
+            label='Mobile Number'
+            value={breederInfo.mobileNumber}
           />
         </DetailBlock>
         <DetailBlock>
           <DetailRow
             label='Quantity'
-            value='50000'
+            value={details.quantity}
           />
-          <DetailRow
-            label='Estimated Date of Delivery'
-            value='July 2, 2010 (Saturday)'
-          />
-          <DetailRow
-            label='Date Needed'
-            value='July 2, 2010 (Saturday)'
-          />
+          {
+            details.deliveryDate && 
+            <DetailRow
+              label='Estimated Date of Delivery'
+              value={formatDateNeeded(details.deliveryDate)}
+            />
+          }
+          {
+            details.dateNeeded &&
+            <DetailRow
+              label='Date Needed'
+              value={formatDateNeeded(details.dateNeeded)}
+            />
+          }
           <TextArea
             label='Special Request'
             disabled
-            value='lorenlorenloren'
+            value={details.specialRequest}
           />
         </DetailBlock>
       </ContainerView>

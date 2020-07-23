@@ -1,12 +1,12 @@
 import API from '../api';
 
-const URL_PREFIX = 'customer/transactions';
+const URL_PREFIX = 'customer/orders';
 
 const service = {
   requestItem(id, requestData) {
     return API.post(`${URL_PREFIX}/${id}`, requestData);
   },
-  getItems(status, page = 1, limit = 10) {
+  getOrders(status, page = 1, limit = 10) {
     const statusText = {
       'requested': 'requested',
       'reserved': 'reserved',
@@ -14,6 +14,9 @@ const service = {
       'sold': 'sold',
     };
     return API.get(`${URL_PREFIX}`, { status: statusText[status], page, limit });
+  },
+  getOrder(id) {
+    return API.get(`${URL_PREFIX}/${id}`);
   },
   getHistory(page = 1, limit = 10) {
     return API.get(`${URL_PREFIX}/history`, { page, limit });

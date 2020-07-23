@@ -28,7 +28,7 @@ function ProductActions({ data }) {
           )
         :
           (
-            <Button size='small' status='primary' onPress={onPressView}>
+            <Button size='small' status='basic' onPress={onPressView}>
               View Order Details
             </Button>
           )
