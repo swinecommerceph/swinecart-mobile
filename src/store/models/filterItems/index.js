@@ -11,6 +11,7 @@ export default {
   breedOptions: null,
   breederOptions: null,
 
+  keyword: '',
   selectedType: [],
   selectedBreeds: [],
   selectedBreeders: [],
@@ -18,6 +19,7 @@ export default {
   // Computed Values
 
   filters: computed(state => ({
+    q: state.keyword,
     type: state.selectedType.map(({ row }) => types[row].key).join(','),
     breed: state.selectedBreeds.map(({ row }) => state.breedOptions[row].id).join(','),
     breeder: state.selectedBreeders.map(({ row }) => state.breederOptions[row].id).join(','),
@@ -35,6 +37,10 @@ export default {
   setFilterOptions: action((state, payload) => {
     state.breedOptions = payload.breedOptions;
     state.breederOptions = payload.breederOptions;
+  }),
+
+  setKeyword: action((state, payload) => {
+    state.keyword = payload;
   }),
 
   setSelectedType: action((state, payload) => {

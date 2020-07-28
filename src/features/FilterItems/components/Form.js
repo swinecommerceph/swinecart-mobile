@@ -1,8 +1,13 @@
 import React, { memo } from 'react';
 import { Divider } from '@ui-kitten/components';
 import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useFormik } from 'formik';
+
 import { types } from 'constants/enums';
 import { NavigationService } from 'services';
+
+import { SearchShopSchema } from 'validationSchemas';
+
 
 import { Select, Input } from 'molecules';
 import { Block, Button } from 'atoms';
@@ -20,20 +25,29 @@ function Form() {
   const {
     setSelectedType,
     setSelectedBreeds,
-    setSelectedBreeders
+    setSelectedBreeders,
+    setKeyword
   } = useStoreActions(actions => actions.filterItems);
 
   const getItems = useStoreActions(actions => actions.shop.getItems);
 
-  const onPressSubmit = () => {
-    getItems({ isRefresh: false });
-    NavigationService.back();
-  };
+  const { values, handleSubmit, setFieldValue, errors, touched } = useFormik({
+    initialValues: {},
+    validationSchema: SearchShopSchema,
+    onSubmit: ({ keyword }) => {
+      setKeyword(keyword);
+      getItems({ isRefresh: false });
+      NavigationService.back();
+    },
+  });
 
   const onPressClear = () => {
+    setKeyword('');
+    setFieldValue('keyword', '');
     setSelectedType([]);
     setSelectedBreeds([]);
     setSelectedBreeders([]);
+    getItems({ isRefresh: false });
   };
 
   const onSelectType = type => {
@@ -55,10 +69,10 @@ function Form() {
           name='keyword'
           label='Keyword'
           placeholder='Name, breeder, type'
-          errors={{}}
-          touched={{}}
-          values={{}}
-          onChange={null}
+          errors={errors}
+          touched={touched}
+          values={values}
+          onChange={setFieldValue}
         />
       </Block>
       <Divider />
@@ -97,7 +111,7 @@ function Form() {
         />
       </Block>
       <Block marginTop={1}>
-        <Button size='tiny' onPress={onPressSubmit}>
+        <Button size='tiny' onPress={handleSubmit}>
           Submit
         </Button>
         <Button size='tiny' status='basic' onPress={onPressClear} marginTop={1}>

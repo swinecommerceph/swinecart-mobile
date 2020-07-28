@@ -36,8 +36,8 @@ function HistoryItem({ data, listIndex }) {
           farmLocation={farmLocation}
         />
         <Block marginTop={1} alignSelf='flex-start'>
-          <Button size='small' onPress={onPressView}>
-            View Order History
+          <Button size='small' status='basic' onPress={onPressView}>
+            View Order Details
           </Button>
         </Block>
       </Block>

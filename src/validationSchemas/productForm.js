@@ -4,7 +4,6 @@ const schema = Yup.object().shape({
   name: Yup
     .string()
     .trim()
-    .nullable()
     .required('Please enter a product name'),
   minPrice: Yup
     .number()
