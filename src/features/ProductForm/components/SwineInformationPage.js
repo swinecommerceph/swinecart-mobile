@@ -1,27 +1,23 @@
 import React, { Fragment, memo, useEffect, useState } from 'react';
-import { useStoreState, useStoreActions } from 'easy-peasy';
+import { Divider } from '@ui-kitten/components';
 
 import { Input, ContainerView, Select } from 'molecules'
 import { Block, Button, Text, Checkbox } from 'atoms';
 
-import { houseTypes, types } from 'constants/enums';
+import { houseTypes } from 'constants/enums';
 
 function SwineInformationPage({ formik }) {
 
   const { values, setFieldValue, errors, touched } = formik;
 
-  const farms = useStoreState(state => state.farms.items);
-
-  const [isPureBreed, setIsPureBreed] = useState(values['isPureBreed']);
+  // const farms = useStoreState(state => state.farms.items);
 
   const onPressPureBreed = () => {
     setFieldValue('isPureBreed', true);
-    setIsPureBreed(true);
   };
 
   const onPressCrossBreed = () => {
     setFieldValue('isPureBreed', false);
-    setIsPureBreed(false);
   };
 
   return (
@@ -36,11 +32,11 @@ function SwineInformationPage({ formik }) {
           </Text>
         </Block>
         <Block row center middle marginBottom={1.5}>
-          <Button status={isPureBreed ? 'primary' : 'basic'} marginRight={0.5} onPress={onPressPureBreed}>Pure Breed</Button>
-          <Button status={isPureBreed ? 'basic' : 'primary'} onPress={onPressCrossBreed}>Cross Breed</Button>
+          <Button status={values['isPureBreed'] ? 'primary' : 'basic'} marginRight={0.5} onPress={onPressPureBreed}>Pure Breed</Button>
+          <Button status={values['isPureBreed'] ? 'basic' : 'primary'} onPress={onPressCrossBreed}>Cross Breed</Button>
         </Block>
         {
-          isPureBreed && <Block marginBottom={1}>
+          values['isPureBreed'] && <Block marginBottom={1}>
             <Input
               label="Breed"
               name='breed'
@@ -48,11 +44,12 @@ function SwineInformationPage({ formik }) {
               touched={touched}
               values={values}
               onChange={setFieldValue}
+              required={true}
             />
           </Block>
         }
         {
-          !isPureBreed && <Block marginBottom={1}>
+          !values['isPureBreed'] && <Block marginBottom={1}>
             <Input
               label="Father's Breed"
               name='fatherBreed'
@@ -60,6 +57,7 @@ function SwineInformationPage({ formik }) {
               touched={touched}
               values={values}
               onChange={setFieldValue}
+              required={true}
             />
             <Input
               label="Mother's Breed"
@@ -68,9 +66,13 @@ function SwineInformationPage({ formik }) {
               touched={touched}
               values={values}
               onChange={setFieldValue}
+              required={true}
             />
           </Block>
         }
+
+        <Divider />
+
         <Block marginBottom={1} marginTop={1}>
           <Input
             name='birthWeight'
@@ -80,6 +82,8 @@ function SwineInformationPage({ formik }) {
             touched={touched}
             values={values}
             onChange={setFieldValue}
+            optional={true}
+            width={128}
           />
         </Block>
         {/* <Block marginBottom={1}>
@@ -113,6 +117,8 @@ function SwineInformationPage({ formik }) {
             touched={touched}
             values={values}
             onChange={setFieldValue}
+            optional={true}
+            width={128}
           />
         </Block>
         <Block marginBottom={1}>
@@ -124,6 +130,8 @@ function SwineInformationPage({ formik }) {
             touched={touched}
             values={values}
             onChange={setFieldValue}
+            optional={true}
+            width={128}
           />
         </Block>
         <Block marginBottom={1}>
@@ -135,6 +143,8 @@ function SwineInformationPage({ formik }) {
             touched={touched}
             values={values}
             onChange={setFieldValue}
+            optional={true}
+            width={128}
           />
         </Block>
         <Block marginBottom={1}>
@@ -146,9 +156,14 @@ function SwineInformationPage({ formik }) {
             touched={touched}
             values={values}
             onChange={setFieldValue}
+            optional={true}
+            width={128}
           />
         </Block>
-        <Block marginBottom={1}>
+
+        <Divider />
+
+        <Block marginTop={1}>
           <Input
             label='Other Details'
             name='otherDetails'
@@ -157,7 +172,9 @@ function SwineInformationPage({ formik }) {
             values={values}
             onChange={setFieldValue}
             multiline
-            numberOfLines={4}
+            numberOfLines={5}
+            textAlignVertical='top'
+            optional={true}
           />
         </Block>
       </ContainerView>

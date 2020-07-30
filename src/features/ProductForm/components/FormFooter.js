@@ -20,6 +20,7 @@ function FormFooter({ onSubmit, validateForm }) {
   const setStep = useStoreActions(actions => actions.productForm.setStep);
   const nextStep = useStoreActions(actions => actions.productForm.nextStep);
   const prevStep = useStoreActions(actions => actions.productForm.prevStep);
+  
   const currentStep = useStoreState(state => state.productForm.currentStep);
   const isLastStep = useStoreState(state => state.productForm.isLastStep);
   const isFirstStep = useStoreState(state => state.productForm.isFirstStep);
@@ -32,29 +33,26 @@ function FormFooter({ onSubmit, validateForm }) {
 
   const onPressNext = async () => {
 
-    if (currentStep <= 2) {
-      const errors = await validateForm();
-      if (!checkForErrors(errors)) {
-        if (currentStep === 2) {
-          onSubmit();
-        }
-        else {
-          nextStep();
-        }
-      }
-      else {
-        ToastService.show('Please check the errors in the form!');
-      }
-    }
-    else {
-      setStep(0);
-      NavigationService.back();
-    }
+    nextStep();
+
+    // const errors = await validateForm();
+
+    // if (!checkForErrors(errors)) {
+    //   if (isLastStep === 2) {
+    //     onSubmit();
+    //   }
+    //   else {
+    //     nextStep();
+    //   }
+    // }
+    // else {
+    //   // ToastService.show('Please check the errors in the form!');
+    // }
 
   };
 
   const onPressPrev = () => {
-    if (isFirstStep || isLastStep) {
+    if (isFirstStep) {
       NavigationService.back();
     }
     else {
@@ -68,7 +66,7 @@ function FormFooter({ onSubmit, validateForm }) {
         <Block row center right padding={0.5} backgroundColor='white1'>
           <Block flex={1} marginRight={1}>
             <Button size='tiny'  status='basic' onPress={onPressPrev}>
-              {(isFirstStep || isLastStep) ? 'Close' : 'Back'}
+              {isFirstStep ? 'Close' : 'Back'}
             </Button>
           </Block>
           <Block flex={1}>

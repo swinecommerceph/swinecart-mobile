@@ -1,8 +1,9 @@
-import React, { Fragment, memo, useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
+import { StateScreen } from 'organisms';
+import { HeaderBar, BackButton } from 'molecules';
 import { LoadingOverlay } from 'atoms';
-import { LoadingView, BlankScreen } from 'molecules';
 
 import {
   Wizard, FormHeader
@@ -10,34 +11,21 @@ import {
 
 function Container() {
 
-  const isFetching = useStoreState(state => state.farms.isLoading);
+  // const isFetching = useStoreState(state => state.farms.isLoading);
   const isLoading = useStoreState(state => state.productForm.isLoading);
-  const farms = useStoreState(state => state.farms.items);
   const getFarms = useStoreActions(actions => actions.farms.getItems);
 
-  useEffect(() => {
-    getFarms();
-  }, []);
+  // useEffect(() => {
+  //   getFarms();
+  // }, []);
 
-  if (isFetching) {
-    return (
-      <LoadingView />
-    );
-  }
-  else if (!isFetching && farms) {
-    return (
-      <Fragment>
-        <LoadingOverlay show={isLoading} />
-        <FormHeader />
-        <Wizard />
-      </Fragment>
-    );
-  }
-  else {
-    return (
-      <BlankScreen />
-    );
-  }
+  return (
+    <StateScreen isLoading={false} hasError={false}>
+      <LoadingOverlay show={isLoading} />
+      <FormHeader />
+      <Wizard />
+    </StateScreen>
+  )
 }
 
 export default memo(Container, () => true);

@@ -2,10 +2,11 @@ import React, { useMemo, useCallback, memo, useState, Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { withStyles, Input as UKInput } from '@ui-kitten/components';
 import isEqual from 'react-fast-compare';
+import toString from 'lodash/toString';
 
 import { computeLineHeight } from 'utils';
 
-import { Icon, Text } from 'atoms';
+import { Block, Icon, Text } from 'atoms';
 
 function Input(props) {
 
@@ -13,18 +14,28 @@ function Input(props) {
 
   const {
     name, values, touched, errors, label, placeholder, 
-    required = false, optional = false, 
-    onChange, isPassword,
+    required = false, optional = false,
+    onChange, onBlur, isPassword, size = 'medium',
+    width = '100%',
     eva: { style },
     ...otherProps
   } = props;
 
 
-  const hasError = useMemo(() => !!(errors[name]), [ errors[name] ]);
+  // const hasError = useMemo(() => !!errors[name] , [ errors[name] ]);
+
+  const hasError = !!errors[name] && !!touched[name];
+
+  console.dir(touched);
+  // console.dir(name, hasError, touched[name], !!errors[name]);
 
   const onChangeText = useCallback(value => {
     onChange(name, value);
   }, [ values[name] ]);
+
+  const onTouched = () => {
+    onBlur(name, true);
+  };
 
   const onIconPress = () => {
     setIsVisible(!isVisible);
@@ -41,32 +52,39 @@ function Input(props) {
     </TouchableOpacity>
   );
 
-  return (
-    <UKInput
-      size='medium'
-      placeholder={placeholder}
-      label={
-        <Fragment>
-          <Text semibold size={12}>{label}</Text>
-          {required && <Text italic size={12}>{' - Required'}</Text>}
-          {optional && <Text italic size={12}>{' - Optional'}</Text>}
-        </Fragment>
-      }
-      caption={
-        <Text semibold size={12} color={hasError ? 'danger' : 'primary'}>
-          {hasError ? errors[name] : null}
-        </Text>
-      }
-      status={hasError ? 'danger' : 'primary'}
-      value={`${values[name] || ''}`}
-      textStyle={style.inputText}
-      onChangeText={onChangeText}
-      accessoryRight={isPassword ? renderIcon : null}
-      secureTextEntry={isPassword ? isVisible : false}
-      {...otherProps}
-    />
-  );
+  const containerStyle = [
+    { width }
+  ];
 
+  return (
+    <Fragment>
+      <Block row marginBottom={0.5}>
+        <Text semibold size={12}>{label}</Text>
+        {required && <Text italic size={12}>{' - Required'}</Text>}
+        {optional && <Text italic size={12}>{' - Optional'}</Text>}
+        </Block>
+       <UKInput
+        size={size}
+        placeholder={placeholder}
+        label={null}
+        caption={
+          hasError &&
+          <Text semibold size={12} color='danger'>
+            {errors[name]}
+          </Text>
+        }
+        status={hasError ? 'danger' : 'basic'}
+        value={toString(values[name])}
+        textStyle={style.inputText}
+        onChangeText={onChangeText}
+        onBlur={onTouched}
+        accessoryRight={isPassword ? renderIcon : null}
+        secureTextEntry={isPassword ? isVisible : false}
+        style={containerStyle}
+        {...otherProps}
+      />
+    </Fragment>
+  );
 }
 
 export default withStyles(memo(Input, isEqual), () => ({

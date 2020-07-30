@@ -39,7 +39,7 @@ export default {
         const accountType = last(user.userable_type.split('\\'));
 
         actions.setUserData({ data: user, accountType });
-        getStoreActions().notifications.getTopic(topic);
+        // getStoreActions().notifications.getTopic(topic);
         // ChatClient.init(getStoreActions().chat.onMessage, user);
         NavigationService.navigate(accountType);
       }
