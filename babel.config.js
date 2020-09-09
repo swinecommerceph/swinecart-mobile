@@ -10,6 +10,9 @@ module.exports = {
         'navigation': './src/navigation',
         'utils': './src/utils',
         'constants': './src/constants',
+        'atoms': './src/components/atoms',
+        'molecules': './src/components/molecules',
+        'organisms': './src/components/organisms',
         'validationSchemas': './src/validationSchemas',
       }
     }]

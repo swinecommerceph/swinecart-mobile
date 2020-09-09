@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { List, LoadingView, BlankScreen } from 'shared';
+
+import { List } from 'organisms';
+import { LoadingView, BlankScreen } from 'molecules';
 
 import CartItem from '../CartItem';
 
@@ -33,7 +35,7 @@ function CartList() {
         data={items}
         Component={CartItem}
         keyExtractor={keyExtractor}
-        emptyListMessage={'No Items Yet'}
+        emptyListMessage={'There are no items in your cart yet.'}
         isRefreshing={isRefreshing}
         onPressLoadMore={onPressLoadMore}
         onRefresh={onRefresh}

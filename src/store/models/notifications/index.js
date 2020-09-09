@@ -45,14 +45,14 @@ export default {
 
   onNotification: thunk((actions, payload, { getStoreActions, getStoreState }) => {
     const { type } = payload;
-    
+
     if (type === 'notification') {
       actions.getItems({ isRefresh: true });
     }
     else if (type === 'db-productRequest') {
 
       const { id, customer_name, name } = payload.body;
-
+      
       const title = 'Product Request';
       const message = `${customer_name} requested for Product ${name}.`;
 
@@ -64,7 +64,7 @@ export default {
         getStoreActions().orderRequests.getItems({ isRefresh: true });
       }
 
-      getStoreActions().orders.setCurrentStatus(routes[0]);
+      getStoreActions().orders.setIndex(0);
       getStoreActions().orders.getOrdersByStatus({ status: 'requested', isRefresh: true });
     }
     else if (type === 'db-rated') {
@@ -77,6 +77,42 @@ export default {
       PushNotificationService.showLocalNotification(title, message);
       getStoreActions().ratings.getData();
       getStoreActions().reviews.getItems({ isRefresh: true });
+    }
+    else if (type === 'sc-reserved') {
+      const title = 'Product Reserved';
+      const message = `Breeder reserved a product for you.`;
+
+      PushNotificationService.showLocalNotification(title, message);
+      getStoreActions().customerOrders.setIndex(1);
+      getStoreActions().customerOrders.getItems({ status: 'requested', isRefresh: false });
+      getStoreActions().customerOrders.getItems({ status: 'reserved', isRefresh: false });
+    }
+    else if (type === 'sc-onDelivery') {
+      const title = 'Product On Delivery';
+      const message = `Product is now on delivery.`;
+
+      PushNotificationService.showLocalNotification(title, message);
+      getStoreActions().customerOrders.setIndex(2);
+      getStoreActions().customerOrders.getItems({ status: 'reserved', isRefresh: false });
+      getStoreActions().customerOrders.getItems({ status: 'onDelivery', isRefresh: false });
+    }
+    else if (type === 'sc-sold') {
+      const title = 'Product Sold';
+      const message = `Product Sold`;
+
+      PushNotificationService.showLocalNotification(title, message);
+      getStoreActions().customerOrders.setIndex(3);
+      getStoreActions().customerOrders.getItems({ status: 'onDelivery', isRefresh: false });
+      getStoreActions().customerOrders.getItems({ status: 'sold', isRefresh: false });
+    }
+    else if (type === 'sc-cancelTransaction') {
+      const title = 'Transaction Cancelled';
+      const message = `A breeder cancelled a transaction with you.`;
+
+      PushNotificationService.showLocalNotification(title, message);
+      // getStoreActions().customerOrders.setIndex(3);
+      // getStoreActions().customerOrders.getItems({ status: 'onDelivery', isRefresh: false });
+      // getStoreActions().customerOrders.getItems({ status: 'sold', isRefresh: false });
     }
 
   }),
@@ -147,6 +183,4 @@ export default {
     actions.setLoadingMore(false);
 
   }),
-
-
 };

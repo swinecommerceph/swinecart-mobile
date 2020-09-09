@@ -20,12 +20,13 @@ export const Product = {
   age: 'age',
   is_unique: 'isUnique',
   quantity: 'quantity',
-  status: 'status'
+  status: 'status',
+  imageUrl: 'imageUrl'
 };
 
 export const Order = {
   status: 'status',
-  request_count: 'requestCount',
+  requestCount: 'requestCount',
   product: Product,
   reservation: Reservation,
 };

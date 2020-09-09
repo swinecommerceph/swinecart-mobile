@@ -1,46 +1,58 @@
-import React, { memo, useEffect, useCallback } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { Select, withStyles } from '@ui-kitten/components';
+import { Select, SelectItem, withStyles } from '@ui-kitten/components';
 
-import { Block, Text } from 'shared';
 import routes from 'constants/routes';
 
-function StatusPicker({ themedStyle, jumpTo }) {
+import { Block, Text } from 'atoms';
 
-  const currentStatus = useStoreState(state => state.transactions.currentStatus);
-  const status = useStoreState(state => state.transactions.status());
-  const setCurrentStatus = useStoreActions(actions => actions.transactions.setCurrentStatus);
+const options = routes.map(({ key, title }) => (
+  <SelectItem key={key} title={<Text semibold>{title}</Text>} />)
+);
+
+
+function StatusPicker({ eva, jumpTo }) {
+
+  const currentIndex = useStoreState(state => state.orders.currentIndex);
+  const setIndex = useStoreActions(actions => actions.orders.setIndex);
 
   useEffect(() => {
-    jumpTo(currentStatus.key);
-  }, [currentStatus])
+    jumpTo(routes[currentIndex.row].key);
+  }, [currentIndex])
 
-  const onSelect = useCallback(option => {
-    setCurrentStatus(option);
-  }, []);
+  const onSelect = ({ row }) => {
+    setIndex(row);
+  };
+
+  const value = useMemo(
+    () => routes[currentIndex.row].title,
+    [currentIndex]
+  );
 
   return (
-    <Block row middle center padding>
+    <Block
+      row middle center padding={0.5}
+      backgroundColor='white1'
+      borderBottomWidth={1}
+      borderBottomColor='gray1'
+    >
       <Text semibold color='gray5' marginRight={1}>
         Order Status
       </Text>
       <Select
-        data={routes}
-        selectedOption={status}
+        selectedIndex={currentIndex}
         onSelect={onSelect}
-        style={themedStyle.selectContainer}
-        textStyle={themedStyle.selectTextStyle}
-      />
+        value={<Text semibold>{value}</Text>}
+        style={eva.style.selectContainer}
+      >
+        {options}
+      </Select>
     </Block>
   );
 }
 
 export default withStyles(memo(StatusPicker), () => ({
-  selectContainer: {  
+  selectContainer: {
     width: 200,
-  },
-  selectTextStyle: {
-    fontFamily: 'OpenSans-Bold',
-    fontWeight: 'normal'
   }
 }));

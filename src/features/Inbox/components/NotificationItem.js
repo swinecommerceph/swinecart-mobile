@@ -2,12 +2,10 @@ import React, { memo } from 'react';
 import { useStoreActions } from 'easy-peasy';
 import { TouchableOpacity } from 'react-native';
 
-import { Block, Icon, Text } from 'shared';
+import { Block, Icon, Text } from 'atoms';
 
 import { NavigationService } from 'services';
 import { formatCreatedAt } from 'utils/formatters';
-import { colors } from 'constants/theme';
-import routes from 'constants/routes';
 
 const iconNames = {
   'ProductRequested': 'alert-circle',
@@ -23,29 +21,29 @@ const iconColors = {
 
 function Notification({ data }) {
 
-  const { message, read_at, created_at, type } = data;
+  const { message, readAt, createdAt, type } = data;
 
-  const setCurrentStatus = useStoreActions(actions => actions.orders.setCurrentStatus);
+  const setIndex = useStoreActions(actions => actions.orders.setIndex);
   const setCurrentRoute = useStoreActions(actions => actions.dashboard.setCurrentRoute);
 
   const onPressNotification = () => {
     switch(type) {
       case 'ProductRequested': 
-        setCurrentStatus(routes[0]);
+        setIndex(0);
         NavigationService.navigate('OrdersStack');
         break;
       case 'BreederRated': 
         setCurrentRoute('reviews');
-        NavigationService.navigate('DashboardStack'); 
+        NavigationService.navigate('Dashboard'); 
         break;
     }
   };
 
-  const textColor = read_at ? 'gray5': 'black1';
+  const textColor = readAt ? 'gray5': 'black1';
 
   return (
     <TouchableOpacity
-      activeOpacity={0.50}
+      activeOpacity={0.90}
       onPress={onPressNotification}
     >
       <Block
@@ -54,13 +52,13 @@ function Notification({ data }) {
         borderBottomWidth={1}
         borderBottomColor='gray1'
       > 
-        {/* <Icon name={iconNames[type]} color={read_at ? 'gray5' : iconColors[type]} size={30}/> */}
+        {/* <Icon name={iconNames[type]} color={readAt ? 'gray5' : iconColors[type]} size={30}/> */}
         <Block flex={1} marginLeft={1}>
           <Text semibold size={13} numberOfLines={3} color={textColor}>
             {message}
           </Text>
           <Text normal size={12} color={textColor}>
-            {formatCreatedAt(created_at)}
+            {formatCreatedAt(createdAt)}
           </Text>
         </Block>
       </Block>

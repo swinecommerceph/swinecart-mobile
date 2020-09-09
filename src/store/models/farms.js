@@ -10,7 +10,7 @@ export default {
 
   items: null,
 
-  isLoading: false,
+  isLoading: true,
 
   setLoading: action((state, payload) => {
     state.isLoading = payload;
@@ -22,7 +22,7 @@ export default {
 
   getItems: thunk(async (actions, payload, { getState, getStoreActions }) => {
 
-    if (!getState().items)  {
+    if (!getState().items) {
       actions.setLoading(true);
       const [error, data] = await to(FarmService.getFarms());
 

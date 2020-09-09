@@ -1,8 +1,8 @@
 import React, { Fragment, memo } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import routes from 'constants/routes';
-import { Text } from 'shared';
 import { NavigationService } from 'services';
+
+import { Text } from 'atoms';
 
 import StatCard from './StatCard';
 
@@ -10,25 +10,25 @@ function ProductInventoryStats() {
 
   const stats = useStoreState(state => state.stats.data);
 
-  const setCurrentStatus = useStoreActions(actions => actions.orders.setCurrentStatus);
+  const setIndex = useStoreActions(actions => actions.orders.setIndex);
 
   const onPressRequested = () => {
-    setCurrentStatus(routes[0]);
+    setIndex(0);
     NavigationService.navigate('OrdersStack');
   };
 
   const onPressReserved = () => {
-    setCurrentStatus(routes[1]);
+    setIndex(1);
     NavigationService.navigate('OrdersStack');
   };
 
   const onPressDelivery = () => {
-    setCurrentStatus(routes[2]);
+    setIndex(2);
     NavigationService.navigate('OrdersStack');
   };
 
   const onPressSold = () => {
-    setCurrentStatus(routes[3]);
+    setIndex(3);
     NavigationService.navigate('OrdersStack');
   };
 

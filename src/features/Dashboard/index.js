@@ -1,15 +1,16 @@
 import React, { Fragment, memo } from 'react';
-import { HeaderBar } from 'shared';
+
+import { HeaderBar, DrawerButton } from 'molecules';
 
 import {
-  DashboardTabView
+  DashboardStats
 } from './components';
 
 function Container() {
   return (
     <Fragment>
-      <HeaderBar title='Dashboard' />
-      <DashboardTabView />
+      <HeaderBar title='Dashboard' accessoryLeft={DrawerButton} />
+      <DashboardStats />
     </Fragment>
   );
 }

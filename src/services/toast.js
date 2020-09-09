@@ -7,20 +7,20 @@ class Toast {
   show(message, callback) {
     RToast.show(message, {
       duration: 1500,
-      position: 75,
+      position: 25,
       shadow: false,
       animation: false,
-      hideOnPress: false,
+      hideOnPress: true,
       delay: 0,
       containerStyle: {
-        borderRadius: 50,
+        borderRadius: 5,
         backgroundColor: colors.black1,
         padding: sizes.padding / 2
       },
       textStyle: {
         fontFamily: 'OpenSans-SemiBold',
-        fontSize: 14,
-        lineHeight: computeLineHeight(14),
+        fontSize: 12,
+        lineHeight: computeLineHeight(12),
       },
       onHidden: () => {
         callback &&

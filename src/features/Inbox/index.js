@@ -1,13 +1,12 @@
 import React, { Fragment, memo } from 'react';
-import { HeaderBar } from 'shared';
+import { HeaderBar, DrawerButton } from 'molecules';
 
 import { InboxTabView } from './components';
 
 function Container() {
-
   return (
     <Fragment>
-      <HeaderBar title='Inbox' />
+      <HeaderBar title='Messages' accessoryLeft={DrawerButton} />
       <InboxTabView />
     </Fragment>
   );

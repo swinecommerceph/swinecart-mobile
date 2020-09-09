@@ -3,39 +3,25 @@ import to from 'await-to-js';
 
 import { ShopService, ToastService } from 'services';
 
-import { initialState } from '../modelUtils';
+import { addGenericModel } from '../../utils';
 
-const LIMIT = 5;
+const LIMIT = 10;
 
 export default {
+
+  ...(addGenericModel()),
+
   // State
-  ...initialState,
 
   // Computed Values
 
   // Actions
 
-  setItems: action((state, payload) => {
-    const { items, page } = payload;
-    state.items = items;
-    state.page = page;
-  }),
-
-  setLoading: action((state, payload) => {
-    state.isLoading = payload;
-  }),
-
-  setLoadingMore: action((state, payload) => {
-    state.isLoadingMore = payload;
-  }),
-
-  setRefreshing: action((state, payload) => {
-    state.isRefreshing = payload;
-  }),
-
   // Side Effects
 
-  getItems: thunk(async (actions, payload) => {
+  getItems: thunk(async (actions, payload, { getStoreState }) => {
+
+    const filters = getStoreState().filterItems.filters;
 
     const { isRefresh } = payload;
 
@@ -43,9 +29,16 @@ export default {
       ? actions.setRefreshing(true)
       : actions.setLoading(true);
 
-    const [error, data] = await to(ShopService.getItems(1, LIMIT));
-  
+    const [error, data] = await to(ShopService.getItems(1, LIMIT, filters));
+    
     if (error) {
+  
+      const { problem, status } = error;
+
+      if (status === 500) {
+        actions.setFetchingError(true);
+      }
+
     }
     else {
 
@@ -64,19 +57,23 @@ export default {
 
   }),
 
-  getMoreItems: thunk(async (actions, payload, { getState }) => {
+  getMoreItems: thunk(async (actions, payload, { getState, getStoreState }) => {
 
+    const filters = getStoreState().filterItems.filters;
     const { page: currentPage, items: currentItems } = getState();
 
     actions.setLoadingMore(true);
 
-    const [error, data] = await to(ShopService.getItems(currentPage, LIMIT));
+    const [error, data] = await to(ShopService.getItems(currentPage, LIMIT, filters));
 
     if (error) {
+
       const { problem, status } = error;
+
       if (status === 500) {
-        ToastService.show('Please try again later!', null);
+        actions.setFetchingError(true);
       }
+
     }
     else {
       const { products } = data.data;

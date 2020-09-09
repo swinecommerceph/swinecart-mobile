@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "assets": [
+        "src/assets/*"
+      ],
+      "atoms": [
+        "src/components/atoms/*"
+      ],
+      "molecules": [
+        "src/components/molecules/*"
+      ],
+      "organisms": [
+        "src/components/organisms/*"
+      ],
+      "navigation": [
+        "src/navigation/*"
+      ],
+      "constants": [
+        "src/constants/*"
+      ],
+      "scenes": [
+        "src/scenes/*"
+      ],
+      "features": [
+        "src/features/*"
+      ],
+      "services": [
+        "src/services/*"
+      ],
+      "utils": [
+        "src/utils/*"
+      ],
+      "shared": [
+        "src/shared/*"
+      ],
+      "validationSchemas": [
+        "src/validationSchemas/*"
+      ]
+    }
+  }
+}

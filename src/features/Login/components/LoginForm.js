@@ -1,10 +1,8 @@
-import React, { Fragment, memo, useState } from 'react';
+import React, { Fragment, memo } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useFormik } from 'formik';
 
-import {
-  Input
-} from 'shared';
+import { Input } from 'molecules';
 
 import { LoginSchema } from 'validationSchemas';
 
@@ -17,8 +15,8 @@ function LoginForm() {
 
   const { values, handleSubmit, setFieldValue, errors, touched } = useFormik({
     initialValues: {
-      // email: 'stuart38@hotmail.com',
-      email: 'mustafa95@hotmail.com',
+      // email: 'viola.stroman@yahoo.com',
+      email: 'laurianne14@yahoo.com',
       password: 'secret12',
     // email: '',
     // password: ''

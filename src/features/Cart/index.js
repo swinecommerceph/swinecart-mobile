@@ -1,6 +1,8 @@
 import React, { Fragment, memo, useEffect } from 'react';
-import { useStoreActions } from 'easy-peasy';
-import { HeaderBar } from 'shared';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+
+import { HeaderBar, DrawerButton } from 'molecules';
+import { LoadingOverlay } from 'atoms';
 
 import {
   CartList
@@ -8,6 +10,7 @@ import {
 
 function Container() {
 
+  const isLoading = useStoreState(state => state.cart.isRemovingItem);
   const getCartItems = useStoreActions(actions => actions.cart.getItems);
 
   useEffect(() => {
@@ -16,7 +19,8 @@ function Container() {
 
   return (
     <Fragment>
-      <HeaderBar title='SwineCart' />
+      <LoadingOverlay show={isLoading} />
+      <HeaderBar title='SwineCart' accessoryLeft={DrawerButton} />
       <CartList />
     </Fragment>
   );

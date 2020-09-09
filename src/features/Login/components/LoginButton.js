@@ -1,18 +1,12 @@
 import React, { memo } from 'react';
 
-import { Block, Button } from 'shared';
+import { Button } from 'atoms';
 
 function LoginButton({ disabled, onSubmit }) {
   return (
-    <Block marginTop={1}>
-      <Button
-        size='medium'
-        disabled={disabled}
-        onPress={onSubmit}
-      >
-        Login
-      </Button>
-    </Block>
+    <Button size='medium' disabled={disabled} onPress={onSubmit} marginTop={1}>
+      Login
+    </Button>
   );
 }
 

@@ -2,12 +2,13 @@ import React, { PureComponent } from 'react';
 import { Dimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
-import { EmptyListMessage } from 'shared';
+import routes from 'constants/routes';
+
+import { EmptyListMessage } from 'molecules';
+
 
 import OrdersList from './OrdersList';
 import StatusPicker from './StatusPicker';
-
-import routes from 'constants/routes';
 
 class OrdersTabView extends PureComponent {
 

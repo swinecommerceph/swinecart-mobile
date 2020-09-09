@@ -1,34 +1,21 @@
 import React, { memo } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { useStoreActions } from 'easy-peasy'
 
-import { NavigationService } from 'services';
+import { Card, ProductInfo, ProductAvatar, MessageBox } from 'molecules';
+import { Block } from 'atoms';
 
-import { Block, ProductAvatar, Text } from 'shared';
+import { ProductActions } from './components';
 
-import { 
-  ProductInfo,
-  ProductActions,
-} from './components';
-
-function CartItem({ data, listIndex }) {
+function CartItem({ data }) {
 
   const { product } = data;
+
   const {
     imageUrl, name, type, breed, age, breederName, farmLocation, isDeleted
   } = product;
 
   return (
-    <Block
-      row padding={1}
-      backgroundColor='white1'
-      borderBottomWidth={1}
-      borderBottomColor='gray1'
-    >
-      <ProductAvatar 
-        shape='rounded' 
-        image={imageUrl} size={90}
-      />
+    <Card>
+      <ProductAvatar shape='rounded' type={type} image={imageUrl} size={96} />
       <Block flex={1} marginLeft={1}>
         <ProductInfo
           name={name}
@@ -39,16 +26,16 @@ function CartItem({ data, listIndex }) {
           farmLocation={farmLocation}
         />
         {
-          isDeleted && 
-          <Block marginTop={0.5} padding={1} backgroundColor='color-info-100' borderRadius={5}>
-            <Text semibold numberOfLines={2} size={14} textAlign='center' color='color-info-700'>
-              This product has been deleted by the Breeder.
-            </Text>
-          </Block>
+          isDeleted &&
+          <MessageBox
+            marginTop={1}
+            status='info'
+            message='This product has been deleted by the Breeder.'
+          />
         }
         <ProductActions data={data} />
       </Block>
-    </Block>
+    </Card>
   );
 
 }

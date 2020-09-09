@@ -19,6 +19,8 @@ const typesByIndex = types.reduce((acc, element, index) => {
 
 class PubSubClient {
 
+  timeout = 1000;
+
   init(topic, onNotification) {
     this.topic = topic;
 
@@ -36,14 +38,14 @@ class PubSubClient {
   }
 
   onClose(data) {
-    // console.dir('Close', data);
+    console.dir('Close', data);
   }
 
   onError(data) {
-    // console.dir('Error', data);
   }
 
-  onMessage({ data }) {
+  onMessage(message) {
+    const { data } = message;
     const [typeIndex, ...messageData] = JSON.parse(data);
     const type = types[typeIndex];
 

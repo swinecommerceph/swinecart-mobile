@@ -1,35 +1,40 @@
 import React, { memo } from 'react';
-import { useStoreState } from 'easy-peasy';
 import { TouchableOpacity } from 'react-native';
-
-import {
-  Block, UserAvatar, Text, Button
-} from 'shared';
+import { useStoreState } from 'easy-peasy';
 
 import { ModalService } from 'services';
 
+import { UserAvatar, Card } from 'molecules';
+import { Block, Text, Button } from 'atoms';
+
 function RequestItem({ data }) {
 
-  const currentProduct = useStoreState(state => state.orderRequests.currentProduct);
+  const currentProduct = useStoreState(
+    state => state.orderRequests.currentProduct
+  );
 
   const { customerProvince, customerName } = data;
+  
+  console.dir(data);
 
   const onPressView = () => {
-    ModalService.showModal('OrderDetails', { product: currentProduct, reservation: data });
+    ModalService.showModal(
+      'OrderDetails',
+      { product: currentProduct, reservation: data }
+    );
   };
 
-  const onPressReserve = () => {
-    ModalService.showModal('ReserveProduct', { ...data });
+  const onPressApprove = () => {
+    ModalService.showModal('ApproveRequest', { ...data });
+  };
+
+  const onPressDisapprove = () => {
+    ModalService.showModal('DisapproveRequest', { ...data });
   };
 
   return (
-    <TouchableOpacity activeOpacity={0.50} onPress={onPressView}>
-      <Block 
-        row padding center
-        backgroundColor='white1'
-        borderBottomWidth={1}
-        borderBottomColor='gray1'
-      >
+    <TouchableOpacity activeOpacity={0.90} onPress={onPressView}>
+      <Card>
         <UserAvatar userName={customerName} size={64} textSize={20} />
         <Block flex={1} marginLeft={1}>
           <Text
@@ -50,17 +55,28 @@ function RequestItem({ data }) {
           >
             {customerProvince}
           </Text>
-          <Block alignSelf='flex-start'>
-            <Button
-              size='small'
-              onPress={onPressReserve}
-              marginTop={0.5}
-            >
-              Reserve Product
-          </Button>
+          <Block flex={1} row alignSelf='flex-start' marginTop={0.5}>
+            <Block>
+              <Button
+                size='tiny'
+                onPress={onPressApprove}
+                marginRight={0.5}
+              >
+                Approve
+              </Button>
+            </Block>
+            <Block>
+              <Button
+                size='tiny'
+                status='basic'
+                onPress={onPressDisapprove}
+              >
+                Disapprove
+            </Button>
+            </Block>
           </Block>
         </Block>
-      </Block>
+      </Card>
     </TouchableOpacity>
   );
 }

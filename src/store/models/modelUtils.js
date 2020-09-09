@@ -1,12 +1,11 @@
 import { action } from 'easy-peasy';
 
-
 export const initialState = {
   items: null,
   page: 1,
   hasError: false,
   isLoadingMore: false,
-  isLoading: false,
+  isLoading: true,
   isRefreshing: false,
 };
 

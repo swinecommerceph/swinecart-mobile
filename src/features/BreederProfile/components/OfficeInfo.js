@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
 import { useStoreState } from 'easy-peasy';
 
-import { Block, ContainerView, LoadingView } from 'shared';
+import { ContainerView, LoadingView } from 'molecules';
+import { Block } from 'atoms';
 
 import BreederLogo from './BreederLogo';
 import ProfileText from './ProfileText';
@@ -22,13 +23,12 @@ function OfficeInfo() {
 
   // console.dir('Loading', isLoading);
   // console.dir('Error', hasError);
-  
+
   if (isLoading) {
     return (
       <LoadingView />
     );
   }
-  
   else if (hasError) {
     return (
       <LoadingView />

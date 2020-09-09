@@ -1,9 +1,8 @@
-import React, { memo, useMemo } from 'react';
-import { useStoreActions } from 'easy-peasy';
+import React, { memo } from 'react';
 
 import { ModalService, NavigationService } from 'services';
 
-import { Block, Button } from 'shared';
+import { Block, Button } from 'atoms';
 
 function ProductActions({ data }) {
 
@@ -12,15 +11,21 @@ function ProductActions({ data }) {
   };
 
   const onPressView = () => {
+    NavigationService.navigate('ProductView', { id: data.id });
   };
 
   return (
     <Block marginTop={1} alignSelf='flex-start'>
-      <Button size='small' status='basic' apperance='ghost' onPress={onPressView}>
+      <Button size='small' status='basic' onPress={onPressView}>
         View All Info
       </Button>
-      <Button size='small' onPress={onPressAdd} marginTop={0.5}>
-        Add to Cart
+      <Button
+        marginTop={0.5}
+        onPress={onPressAdd}
+        size='small'
+        status='primary'
+      >
+        Add to SwineCart
       </Button>
     </Block>
   );

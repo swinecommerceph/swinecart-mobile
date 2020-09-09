@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-import { Block, UserAvatar, Text } from 'shared';
+import { Block, Text } from 'atoms';
 import { formatMessageDate } from 'utils/formatters';
 import { NavigationService } from 'services';
 
@@ -22,7 +22,7 @@ function ChatItem({ data }) {
 
   return (
     <TouchableOpacity
-      activeOpacity={0.10}
+      activeOpacity={0.90}
       onPress={onPressConversation}
     >
       <Block 
@@ -31,7 +31,7 @@ function ChatItem({ data }) {
         borderBottomWidth={1}
         borderBottomColor='gray1'
       >
-        <UserAvatar userName={name} size={48} textSize={18} />
+        {/* <UserAvatar userName={name} size={48} textSize={18} /> */}
         <Block flex={1} paddingHorizontal>
           <Text
             semibold

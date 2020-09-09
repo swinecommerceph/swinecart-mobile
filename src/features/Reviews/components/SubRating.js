@@ -1,5 +1,6 @@
 import React, { Fragment, memo } from 'react';
-import { Block, Text, StarRating } from 'shared';
+
+import { Block, Text, StarRating } from 'atoms';
 
 function SubRating(props) {
 

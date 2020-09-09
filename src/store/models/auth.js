@@ -47,6 +47,10 @@ export default {
       else if (problem === 'NETWORK_ERROR') {
         ToastService.show('Please try again later!', null);
       }
+      else {
+        ToastService.show('Please try again later!', null);
+      }
+      
 
       actions.setLoggingIn({ isLoggingIn: false });
     }
@@ -60,6 +64,7 @@ export default {
       });
       
     }
+
   }),
 
   logout: thunk(async (actions, payload) => {
@@ -67,7 +72,7 @@ export default {
     actions.setLoggingIn({ isLoggingIn: false });
     actions.setLoggingOut({ isLoggingOut: true });
 
-    const [error, data] = await to(AuthService.logout());
+    const [ error, data ] = await to(AuthService.logout());
   
     if (error) {
       const { problem } = error;

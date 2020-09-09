@@ -1,22 +1,46 @@
 import React, { Fragment, memo, useEffect } from 'react';
-import { useStoreState, useStoreActions } from 'easy-peasy';
-import { HeaderBar, LoadingOverlay } from 'shared';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+
+import { NavigationService } from 'services';
+
+import { HeaderBar, HeaderBarButton, DrawerButton } from 'molecules';
+import { LoadingOverlay } from 'atoms';
 
 import {
   ShopList
 } from './components';
 
+const accessoryRight = () => {
+
+  const onPress = () => {
+    NavigationService.navigate('FilterItems');
+  };
+
+  return (
+    <HeaderBarButton
+      iconName='search'
+      onPress={onPress}
+    />
+  );
+};
+
 function Container() {
 
   const getItems = useStoreActions(actions => actions.shop.getItems);
+  const isLoading = useStoreState(state => state.cart.isAddingItem);
 
   useEffect(() => {
-    getItems({ isRefresh:false });
+    getItems({ isRefresh: false });
   }, []);
 
   return (
     <Fragment>
-      <HeaderBar title='Shop' />
+      <LoadingOverlay show={isLoading} />
+      <HeaderBar
+        title='Shop'
+        accessoryLeft={DrawerButton}
+        accessoryRight={accessoryRight}
+      />
       <ShopList />
     </Fragment>
   );

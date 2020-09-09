@@ -2,7 +2,7 @@ import React, { memo, useMemo } from 'react';
 import { APP_URL } from 'react-native-dotenv';
 import { Avatar, withStyles } from '@ui-kitten/components';
 
-import { Block } from 'shared';
+import { Block } from 'atoms';
 
 function BreederLogo(props) {
 

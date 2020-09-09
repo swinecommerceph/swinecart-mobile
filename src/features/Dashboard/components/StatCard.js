@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Block, Text } from 'shared';
+
+import { Block, Text } from 'atoms';
 
 function StatCard({ title, data, onPress }) {
 
@@ -9,7 +10,7 @@ function StatCard({ title, data, onPress }) {
 
   return (
     <TouchableOpacity
-      activeOpacity={0.50}
+      activeOpacity={0.90}
       onPress={onPress}
     >
       <Block height={200} backgroundColor='white1' borderRadius={5} margin={1} shadow='shadow2'>

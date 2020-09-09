@@ -26,7 +26,10 @@ const service = {
   },
   confirmSold(requestData) {
     return API.post(`${URL_PREFIX}/products/${requestData.product_id}/order-status`, requestData);
-  }
+  },
+  removeRequest(id) {
+    return API.delete(`${URL_PREFIX}/products/${id}/requests`);
+  },
 }
 
 export default service;

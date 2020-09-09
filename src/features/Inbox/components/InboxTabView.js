@@ -3,7 +3,7 @@ import { withStyles } from '@ui-kitten/components';
 import { Dimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
-import { EmptyListMessage } from 'shared';
+import { EmptyListMessage } from 'molecules';
 
 import { shadows, colors } from 'constants/theme';
 
@@ -20,7 +20,7 @@ class InboxTabView extends PureComponent {
     ]
   };
 
-  chatListRoute = () =>  <ChatList />;
+  chatListRoute = () => <ChatList />;
   notificationListRoute = () => <NotificationList />;
 
   getLabelText = ({ route }) => route.title;
@@ -36,10 +36,10 @@ class InboxTabView extends PureComponent {
         {...props}
         useNativeDriver={true}
         getLabelText={this.getLabelText}
-        labelStyle={this.props.themedStyle.labelStyle}
-        indicatorStyle={this.props.themedStyle.indicatorStyle}
-        style={this.props.themedStyle.tabBarStyle}
-        tabStyle={this.props.themedStyle.tabStyle}
+        labelStyle={this.props.eva.style.labelStyle}
+        indicatorStyle={this.props.eva.style.indicatorStyle}
+        style={this.props.eva.style.tabBarStyle}
+        tabStyle={this.props.eva.style.tabStyle}
       />
     )
   }
@@ -76,16 +76,18 @@ class InboxTabView extends PureComponent {
 
 export default withStyles(InboxTabView, () => ({
   tabBarStyle: {
-    ...shadows.shadow3,
-    backgroundColor: colors.primary,
-    height: 56
+    ...shadows.shadow2,
+    backgroundColor: colors.white1,
+    height: 48
   },
   labelStyle: {
-    fontFamily: 'OpenSans-SemiBold',
-    fontSize: 15,
+    fontFamily: 'OpenSans-Bold',
+    fontWeight: 'normal',
+    fontSize: 14,
+    color: colors.primary
   },
   indicatorStyle: {
-    backgroundColor: 'white',
+    backgroundColor: colors.primary,
     height: 4
   },
 }));

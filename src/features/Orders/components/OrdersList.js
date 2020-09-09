@@ -1,7 +1,8 @@
 import React, { memo, useEffect } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-import { List, LoadingView, BlankScreen } from 'shared';
+import { List } from 'organisms';
+import { LoadingView, BlankScreen } from 'molecules';
 
 import OrderItem from './OrderItem';
 
@@ -62,7 +63,7 @@ function OrdersList({ status }) {
         data={orders}
         Component={OrderItem}
         keyExtractor={keyExtractor}
-        emptyListMessage={'No Orders'}
+        emptyListMessage={'There are no orders placed yet.'}
         isRefreshing={isRefreshing}
         onPressLoadMore={onPressLoadMore}
         onRefresh={onRefresh}

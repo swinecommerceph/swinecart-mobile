@@ -2,7 +2,9 @@ import React, { memo, useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { ModalService } from 'services';
-import { Block, ProductAvatar } from 'shared';
+
+import { ProductAvatar, Card } from 'molecules';
+import { Block } from 'atoms';
 
 import {
   ProductInfo,
@@ -17,22 +19,22 @@ function OrderItem({ data }) {
 
   const onPressView = useCallback(() => {
     ModalService.showModal('OrderDetails', { product, reservation });
-  }, []);
+  }, [ product, reservation ]);
 
   return (
     <TouchableOpacity
       disabled={status === 'requested'}
-      activeOpacity={0.50}
+      activeOpacity={0.90}
       onPress={onPressView}
     >
-      <Block row padding backgroundColor='white1' borderBottomWidth={1} borderBottomColor='gray1'>
-        <ProductAvatar image={image} />
-        <Block paddingHorizontal>
+      <Card>
+        <ProductAvatar image={image} type={type} shape='rounded' size={96} />
+        <Block flex={1} paddingHorizontal={1}>
           <ProductInfo name={name} type={type} breed={breed} />
           <OrderStatus status={status} requestCount={requestCount} reservation={reservation} />
           <OrderActions status={status} product={product} reservation={reservation} />
         </Block>
-      </Block>
+      </Card>
     </TouchableOpacity>
   );
 }

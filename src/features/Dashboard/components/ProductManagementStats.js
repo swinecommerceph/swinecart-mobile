@@ -1,7 +1,10 @@
 import React, { Fragment, memo } from 'react';
 import { useStoreState } from 'easy-peasy';
-import { Text } from 'shared';
+
 import { NavigationService } from 'services';
+
+import { Text } from 'atoms';
+
 import StatCard from './StatCard';
 
 function ProductManagementStats() {

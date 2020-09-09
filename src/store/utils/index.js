@@ -1,0 +1,42 @@
+import { action } from 'easy-peasy';
+
+const initialState = {
+  items: null,
+  page: 1,
+  isLoading: true,
+  isRefreshing: false,
+  isLoadingMore: false,
+  hasFetchingError: false,
+};
+
+export const addGenericModel = () => ({
+
+  ...initialState,
+
+  resetState: action((state) => {
+    state = initialState;
+  }),
+
+  setItems: action((state, payload) => {
+    const { items = [], page = 1 } = payload;
+    state.items = items;
+    state.page = page;
+  }),
+
+  setLoading: action((state, payload) => {
+    state.isLoading = payload;
+  }),
+
+  setRefreshing: action((state, payload) => {
+    state.isRefreshing = payload;
+  }),
+
+  setLoadingMore: action((state, payload) => {
+    state.isLoadingMore = payload;
+  }),
+
+  setFetchingError: action((state, payload) => {
+    state.hasFetchingError = payload;
+  }),
+
+});

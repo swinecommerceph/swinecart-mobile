@@ -1,19 +1,20 @@
 import React, { useEffect, memo } from 'react';
-import { mapping } from '@eva-design/eva';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { enableScreens } from 'react-native-screens';
 import { StoreProvider } from 'easy-peasy';
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 
-import RootNavigator from 'navigation/navigators';
-import StatusBar from 'shared/StatusBar';
-import ModalContainer from 'shared/ModalContainer';
 import { NavigationService, ModalService } from 'services';
+import RootNavigator from 'navigation';
 import { colors } from 'constants/theme';
+
+import StatusBar from 'atoms/StatusBar';
+import ModalContainer from 'organisms/ModalContainer';
 
 import store from './store';
 
-enableScreens();
+// enableScreens();
 
 function App() {
 
@@ -23,10 +24,7 @@ function App() {
   return (
     <StoreProvider store={store}>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider
-        mapping={mapping}
-        theme={colors}
-      >
+      <ApplicationProvider {...eva} theme={colors}>
         <StatusBar />
         <ModalContainer ref={ModalService.setModalContainerRef} />
         <RootNavigator ref={NavigationService.setTopLevelNavigator}/>
