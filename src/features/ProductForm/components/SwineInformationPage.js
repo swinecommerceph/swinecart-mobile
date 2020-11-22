@@ -8,7 +8,7 @@ import { houseTypes } from 'constants/enums';
 
 function SwineInformationPage({ formik }) {
 
-  const { values, setFieldValue, errors, touched } = formik;
+  const { values, setFieldValue, errors, touched, setFieldTouched } = formik;
 
   // const farms = useStoreState(state => state.farms.items);
 
@@ -44,6 +44,7 @@ function SwineInformationPage({ formik }) {
               touched={touched}
               values={values}
               onChange={setFieldValue}
+              onBlur={setFieldTouched}
               required={true}
             />
           </Block>
@@ -57,6 +58,7 @@ function SwineInformationPage({ formik }) {
               touched={touched}
               values={values}
               onChange={setFieldValue}
+              onBlur={setFieldTouched}
               required={true}
             />
             <Input
@@ -66,6 +68,7 @@ function SwineInformationPage({ formik }) {
               touched={touched}
               values={values}
               onChange={setFieldValue}
+              onBlur={setFieldTouched}
               required={true}
             />
           </Block>
@@ -82,6 +85,9 @@ function SwineInformationPage({ formik }) {
             touched={touched}
             values={values}
             onChange={setFieldValue}
+            onBlur={setFieldTouched}
+            onChange={setFieldValue}
+            onBlur={setFieldTouched}
             optional={true}
             width={128}
           />
@@ -117,6 +123,7 @@ function SwineInformationPage({ formik }) {
             touched={touched}
             values={values}
             onChange={setFieldValue}
+            onBlur={setFieldTouched}
             optional={true}
             width={128}
           />
@@ -130,6 +137,7 @@ function SwineInformationPage({ formik }) {
             touched={touched}
             values={values}
             onChange={setFieldValue}
+            onBlur={setFieldTouched}
             optional={true}
             width={128}
           />
@@ -143,6 +151,7 @@ function SwineInformationPage({ formik }) {
             touched={touched}
             values={values}
             onChange={setFieldValue}
+            onBlur={setFieldTouched}
             optional={true}
             width={128}
           />
@@ -156,6 +165,7 @@ function SwineInformationPage({ formik }) {
             touched={touched}
             values={values}
             onChange={setFieldValue}
+            onBlur={setFieldTouched}
             optional={true}
             width={128}
           />
@@ -171,6 +181,7 @@ function SwineInformationPage({ formik }) {
             touched={touched}
             values={values}
             onChange={setFieldValue}
+            onBlur={setFieldTouched}
             multiline
             numberOfLines={5}
             textAlignVertical='top'

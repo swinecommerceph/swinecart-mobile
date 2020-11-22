@@ -3,13 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
     "start": "npx react-native start --reset-cache --max-workers=10",
     "dev:android": "npx react-native run-android",
-=======
-    "start": "react-native start --reset-cache --max-workers=30",
-    "dev:android": "react-native run-android",
->>>>>>> 1abf5175001dbaf86ca26be60e13ff6f63c7dadb
     "clean:android": "cd android && ./gradlew clean && cd ..",
     "build:android": "cd android && ./gradlew clean && ./gradlew bundleRelease",
     "analyze-bundle:android": "yarn run react-native-bundle-visualizer --verbose --reset-cache --dev false --platform android",
