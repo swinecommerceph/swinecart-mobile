@@ -9,7 +9,7 @@ const navigator = createStackNavigator({
   ManageProducts: ManageProducts,
   ProductForm: ProductForm,
 }, {
-    initialRouteName: 'ProductForm',
+    initialRouteName: 'ManageProducts',
     headerMode: 'none',
     defaultNavigationOptions: {
     }
@@ -17,8 +17,8 @@ const navigator = createStackNavigator({
 
 navigator.navigationOptions = ({ navigation }) => {
   return {
-    tabBarVisible: false,
-    // tabBarVisible: navigation.state.index > 0 ? false : true,
+    // tabBarVisible: false,
+    tabBarVisible: navigation.state.index > 0 ? false : true,
   };
 };
 

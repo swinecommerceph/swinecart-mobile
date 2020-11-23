@@ -18,7 +18,7 @@ function Container() {
       <LoadingOverlay show={isLoggingIn} />
       <Block flex={1} backgroundColor='white1'>
         <Block flex={1} middle padding={1}>
-          {/* <Logo /> */}
+          <Logo />
           <LoginForm />
         </Block>
       </Block>

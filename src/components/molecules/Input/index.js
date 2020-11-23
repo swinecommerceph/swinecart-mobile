@@ -26,7 +26,7 @@ function Input(props) {
 
   const hasError = !!errors[name] && !!touched[name];
 
-  console.dir(touched);
+  // console.dir(touched);
   // console.dir(name, hasError, touched[name], !!errors[name]);
 
   const onChangeText = useCallback(value => {

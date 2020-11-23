@@ -84,11 +84,11 @@ export default {
 
   }),
   removeFromCart: thunk(async (actions, payload) => {
-    
+
     actions.setIsRemovingItem(true);
 
     const [error, data] = await to(CartService.removeItem(payload));
-    
+
     if (error) {
       const { data, problem } = error;
       if (problem === 'CLIENT_ERROR') {
@@ -124,7 +124,7 @@ export default {
     else {
 
       const { items } = data.data;
-  
+
       actions.setItems({
         items,
         page: 2

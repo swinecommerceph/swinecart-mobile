@@ -104,13 +104,14 @@ export default {
 
     const { status, isRefresh } = payload;
 
-    isRefresh 
+    isRefresh
       ? actions.setRefreshingByStatus({ isRefreshing: true, status })
       : actions.setLoadingByStatus({ isLoading: true, status });
 
     const [error, data] = await to(OrderService.getOrders(status, 1, LIMIT));
 
     if (error) {
+      console.log(error.data);
       ToastService.show('Please try again later!', null);
     }
     else {
