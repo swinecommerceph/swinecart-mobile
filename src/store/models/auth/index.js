@@ -21,7 +21,7 @@ export default {
     state.isLoading = payload;
   }),
   setLoggingIn: action((state, payload) => {
-    state.isLoggingIn = payload.isLoggingIn;
+    state.isLoggingIn = payload;
   }),
 
   setLoggingOut: action((state, payload) => {
@@ -36,7 +36,7 @@ export default {
   login: thunk(async (actions, payload, { getStoreActions }) => {
     const { email, password } = payload;
 
-    actions.setLoggingIn({ isLoggingIn: true });
+    actions.setLoggingIn(true);
 
     const [ error, data ] = await to(AuthService.login({ email, password }));
 
@@ -54,52 +54,25 @@ export default {
       else {
         ToastService.show('Please try again later!', null);
       }
-
-
-      actions.setLoggingIn({ isLoggingIn: false });
     }
     else {
-      ToastService.show('Successfully logged in!', () => {
-        const { token } = data.data;
-        Api.setAuthToken(token);
-        actions.setToken({ token });
-        actions.saveTokenToStorage(token);
-        getStoreActions().user.getAccountType({ token });
-      });
-
+      ToastService.show('Successfully logged in!', null);
+      const { token } = data.data;
+      Api.setAuthToken(token);
+      actions.setToken(token);
+      await AsyncStorage.setItem('token', token);
     }
-
+    actions.setLoggingIn(false);
   }),
 
   logout: thunk(async (actions, payload) => {
 
-    actions.setLoggingIn({ isLoggingIn: false });
-    actions.setLoggingOut({ isLoggingOut: true });
-
-    const [ error, data ] = await to(AuthService.logout());
-
-    if (error) {
-      const { problem } = error;
-
-      if (problem === 'TIMEOUT_ERROR') {
-        ToastService.show('Please try again later!', null);
-      }
-
-      actions.setLoggingOut({ isLoggingOut: false });
-    }
-    else {
-      ToastService.show('Successfully logged out!', async () => {
-        Api.setAuthToken(null);
-        actions.setToken({ token: null });
-        await AsyncStorage.removeItem('token');
-        NavigationService.navigate('Public');
-        actions.setLoggingOut({ isLoggingOut: false });
-      });
-    }
-
   }),
 
-  getTokenFromStorage: thunk(async (actions, payload, { getStoreActions }) => {
+  getTokenFromStorage: thunk(async (actions, payload) => {
+
+    actions.setIsLoading(true);
+
     const token = await AsyncStorage.getItem('token');
 
     if (token) {
@@ -110,10 +83,5 @@ export default {
     }
 
     actions.setIsLoading(false);
-
-    // Api.setAuthToken(token);
-    // actions.setToken({ token });
-    // getStoreActions().user.getAccountType({ token });
-
   }),
 };

@@ -1,9 +1,11 @@
 import React, { memo } from 'react';
-import { withNavigation } from 'react-navigation';
+import { useNavigation } from '@react-navigation/native';
 
 import HeaderBarButton from '../HeaderBarButton';
 
-function DrawerButton({ navigation }) {
+function DrawerButton() {
+
+  const navigation = useNavigation();
 
   const onPressBack = () => {
     navigation.openDrawer();
@@ -18,4 +20,4 @@ function DrawerButton({ navigation }) {
 
 }
 
-export default withNavigation(memo(DrawerButton));
+export default memo(DrawerButton);

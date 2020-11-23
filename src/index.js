@@ -21,7 +21,7 @@ enableScreens();
 function App() {
 
     useEffect(() => {
-        // Preload images here
+        console.log('App mounted');
     }, []);
 
     return (

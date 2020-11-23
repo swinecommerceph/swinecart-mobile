@@ -24,31 +24,22 @@ export default {
 
   // Thunk
 
-  getAccountType: thunk(async (actions, payload, { getStoreActions }) => {
+  getUserData: thunk(async (actions, payload, { getStoreActions }) => {
 
-    if (payload.token) {
-      const [error, data] = await to(AuthService.getLoggedInUser());
+    const [error, data] = await to(AuthService.getLoggedInUser());
 
-      if (error) {
-        ToastService.show('Please try again later!', () => {
-          NavigationService.navigate('Public');
-        });
-      }
-      else {
-        const { user, topic } = data.data;
-        const accountType = last(user.userable_type.split('\\'));
-
-        actions.setUserData({ data: user, accountType });
-        // getStoreActions().notifications.getTopic(topic);
-        // ChatClient.init(getStoreActions().chat.onMessage, user);
-      }
+    if (error) {
+      // ToastService.show('Please try again later!', () => {
+      //   NavigationService.navigate('Public');
+      // });
     }
     else {
-      ToastService.show('Please try again later!', () => {
-        NavigationService.navigate('Public');
-      });
-    }
+      const { user, topic } = data.data;
+      const accountType = last(user.userable_type.split('\\'));
+      console.log(accountType);
 
+      // actions.setUserData({ data: user, accountType });
+    }
   }),
 
 };

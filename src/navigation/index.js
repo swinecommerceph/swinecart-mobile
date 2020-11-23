@@ -5,6 +5,9 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import { NavigationService } from 'services';
 
+import PublicStack from './Navigators/Public';
+import MainAppStack from './Navigators/MainApp';
+
 import LoadingScreen from 'screens/LoadingScreen';
 
 const Stack = createStackNavigator();
@@ -26,22 +29,14 @@ function RootNavigation(props) {
                 {
                     isLoading
                         ? <Stack.Screen name='LoadingScreen' component={LoadingScreen} />
-                        : token
-                            ? <Stack.Screen name='LoadingScreen' component={LoadingScreen} />
-                            : <Stack.Screen name='LoadingScreen' component={LoadingScreen} />
+                        : !!token
+                            ? <Stack.Screen name='MainApp' component={MainAppStack} />
+                            : <Stack.Screen name='Public' component={PublicStack} />
                 }
             </Stack.Navigator>
         </NavigationContainer>
     );
 }
-// Auth Flow PseudoCode
-
-// if isSignedIn
-//     Breeder
-//     Customer
-// else
-//     Login
-// Loading
 
 
 export default RootNavigation;
