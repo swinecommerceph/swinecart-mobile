@@ -1,25 +1,47 @@
-import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
-import AuthChecker from 'features/AuthChecker';
+import { NavigationService } from 'services';
 
-import PublicStack from './PublicStack';
-import BreederNavigator from './Breeder';
-import CustomerNavigator from './Customer';
+import LoadingScreen from 'screens/LoadingScreen';
 
-import TestScreen from 'features/TestScreen';
+const Stack = createStackNavigator();
 
-const navigatorConfig = {
-  initialRouteName: 'AuthChecker',
-};
+function RootNavigation(props) {
 
-const routes = {
-  Public: PublicStack,
-  AuthChecker: AuthChecker,
-  Breeder: BreederNavigator,
-  Customer: CustomerNavigator,
-  TestScreen: TestScreen
-};
+    useEffect(() => {
+        getTokenFromStorage();
+    }, []);
 
-const RootNavigator = createSwitchNavigator(routes, navigatorConfig);
+    const { isLoading, token } = useStoreState(state => state.auth);
+    const getTokenFromStorage = useStoreActions(
+        actions => actions.auth.getTokenFromStorage
+    );
 
-export default createAppContainer(RootNavigator);
+    return (
+        <NavigationContainer ref={NavigationService.setNavigatorRef}>
+            <Stack.Navigator headerMode='none'>
+                {
+                    isLoading
+                        ? <Stack.Screen name='LoadingScreen' component={LoadingScreen} />
+                        : token
+                            ? <Stack.Screen name='LoadingScreen' component={LoadingScreen} />
+                            : <Stack.Screen name='LoadingScreen' component={LoadingScreen} />
+                }
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}
+// Auth Flow PseudoCode
+
+// if isSignedIn
+//     Breeder
+//     Customer
+// else
+//     Login
+// Loading
+
+
+export default RootNavigation;

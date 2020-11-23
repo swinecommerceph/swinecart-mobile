@@ -1,37 +1,17 @@
-import { NavigationActions } from 'react-navigation';
-
 class Navigation {
 
-  navigator;
+  navigatorRef;
 
-  setTopLevelNavigator = ref => {
-    this.navigator = ref;
+  setNavigatorRef = ref => {
+    this.navigatorRef = ref;
   }
 
   navigate = (routeName, params) => {
-    this.navigator.dispatch(
-      NavigationActions.navigate({
-        routeName,
-        params
-      })
-    );
+    this.navigationRef.current.navigate(routeName, params);
   }
 
   back = () => {
-    this.navigator.dispatch(NavigationActions.back());
-  }
-
-  popToTop = (immediate = true) => {
-    this.navigator.dispatch({
-      type: NavigationActions.POP_TO_TOP,
-      immediate
-    });
-  }
-
-  reset = ({ actions, index }) => {
-    this.navigator.dispatch({
-      type: NavigationActions.RESET
-    });
+    this.navigatorRef.dispatch(NavigationActions.back());
   }
 
 }

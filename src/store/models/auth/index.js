@@ -1,13 +1,14 @@
 import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { 
+import {
   AuthService, Api, NavigationService, ToastService
 } from 'services';
 
 export default {
   // State
+  isLoading: true,
   isLoggingIn: false,
   isLoggingOut: false,
   token: null,
@@ -16,6 +17,9 @@ export default {
   // Computed Values
 
   // Actions
+  setIsLoading: action((state, payload) => {
+    state.isLoading = payload;
+  }),
   setLoggingIn: action((state, payload) => {
     state.isLoggingIn = payload.isLoggingIn;
   }),
@@ -25,7 +29,7 @@ export default {
   }),
 
   setToken: action((state, payload) => {
-    state.token = payload.token;
+    state.token = payload;
   }),
 
   // Side Effects
@@ -50,7 +54,7 @@ export default {
       else {
         ToastService.show('Please try again later!', null);
       }
-      
+
 
       actions.setLoggingIn({ isLoggingIn: false });
     }
@@ -59,10 +63,10 @@ export default {
         const { token } = data.data;
         Api.setAuthToken(token);
         actions.setToken({ token });
-        actions.saveTokenToStorage({ token });
+        actions.saveTokenToStorage(token);
         getStoreActions().user.getAccountType({ token });
       });
-      
+
     }
 
   }),
@@ -73,7 +77,7 @@ export default {
     actions.setLoggingOut({ isLoggingOut: true });
 
     const [ error, data ] = await to(AuthService.logout());
-  
+
     if (error) {
       const { problem } = error;
 
@@ -91,27 +95,25 @@ export default {
         NavigationService.navigate('Public');
         actions.setLoggingOut({ isLoggingOut: false });
       });
-      
     }
 
   }),
 
-  checkStorageForToken: thunk(async (actions, payload, { getStoreActions }) => {
+  getTokenFromStorage: thunk(async (actions, payload, { getStoreActions }) => {
     const token = await AsyncStorage.getItem('token');
+
     if (token) {
       Api.setAuthToken(token);
-      actions.setToken({ token });
-      actions.saveTokenToStorage({ token });
-      getStoreActions().user.getAccountType({ token });
+      actions.setToken(token);
     }
     else {
-      NavigationService.navigate('Public');
     }
-  }),
 
-  saveTokenToStorage: thunk(async (actions, payload) => {
-    const { token } = payload;
-    await AsyncStorage.setItem('token', token);
-  }),
+    actions.setIsLoading(false);
 
+    // Api.setAuthToken(token);
+    // actions.setToken({ token });
+    // getStoreActions().user.getAccountType({ token });
+
+  }),
 };

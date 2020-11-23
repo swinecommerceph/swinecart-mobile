@@ -41,7 +41,6 @@ export default {
         actions.setUserData({ data: user, accountType });
         // getStoreActions().notifications.getTopic(topic);
         // ChatClient.init(getStoreActions().chat.onMessage, user);
-        NavigationService.navigate(accountType);
       }
     }
     else {
