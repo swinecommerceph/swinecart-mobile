@@ -15,7 +15,7 @@ import BreederTab from './BreederTab';
 
 const navigatorConfig = {
   initialRouteName: 'BreederTab',
-  contentComponent: BreederDrawer, 
+  contentComponent: BreederDrawer,
   defaultNavigationOptions: {
   },
   lazy: true,

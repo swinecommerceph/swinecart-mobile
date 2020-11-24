@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import BreederScreen from 'screens/BreederScreen';
-import CustomerScreen from 'screens/CustomerScreen';
+import BreederNavigator from '../Breeder';
+import CustomerNavigator from '../Customer';
+
 import LoadingScreen from 'screens/LoadingScreen';
 
 const Stack = createStackNavigator();
@@ -26,13 +27,13 @@ function Navigator() {
                             (
                                 <Stack.Screen
                                     name='BreederNavigator'
-                                    component={BreederScreen}
+                                    component={BreederNavigator}
                                 />
                             )
                         :   (
                                 <Stack.Screen
                                     name='CustomerNavigator'
-                                    component={CustomerScreen}
+                                    component={CustomerNavigator}
                                 />
                             )
                 :

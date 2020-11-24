@@ -6,12 +6,14 @@ import { AuthService, ToastService, ChatClient } from 'services';
 
 import { apiErrors } from 'constants/enums';
 
+const initialState = {
+  data: null,
+  accountType: null,
+};
+
 export default {
   // State
-  data: null,
-  currentUserGCFormat: null,
-  accountType: null,
-
+  ...initialState,
   // Actions
 
   setUserData: action((state, payload) => {
@@ -26,22 +28,22 @@ export default {
 
   // Thunk
   getUserData: thunk(async (actions, payload, { getStoreActions }) => {
+
     const [error, data] = await to(AuthService.getLoggedInUser());
 
-      if (error) {
-        const { problem } = error;
+    if (error) {
+      const { problem } = error;
 
-        if (apiErrors[problem]) {
-          ToastService.show('Something went wrong!', null);
-          getStoreActions().auth.setToken(null);
-        }
-        else {
-        }
+      if (apiErrors[problem]) {
+        ToastService.show('Something went wrong!', null);
+        getStoreActions().auth.setToken(null);
       }
-      else {
-        const { user, topic } = data.data;
-        const accountType = last(user.userable_type.split('\\'));
-        actions.setUserData({ data: user, accountType });
-      }
+    }
+    else {
+      const { user, topic } = data.data;
+      const accountType = last(user.userable_type.split('\\'));
+      actions.setUserData({ data: user, accountType });
+    }
+
   }),
 };
