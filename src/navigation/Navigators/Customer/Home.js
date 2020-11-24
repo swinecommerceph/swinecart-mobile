@@ -3,15 +3,21 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import CustomerScreen from 'screens/CustomerScreen';
 
+import {
+  CartScreen,
+  ShopScreen,
+  InboxScreen,
+} from 'screens';
+
 import TabBar from 'organisms/TabBar';
 
 const Tab = createBottomTabNavigator();
 
 const tabBarRoutes = [
-  { name: 'Shop', component: CustomerScreen, iconName: 'shopping-bag' },
-  { name: 'SwineCart', component: CustomerScreen, iconName: 'shopping-cart' },
+  { name: 'Shop', component: ShopScreen, iconName: 'shopping-bag' },
+  { name: 'SwineCart', component: CartScreen, iconName: 'shopping-cart' },
   { name: 'Orders', component: CustomerScreen, iconName: 'car' },
-  { name: 'Messages', component: CustomerScreen, iconName: 'email' },
+  { name: 'Inbox', component: InboxScreen, iconName: 'email' },
 ];
 
 const tabBar = props => (

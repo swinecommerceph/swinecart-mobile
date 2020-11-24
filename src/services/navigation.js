@@ -11,7 +11,7 @@ class Navigation {
   }
 
   back = () => {
-    this.navigatorRef.dispatch(NavigationActions.back());
+    this.navigatorRef.goBack();
   }
 
 }

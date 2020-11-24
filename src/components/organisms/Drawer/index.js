@@ -19,8 +19,8 @@ function Drawer({ state, navigation, drawerRoutes }) {
 
   return (
     <UKDrawer header={Header} footer={Footer} onSelect={onSelect}>
-      {drawerRoutes.map(({ title }, index) => (
-        <DrawerItem title={title} key={index} />
+      {drawerRoutes.map(({ name }, index) => (
+        <DrawerItem title={name} key={index} />
       ))}
     </UKDrawer>
   );
