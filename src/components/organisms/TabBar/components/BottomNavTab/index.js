@@ -1,11 +1,11 @@
 import React, { memo, useMemo } from 'react';
-import { 
+import {
   BottomNavigationTab as UKBottomNavigationTab
 } from '@ui-kitten/components';
 
 import { Text, Icon } from 'atoms';
 
-function BottomNavigationTab(props) {
+function BottomNavTab(props) {
 
   const { title, style, selected, iconName, onSelect } = props;
 
@@ -23,4 +23,4 @@ function BottomNavigationTab(props) {
   );
 };
 
-export default memo(BottomNavigationTab);
+export default memo(BottomNavTab);
