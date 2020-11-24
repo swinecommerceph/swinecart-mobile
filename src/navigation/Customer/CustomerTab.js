@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import CartStack from './CartStack';
 import ShopStack from './ShopStack';
 import CustomerOrdersStack from './CustomerOrderStack';
-import InboxStack from '../InboxStack';
+import InboxStack from '../Navigators/MainApp/InboxStack';
 
 import CustomerTabBar from 'organisms/CustomerTabBar';
 

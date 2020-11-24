@@ -32,8 +32,7 @@ base.addMonitor(({ config: request, ...response }) => {
   const { headers: reqHeaders, data: reqData, url: endpoint } = request;
   const { headers: resHeaders, data: resData, duration: resDuration } = response;
 
-  // console.dir('Request Headers: ', reqHeaders);
-  // console.dir('Request Token:', reqHeaders.Authorization);
+  // console.log('Request Headers: ', reqHeaders);
   // console.dir('Request Data: ', reqData);
   console.log(resDuration, 'Request Endpoint:', endpoint);
   // console.dir(request);

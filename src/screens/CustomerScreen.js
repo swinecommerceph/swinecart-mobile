@@ -8,7 +8,7 @@ function Container() {
   return (
     <Fragment>
       <Block flex={1}>
-        <Text>Breeder</Text>
+        <Text>Customer</Text>
       </Block>
     </Fragment>
   );

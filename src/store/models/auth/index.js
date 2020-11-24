@@ -6,9 +6,12 @@ import {
   AuthService, Api, NavigationService, ToastService
 } from 'services';
 
+import { apiErrors } from 'constants/enums';
+
 export default {
   // State
   isLoading: true,
+  isLoggedIn: false,
   isLoggingIn: false,
   isLoggingOut: false,
   token: null,
@@ -25,15 +28,15 @@ export default {
   }),
 
   setLoggingOut: action((state, payload) => {
-    state.isLoggingOut = payload.isLoggingOut;
+    state.isLoggingOut = payload;
   }),
 
-  setToken: action((state, payload) => {
-    state.token = payload;
+  setIsLoggedIn: action((state, payload) => {
+    state.isLoggedIn = payload;
   }),
 
   // Side Effects
-  login: thunk(async (actions, payload, { getStoreActions }) => {
+  login: thunk(async (actions, payload) => {
     const { email, password } = payload;
 
     actions.setLoggingIn(true);
@@ -42,25 +45,16 @@ export default {
 
     if (error) {
       const { problem } = error;
-      if (problem === 'TIMEOUT_ERROR') {
-        ToastService.show('Please try again later!', null);
-      }
-      else if (problem === 'CLIENT_ERROR') {
+      if (problem === 'CLIENT_ERROR') {
         ToastService.show('Invalid Email or Password!', null);
       }
-      else if (problem === 'NETWORK_ERROR') {
-        ToastService.show('Please try again later!', null);
-      }
-      else {
-        ToastService.show('Please try again later!', null);
+      else if (apiErrors[problem]) {
+        ToastService.show('Something went wrong!', null);
       }
     }
     else {
       ToastService.show('Successfully logged in!', null);
-      const { token } = data.data;
-      Api.setAuthToken(token);
-      actions.setToken(token);
-      await AsyncStorage.setItem('token', token);
+      actions.setTokenData(data.data.token);
     }
     actions.setLoggingIn(false);
   }),
@@ -70,18 +64,27 @@ export default {
   }),
 
   getTokenFromStorage: thunk(async (actions, payload) => {
-
     actions.setIsLoading(true);
 
     const token = await AsyncStorage.getItem('token');
-
-    if (token) {
-      Api.setAuthToken(token);
-      actions.setToken(token);
-    }
-    else {
-    }
+    actions.setTokenData(token);
 
     actions.setIsLoading(false);
   }),
+
+  setTokenData: thunk(async (actions, payload) => {
+    const token = payload;
+
+    if (token) {
+      Api.setAuthToken(token);
+      actions.setIsLoggedIn(!!token);
+      await AsyncStorage.setItem('token', token);
+    }
+    else {
+      Api.setAuthToken(null);
+      actions.setIsLoggedIn(!!token);
+      await AsyncStorage.removeItem('token');
+    }
+  }),
+
 };

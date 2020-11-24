@@ -7,7 +7,7 @@ class Navigation {
   }
 
   navigate = (routeName, params) => {
-    this.navigationRef.current.navigate(routeName, params);
+    this.navigatorRef.navigate(routeName, params);
   }
 
   back = () => {

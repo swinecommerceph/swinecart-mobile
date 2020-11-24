@@ -1,8 +1,10 @@
-import { action, thunk, computed } from 'easy-peasy';
+import { action, thunk } from 'easy-peasy';
 import last from 'lodash/last';
 import to from 'await-to-js';
 
-import { AuthService, NavigationService, ToastService, ChatClient } from 'services';
+import { AuthService, ToastService, ChatClient } from 'services';
+
+import { apiErrors } from 'constants/enums';
 
 export default {
   // State
@@ -23,23 +25,23 @@ export default {
   }),
 
   // Thunk
-
   getUserData: thunk(async (actions, payload, { getStoreActions }) => {
-
     const [error, data] = await to(AuthService.getLoggedInUser());
 
-    if (error) {
-      // ToastService.show('Please try again later!', () => {
-      //   NavigationService.navigate('Public');
-      // });
-    }
-    else {
-      const { user, topic } = data.data;
-      const accountType = last(user.userable_type.split('\\'));
-      console.log(accountType);
+      if (error) {
+        const { problem } = error;
 
-      // actions.setUserData({ data: user, accountType });
-    }
+        if (apiErrors[problem]) {
+          ToastService.show('Something went wrong!', null);
+          getStoreActions().auth.setToken(null);
+        }
+        else {
+        }
+      }
+      else {
+        const { user, topic } = data.data;
+        const accountType = last(user.userable_type.split('\\'));
+        actions.setUserData({ data: user, accountType });
+      }
   }),
-
 };

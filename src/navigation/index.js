@@ -18,20 +18,34 @@ function RootNavigation(props) {
         getTokenFromStorage();
     }, []);
 
-    const { isLoading, token } = useStoreState(state => state.auth);
+    const { isLoading, isLoggedIn } = useStoreState(state => state.auth);
     const getTokenFromStorage = useStoreActions(
         actions => actions.auth.getTokenFromStorage
     );
 
+    if (isLoading) {
+        return <LoadingScreen />
+    };
+
     return (
         <NavigationContainer ref={NavigationService.setNavigatorRef}>
-            <Stack.Navigator headerMode='none'>
+            <Stack.Navigator headerMode='none' animationEnabled={false}>
                 {
-                    isLoading
-                        ? <Stack.Screen name='LoadingScreen' component={LoadingScreen} />
-                        : !!token
-                            ? <Stack.Screen name='MainApp' component={MainAppStack} />
-                            : <Stack.Screen name='Public' component={PublicStack} />
+                    isLoggedIn
+                        ?
+                            (
+                                <Stack.Screen
+                                    name='MainApp'
+                                    component={MainAppStack}
+                                />
+                            )
+                        :
+                            (
+                                <Stack.Screen
+                                    name='Public'
+                                    component={PublicStack}
+                                />
+                            )
                 }
             </Stack.Navigator>
         </NavigationContainer>

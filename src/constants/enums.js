@@ -9,3 +9,9 @@ export const houseTypes = [
   { key: 'tunnelventilated', text: 'Tunnel Ventilated' },
   { key: 'opensided', text: 'Open Sided' },
 ];
+
+export const apiErrors = {
+  'TIMEOUT_ERROR': true,
+  'CLIENT_ERROR': true,
+  'NETWORK_ERROR': true,
+};

@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import OrdersStack from './OrdersStack';
-import InboxStack from '../InboxStack';
+import InboxStack from '../Navigators/MainApp/InboxStack';
 import ManageProductsStack from './ManageProductsStack';
 
 import BreederTabBar from 'organisms/BreederTabBar';
