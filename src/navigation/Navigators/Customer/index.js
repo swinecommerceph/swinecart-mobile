@@ -33,6 +33,7 @@ function Navigator() {
             {drawerRoutes.map(({ name, component }, index) => (
                 <Drawer.Screen name={name} component={component} key={index} />
             ))}
+
             <Drawer.Screen name='Home' component={HomeNavigator} />
             <Drawer.Screen name='RequestProduct' component={RequestProductScreen} />
         </Drawer.Navigator>
