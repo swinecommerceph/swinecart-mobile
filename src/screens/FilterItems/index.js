@@ -26,7 +26,6 @@ function Container() {
     </Fragment>
   );
 
-  
 }
 
 export default memo(Container);

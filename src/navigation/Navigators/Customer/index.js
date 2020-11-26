@@ -22,6 +22,7 @@ const drawerRoutes = [
     { name: 'Order History', component: OrderHistoryScreen },
     { name: 'Farms', component: CustomerScreen },
     { name: 'Profile', component: CustomerScreen },
+    { name: 'Settings', component: CustomerScreen },
 ];
 
 const drawerContent = props => (

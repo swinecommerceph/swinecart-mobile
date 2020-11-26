@@ -9,14 +9,14 @@ import { LoginSchema } from 'validationSchemas';
 import LoginButton from './LoginButton';
 
 function LoginForm() {
-  
+
   const isLoggingIn = useStoreState(state => state.auth.isLoggingIn);
   const loginUser = useStoreActions(actions => actions.auth.login);
 
   const { values, handleSubmit, setFieldValue, errors, touched } = useFormik({
     initialValues: {
-      email: 'viola.stroman@yahoo.com',
-      // email: 'laurianne14@yahoo.com',
+      // email: 'viola.stroman@yahoo.com',
+      email: 'laurianne14@yahoo.com',
       password: 'secret12',
     // email: '',
     // password: ''

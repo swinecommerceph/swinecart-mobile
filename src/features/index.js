@@ -11,12 +11,10 @@ export { default as OrderDetails } from './OrderDetails';
 export { default as Orders } from './Orders';
 export { default as ProductForm } from './ProductForm';
 export { default as ProductRequests } from './ProductRequests';
-export { default as BreederProfile } from './BreederProfile';
 export { default as ManageProducts } from './ManageProducts';
 export { default as Dashboard } from './Dashboard';
 export { default as Reviews } from './Reviews';
 export { default as Ratings } from './Ratings';
-export { default as Farms } from './Farms';
 export { default as SendProduct } from './SendProduct';
 
 // Customer Features
