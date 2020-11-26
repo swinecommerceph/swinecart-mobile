@@ -14,6 +14,7 @@ export { default as DashboardScreen } from './Dashboard';
 export { default as SendProductScreen } from './SendProduct';
 export { default as ReviewsScreen } from './Reviews';
 export { default as RatingsScreen } from './Ratings';
+export { default as ProductFormScreen } from './ProductForm';
 
 // Customer Screens
 export { default as CartScreen } from './Cart';

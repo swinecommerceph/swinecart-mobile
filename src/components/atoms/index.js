@@ -10,3 +10,4 @@ export { default as Image } from './Image';
 export { default as Select } from './Select';
 export { default as StatusBar } from './StatusBar';
 export { default as Spinner } from './Spinner';
+export { default as Divider } from './Divider';

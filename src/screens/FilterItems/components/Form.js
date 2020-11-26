@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { Divider } from '@ui-kitten/components';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useFormik } from 'formik';
 
@@ -8,13 +7,12 @@ import { NavigationService } from 'services';
 
 import { SearchShopSchema } from 'validationSchemas';
 
-
 import { Select, Input } from 'molecules';
-import { Block, Button } from 'atoms';
+import { Block, Button, Divider } from 'atoms';
 
 function Form() {
 
-  const { 
+  const {
     breederOptions,
     breedOptions,
     selectedType,
@@ -63,7 +61,7 @@ function Form() {
   };
 
   return (
-    <Block flex={1} padding={1}>
+    <Block flex={1} padding={1} backgroundColor='white1'>
       <Block>
         <Input
           name='keyword'
@@ -75,7 +73,7 @@ function Form() {
           onChange={setFieldValue}
         />
       </Block>
-      <Divider />
+      <Divider marginTop={1} />
       <Block marginTop={1}>
         <Select
           onSelect={onSelectType}
