@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useCallback } from 'react';
+import React, { Fragment, memo, useCallback, useEFfect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
@@ -6,7 +6,7 @@ import { StateScreen } from 'organisms';
 import { HeaderBar, BackButton } from 'molecules';
 
 import {
-  Details 
+  Details
 } from './components';
 
 function Container({ route }) {
@@ -17,12 +17,16 @@ function Container({ route }) {
     getData, setLoading
   } = useStoreActions(actions => actions.productView);
 
-  useFocusEffect(useCallback(() => {
+  const productId = route.params.id;
 
-    const productId = route.params.id;
-    getData(productId);
-
-  }), []);
+  useFocusEffect(
+    useCallback(() => {
+      getData(productId);
+      return () => {
+        setLoading(true);
+      };
+    }, [ productId ])
+  );
 
   return (
     <Fragment>

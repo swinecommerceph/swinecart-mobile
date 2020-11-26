@@ -8,7 +8,7 @@ export default {
 
   data: null,
   isLoading: true,
-  hasFetchingError: false, 
+  hasFetchingError: false,
 
   // Computed Values
 

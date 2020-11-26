@@ -13,7 +13,7 @@ function Container() {
   return (
     <Fragment>
       <LoadingOverlay show={isLoading} />
-      <HeaderBar 
+      <HeaderBar
         title='Product Requests'
         accessoryLeft={BackButton}
       />
