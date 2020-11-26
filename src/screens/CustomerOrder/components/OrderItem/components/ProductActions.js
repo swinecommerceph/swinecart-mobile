@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { Fragment, memo } from 'react';
 
 import { ModalService, NavigationService } from 'services';
 
@@ -22,9 +22,14 @@ function ProductActions({ data }) {
         status === 'sold'
         ?
           (
-            <Button size='small' status='primary' onPress={onPressRate}>
-              Rate Breeder
-            </Button>
+            <Fragment>
+              <Button size='small' status='basic' onPress={onPressView}>
+                View Order Details
+              </Button>
+              <Button size='small' status='primary' onPress={onPressRate} marginTop={0.5}>
+                Rate Breeder
+              </Button>
+            </Fragment>
           )
         :
           (

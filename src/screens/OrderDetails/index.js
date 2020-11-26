@@ -12,15 +12,14 @@ import {
 function Container({ route }) {
 
   const isLoading = useStoreState(state => state.orderDetails.isLoading);
+  const {
+    getOrder, setLoading
+  } = useStoreActions(actions => actions.orderDetails);
 
   const { id, status, statusTime } = useMemo(
     () => route.params.order,
     [route.params.order]
   );
-
-  const {
-    getOrder, setLoading
-  } = useStoreActions(actions => actions.orderDetails);
 
   useFocusEffect(
     useCallback(() => {
