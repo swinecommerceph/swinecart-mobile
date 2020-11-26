@@ -42,7 +42,7 @@ export default {
           isRefresh: false
         });
 
-        getStoreActions().orderRequests.getItems({
+        getStoreActions().requests.getItems({
           isRefresh: false
         });
 

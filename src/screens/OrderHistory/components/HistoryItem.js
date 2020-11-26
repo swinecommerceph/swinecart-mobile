@@ -3,10 +3,9 @@ import React, { memo } from 'react';
 import { NavigationService } from 'services';
 
 import { Card, ProductInfo, ProductAvatar } from 'molecules';
-
 import { Block, Button } from 'atoms';
 
-function HistoryItem({ data, listIndex }) {
+function HistoryItem({ data }) {
 
   const { product, logs } = data;
 

@@ -3,7 +3,7 @@ import map from 'lodash/map';
 import to from 'await-to-js';
 import { OrderService, ToastService } from 'services';
 import { requestMapper } from 'utils/mappers/responseMappers';
-import { initialState } from './modelUtils';
+import { initialState } from '../modelUtils';
 
 const LIMIT = 10;
 
@@ -23,7 +23,7 @@ export default {
     state.isLoadingMore = false;
     state.isRefreshing = false;
     state.isLoading = false;
-  }), 
+  }),
 
   setCurrentProduct: action((state, payload) => {
     state.currentProduct = payload;
@@ -46,7 +46,7 @@ export default {
   setLoadingMore: action((state, payload) => {
     state.isLoadingMore = payload;
   }),
-  
+
   // Side Effects
   getItems: thunk(async (actions, payload, { getState }) => {
 
@@ -58,7 +58,7 @@ export default {
       ? actions.setRefreshing(true)
       : actions.setLoading(true);
 
-    const [error, data] = await to(OrderService.getOrderRequests(currentProduct.id, 1, LIMIT));
+    const [error, data] = await to(OrderService.getRequests(currentProduct.id, 1, LIMIT));
 
     if (error) {
       ToastService.show('Please try again later!', null);
@@ -79,13 +79,13 @@ export default {
       : actions.setLoading(false);
 
   }),
-  getMoreItems: thunk(async (actions, payload, { getStoreState, getState }) => {
+  getMoreItems: thunk(async (actions, payload, { getState }) => {
 
     const { currentProduct, page: currentPage, items: currentItems } = getState();
 
     actions.setLoadingMore(true);
 
-    const [error, data] = await to(OrderService.getOrderRequests(currentProduct.id, currentPage, LIMIT));
+    const [error, data] = await to(OrderService.getRequests(currentProduct.id, currentPage, LIMIT));
 
     if (error) {
       ToastService.show('Please try again later!', null);

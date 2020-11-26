@@ -58,10 +58,10 @@ export default {
 
       PushNotificationService.showLocalNotification(title, message);
 
-      const { currentProduct } = getStoreState().orderRequests;
+      const { currentProduct } = getStoreState().requests;
 
       if (currentProduct && currentProduct.id === id) {
-        getStoreActions().orderRequests.getItems({ isRefresh: true });
+        getStoreActions().requests.getItems({ isRefresh: true });
       }
 
       getStoreActions().orders.setIndex(0);

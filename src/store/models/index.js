@@ -14,9 +14,8 @@ export { default as stats } from './stats';
 export { default as ratings } from './ratings';
 export { default as reviews } from './reviews';
 export { default as dashboard } from './dashboard';
-export { default as breederProfile } from './breederProfile';
 export { default as orders } from './orders';
-export { default as orderRequests } from './orderRequests';
+export { default as requests } from './requests';
 export { default as manageProducts } from './manageProducts';
 export { default as reservations } from './reservations';
 

@@ -19,7 +19,7 @@ function Details({ status, statusTime }) {
 
   const { id, breederInfo, details } = order;
 
-  console.dir(order);
+  // console.dir(order);
 
   return (
     <Fragment>

@@ -27,7 +27,6 @@ function Container({ product, orderDetails }) {
   );
     
   const onSelect = date => {
-    console.dir(date);
     setCurrentDate(date);
   };
     

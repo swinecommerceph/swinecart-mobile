@@ -10,7 +10,7 @@ function ReserveProduct(props) {
   const { customerName } = data;
 
   const disapproveRequest = useStoreActions(actions => actions.reservations.disapproveRequest);
-  const currentProduct = useStoreState(state => state.orderRequests.currentProduct);
+  const currentProduct = useStoreState(state => state.requests.currentProduct);
 
   const onPressPrimaryAction = () => {
     hideModal();

@@ -10,12 +10,10 @@ import { Block, Text, Button } from 'atoms';
 function RequestItem({ data }) {
 
   const currentProduct = useStoreState(
-    state => state.orderRequests.currentProduct
+    state => state.requests.currentProduct
   );
 
   const { customerProvince, customerName } = data;
-  
-  console.dir(data);
 
   const onPressView = () => {
     ModalService.showModal(

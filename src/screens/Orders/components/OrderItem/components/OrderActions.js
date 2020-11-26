@@ -12,7 +12,7 @@ function OrderActions(props) {
   const {
     setCurrentProduct,
     resetState
-  } = useStoreActions(actions => actions.orderRequests);
+  } = useStoreActions(actions => actions.requests);
 
   const onPressView = () => {
     resetState();

@@ -111,7 +111,6 @@ export default {
     const [error, data] = await to(OrderService.getOrders(status, 1, LIMIT));
 
     if (error) {
-      console.log(error.data);
       ToastService.show('Please try again later!', null);
     }
     else {

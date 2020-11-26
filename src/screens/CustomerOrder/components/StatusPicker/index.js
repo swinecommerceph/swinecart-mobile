@@ -29,8 +29,8 @@ function StatusPicker({ eva, jumpTo }) {
   );
 
   return (
-    <Block 
-      row middle center padding={1}
+    <Block
+      row middle center padding={0.5}
       backgroundColor='white1'
       borderBottomWidth={1}
       borderBottomColor='gray1'

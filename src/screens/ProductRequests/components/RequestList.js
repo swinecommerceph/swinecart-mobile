@@ -8,9 +8,9 @@ import RequestItem from './RequestItem';
 
 function RequestList() {
 
-  const getRequests = useStoreActions(actions => actions.orderRequests.getItems);
-  const getMoreRequests = useStoreActions(actions => actions.orderRequests.getMoreItems);
-  const currentProduct = useStoreState(state => state.orderRequests.currentProduct);
+  const getRequests = useStoreActions(actions => actions.requests.getItems);
+  const getMoreRequests = useStoreActions(actions => actions.requests.getMoreItems);
+  const currentProduct = useStoreState(state => state.requests.currentProduct);
 
   useEffect(() => {
     if (currentProduct) {
@@ -18,10 +18,10 @@ function RequestList() {
     }
   }, [currentProduct]);
 
-  const requests = useStoreState(state => state.orderRequests.items);
-  const isRefreshing = useStoreState(state => state.orderRequests.isRefreshing);
-  const isLoadingMore = useStoreState(state => state.orderRequests.isLoadingMore);
-  const isLoading = useStoreState(state => state.orderRequests.isLoading);
+  const requests = useStoreState(state => state.requests.items);
+  const isRefreshing = useStoreState(state => state.requests.isRefreshing);
+  const isLoadingMore = useStoreState(state => state.requests.isLoadingMore);
+  const isLoading = useStoreState(state => state.requests.isLoading);
 
   const keyExtractor = item => `${item.swineCartId}`;
 

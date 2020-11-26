@@ -12,7 +12,7 @@ const service = {
     };
     return API.get(`${URL_PREFIX}/orders/${statusText[status]}`, { page, limit });
   },
-  getOrderRequests(id, page = 1, limit = 1000) {
+  getRequests(id, page = 1, limit = 1000) {
     return API.get(`${URL_PREFIX}/orders/${id}/requests`, { page, limit });
   },
   reserveProduct(requestData) {
