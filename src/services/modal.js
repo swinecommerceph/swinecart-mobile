@@ -5,7 +5,7 @@ class Modal {
   setModalContainerRef = ref => {
     this.modalContainer = ref;
   }
-  
+
   showModal = (id, props) => {
     this.modalContainer.showModal(id, props);
   }

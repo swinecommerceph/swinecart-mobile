@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
-import React, { Fragment, useEffect } from 'react';
+
+import React, { useEffect } from 'react';
 import { enableScreens } from 'react-native-screens';
 import { StoreProvider } from 'easy-peasy';
 import {
