@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 
 import React, { useEffect } from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import { enableScreens } from 'react-native-screens';
 import { StoreProvider } from 'easy-peasy';
 import {
@@ -23,6 +24,7 @@ function App() {
 
     useEffect(() => {
         console.log('App mounted');
+        SplashScreen.hide();
     }, []);
 
     return (
