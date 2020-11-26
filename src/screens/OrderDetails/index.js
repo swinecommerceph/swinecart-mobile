@@ -1,4 +1,5 @@
-import React, { memo, useEffect, Fragment, useMemo } from 'react';
+import React, { memo, useEffect, Fragment, useMemo, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import { StateScreen } from 'organisms';
@@ -21,15 +22,14 @@ function Container({ route }) {
     getOrder, setLoading
   } = useStoreActions(actions => actions.orderDetails);
 
-  useEffect(() => {
-
-    getOrder(id);
-
-    return () => {
-      setLoading(true);
-    };
-
-  }, [route.params.order]);
+  useFocusEffect(
+    useCallback(() => {
+      getOrder(id);
+      return () => {
+        setLoading(true);
+      };
+    }, [ route.params.order ])
+  );
 
   return (
     <Fragment>

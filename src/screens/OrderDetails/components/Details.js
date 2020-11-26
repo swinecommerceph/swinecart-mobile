@@ -23,7 +23,7 @@ function Details({ status, statusTime }) {
 
   return (
     <Fragment>
-      <ContainerView flex={1} backgroundColor='gray10'>
+      <ContainerView flex={1} backgroundColor='white1'>
         <DetailBlock>
           <DetailRow
             label='Order No.'
@@ -62,7 +62,7 @@ function Details({ status, statusTime }) {
             value={details.quantity}
           />
           {
-            details.deliveryDate && 
+            details.deliveryDate &&
             <DetailRow
               label='Estimated Date of Delivery'
               value={formatDateNeeded(details.deliveryDate)}

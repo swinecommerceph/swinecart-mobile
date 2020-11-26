@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useCallback, useEFfect } from 'react';
+import React, { Fragment, memo, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
