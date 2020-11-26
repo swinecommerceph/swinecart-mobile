@@ -1,12 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import CustomerScreen from 'screens/CustomerScreen';
-
 import {
   CartScreen,
   ShopScreen,
   InboxScreen,
+  CustomerOrderScreen,
 } from 'screens';
 
 import TabBar from 'organisms/TabBar';
@@ -16,7 +15,7 @@ const Tab = createBottomTabNavigator();
 const tabBarRoutes = [
   { name: 'Shop', component: ShopScreen, iconName: 'shopping-bag' },
   { name: 'SwineCart', component: CartScreen, iconName: 'shopping-cart' },
-  { name: 'Orders', component: CustomerScreen, iconName: 'car' },
+  { name: 'Orders', component: CustomerOrderScreen, iconName: 'car' },
   { name: 'Inbox', component: InboxScreen, iconName: 'email' },
 ];
 

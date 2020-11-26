@@ -6,6 +6,10 @@ import CustomerScreen from 'screens/CustomerScreen';
 import {
     OrderHistoryScreen,
     RequestProductScreen,
+    FilterItemsScreen,
+    ProductViewScreen,
+    OrderDetailsScreen,
+    HistoryDetailsScreen,
 } from 'screens';
 
 import DrawerContent from 'organisms/Drawer';
@@ -36,6 +40,10 @@ function Navigator() {
 
             <Drawer.Screen name='Home' component={HomeNavigator} />
             <Drawer.Screen name='RequestProduct' component={RequestProductScreen} />
+            <Drawer.Screen name='FilterItems' component={FilterItemsScreen} />
+            <Drawer.Screen name='ProductView' component={ProductViewScreen} />
+            <Drawer.Screen name='OrderDetails' component={OrderDetailsScreen} />
+            <Drawer.Screen name='HistoryDetails' component={HistoryDetailsScreen} />
         </Drawer.Navigator>
     );
 }

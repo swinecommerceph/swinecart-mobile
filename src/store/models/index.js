@@ -4,7 +4,7 @@ export { default as chat } from './chat';
 export { default as messaging } from './messaging';
 export { default as notifications } from './notifications';
 
-// export { default as productView } from './productView';
+export { default as productView } from './productView';
 
 // // Breeder Stores
 // export { default as productForm } from './productForm';
