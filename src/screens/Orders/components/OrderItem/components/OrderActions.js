@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { useStoreActions } from 'easy-peasy';
 
 import { NavigationService, ModalService } from 'services';
 
@@ -9,15 +8,8 @@ function OrderActions(props) {
 
   const { status, product, reservation } = props;
 
-  const {
-    setCurrentProduct,
-    resetState
-  } = useStoreActions(actions => actions.requests);
-
   const onPressView = () => {
-    resetState();
-    setCurrentProduct(product);
-    NavigationService.navigate('ProductRequests');
+    NavigationService.navigate('ProductRequests', { product });
   };
 
   const onPressPrimaryAction = () => {

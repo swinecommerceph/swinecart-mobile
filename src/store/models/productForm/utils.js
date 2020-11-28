@@ -1,0 +1,25 @@
+import { types, houseTypes } from 'constants/enums';
+
+export const formInitialState = {
+    name: '',
+    type: types[0],
+    minPrice: null,
+    maxPrice: null,
+    isUnique: false,
+    quantity: 1,
+    isPureBreed: true,
+    breed: null,
+    fatherBreed: null,
+    motherBreed: null,
+    birthDate: null,
+    birthWeight: null,
+    farmFrom: null,
+    houseType: houseTypes[0],
+    adg: null,
+    fcr: null,
+    bft: null,
+    lsba: null,
+    leftTeats: null,
+    rightTeats: null,
+    otherDetails: null,
+};

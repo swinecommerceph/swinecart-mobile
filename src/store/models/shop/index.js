@@ -3,13 +3,13 @@ import to from 'await-to-js';
 
 import { ShopService, ToastService } from 'services';
 
-import { addGenericModel } from '../../utils';
+import { BaseModel } from '../../utils';
 
 const LIMIT = 10;
 
 export default {
 
-  ...(addGenericModel()),
+  ...(BaseModel()),
 
   // State
 

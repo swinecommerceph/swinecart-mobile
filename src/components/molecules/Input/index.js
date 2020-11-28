@@ -13,7 +13,7 @@ function Input(props) {
   const [ isVisible, setIsVisible ] = useState(true);
 
   const {
-    name, values, touched, errors, label, placeholder, 
+    name, values, touched, errors, label, placeholder,
     required = false, optional = false,
     onChange, onBlur, isPassword, size = 'medium',
     width = '100%',
@@ -21,13 +21,7 @@ function Input(props) {
     ...otherProps
   } = props;
 
-
-  // const hasError = useMemo(() => !!errors[name] , [ errors[name] ]);
-
   const hasError = !!errors[name] && !!touched[name];
-
-  // console.dir(touched);
-  // console.dir(name, hasError, touched[name], !!errors[name]);
 
   const onChangeText = useCallback(value => {
     onChange(name, value);

@@ -35,8 +35,7 @@ export default {
       const { problem } = error;
 
       if (apiErrors[problem]) {
-        ToastService.show('Something went wrong!', null);
-        getStoreActions().auth.setToken(null);
+        getStoreActions().auth.setTokenData(null);
       }
     }
     else {

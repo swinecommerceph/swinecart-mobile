@@ -3,38 +3,20 @@ import to from 'await-to-js';
 
 import { CartService, ToastService } from 'services';
 
-import { initialState } from '../modelUtils';
+import { BaseModel } from '../../utils';
 
 
 const LIMIT = 5;
 
 export default {
   // State
-  ...initialState,
+  ...BaseModel(),
 
   isAddingItem: false,
   isRemovingItem: false,
   // Computed Values
 
   // Actions
-
-  setItems: action((state, payload) => {
-    const { items, page } = payload;
-    state.items = items;
-    state.page = page;
-  }),
-
-  setLoading: action((state, payload) => {
-    state.isLoading = payload;
-  }),
-
-  setLoadingMore: action((state, payload) => {
-    state.isLoadingMore = payload;
-  }),
-
-  setRefreshing: action((state, payload) => {
-    state.isRefreshing = payload;
-  }),
 
   setIsAddingItem: action((state, payload) => {
     state.isAddingItem = payload;

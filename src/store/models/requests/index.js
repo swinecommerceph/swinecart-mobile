@@ -1,67 +1,43 @@
 import { action, computed, thunk } from 'easy-peasy';
 import map from 'lodash/map';
 import to from 'await-to-js';
-import { OrderService, ToastService } from 'services';
+import { OrderService } from 'services';
 import { requestMapper } from 'utils/mappers/responseMappers';
-import { initialState } from '../modelUtils';
+
+import { BaseModel } from '../../utils';
 
 const LIMIT = 10;
 
 export default {
+  ...(BaseModel()),
+
   currentProduct: null,
-  ...initialState,
+
 
   // Computed Values
 
   // Actions
 
-  resetState: action((state, payload) => {
-    state.requests = null;
-    state.currentProduct = null;
-    state.page = 1;
-    state.hasError = false;
-    state.isLoadingMore = false;
-    state.isRefreshing = false;
-    state.isLoading = false;
-  }),
-
   setCurrentProduct: action((state, payload) => {
     state.currentProduct = payload;
-  }),
-
-  setItems: action((state, payload) => {
-    const { items = [], page } = payload;
-    state.items = items;
-    state.page = page;
-  }),
-
-  setLoading: action((state, payload) => {
-    state.isLoading = payload;
-  }),
-
-  setRefreshing: action((state, payload) => {
-    state.isRefreshing = payload;
-  }),
-
-  setLoadingMore: action((state, payload) => {
-    state.isLoadingMore = payload;
   }),
 
   // Side Effects
   getItems: thunk(async (actions, payload, { getState }) => {
 
-    const { currentProduct } = getState();
-
     const { isRefresh } = payload;
+
+    const { currentProduct: { id } } = getState();
 
     isRefresh
       ? actions.setRefreshing(true)
       : actions.setLoading(true);
 
-    const [error, data] = await to(OrderService.getRequests(currentProduct.id, 1, LIMIT));
+    const [error, data] = await to(OrderService.getRequests(id, 1, LIMIT));
 
     if (error) {
-      ToastService.show('Please try again later!', null);
+      actions.setFetchingError(true);
+      console.log(error);
     }
     else {
       const { requests } = data.data;
@@ -81,14 +57,19 @@ export default {
   }),
   getMoreItems: thunk(async (actions, payload, { getState }) => {
 
-    const { currentProduct, page: currentPage, items: currentItems } = getState();
+    const {
+      page: currentPage,
+      items: currentItems,
+      currentProduct: { id }
+    } = getState();
 
     actions.setLoadingMore(true);
 
-    const [error, data] = await to(OrderService.getRequests(currentProduct.id, currentPage, LIMIT));
+    const [error, data] = await to(OrderService.getRequests(id, currentPage, LIMIT));
 
     if (error) {
-      ToastService.show('Please try again later!', null);
+      actions.setFetchingError(true);
+      console.log(error);
     }
     else {
       const { requests } = data.data;

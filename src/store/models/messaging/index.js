@@ -2,40 +2,18 @@ import { action, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 
 import { ToastService, MessagingService } from 'services';
-import { initialState } from '../modelUtils';
 
+import { BaseModel } from '../../utils';
 
 const LIMIT = 10;
 
 export default {
   // State
-  ...initialState,
+  ...BaseModel(),
 
   // Computed Values
 
   // Actions
-
-  resetState: action((state) => {
-    state = initialState;
-  }),
-
-  setItems: action((state, payload) => {
-    const { items = [], page } = payload;
-    state.items = items;
-    state.page = page;
-  }),
-
-  setLoading: action((state, payload) => {
-    state.isLoading = payload;
-  }),
-
-  setRefreshing: action((state, payload) => {
-    state.isRefreshing = payload;
-  }),
-
-  setLoadingMore: action((state, payload) => {
-    state.isLoadingMore = payload;
-  }),
 
   // Side Effects
   getItems: thunk(async (actions, payload, { getStoreState }) => {
@@ -51,7 +29,7 @@ export default {
     const [error, data] = await to(MessagingService.getThreads(accountType, 1, LIMIT));
 
     if (error) {
-      ToastService.show('Please try again later!', null);
+      actions.setHasFetchingError(true);
     }
     else {
       const { threads } = data.data;

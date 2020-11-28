@@ -9,7 +9,7 @@ const initialState = {
   hasFetchingError: false,
 };
 
-export const addGenericModel = () => ({
+export const BaseModel = () => ({
 
   ...initialState,
 
@@ -23,16 +23,16 @@ export const addGenericModel = () => ({
     state.page = page;
   }),
 
+  setLoadingMore: action((state, payload) => {
+    state.isLoadingMore = payload;
+  }),
+
   setLoading: action((state, payload) => {
     state.isLoading = payload;
   }),
 
   setRefreshing: action((state, payload) => {
     state.isRefreshing = payload;
-  }),
-
-  setLoadingMore: action((state, payload) => {
-    state.isLoadingMore = payload;
   }),
 
   setFetchingError: action((state, payload) => {

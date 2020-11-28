@@ -23,8 +23,8 @@ enableScreens();
 function App() {
 
     useEffect(() => {
-        console.log('App mounted');
         SplashScreen.hide();
+        console.log('App mounted');
     }, []);
 
     return (

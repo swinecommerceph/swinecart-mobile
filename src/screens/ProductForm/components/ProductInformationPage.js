@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useState, useEffect } from 'react';
+import React, { Fragment, memo, useEffect } from 'react';
 
 import { types } from 'constants/enums';
 
@@ -6,15 +6,9 @@ import { Input, ContainerView, Select, MessageBox } from 'molecules';
 
 import { Block, Text, Checkbox } from 'atoms';
 
-
 function ProductInformationPage({ formik }) {
 
-  const [ selectedType, setSelectedType ] = useState();
   const { values, setFieldValue, errors, touched, setFieldTouched } = formik;
-
-  const onSelectType = selectedIndex => {
-    setSelectedType(selectedIndex);
-  };
 
   useEffect(() => {
 
@@ -22,7 +16,7 @@ function ProductInformationPage({ formik }) {
       setFieldValue('quantity', 1);
     }
 
-  }, [ values['isUnique'] ]);
+  }, [ values['isUnique'], touched['isUnique'] ]);
 
 
   return (
@@ -43,8 +37,12 @@ function ProductInformationPage({ formik }) {
         </Block>
         <Block marginBottom={1}>
           <Select
-            onSelect={onSelectType}
-            selectedIndex={selectedType}
+            name='type'
+            errors={errors}
+            touched={touched}
+            values={values}
+            onChange={setFieldValue}
+            onBlur={setFieldTouched}
             placeholder='Choose Product Type'
             required={true}
             multiSelect={false}
@@ -52,12 +50,12 @@ function ProductInformationPage({ formik }) {
             options={types}
           />
         </Block>
-        <Block marginBottom={0.5}>
+        {/* <Block marginBottom={0.5}>
           <Text semibold size={14}>
             Price Range -
             <Text italic size={12}>
               {' Optional'}
-            </Text> 
+            </Text>
           </Text>
         </Block>
         <Block row>
@@ -89,7 +87,7 @@ function ProductInformationPage({ formik }) {
           </Block>
         </Block>
         {
-          (selectedType && !(types[selectedType.row].key === 'semen')) &&
+          (values['type'] && !(values['type'].key === 'semen')) &&
           <Block marginTop={1}>
             <Text bold size={16} color='primary' textAlign='left'>
               Is this product unique?
@@ -124,7 +122,7 @@ function ProductInformationPage({ formik }) {
               />
             </Block>
           </Block>
-        }
+        } */}
       </ContainerView>
     </Fragment>
   );

@@ -5,15 +5,15 @@ export { default as messaging } from './messaging';
 export { default as notifications } from './notifications';
 
 export { default as productView } from './productView';
+export { default as farms } from './farms';
 
 // Breeder Stores
 export { default as productForm } from './productForm';
 export { default as productMedia } from './productMedia';
-export { default as farms } from './farms';
+
 export { default as stats } from './stats';
 export { default as ratings } from './ratings';
 export { default as reviews } from './reviews';
-export { default as dashboard } from './dashboard';
 export { default as orders } from './orders';
 export { default as requests } from './requests';
 export { default as manageProducts } from './manageProducts';

@@ -21,8 +21,8 @@ export default {
 
   // Side Effects
 
-  disapproveRequest: thunk(async (actions, payload, { getStoreActions }) => {
-  
+  disapproveRequest: thunk(async (actions, payload, { getState, getStoreActions }) => {
+
     const { swineCartId } = payload;
 
     actions.setLoading(true);
@@ -30,13 +30,14 @@ export default {
     const [error, data] = await to(OrderService.removeRequest(swineCartId));
 
     if (error) {
+      console.log(error);
       ToastService.show('Please try again later!', null);
       actions.setLoading(false);
     }
     else {
 
       ToastService.show('Request Disapproved!', () => {
-        
+
         getStoreActions().orders.getOrdersByStatus({
           status: 'requested',
           isRefresh: false
@@ -59,7 +60,7 @@ export default {
       customerId, dateNeeded, quantity, specialRequest, swineCartId,
       productId
     } = payload;
-    
+
     const requestData = {
       status: 'reserved',
       customer_id: customerId,
@@ -73,7 +74,7 @@ export default {
     actions.setLoading(true);
 
     const [ error, data ] = await to(OrderService.reserveProduct(requestData));
-    
+
     if (error) {
       ToastService.show('Please try again later!', null);
       actions.setLoading(false);
@@ -99,8 +100,8 @@ export default {
   }),
 
   sendForDelivery: thunk(async (actions, payload, { getStoreActions }) => {
-    
-    const { 
+
+    const {
       deliveryDate, product, reservation
     } = payload;
 
@@ -139,7 +140,6 @@ export default {
   }),
 
   confirmSold: thunk(async (actions, payload, { getStoreActions }) => {
-    
     const {
       product, reservation
     } = payload;
@@ -174,7 +174,6 @@ export default {
         actions.setLoading(false);
       });
     }
-
   }),
 
   cancelTransaction: thunk(async (actions, payload, { getStoreActions }) => {

@@ -4,47 +4,20 @@ import to from 'await-to-js';
 
 import { ProductsService, NavigationService, ToastService } from 'services';
 
-import { types, houseTypes } from 'constants/enums';
+import { formInitialState } from './utils';
 
 const titles = [
   'Product Information',
   'Swine Information',
-  'Product Media'
 ];
-
-const formInitialState = {
-  name: '',
-  type: types[0],
-  minPrice: null,
-  maxPrice: null,
-  isUnique: false,
-  quantity: 1,
-
-  isPureBreed: true,
-  breed: null,
-  fatherBreed: null,
-  motherBreed: null,
-  birthDate: null,
-  birthWeight: null,
-  farmFrom: null,
-  houseType: houseTypes[0],
-  adg: null,
-  fcr: null,
-  bft: null,
-  lsba: null,
-  leftTeats: null,
-  rightTeats: null,
-  otherDetails: null,
-};
 
 export default {
   // State
   isLoading: false,
   currentStep: 1,
   maxSteps: 2,
-  data: {
-    ...formInitialState
-  },
+  mode: 'add',
+  data: { ...formInitialState },
 
   // Computed
   currentTitle: computed(state => titles[state.currentStep - 1]),
@@ -55,6 +28,10 @@ export default {
 
   resetForm: action((state, payload) => {
     state.data = { ...formInitialState };
+  }),
+
+  setMode: action((state, payload) => {
+    state.mode = payload;
   }),
 
   setLoading: action((state, payload) => {
@@ -131,6 +108,21 @@ export default {
         actions.setLoading(false);
         NavigationService.back();
       // });
+    }
+
+  }),
+
+  getProductDetails: thunk(async (actions, payload) => {
+
+    const [error, data] = await to(ProductsService.getProductDetails(payload));
+
+    if (error) {
+
+    }
+
+    else {
+      const product = data.data;
+      console.log(product);
     }
 
   }),

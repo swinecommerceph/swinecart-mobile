@@ -1,28 +1,50 @@
-import React, { Fragment, memo } from 'react';
-import { Select as UKSelect, SelectItem as UKSelectItem, withStyles } from '@ui-kitten/components';
+import React, { Fragment, memo, useState } from 'react';
+import {
+  Select as UKSelect,
+  SelectItem as UKSelectItem,
+  withStyles
+} from '@ui-kitten/components';
 
 import { Text } from 'atoms';
 
 function Select(props) {
 
-  const { 
-    options, selectedIndex, label, valueProp = 'title', uniqueId = 'id',
+  const [selectedIndex, setSelectedIndex] = useState(null);
+
+  const {
+    options, label, valueProp = 'title', uniqueId = 'id',
     required = false, optional = false,
+    name, values, touched, errors, onChange, onBlur,
     placeholder,
     multiSelect,
     eva,
     ...otherProps
   } = props;
 
-  const value = multiSelect
-    ? 
-      selectedIndex.length === 0
-        ? placeholder
-        : selectedIndex.map(option => options[option.row][valueProp]).join(',')
-    : 
-      selectedIndex
-        ? options[selectedIndex.row][valueProp]
-        : placeholder;
+  const onTouched = () => {
+    onBlur(name, true);
+  };
+
+  const onSelect = index => {
+    setSelectedIndex(index);
+
+    const value = multiSelect
+      ?
+        index.length === 0
+          ? null
+          : index.map(option => options[option.row])
+      :
+        index
+          ? options[index.row]
+          : null;
+
+    onChange(name, value);
+
+  };
+
+  const hasError = !!errors[name] && !!touched[name];
+
+  const value = values[name] ? values[name][valueProp] : placeholder;
 
   return (
     <UKSelect
@@ -34,10 +56,19 @@ function Select(props) {
           {optional && <Text italic size={12}>{' - Optional'}</Text>}
         </Fragment>
       }
+      caption={
+        hasError &&
+        <Text semibold size={12} color='danger'>
+          {errors[name]}
+        </Text>
+      }
+      status={hasError ? 'danger' : 'basic'}
       style={eva.style.selectContainer}
       selectedIndex={selectedIndex}
       multiSelect={multiSelect}
       placeholder={placeholder}
+      onBlur={onTouched}
+      onSelect={onSelect}
       {...otherProps}
     >
       {options.map((option) => {

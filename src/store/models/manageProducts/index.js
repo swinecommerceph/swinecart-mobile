@@ -1,17 +1,16 @@
 import { action, thunk } from 'easy-peasy';
-import map from 'lodash/map';
 import to from 'await-to-js';
 
 import { ProductsService, ToastService } from 'services';
 import { productMapper } from 'utils/mappers/responseMappers';
 
-import { addGenericModel } from '../../utils';
+import { BaseModel } from '../../utils';
 
 const LIMIT = 10;
 
 export default {
   // State
-  ...(addGenericModel()),
+  ...(BaseModel()),
 
   // Computed Values
 

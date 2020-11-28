@@ -7,7 +7,7 @@ import { Block, Button } from 'atoms';
 function ProductActions({ data }) {
 
   const onPressEdit = () => {
-    NavigationService.navigate('ProductForm', { mode: 'edit' });
+    NavigationService.navigate('ProductForm', { mode: 'edit', id: data.id });
   };
 
   const onPressView = () => {

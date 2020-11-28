@@ -18,7 +18,7 @@ function ProductMediaItem({ data }) {
   };
 
   const onDelete = () => {
-    
+
   };
 
   const onSetPhoto = () => {

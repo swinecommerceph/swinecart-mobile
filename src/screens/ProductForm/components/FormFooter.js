@@ -1,5 +1,4 @@
 import React, { Fragment, memo, useEffect, useState } from 'react';
-import isEqual from 'react-fast-compare';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
@@ -11,16 +10,15 @@ import {
 } from 'atoms';
 
 const fields = [
-  ['name', 'minPrice', 'maxPrice', 'quantity'],
+  ['name', 'type','minPrice', 'maxPrice', 'quantity'],
   ['breed', 'fatherBreed', 'motherBreed', 'birthWeight', 'adg', 'fcr', 'bft', 'lsba', 'leftTeats', 'rightTeats', 'otherDetails'],
 ];
 
 function FormFooter({ onSubmit, validateForm }) {
 
-  const setStep = useStoreActions(actions => actions.productForm.setStep);
   const nextStep = useStoreActions(actions => actions.productForm.nextStep);
   const prevStep = useStoreActions(actions => actions.productForm.prevStep);
-  
+
   const currentStep = useStoreState(state => state.productForm.currentStep);
   const isLastStep = useStoreState(state => state.productForm.isLastStep);
   const isFirstStep = useStoreState(state => state.productForm.isFirstStep);
@@ -33,21 +31,19 @@ function FormFooter({ onSubmit, validateForm }) {
 
   const onPressNext = async () => {
 
-    nextStep();
+    const errors = await validateForm();
 
-    // const errors = await validateForm();
-
-    // if (!checkForErrors(errors)) {
-    //   if (isLastStep === 2) {
-    //     onSubmit();
-    //   }
-    //   else {
-    //     nextStep();
-    //   }
-    // }
-    // else {
-    //   // ToastService.show('Please check the errors in the form!');
-    // }
+    if (checkForErrors(errors)) {
+      console.log(errors);
+    }
+    else {
+      if (isLastStep === 2) {
+        onSubmit();
+      }
+      else {
+        // nextStep();
+      }
+    }
 
   };
 
@@ -80,4 +76,4 @@ function FormFooter({ onSubmit, validateForm }) {
   );
 }
 
-export default memo(FormFooter, isEqual);
+export default memo(FormFooter);

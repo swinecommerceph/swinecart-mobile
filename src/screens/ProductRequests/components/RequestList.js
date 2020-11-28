@@ -1,6 +1,5 @@
-import React, { useEffect, memo } from 'react';
+import React, { memo } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-
 import { LoadingView } from 'molecules';
 import { List } from 'organisms'
 
@@ -8,29 +7,28 @@ import RequestItem from './RequestItem';
 
 function RequestList() {
 
-  const getRequests = useStoreActions(actions => actions.requests.getItems);
-  const getMoreRequests = useStoreActions(actions => actions.requests.getMoreItems);
-  const currentProduct = useStoreState(state => state.requests.currentProduct);
+  const {
+    items,
+    isRefreshing,
+    isLoadingMore,
+    isLoading,
+  } = useStoreState(state => state.requests);
 
-  useEffect(() => {
-    if (currentProduct) {
-      getRequests({ isRefresh: false });
-    }
-  }, [currentProduct]);
-
-  const requests = useStoreState(state => state.requests.items);
-  const isRefreshing = useStoreState(state => state.requests.isRefreshing);
-  const isLoadingMore = useStoreState(state => state.requests.isLoadingMore);
-  const isLoading = useStoreState(state => state.requests.isLoading);
+  const {
+    getItems,
+    getMoreItems
+  } = useStoreActions(actions => actions.requests);
 
   const keyExtractor = item => `${item.swineCartId}`;
 
   const onPressLoadMore = () => {
-    getMoreRequests();
+    getMoreItems();
   };
 
   const onRefresh = () => {
-    getRequests({ isRefresh: true });
+    getItems({
+      isRefresh: true
+    });
   };
 
   if (isLoading) {
@@ -39,10 +37,10 @@ function RequestList() {
     );
   }
 
-  else if (!isLoading && requests) {
+  else if (!isLoading && items) {
     return (
       <List
-        data={requests}
+        data={items}
         Component={RequestItem}
         keyExtractor={keyExtractor}
         emptyListMessage={'There are no requests yet.'}

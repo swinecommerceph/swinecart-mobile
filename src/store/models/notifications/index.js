@@ -3,43 +3,23 @@ import to from 'await-to-js';
 import routes from 'constants/routes';
 import { ToastService, NotificationService, PushNotificationService, PubSubClient } from 'services';
 
-import { initialState } from '../modelUtils';
+import { BaseModel } from '../../utils';
+
 const LIMIT = 10;
 
 export default {
   // State
-  ...initialState,
+  ...BaseModel(),
   topic: null,
 
   // Computed Values
 
   // Actions
 
-  resetState: action((state) => {
-    state = initialState;
-  }),
-
   setTopic: action((state, payload) => {
     state.topic = payload;
   }),
 
-  setItems: action((state, payload) => {
-    const { items = [], page } = payload;
-    state.items = items;
-    state.page = page;
-  }),
-
-  setLoading: action((state, payload) => {
-    state.isLoading = payload;
-  }),
-
-  setRefreshing: action((state, payload) => {
-    state.isRefreshing = payload;
-  }),
-
-  setLoadingMore: action((state, payload) => {
-    state.isLoadingMore = payload;
-  }),
 
   // Side Effects
 
@@ -52,7 +32,7 @@ export default {
     else if (type === 'db-productRequest') {
 
       const { id, customer_name, name } = payload.body;
-      
+
       const title = 'Product Request';
       const message = `${customer_name} requested for Product ${name}.`;
 

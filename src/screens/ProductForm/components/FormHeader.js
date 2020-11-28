@@ -7,9 +7,9 @@ function FormHeader() {
   const currentTitle = useStoreState(state => state.productForm.currentTitle);
 
   return (
-    <Block padding backgroundColor='gray2'>
+    <Block padding backgroundColor='white1'>
       <Block>
-        <Text bold size={22} color='primary'>
+        <Text bold size={22}>
           {currentTitle}
         </Text>
       </Block>

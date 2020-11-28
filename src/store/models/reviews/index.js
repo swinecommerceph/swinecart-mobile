@@ -1,38 +1,22 @@
 import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 import take from 'lodash/take';
-import { initialState } from './modelUtils';
 
 import {
   ToastService, DashboardService
 } from 'services';
 
+import { BaseModel } from '../../utils';
+
 const LIMIT = 10;
 
 export default {
 
-  ...initialState,
+  ...BaseModel(),
+
   totalCount: 0,
 
   sampleReviews: computed(state => state.items ? take(state.items, 3) : []),
-
-  setRefreshing: action((state, payload) => {
-    state.isRefreshing = payload;
-  }),
-
-  setLoading: action((state, payload) => {
-    state.isLoading = payload;
-  }),
-
-  setLoadingMore: action((state, payload) => {
-    state.isLoadingMore = payload;
-  }),
-
-  setItems: action((state, payload) => {
-    const { items = [], page } = payload;
-    state.items = items;
-    state.page = page;
-  }),
 
   setTotalCount: action((state, payload) => {
     state.totalCount = payload;

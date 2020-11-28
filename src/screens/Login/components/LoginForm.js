@@ -15,8 +15,7 @@ function LoginForm() {
 
   const { values, handleSubmit, setFieldValue, errors, touched } = useFormik({
     initialValues: {
-      // email: 'viola.stroman@yahoo.com',
-      email: 'laurianne14@yahoo.com',
+      email: 'urban.torp@yahoo.com', // breeder
       password: 'secret12',
     // email: '',
     // password: ''

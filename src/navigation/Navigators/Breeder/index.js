@@ -9,6 +9,7 @@ import {
     SendProductScreen,
     ReviewsScreen,
     RatingsScreen,
+    ProductFormScreen,
 } from 'screens';
 
 import DrawerContent from 'organisms/Drawer';
@@ -43,6 +44,7 @@ function Navigator() {
             <Drawer.Screen name='ProductView' component={ProductViewScreen} />
             <Drawer.Screen name='ProductRequests' component={ProductRequestsScreen} />
             <Drawer.Screen name='SendProduct' component={SendProductScreen} />
+            <Drawer.Screen name='ProductForm' component={ProductFormScreen} />
         </Drawer.Navigator>
     );
 }

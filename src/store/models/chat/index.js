@@ -4,41 +4,19 @@ import to from 'await-to-js';
 
 import { ToastService, MessagingService, ChatClient } from 'services';
 
-import { initialState } from '../modelUtils';
+import { BaseModel } from '../../utils';
 
 const LIMIT = 10;
 
 export default {
   // State
-  ...initialState,
-  
+  ...BaseModel(),
+
   currentUser: null,
 
   // Computed Values
 
   // Actions
-
-  resetState: action((state) => {
-    state = initialState;
-  }),
-
-  setItems: action((state, payload) => {
-    const { items = [], page } = payload;
-    state.items = items;
-    state.page = page;
-  }),
-
-  setLoading: action((state, payload) => {
-    state.isLoading = payload;
-  }),
-
-  setRefreshing: action((state, payload) => {
-    state.isRefreshing = payload;
-  }),
-
-  setLoadingMore: action((state, payload) => {
-    state.isLoadingMore = payload;
-  }),
 
   setCurrentUser: action((state, payload) => {
     const { id, name } = payload;

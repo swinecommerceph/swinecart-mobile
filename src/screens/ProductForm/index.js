@@ -1,31 +1,46 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
 import { StateScreen } from 'organisms';
-import { HeaderBar, BackButton } from 'molecules';
 import { LoadingOverlay } from 'atoms';
 
 import {
   Wizard, FormHeader
 } from './components';
 
-function Container() {
+function Container({ route }) {
 
-  // const isFetching = useStoreState(state => state.farms.isLoading);
-  const isLoading = useStoreState(state => state.productForm.isLoading);
-  const getFarms = useStoreActions(actions => actions.farms.getItems);
+  const { setMode, getProductDetails } = useStoreActions(actions => actions.productForm);
 
-  // useEffect(() => {
-  //   getFarms();
-  // }, []);
+  useFocusEffect(
+    useCallback(() => {
+
+      const { mode, id } = route.params;
+
+      setMode(mode);
+
+      if (mode === 'edit') {
+        getProductDetails(id);
+      }
+      else {
+
+      }
+
+      return () => {
+
+      };
+
+    }, [route.params])
+  );
 
   return (
     <StateScreen isLoading={false} hasError={false}>
-      <LoadingOverlay show={isLoading} />
+      {/* <LoadingOverlay show={isLoading} /> */}
       <FormHeader />
       <Wizard />
     </StateScreen>
-  )
+  );
 }
 
-export default memo(Container, () => true);
+export default memo(Container);
