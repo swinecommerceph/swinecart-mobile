@@ -13,7 +13,7 @@ module.exports = {
         'atoms': './src/components/atoms',
         'molecules': './src/components/molecules',
         'organisms': './src/components/organisms',
-        'validationSchemas': './src/validationSchemas',
+        'schemas': './src/schemas',
       }
     }]
   ],

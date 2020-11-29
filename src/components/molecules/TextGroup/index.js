@@ -16,10 +16,10 @@ function TextGroup(props) {
       borderBottomWidth={1}
       borderBottomColor='gray2'
     >
-      <Text semibold color='gray5'>
+      <Text semibold color='gray5' size={14}>
         {label}
       </Text>
-      <Text semibold>
+      <Text semibold size={12}>
         {data}
       </Text>
     </Block>

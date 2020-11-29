@@ -6,7 +6,7 @@ import SwineInformationPage from './SwineInformationPage';
 import ProductInformationPage from './ProductInformationPage';
 import FormFooter from './FormFooter';
 
-import { ProductFormSchema } from 'validationSchemas';
+import { ProductFormSchema } from 'schemas';
 
 function Wizard() {
 

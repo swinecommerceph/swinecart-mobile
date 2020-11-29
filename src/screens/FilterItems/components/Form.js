@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { types } from 'constants/enums';
 import { NavigationService } from 'services';
 
-import { SearchShopSchema } from 'validationSchemas';
+import { SearchShopSchema } from 'schemas';
 
 import { Select, Input } from 'molecules';
 import { Block, Button, Divider } from 'atoms';

@@ -35,8 +35,8 @@
       "shared": [
         "src/shared/*"
       ],
-      "validationSchemas": [
-        "src/validationSchemas/*"
+      "schemas": [
+        "src/schemas/*"
       ]
     }
   }

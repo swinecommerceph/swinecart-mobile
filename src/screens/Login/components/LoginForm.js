@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 
 import { Input } from 'molecules';
 
-import { LoginSchema } from 'validationSchemas';
+import { LoginSchema } from 'schemas';
 
 import LoginButton from './LoginButton';
 
@@ -13,13 +13,11 @@ function LoginForm() {
   const isLoggingIn = useStoreState(state => state.auth.isLoggingIn);
   const loginUser = useStoreActions(actions => actions.auth.login);
 
-  const { values, handleSubmit, setFieldValue, errors, touched } = useFormik({
+  const { handleSubmit, ...formControl } = useFormik({
     initialValues: {
-      email: 'ykautzer@steuber.com', // breeder
-      // email: 'patsy84@ullrich.net', // customer
+      // email: 'ykautzer@steuber.com', // breeder
+      email: 'patsy84@ullrich.net', // customer
       password: 'secret12',
-    // email: '',
-    // password: ''
     },
     validationSchema: LoginSchema,
     onSubmit: ({ email, password }) => {
@@ -33,20 +31,14 @@ function LoginForm() {
         name='email'
         label='Email'
         placeholder='Enter your email here...'
-        errors={errors}
-        touched={touched}
-        values={values}
-        onChange={setFieldValue}
+        formControl={formControl}
       />
       <Input
         name='password'
         label='Password'
         placeholder='Enter your password here...'
-        errors={errors}
-        touched={touched}
-        values={values}
-        onChange={setFieldValue}
         isPassword={true}
+        formControl={formControl}
       />
       <LoginButton
         disabled={isLoggingIn}
