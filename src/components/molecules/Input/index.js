@@ -29,7 +29,8 @@ function Input(props) {
     optional = false,
     isPassword,
     width = '100%',
-    eva: { style }
+    eva: { style },
+    ...otherProps
   } = props;
 
   const {
@@ -93,6 +94,7 @@ function Input(props) {
         accessoryRight={isPassword ? renderIcon : null}
         secureTextEntry={isPassword ? isVisible : false}
         style={containerStyle}
+        {...otherProps}
       />
     </Fragment>
   );

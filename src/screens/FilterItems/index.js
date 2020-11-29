@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useState } from 'react';
+import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
 import { StateScreen } from 'organisms';
@@ -13,7 +13,7 @@ function Container() {
   );
   const isLoading = useStoreState(state => state.filterItems.isLoading);
 
-  useState(() => {
+  useEffect(() => {
     getFilterOptions();
   }, []);
 

@@ -8,22 +8,13 @@ export default {
   isLoading: true,
   hasError: false,
 
+  typeOptions: types,
   breedOptions: null,
   breederOptions: null,
 
-  keyword: '',
-  selectedType: [],
-  selectedBreeds: [],
-  selectedBreeders: [],
+  filters: {},
 
   // Computed Values
-
-  filters: computed(state => ({
-    q: state.keyword,
-    type: state.selectedType.map(({ row }) => types[row].key).join(','),
-    breed: state.selectedBreeds.map(({ row }) => state.breedOptions[row].id).join(','),
-    breeder: state.selectedBreeders.map(({ row }) => state.breederOptions[row].id).join(','),
-  })),
 
   // Actions
   setLoading: action((state, payload) => {
@@ -39,20 +30,16 @@ export default {
     state.breederOptions = payload.breederOptions;
   }),
 
-  setKeyword: action((state, payload) => {
-    state.keyword = payload;
-  }),
+  setFilter: action((state, payload) => {
+    const { keyword, type, breed, breeder } = payload;
 
-  setSelectedType: action((state, payload) => {
-    state.selectedType = payload;
-  }),
+    state.filters = {
+      q: keyword,
+      type: type && type.map(t => t.key).join(','),
+      breed: breed && breed.map(t => t.id).join(','),
+      breeder: breeder && breeder.map(t => t.id).join(','),
+    }
 
-  setSelectedBreeds: action((state, payload) => {
-    state.selectedBreeds = payload;
-  }),
-
-  setSelectedBreeders: action((state, payload) => {
-    state.selectedBreeders = payload;
   }),
 
   // Side Effects
@@ -60,16 +47,21 @@ export default {
 
     actions.setLoading(true);
 
-    const [ error, data ] = await to (ShopService.getFilters());
+    const [ error, data ] = await to(ShopService.getFilters());
 
-    const { breeders, breeds } = data.data; 
+    if (error) {
 
-    actions.setFilterOptions({ 
-      breederOptions: breeders,
-      breedOptions: breeds
-    });
+    }
+    else {
+      const { breeders, breeds } = data.data;
+
+      actions.setFilterOptions({
+        breederOptions: breeders,
+        breedOptions: breeds
+      });
+    }
 
     actions.setLoading(false);
-  
+
   }),
 };
