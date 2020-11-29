@@ -1,15 +1,21 @@
 import React, { memo } from 'react';
 
 import {
-  Block, Text
+  Block,
+  Text,
 } from 'atoms';
 
-function ProfileText(props) {
+function TextGroup(props) {
 
   const { label, data } = props;
 
   return (
-    <Block padding={1} borderBottomWidth={1} borderBottomColor='gray2'>
+    <Block
+      paddingVertical={0.5}
+      paddingHorizontal={1}
+      borderBottomWidth={1}
+      borderBottomColor='gray2'
+    >
       <Text semibold color='gray5'>
         {label}
       </Text>
@@ -18,7 +24,6 @@ function ProfileText(props) {
       </Text>
     </Block>
   )
-
 }
 
-export default memo(ProfileText, () => true);
+export default memo(TextGroup);

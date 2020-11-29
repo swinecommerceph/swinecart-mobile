@@ -1,11 +1,10 @@
-import React, { memo } from 'react';
+import React, { memo, Fragment } from 'react';
 import { useStoreState } from 'easy-peasy';
 
-import { ContainerView } from 'molecules';
+import { ContainerView, TextGroup } from 'molecules';
 import { Block } from 'atoms';
 
 import BreederLogo from './BreederLogo';
-import ProfileText from './ProfileText';
 
 function UserDetails() {
 
@@ -17,22 +16,27 @@ function UserDetails() {
       {/* <Block marginBottom={1}>
         <BreederLogo logoURL={profile.logoUrl} />
       </Block> */}
-      <Block marginVertical={1} backgroundColor='white1'>
-        <ProfileText label='Address Line 1' data={profile.addressLine1} />
-        <ProfileText label='Address Line 2' data={profile.addressLine2} />
-        <ProfileText label='Province' data={profile.province} />
-        <ProfileText label='Postal / Zip Code' data={profile.zipCode} />
-        <ProfileText label='Landline' data={profile.landline} />
-        <ProfileText label='Mobile' data={profile.mobile} />
+      <Block marginTop={1} backgroundColor='white1'>
+        <TextGroup label='Address Line 1' data={profile.addressLine1} />
+        <TextGroup label='Address Line 2' data={profile.addressLine2} />
+        <TextGroup label='Province' data={profile.province} />
+        <TextGroup label='Postal / Zip Code' data={profile.zipCode} />
+        <TextGroup label='Landline' data={profile.landline} />
+        <TextGroup label='Mobile' data={profile.mobile} />
       </Block>
-      {/* <Block marginVertical={1} backgroundColor='white1'>
-        <ProfileText label='Contact Person Name' data={profile.contactPersonName} />
-        <ProfileText label='Contact Person Mobile' data={profile.contactPersonMobile} />
-      </Block>
-      <Block marginVertical={1} backgroundColor='white1'>
-        <ProfileText label='Website' data={profile.website} />
-        <ProfileText label='Produce' data={profile.produce} />
-      </Block> */}
+      {
+        accountType === 'Breeder' &&
+        <Fragment>
+          <Block marginTop={1} backgroundColor='white1'>
+            <TextGroup label='Contact Person Name' data={profile.contactPerson.name} />
+            <TextGroup label='Contact Person Mobile' data={profile.contactPerson.mobile} />
+          </Block>
+          <Block marginTop={1} backgroundColor='white1'>
+            <TextGroup label='Website' data={profile.website} />
+            <TextGroup label='Produce' data={profile.produce} />
+          </Block>
+        </Fragment>
+      }
     </ContainerView>
   );
 

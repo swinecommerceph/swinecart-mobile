@@ -10,6 +10,8 @@ import {
     ReviewsScreen,
     RatingsScreen,
     ProductFormScreen,
+    ProfileScreen,
+    FarmsScreen,
 } from 'screens';
 
 import DrawerContent from 'organisms/Drawer';
@@ -21,8 +23,8 @@ const Drawer = createDrawerNavigator();
 const drawerRoutes = [
     { name: 'Reviews', component: ReviewsScreen },
     { name: 'Ratings', component: RatingsScreen },
-    { name: 'Farms', component: BreederScreen },
-    { name: 'Profile', component: BreederScreen },
+    { name: 'Farms', component: FarmsScreen },
+    { name: 'Profile', component: ProfileScreen },
     { name: 'Settings', component: BreederScreen },
 ];
 

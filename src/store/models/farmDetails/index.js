@@ -10,18 +10,17 @@ import { BaseModel } from '../../utils';
 export default {
 
   ...BaseModel(),
-  getItems: thunk(async (actions, payload) => {
+  getItem: thunk(async (actions, payload) => {
 
     actions.setLoading(true);
 
-    const [error, data] = await to(FarmService.getFarms());
+    const [error, data] = await to(FarmService.getFarm(payload));
 
     if (error) {
       actions.hasFetchingError(false);
     }
     else {
-      const { farms } = data.data;
-      actions.setItems(farms);
+        console.log(data);
     }
 
     actions.setLoading(false);
