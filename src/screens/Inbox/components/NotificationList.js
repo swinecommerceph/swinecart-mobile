@@ -52,7 +52,7 @@ function NotificationList() {
         data={chats}
         Component={NotificationItem}
         keyExtractor={keyExtractor}
-        emptyListMessage={'No Notifications!'}
+        emptyListMessage={'There are no notifications yet.'}
         isRefreshing={isRefreshing}
         onPressLoadMore={onPressLoadMore}
         onRefresh={onRefresh}

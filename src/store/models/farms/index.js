@@ -10,6 +10,7 @@ import { BaseModel } from '../../utils';
 export default {
 
   ...BaseModel(),
+
   getItems: thunk(async (actions, payload) => {
 
     actions.setLoading(true);
@@ -21,7 +22,7 @@ export default {
     }
     else {
       const { farms } = data.data;
-      actions.setItems(farms);
+      actions.setItems({ items: farms, page: 1 });
     }
 
     actions.setLoading(false);

@@ -4,17 +4,30 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { StateScreen } from 'organisms';
 import { HeaderBar, BackButton } from 'molecules';
 
-function Container() {
+import {
+  FarmList,
+  AddButton
+} from './components';
 
-  const { getItems } = useStoreActions(actions => actions.farms);
+function Container() {
 
   useEffect(() => {
     getItems();
   }, []);
 
+  const { isLoading } = useStoreState(state => state.farms);
+  const { getItems } = useStoreActions(actions => actions.farms);
+
   return (
     <Fragment>
-      <HeaderBar title='Farms' accessoryLeft={BackButton} />
+      <HeaderBar
+        title='Farms'
+        accessoryLeft={BackButton}
+        accessoryRight={AddButton}
+      />
+      <StateScreen isLoading={isLoading} hasError={false}>
+        <FarmList />
+      </StateScreen>
     </Fragment>
   );
 }

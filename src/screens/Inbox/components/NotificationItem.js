@@ -23,18 +23,18 @@ function Notification({ data }) {
 
   const { message, readAt, createdAt, type } = data;
 
-  const setIndex = useStoreActions(actions => actions.orders.setIndex);
-  const setCurrentRoute = useStoreActions(actions => actions.dashboard.setCurrentRoute);
+  // const setIndex = useStoreActions(actions => actions.orders.setIndex);
+  // const setCurrentRoute = useStoreActions(actions => actions.dashboard.setCurrentRoute);
 
   const onPressNotification = () => {
     switch(type) {
-      case 'ProductRequested': 
-        setIndex(0);
-        NavigationService.navigate('OrdersStack');
+      case 'ProductRequested':
+        // setIndex(0);
+        // NavigationService.navigate('OrdersStack');
         break;
-      case 'BreederRated': 
-        setCurrentRoute('reviews');
-        NavigationService.navigate('Dashboard'); 
+      case 'BreederRated':
+        // setCurrentRoute('reviews');
+        // NavigationService.navigate('Dashboard');
         break;
     }
   };
@@ -51,7 +51,7 @@ function Notification({ data }) {
         backgroundColor='white1'
         borderBottomWidth={1}
         borderBottomColor='gray1'
-      > 
+      >
         {/* <Icon name={iconNames[type]} color={readAt ? 'gray5' : iconColors[type]} size={30}/> */}
         <Block flex={1} marginLeft={1}>
           <Text semibold size={13} numberOfLines={3} color={textColor}>

@@ -20,11 +20,8 @@ function ProductActions({ data }) {
 
   return (
     <Block flex={1} marginTop={0.5}>
-      <Button size='tiny' status='basic' onPress={onPressView}>
+      <Button size='tiny' status='primary' onPress={onPressView}>
         View Info
-      </Button>
-      <Button size='tiny' status='primary' onPress={onPressEdit} marginTop={0.5}>
-        {data.status === 'hidden' ? 'Display' : 'Hide'}
       </Button>
       <Block flex={1} row marginTop={0.5}>
         <Block flex={1} marginRight={0.5}>

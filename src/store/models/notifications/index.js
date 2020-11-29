@@ -97,12 +97,12 @@ export default {
 
   }),
 
-  getTopic: thunk(async (actions, payload, { getStoreActions }) => {
+  getTopic: thunk(async (actions, payload) => {
     actions.setTopic(payload);
     PubSubClient.init(payload, actions.onNotification);
   }),
 
-  getItems: thunk(async (actions, payload, { getStoreState }) => {
+  getItems: thunk(async (actions, payload) => {
 
     const { isRefresh } = payload;
 
@@ -110,9 +110,7 @@ export default {
       ? actions.setRefreshing(true)
       : actions.setLoading(true);
 
-    const { accountType } = getStoreState().user;
-
-    const [error, data] = await to(NotificationService.getNotifications(accountType, 1, LIMIT));
+    const [error, data] = await to(NotificationService.getNotifications(1, LIMIT));
 
     if (error) {
       ToastService.show('Please try again later!', null);
@@ -133,14 +131,13 @@ export default {
 
   }),
 
-  getMoreItems: thunk(async (actions, payload, { getStoreState, getState }) => {
+  getMoreItems: thunk(async (actions, payload, { getState }) => {
 
     const { page: currentPage, items: currentItems } = getState();
-    const { accountType } = getStoreState().user;
 
     actions.setLoadingMore(true);
 
-    const [error, data] = await to(NotificationService.getNotifications(accountType, currentPage, LIMIT));
+    const [error, data] = await to(NotificationService.getNotifications(currentPage, LIMIT));
 
     if (error) {
       ToastService.show('Please try again later!', null);
@@ -148,15 +145,10 @@ export default {
     else {
       const { notifications } = data.data;
 
-      if (notifications.length > 0) {
-        actions.setItems({
-          items: [...(currentItems || []), ...notifications],
-          page: currentPage + 1
-        });
-      }
-      else {
-        ToastService.show('No more notifications to load!', null);
-      }
+      actions.setItems({
+        items: [...(currentItems || []), ...notifications],
+        page: currentPage + 1
+      });
 
     }
 

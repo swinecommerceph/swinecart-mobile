@@ -21,7 +21,7 @@ export default {
 
   // Side Effects
 
-  disapproveRequest: thunk(async (actions, payload, { getState, getStoreActions }) => {
+  disapproveRequest: thunk(async (actions, payload, { getStoreActions }) => {
 
     const { swineCartId } = payload;
 
