@@ -60,7 +60,7 @@ export default {
   onMessage: thunk((actions, payload, { getStoreState, getState }) => {
 
     const { currentUserGCFormat } = getStoreState().user;
-  
+
     const {
       id, created_at, message, from_id, from, to, to_id, direction,
     } = payload;
@@ -85,7 +85,7 @@ export default {
     const { isRefresh } = payload;
     const { currentUserGCFormat, accountType } = getStoreState().user;
     const { currentUser } = getState();
-    
+
     isRefresh
       ? actions.setRefreshing(true)
       : actions.setLoading(true);

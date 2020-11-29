@@ -10,6 +10,8 @@ import {
     ProductViewScreen,
     OrderDetailsScreen,
     HistoryDetailsScreen,
+    FarmsScreen,
+    ProfileScreen,
 } from 'screens';
 
 import DrawerContent from 'organisms/Drawer';
@@ -20,8 +22,8 @@ const Drawer = createDrawerNavigator();
 
 const drawerRoutes = [
     { name: 'Order History', component: OrderHistoryScreen },
-    { name: 'Farms', component: CustomerScreen },
-    { name: 'Profile', component: CustomerScreen },
+    { name: 'Farms', component: FarmsScreen },
+    { name: 'Profile', component: ProfileScreen },
     { name: 'Settings', component: CustomerScreen },
 ];
 

@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
-import { 
-  Block, Text 
+import {
+  Block, Text
 } from 'atoms';
 
 function ProfileText(props) {
