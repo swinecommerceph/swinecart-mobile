@@ -10,7 +10,7 @@ import {
 } from 'atoms';
 
 const fields = [
-  ['name', 'type','minPrice', 'maxPrice', 'quantity'],
+  ['name', 'type','minPrice', 'maxPrice', 'isUnique', 'quantity'],
   ['breed', 'fatherBreed', 'motherBreed', 'birthWeight', 'adg', 'fcr', 'bft', 'lsba', 'leftTeats', 'rightTeats', 'otherDetails'],
 ];
 
@@ -41,7 +41,7 @@ function FormFooter({ onSubmit, validateForm }) {
         onSubmit();
       }
       else {
-        // nextStep();
+        nextStep();
       }
     }
 

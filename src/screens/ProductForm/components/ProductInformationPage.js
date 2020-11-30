@@ -1,6 +1,6 @@
 import React, { Fragment, memo, useEffect } from 'react';
-
-import { types } from 'constants/enums';
+import isEqual from 'react-fast-compare';
+import { useStoreState } from 'easy-peasy';
 
 import { Input, ContainerView, Select, MessageBox } from 'molecules';
 
@@ -8,7 +8,9 @@ import { Block, Text, Checkbox } from 'atoms';
 
 function ProductInformationPage({ formik }) {
 
-  const { values, setFieldValue, errors, touched, setFieldTouched } = formik;
+  const typeOptions = useStoreState(state => state.productForm.typeOptions);
+
+  const { values, setFieldValue, touched } = formik;
 
   useEffect(() => {
 
@@ -18,39 +20,35 @@ function ProductInformationPage({ formik }) {
 
   }, [ values['isUnique'], touched['isUnique'] ]);
 
-
   return (
     <Fragment>
-      <ContainerView padding={1} backgroundColor='white1'>
+      <ContainerView
+        padding={1}
+        backgroundColor='white1'
+        showsVerticalScrollIndicator
+      >
         <Block>
           <Input
             name='name'
             label='Name'
             placeholder='Enter Product Name here'
             required={true}
-            errors={errors}
-            touched={touched}
-            values={values}
-            onChange={setFieldValue}
-            onBlur={setFieldTouched}
+            formControl={formik}
           />
         </Block>
-        <Block marginBottom={1}>
+        <Block marginTop={0.5}>
           <Select
             name='type'
-            errors={errors}
-            touched={touched}
-            values={values}
-            onChange={setFieldValue}
-            onBlur={setFieldTouched}
-            placeholder='Choose Product Type'
-            required={true}
-            multiSelect={false}
             label='Type'
-            options={types}
+            placeholder='Select Type'
+            required={true}
+            options={typeOptions}
+            valueProp='title'
+            uniqueId='key'
+            formControl={formik}
           />
         </Block>
-        {/* <Block marginBottom={0.5}>
+        <Block marginVertical={0.5}>
           <Text semibold size={14}>
             Price Range -
             <Text italic size={12}>
@@ -63,12 +61,9 @@ function ProductInformationPage({ formik }) {
             <Input
               name='minPrice'
               label='From'
+              placeholder='100'
               keyboardType='numeric'
-              errors={errors}
-              touched={touched}
-              values={values}
-              onChange={setFieldValue}
-              onBlur={setFieldTouched}
+              formControl={formik}
               width={128}
             />
           </Block>
@@ -76,12 +71,9 @@ function ProductInformationPage({ formik }) {
             <Input
               name='maxPrice'
               label='To'
+              placeholder='1000'
               keyboardType='numeric'
-              errors={errors}
-              touched={touched}
-              values={values}
-              onChange={setFieldValue}
-              onBlur={setFieldTouched}
+              formControl={formik}
               width={128}
             />
           </Block>
@@ -97,11 +89,7 @@ function ProductInformationPage({ formik }) {
             </MessageBox>
             <Checkbox
               name='isUnique'
-              errors={errors}
-              touched={touched}
-              values={values}
-              onChange={setFieldValue}
-              onBlur={setFieldTouched}
+              formControl={formik}
             >
               <Text semibold size={14}>
                 Yes, it is unique.
@@ -112,20 +100,22 @@ function ProductInformationPage({ formik }) {
                 disabled={values.isUnique}
                 name='quantity'
                 label='Quantity'
+                placeholder='10'
                 keyboardType='numeric'
-                errors={errors}
-                touched={touched}
-                values={values}
-                onChange={setFieldValue}
-                onBlur={setFieldTouched}
+                formControl={formik}
                 width={96}
               />
             </Block>
           </Block>
-        } */}
+        }
       </ContainerView>
     </Fragment>
   );
 }
 
-export default memo(ProductInformationPage);
+export default memo(ProductInformationPage, (props, nextProps) => {
+  const valResult = isEqual(props.formik.values, nextProps.formik.values);
+  const errResult = isEqual(props.formik.errors, nextProps.formik.errors);
+  const touResult = isEqual(props.formik.touched, nextProps.formik.touched);
+  return valResult && errResult && touResult;
+});

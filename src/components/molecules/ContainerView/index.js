@@ -6,13 +6,13 @@ import { colors, sizes } from 'constants/theme';
 
 function ContainerView(props) {
 
-  const { 
+  const {
     eva, flex,
     backgroundColor = 'gray6',
     padding, paddingBottom = 1, paddingLeft, paddingRight, paddingTop, paddingHorizontal, paddingVertical,
-    showsHorizontalScrollIndicator = true, 
-    showsVerticalScrollIndicator = false, 
-    ...restProps 
+    showsHorizontalScrollIndicator = true,
+    showsVerticalScrollIndicator = false,
+    ...otherProps
   } = props;
 
   const contentContainerStyle = [
@@ -44,7 +44,7 @@ function ContainerView(props) {
       alwaysBounceHorizontal={false}
       // showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={showsVerticalScrollIndicator}
-      {...restProps}
+      {...otherProps}
     />
   )
 

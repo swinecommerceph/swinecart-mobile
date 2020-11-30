@@ -15,8 +15,8 @@ function LoginForm() {
 
   const { handleSubmit, ...formControl } = useFormik({
     initialValues: {
-      // email: 'ykautzer@steuber.com', // breeder
-      email: 'patsy84@ullrich.net', // customer
+      email: 'ykautzer@steuber.com', // breeder
+      // email: 'patsy84@ullrich.net', // customer
       password: 'secret12',
     },
     validationSchema: LoginSchema,
