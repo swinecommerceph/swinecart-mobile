@@ -12,7 +12,7 @@ function OtherDetails({ data }) {
       <Text bold size={18} marginBottom={0.5} color='primary'>
         Other Information
       </Text>
-      <Block paddingBottom={1}>
+      <Block>
         <Text normal size={14} textAlign='left'>
           {trimmedDetails}
         </Text>

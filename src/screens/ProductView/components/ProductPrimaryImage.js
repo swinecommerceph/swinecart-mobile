@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Dimensions } from "react-native";
+import { useWindowDimensions  } from 'react-native';
 import { withStyles } from '@ui-kitten/components';
 import { Block, Image } from 'atoms';
 
@@ -10,9 +10,9 @@ const fallbackUrls = {
   'gilt': 'https://swinecart.work/images/product/medium/gilt_default.jpg',
 };
 
-const screenWidth = Math.round(Dimensions.get('window').width / 2);
-
 function ProductPrimaryImage({ eva, photoURL, type }) {
+
+  const height = ~~(useWindowDimensions().width / 2);
 
   const imageSource = {
     uri: photoURL
@@ -22,15 +22,20 @@ function ProductPrimaryImage({ eva, photoURL, type }) {
     uri: fallbackUrls[type]
   };
 
+  const imageStyle = [
+    eva.style.imageStyle,
+    { height: height }
+  ];
+
   return (
     <Block row>
       <Block row center middle
-        width={'100%'}
-        height={screenWidth}
+        width='100%'
+        height={height}
         backgroundColor='gray7'
       >
         <Image
-          style={eva.style.imageStyle}
+          style={imageStyle}
           imageSource={imageSource}
           fallbackSource={fallbackSource}
           resizeMode='contain'
@@ -45,6 +50,5 @@ export default withStyles(memo(ProductPrimaryImage, () => true), () => ({
   imageStyle: {
     flex: 1,
     width: null,
-    height: screenWidth
   }
 }));

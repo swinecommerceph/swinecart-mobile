@@ -39,7 +39,6 @@ export default {
     }
     else {
       const { product } = data.data;
-      console.log(product);
       actions.setData(product);
     }
 
