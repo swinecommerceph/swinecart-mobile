@@ -4,7 +4,8 @@ const schema = Yup.object().shape({
   name: Yup
     .string()
     .trim()
-    .required('Please enter the product name'),
+    .required('Please enter the product name')
+    .nullable(),
   type: Yup
     .object()
     .required('Please select the product type')
@@ -21,7 +22,8 @@ const schema = Yup.object().shape({
     .number()
     .positive()
     .integer('Invalid Input')
-    .moreThan(0),
+    .moreThan(0)
+    .nullable(),
 
   isPureBreed: Yup
     .boolean(),
@@ -29,29 +31,27 @@ const schema = Yup.object().shape({
     .string().trim()
     .when('isPureBreed', {
       is: true,
-      then: Yup.string().trim().required('Please enter swine breed'),
+      then: Yup.string().trim().required('Please enter swine breed').nullable(),
     })
     .nullable(),
   fatherBreed: Yup
     .string().trim()
     .when('isPureBreed', {
       is: false,
-      then: Yup.string().trim().required('Please enter swine breed'),
+      then: Yup.string().trim().required('Please enter swine breed').nullable(),
     })
     .nullable(),
   motherBreed: Yup
     .string().trim()
     .when('isPureBreed', {
       is: false,
-      then: Yup.string().trim().required('Please enter swine breed'),
+      then: Yup.string().trim().required('Please enter swine breed').nullable(),
     })
     .nullable(),
 
-  // birthDate: Yup
-  //   .date()
-  //   .max(new Date()),
-  birthWeight: Yup
-    .number()
+  birthDate: Yup
+    .date()
+    .max(new Date())
     .nullable(),
   farmFrom: Yup
     .object()
@@ -60,7 +60,9 @@ const schema = Yup.object().shape({
   houseType: Yup
     .object()
     .nullable(),
-
+  birthWeight: Yup
+    .number()
+    .nullable(),
   adg:  Yup
     .number()
     .nullable(),
@@ -83,7 +85,6 @@ const schema = Yup.object().shape({
     .positive()
     .integer('Invalid Input')
     .nullable(),
-
   otherDetails: Yup
     .string()
     .trim()

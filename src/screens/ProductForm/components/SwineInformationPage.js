@@ -1,9 +1,11 @@
-import React, { Fragment, memo, useEffect } from 'react';
+import React, { Fragment, memo } from 'react';
 import isEqual from 'react-fast-compare';
 import { useStoreState } from 'easy-peasy';
 
-import { Input, ContainerView, Select } from 'molecules'
+import { Input, ContainerView, Select, DateInput } from 'molecules'
 import { Block, Button, Text, Divider } from 'atoms';
+
+const today = new Date();
 
 function SwineInformationPage({ formik }) {
 
@@ -33,14 +35,25 @@ function SwineInformationPage({ formik }) {
           </Text>
         </Block>
         <Block row center middle marginBottom={1.5}>
-          <Button status={values['isPureBreed'] ? 'primary' : 'basic'} marginRight={0.5} onPress={onPressPureBreed}>Pure Breed</Button>
-          <Button status={values['isPureBreed'] ? 'basic' : 'primary'} onPress={onPressCrossBreed}>Cross Breed</Button>
+          <Button
+            status={values['isPureBreed'] ? 'primary' : 'basic'}
+            marginRight={0.5}
+            onPress={onPressPureBreed}
+          >
+            Pure Breed
+          </Button>
+          <Button
+            status={values['isPureBreed'] ? 'basic' : 'primary'}
+            onPress={onPressCrossBreed}
+          >
+            Cross Breed
+          </Button>
         </Block>
         {
           values['isPureBreed'] && <Block>
             <Input
-              label="Breed"
               name='breed'
+              label="Breed"
               required={true}
               formControl={formik}
             />
@@ -49,14 +62,14 @@ function SwineInformationPage({ formik }) {
         {
           !values['isPureBreed'] && <Block>
             <Input
-              label="Father's Breed"
               name='fatherBreed'
+              label="Father's Breed"
               required={true}
               formControl={formik}
             />
             <Input
-              label="Mother's Breed"
               name='motherBreed'
+              label="Mother's Breed"
               required={true}
               formControl={formik}
             />
@@ -64,8 +77,17 @@ function SwineInformationPage({ formik }) {
         }
 
         <Divider marginBottom={1} />
-
-        <Block marginBottom={1}>
+        <Block>
+          <DateInput
+            name='birthDate'
+            label='Birth Date'
+            placeholder='Choose Birth Date'
+            max={today}
+            optional={true}
+            formControl={formik}
+          />
+        </Block>
+        <Block>
           <Select
             name='farmFrom'
             label='Farm From'
@@ -77,7 +99,7 @@ function SwineInformationPage({ formik }) {
             formControl={formik}
           />
         </Block>
-        <Block marginBottom={1}>
+        <Block>
           <Select
             name='houseType'
             label='House Type'

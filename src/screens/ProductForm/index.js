@@ -37,6 +37,7 @@ function Container({ route }) {
   );
 
 
+  const isLoading = useStoreState(state => state.productForm.isLoading);
   const isFetchingFarms = useStoreState(state => state.farms.isLoading);
 
   const {
@@ -48,7 +49,7 @@ function Container({ route }) {
 
   return (
     <StateScreen isLoading={isFetchingFarms} hasError={false}>
-      {/* <LoadingOverlay show={isLoading} /> */}
+      <LoadingOverlay show={isLoading} />
       <FormHeader />
       <Wizard />
     </StateScreen>

@@ -10,6 +10,10 @@ import parseISO from 'date-fns/parseISO';
 
 import _pluralize from 'pluralize';
 
+export function formatDate(date, formatString) {
+  return format(date, formatString);
+}
+
 export function capitalizeWords(string) {
   return startCase(string);
 }
@@ -28,7 +32,7 @@ export function formatStatusTime(date) {
   return format(parseISO(date), 'MMM d yyyy (eeee), h:mm a');
 }
 
-export function formatDateNeeded(date) {  
+export function formatDateNeeded(date) {
   return format(parseISO(date), 'MMMM d, yyyy (eeee)')
 }
 

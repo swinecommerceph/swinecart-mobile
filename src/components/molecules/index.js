@@ -18,3 +18,4 @@ export { default as UserAvatar } from './UserAvatar';
 export { default as DrawerButton } from './DrawerButton';
 export { default as Badge } from './Badge';
 export { default as TextGroup } from './TextGroup';
+export { default as DateInput } from './DateInput';

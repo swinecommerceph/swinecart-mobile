@@ -6,6 +6,8 @@ import { ProductsService, NavigationService, ToastService } from 'services';
 
 import { types, houseTypes } from 'constants/enums';
 
+import { formatDate } from 'utils/formatters'
+
 import { formInitialState } from './utils';
 
 const titles = [
@@ -64,8 +66,12 @@ export default {
 
     const {
       name, type, minPrice, maxPrice, isUnique, quantity,
-      isPureBreed, breed, fatherBreed, motherBreed,
-      birthDate, birthWeight, farmFrom, houseType,
+
+      breed, fatherBreed, motherBreed,
+      birthDate,
+      birthWeight,
+      farmFrom,
+      houseType,
       adg,
       fcr,
       bft,
@@ -73,26 +79,27 @@ export default {
       leftTeats,
       rightTeats,
       otherDetails,
-    } = payload.values;
+      isPureBreed,
+    } = payload;
 
     const requestData = {
-      farm_from_id: farmFrom.id,
       name,
       type: type.key,
-      birthdate: birthDate,
-      breed: isPureBreed ? breed : `${fatherBreed.toLowerCase()}+${motherBreed.toLowerCase()}`,
       min_price: minPrice,
       max_price: maxPrice,
-      left_teats: leftTeats,
-      right_teats: rightTeats,
-      birthweight: birthWeight,
-      house_type: houseType.key,
       is_unique: isUnique ? 1 : 0,
       quantity: isUnique ? 1 : quantity,
+      farm_from_id: farmFrom.id,
+      birthdate: birthDate ? formatDate(birthDate, 'yyyy-MM-dd') : null,
+      breed: isPureBreed ? breed : `${fatherBreed.toLowerCase()}+${motherBreed.toLowerCase()}`,
+      birthweight: birthWeight,
+      house_type: houseType ? houseType.key : null,
       adg,
       fcr,
       bft,
       lsba,
+      left_teats: leftTeats,
+      right_teats: rightTeats,
       other_details: otherDetails,
     };
 
@@ -105,13 +112,13 @@ export default {
     }
     else {
       const { product } = data.data;
-      // ToastService.show('Product successfully added!', () => {
+      ToastService.show('Product successfully added!', () => {
         actions.resetForm();
         getStoreActions().manageProducts.getItems({ isRefresh: false });
-        actions.setStep(0);
+        actions.setStep(1);
         actions.setLoading(false);
         NavigationService.back();
-      // });
+      });
     }
 
   }),
@@ -127,6 +134,24 @@ export default {
     else {
       const product = data.data;
       console.log(product);
+
+      // const {
+      //   name, type, minPrice, maxPrice, isUnique, quantity,
+
+      //   breed, fatherBreed, motherBreed,
+      //   birthDate,
+      //   birthWeight,
+      //   farmFrom,
+      //   houseType,
+      //   adg,
+      //   fcr,
+      //   bft,
+      //   lsba,
+      //   leftTeats,
+      //   rightTeats,
+      //   otherDetails,
+      //   isPureBreed,
+      // } = payload;
     }
 
   }),
