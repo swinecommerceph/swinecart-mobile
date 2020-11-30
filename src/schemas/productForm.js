@@ -7,7 +7,8 @@ const schema = Yup.object().shape({
     .required('Please enter the product name'),
   type: Yup
     .object()
-    .required('Please select the product type'),
+    .required('Please select the product type')
+    .nullable(),
   minPrice: Yup
     .number()
     .nullable(),
@@ -19,7 +20,8 @@ const schema = Yup.object().shape({
   quantity: Yup
     .number()
     .positive()
-    .integer('Invalid Input'),
+    .integer('Invalid Input')
+    .moreThan(0),
 
   isPureBreed: Yup
     .boolean(),
@@ -44,9 +46,21 @@ const schema = Yup.object().shape({
       then: Yup.string().trim().required('Please enter swine breed'),
     })
     .nullable(),
+
+  // birthDate: Yup
+  //   .date()
+  //   .max(new Date()),
   birthWeight: Yup
     .number()
     .nullable(),
+  farmFrom: Yup
+    .object()
+    .required('Please select a farm')
+    .nullable(),
+  houseType: Yup
+    .object()
+    .nullable(),
+
   adg:  Yup
     .number()
     .nullable(),
@@ -69,6 +83,7 @@ const schema = Yup.object().shape({
     .positive()
     .integer('Invalid Input')
     .nullable(),
+
   otherDetails: Yup
     .string()
     .trim()

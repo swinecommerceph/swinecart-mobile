@@ -65,19 +65,9 @@ function SwineInformationPage({ formik }) {
 
         <Divider marginBottom={1} />
 
-        <Block>
-          <Input
-            name='birthWeight'
-            label='Birth Weight'
-            keyboardType='numeric'
-            optional={true}
-            width={128}
-            formControl={formik}
-          />
-        </Block>
         <Block marginBottom={1}>
           <Select
-            name='farmForm'
+            name='farmFrom'
             label='Farm From'
             placeholder='Select Farm From'
             required={true}
@@ -89,7 +79,7 @@ function SwineInformationPage({ formik }) {
         </Block>
         <Block marginBottom={1}>
           <Select
-            name='House Type'
+            name='houseType'
             label='House Type'
             placeholder='Select House Type'
             optional={true}
@@ -99,7 +89,17 @@ function SwineInformationPage({ formik }) {
             formControl={formik}
           />
         </Block>
-        <Block marginBottom={1}>
+        <Block>
+          <Input
+            name='birthWeight'
+            label='Birth Weight'
+            keyboardType='numeric'
+            optional={true}
+            width={128}
+            formControl={formik}
+          />
+        </Block>
+        <Block>
           <Input
             label='Average Daily Gain (grams)'
             name='adg'
@@ -109,7 +109,7 @@ function SwineInformationPage({ formik }) {
             formControl={formik}
           />
         </Block>
-        <Block marginBottom={1}>
+        <Block>
           <Input
             label='Feed Conversion Ratio'
             name='fcr'
@@ -119,7 +119,7 @@ function SwineInformationPage({ formik }) {
             formControl={formik}
           />
         </Block>
-        <Block marginBottom={1}>
+        <Block>
           <Input
             label='Backfat Thickness (mm)'
             name='bft'
@@ -129,7 +129,7 @@ function SwineInformationPage({ formik }) {
             formControl={formik}
           />
         </Block>
-        <Block marginBottom={1}>
+        <Block>
           <Input
             label='Litter Size Born Alive'
             name='lsba'
