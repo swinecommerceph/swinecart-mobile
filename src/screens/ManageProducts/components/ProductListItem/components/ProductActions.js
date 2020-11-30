@@ -20,16 +20,18 @@ function ProductActions({ data }) {
 
   return (
     <Block flex={1} marginTop={0.5}>
-      <Button size='tiny' status='primary' onPress={onPressView}>
-        View Info
-      </Button>
-      <Block flex={1} row marginTop={0.5}>
-        <Block flex={1} marginRight={0.5}>
+      <Block alignSelf='flex-start'>
+        <Button size='tiny' status='primary' onPress={onPressView}>
+          View Details
+        </Button>
+      </Block>
+      <Block row marginTop={0.5}>
+        <Block marginRight={0.5}>
           <Button size='tiny' appearance='outline' status='info' onPress={onPressEdit}>
-            Edit
+            Edit Details
           </Button>
         </Block>
-        <Block flex={1}>
+        <Block>
           <Button size='tiny' appearance='outline' status='danger' onPress={onPressDelete}>
             Delete
         </Button>
