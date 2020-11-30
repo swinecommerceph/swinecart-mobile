@@ -5,8 +5,6 @@ import { ContainerView } from 'molecules';
 import ProductPrimaryImage from './ProductPrimaryImage';
 import ProductInfo from './ProductInfo';
 import SwineInfo from './SwineInfo';
-import FarmFrom from './FarmFrom';
-import Breeder from './Breeder';
 import OtherDetails from './OtherDetails';
 
 function Details() {
@@ -17,13 +15,13 @@ function Details() {
   const { primaryImageUrl } = productInfo;
 
   return (
-    <ContainerView paddingBottom={0}>
+    <ContainerView paddingBottom={1} backgroundColor='white1'>
       <ProductPrimaryImage
         photoURL={primaryImageUrl}
         type={productInfo.type}
       />
       <ProductInfo data={productInfo} breeder={breeder} farm={farm} />
-      <SwineInfo data={swineInfo} />
+      <SwineInfo data={swineInfo} type={productInfo.type} />
       <OtherDetails data={otherDetails} />
     </ContainerView>
   );

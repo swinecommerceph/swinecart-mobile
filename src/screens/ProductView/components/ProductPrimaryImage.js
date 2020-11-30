@@ -10,7 +10,7 @@ const fallbackUrls = {
   'gilt': 'https://swinecart.work/images/product/medium/gilt_default.jpg',
 };
 
-const screenWidth = Math.round(Dimensions.get('window').width);
+const screenWidth = Math.round(Dimensions.get('window').width / 2);
 
 function ProductPrimaryImage({ eva, photoURL, type }) {
 
@@ -27,7 +27,7 @@ function ProductPrimaryImage({ eva, photoURL, type }) {
       <Block row center middle
         width={'100%'}
         height={screenWidth}
-        backgroundColor='gray8'
+        backgroundColor='gray7'
       >
         <Image
           style={eva.style.imageStyle}

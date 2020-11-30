@@ -1,31 +1,79 @@
 import React, { memo } from 'react';
+
+import { TextGroup } from 'molecules';
+
 import {
   Block, Text
 } from 'atoms';
 
-import SwineInfoRow from './SwineInfoRow';
+function getPropHouseTypeText(houseType) {
+  return (
+    houseType
+    ?
+      houseType === 'tunnelventilated'
+        ? 'Tunnel Ventilated'
+        : 'Open Sided'
+    : null
+  );
+}
 
-function SwineInfo({ data }) {
+function checkNullField(label, data) {
+  return (
+    data
+      ?
+        (
+          <TextGroup
+            label={label}
+            data={data}
+          />
+        )
+      :
+        (
+          <TextGroup
+            label={label}
+            data='Not indicated'
+            isItalicized
+          />
+        )
+  );
+}
+
+function SwineInfo({ data, type }) {
+
   const {
-    adg, fcr, bft, lsba, birth_weight, house_type
+    adg,
+    fcr,
+    bft,
+    lsba,
+    birthWeight,
+    houseType,
+    rightTeats,
+    leftTeats,
   } = data;
 
   return (
-    <Block backgroundColor='white1' paddingHorizontal={1}>
-      <Text bold size={20} marginBottom={0.5} color='primary'>Swine Information</Text>
-      <SwineInfoRow label={'Average Daily Gain (g)'} data={adg} />
-      <SwineInfoRow label={'Feed Conversion Ratio'} data={fcr} />
-      <SwineInfoRow label={'Backfat Thickness (mm)'} data={bft} />
-      <SwineInfoRow label={'Litter Size (Born Alive)'} data={lsba} />
-      <SwineInfoRow label={'Birth Weight'} data={birth_weight} />
-      <SwineInfoRow label={'House Type'} data={
-        house_type
-          ?
-            house_type === 'tunnelventilated'
-              ? 'Tunnel Ventilated'
-              : 'Open Sided'
-          : null
-      } />
+    <Block marginTop={1} backgroundColor='white1'>
+      <Block paddingHorizontal={1} >
+        <Text bold size={18} marginBottom={0.5} color='primary'>
+          Swine Information
+        </Text>
+      </Block>
+      {checkNullField('Average Daily Gain (g)', adg)}
+      {checkNullField('Feed Conversion Ratio', fcr)}
+      {checkNullField('Backfat Thickness (mm)', bft)}
+      {checkNullField('Litter Size (Born Alive)', lsba)}
+      {checkNullField('Birth Weight', birthWeight)}
+      {checkNullField('House Type', getPropHouseTypeText(houseType))}
+      {
+        type === 'gilt'
+          ? checkNullField('Left Teats', leftTeats)
+          : []
+      }
+      {
+        type === 'gilt'
+          ?checkNullField('Right Teats', rightTeats)
+          : []
+      }
     </Block>
   );
 }

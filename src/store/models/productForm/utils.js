@@ -55,7 +55,7 @@ export function toRequestDataFormat(values) {
         breed: isPureBreed
             ? breed
             : `${fatherBreed.toLowerCase()}+${motherBreed.toLowerCase()}`,
-        birthweight: birthWeight,
+        birth_weight: birthWeight,
         house_type: houseType ? houseType.key : null,
         adg,
         fcr,

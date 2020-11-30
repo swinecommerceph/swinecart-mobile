@@ -8,10 +8,12 @@ function OtherDetails({ data }) {
   const trimmedDetails = trim(data);
 
   return (
-    <Block backgroundColor='white1' paddingHorizontal={1}>
-      <Text bold size={20} color='primary' marginBottom={0.5}>Other Information</Text>
+    <Block marginTop={1} backgroundColor='white1' paddingHorizontal={1}>
+      <Text bold size={18} marginBottom={0.5} color='primary'>
+        Other Information
+      </Text>
       <Block paddingBottom={1}>
-        <Text normal size={15} textAlign='left'>
+        <Text normal size={14} textAlign='left'>
           {trimmedDetails}
         </Text>
       </Block>
@@ -19,4 +21,4 @@ function OtherDetails({ data }) {
   );
 }
 
-export default memo(OtherDetails, () => true);  
+export default memo(OtherDetails, () => true);

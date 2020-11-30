@@ -7,7 +7,7 @@ import {
 
 function TextGroup(props) {
 
-  const { label, data } = props;
+  const { label, data, isItalicized = false } = props;
 
   return (
     <Block
@@ -19,9 +19,21 @@ function TextGroup(props) {
       <Text semibold color='gray5' size={14}>
         {label}
       </Text>
-      <Text semibold size={12}>
-        {data}
-      </Text>
+      {
+        isItalicized
+          ?
+            (
+              <Text semibold size={12} italic color='gray5'>
+                {data}
+              </Text>
+            )
+          :
+            (
+              <Text semibold size={12}>
+                {data}
+              </Text>
+            )
+      }
     </Block>
   )
 }

@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import upperFirst from 'lodash/upperFirst';
 import { pluralize, capitalizeWords, formatBirthdate } from 'utils/formatters';
+
+import { TextGroup } from 'molecules';
 import { Block, Text } from 'atoms';
 
 function ProductInfo({ data, breeder, farm }) {
@@ -9,19 +11,43 @@ function ProductInfo({ data, breeder, farm }) {
   const { name: farmName, province: farmProvince } = farm;
 
   return (
-    <Block padding={1} backgroundColor='white1'>
-      <Text bold size={24}>{`${capitalizeWords(name)}`}</Text>
-      <Text semibild size={18}>{`${capitalizeWords(type)}`} - {`${capitalizeWords(breed)}`}</Text>
+    <Block marginTop={1} backgroundColor='white1'>
+      <Block paddingHorizontal={1} >
+        <Text bold size={18} marginBottom={0.5} color='primary'>
+          Product Information
+        </Text>
+      </Block>
+      <TextGroup label='Name' data={capitalizeWords(name)} />
+      <TextGroup
+        label='Type - Breed'
+        data={`${capitalizeWords(type)} - ${capitalizeWords(breed)}`}
+      />
       {
-        age && 
-        <Text normal size={14} color='gray5'>{`${pluralize(age, 'day')} old (Birthdate is on ${formatBirthdate(birthDate)}`})</Text>
+        age
+          ?
+            (
+              <TextGroup
+                label='Age'
+                data={`${pluralize(age, 'day')} old (Birthdate is on ${formatBirthdate(birthDate)})`}
+              />
+            )
+          :
+            (
+              <TextGroup
+                label='Age'
+                data='Birthdate not indicated'
+                isItalicized
+              />
+            )
       }
-      {
-        !age &&
-        <Text italic size={14} color='gray5'>Birthdate not indicated</Text>
-      }
-      <Text normal size={16} color='black1'>{upperFirst(breederName)}</Text>
-      <Text normal size={16} color='black1'>{`${upperFirst(farmName)}, ${upperFirst(farmProvince)}`}</Text>
+      <TextGroup
+        label='Breeder'
+        data={upperFirst(breederName)}
+      />
+      <TextGroup
+        label='Farm from'
+        data={`${upperFirst(farmName)}, ${upperFirst(farmProvince)}`}
+      />
     </Block>
   );
 }
