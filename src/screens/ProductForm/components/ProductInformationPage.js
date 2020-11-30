@@ -97,7 +97,7 @@ function ProductInformationPage({ formik }) {
             </Checkbox>
             <Block marginTop={1}>
               <Input
-                disabled={values.isUnique}
+                disabled={values['isUnique']}
                 name='quantity'
                 label='Quantity'
                 placeholder='10'

@@ -4,7 +4,7 @@ import to from 'await-to-js';
 
 import { ProductsService, NavigationService, ToastService } from 'services';
 
-import { types } from 'constants/enums';
+import { types, houseTypes } from 'constants/enums';
 
 import { formInitialState } from './utils';
 
@@ -21,6 +21,7 @@ export default {
   mode: 'add',
   data: { ...formInitialState },
   typeOptions: types,
+  houseOptions: houseTypes,
 
   // Computed
   currentTitle: computed(state => titles[state.currentStep - 1]),

@@ -105,7 +105,8 @@ export default withStyles(memo(Input, (props, nextProps) => {
   const valueEqual = isEqual(props.formControl.values[name], nextProps.formControl.values[name]);
   const errorEqual = isEqual(props.formControl.errors[name], nextProps.formControl.errors[name]);
   const touchEqual = isEqual(props.formControl.touched[name], nextProps.formControl.touched[name]);
-  return valueEqual && errorEqual && touchEqual;
+  const disabEqual = isEqual(props.disabled, nextProps.disabled);
+  return valueEqual && errorEqual && touchEqual && disabEqual;
 }), () => ({
   inputText: {
     fontFamily: 'OpenSans-SemiBold',

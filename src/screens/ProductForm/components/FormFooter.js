@@ -34,10 +34,10 @@ function FormFooter({ onSubmit, validateForm }) {
     const errors = await validateForm();
 
     if (checkForErrors(errors)) {
-      console.log(errors);
+      ToastService.show('Please fill up the required fields!', null);
     }
     else {
-      if (isLastStep === 2) {
+      if (isLastStep) {
         onSubmit();
       }
       else {

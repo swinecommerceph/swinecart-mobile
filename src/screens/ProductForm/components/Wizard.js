@@ -10,17 +10,18 @@ import { ProductFormSchema } from 'schemas';
 
 function Wizard() {
 
-  const currentStep = useStoreState(state => state.productForm.currentStep);
+  const {
+    currentStep,
+    data,
+  } = useStoreState(state => state.productForm);
 
   const formik = useFormik({
-    initialValues: {
-    },
+    initialValues: data,
     validationSchema: ProductFormSchema,
     onSubmit: (values) => {
       console.log(values);
     },
   });
-
 
   return (
     <Fragment>

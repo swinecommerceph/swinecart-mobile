@@ -22,7 +22,13 @@ export default {
     }
     else {
       const { farms } = data.data;
-      actions.setItems({ items: farms, page: 1 });
+
+      const items = farms.map(farm => {
+        farm.displayName = `${farm.name}, ${farm.province}`;
+        return farm;
+      });
+
+      actions.setItems({ items, page: 1 });
     }
 
     actions.setLoading(false);

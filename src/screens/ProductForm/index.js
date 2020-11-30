@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
@@ -11,7 +11,9 @@ import {
 
 function Container({ route }) {
 
-  const { setMode, getProductDetails } = useStoreActions(actions => actions.productForm);
+  useEffect(() => {
+    getFarms();
+  }, []);
 
   useFocusEffect(
     useCallback(() => {
@@ -34,8 +36,18 @@ function Container({ route }) {
     }, [route.params])
   );
 
+
+  const isFetchingFarms = useStoreState(state => state.farms.isLoading);
+
+  const {
+    setMode,
+    getProductDetails,
+  } = useStoreActions(actions => actions.productForm);
+
+  const getFarms = useStoreActions(actions => actions.farms.getItems);
+
   return (
-    <StateScreen isLoading={false} hasError={false}>
+    <StateScreen isLoading={isFetchingFarms} hasError={false}>
       {/* <LoadingOverlay show={isLoading} /> */}
       <FormHeader />
       <Wizard />
