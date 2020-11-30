@@ -13,6 +13,9 @@ const service = {
   addProduct(data) {
     return API.post(`${URL_PREFIX}`, data);
   },
+  updateProduct(id, data) {
+    return API.put(`${URL_PREFIX}/${id}`, data);
+  },
   deleteProduct(id) {
     return API.delete(`${URL_PREFIX}?ids=${id}`);
   },

@@ -6,9 +6,9 @@ import { ProductsService, NavigationService, ToastService } from 'services';
 
 import { types, houseTypes } from 'constants/enums';
 
-import { formatDate } from 'utils/formatters'
+import { findElement } from 'utils/helpers';
 
-import { formInitialState } from './utils';
+import { formInitialState, toRequestDataFormat } from './utils';
 
 const titles = [
   'Product Information',
@@ -18,6 +18,7 @@ const titles = [
 export default {
   // State
   isLoading: false,
+  isFetchingDetails: false,
   currentStep: 1,
   maxSteps: 2,
   mode: 'add',
@@ -44,6 +45,10 @@ export default {
     state.isLoading = payload;
   }),
 
+  setFetchingDetails: action((state, payload) => {
+    state.isFetchingDetails = payload;
+  }),
+
   setData: action((state, payload) => {
     state.data = { ...payload };
   }),
@@ -64,44 +69,9 @@ export default {
 
   addProduct: thunk(async (actions, payload, { getStoreActions }) => {
 
-    const {
-      name, type, minPrice, maxPrice, isUnique, quantity,
+    const { values, resetForm: resetFormikForm } = payload;
 
-      breed, fatherBreed, motherBreed,
-      birthDate,
-      birthWeight,
-      farmFrom,
-      houseType,
-      adg,
-      fcr,
-      bft,
-      lsba,
-      leftTeats,
-      rightTeats,
-      otherDetails,
-      isPureBreed,
-    } = payload;
-
-    const requestData = {
-      name,
-      type: type.key,
-      min_price: minPrice,
-      max_price: maxPrice,
-      is_unique: isUnique ? 1 : 0,
-      quantity: isUnique ? 1 : quantity,
-      farm_from_id: farmFrom.id,
-      birthdate: birthDate ? formatDate(birthDate, 'yyyy-MM-dd') : null,
-      breed: isPureBreed ? breed : `${fatherBreed.toLowerCase()}+${motherBreed.toLowerCase()}`,
-      birthweight: birthWeight,
-      house_type: houseType ? houseType.key : null,
-      adg,
-      fcr,
-      bft,
-      lsba,
-      left_teats: leftTeats,
-      right_teats: rightTeats,
-      other_details: otherDetails,
-    };
+    const requestData = toRequestDataFormat(values);
 
     actions.setLoading(true);
 
@@ -111,9 +81,9 @@ export default {
       actions.setLoading(false);
     }
     else {
-      const { product } = data.data;
       ToastService.show('Product successfully added!', () => {
         actions.resetForm();
+        resetFormikForm();
         getStoreActions().manageProducts.getItems({ isRefresh: false });
         actions.setStep(1);
         actions.setLoading(false);
@@ -123,36 +93,103 @@ export default {
 
   }),
 
-  getProductDetails: thunk(async (actions, payload) => {
+  editProduct: thunk(async (actions, payload, { getStoreActions, getState }) => {
+
+    const id = getState().data.id;
+    const { values, resetForm: resetFormikForm } = payload;
+
+    const requestData = toRequestDataFormat(values);
+
+    actions.setLoading(true);
+
+    const [error, data] = await to(ProductsService.updateProduct(id, requestData));
+
+    if (error) {
+      actions.setLoading(false);
+    }
+    else {
+      ToastService.show('Product successfully edited!', () => {
+        actions.resetForm();
+        resetFormikForm();
+        getStoreActions().manageProducts.getItems({ isRefresh: false });
+        actions.setStep(1);
+        actions.setLoading(false);
+        NavigationService.back();
+      });
+    }
+
+  }),
+
+  getProductDetails: thunk(async (actions, payload, { getState, getStoreState }) => {
+
+    actions.setFetchingDetails(true);
 
     const [error, data] = await to(ProductsService.getProductDetails(payload));
 
     if (error) {
 
     }
-
     else {
-      const product = data.data;
-      console.log(product);
 
-      // const {
-      //   name, type, minPrice, maxPrice, isUnique, quantity,
+      const { typeOptions, houseOptions } = getState();
+      const { items: farmOptions } = getStoreState().farms;
 
-      //   breed, fatherBreed, motherBreed,
-      //   birthDate,
-      //   birthWeight,
-      //   farmFrom,
-      //   houseType,
-      //   adg,
-      //   fcr,
-      //   bft,
-      //   lsba,
-      //   leftTeats,
-      //   rightTeats,
-      //   otherDetails,
-      //   isPureBreed,
-      // } = payload;
+      const details = data.data;
+      const { product } = details
+      const { productInfo, swineInfo, farm, otherDetails } = product;
+
+      const {
+        name,
+        type,
+        isUnique,
+        quantity,
+        birthDate,
+        breed,
+      } = productInfo;
+
+      const {
+        minPrice,
+        maxPrice,
+        houseType,
+        birthWeight,
+        adg,
+        fcr,
+        bft,
+        lsba,
+        leftTeats,
+        rightTeats,
+      } = swineInfo;
+
+      const breedArray = breed.split(' x ');
+      const isPureBreed = breedArray.length === 1;
+
+      actions.setData({
+        id: payload,
+        name: name,
+        type: findElement(typeOptions, { key: type }),
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        isUnique: isUnique,
+        quantity: quantity,
+        isPureBreed: isPureBreed,
+        breed: isPureBreed ? breed : '',
+        fatherBreed: !isPureBreed ? breedArray[0] : '',
+        motherBreed: !isPureBreed ? breedArray[1] : '',
+        birthWeight: birthWeight,
+        birthDate: birthDate === '0000-00-00' ? null : new Date(birthDate),
+        farmFrom: findElement(farmOptions, { id: farm.id }),
+        houseType: findElement(houseOptions, { key: houseType }),
+        adg: adg,
+        fcr: fcr,
+        bft: bft,
+        lsba: lsba,
+        leftTeats: leftTeats,
+        rightTeats: rightTeats,
+        otherDetails: otherDetails,
+      });
     }
+
+    actions.setFetchingDetails(false);
 
   }),
 

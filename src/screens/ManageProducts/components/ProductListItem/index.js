@@ -11,9 +11,9 @@ import {
 
 function ProductListItem({ data, listIndex }) {
 
-  const { 
-    imageUrl, name, type, breed, age, isUnique, quantity, status, imageCount,
-    videoCount, 
+  const {
+    imageUrl, name, type, breed, age, isUnique, quantity, imageCount,
+    videoCount,
   } = data;
 
   return (

@@ -19,9 +19,12 @@ function SwineInfo({ data }) {
       <SwineInfoRow label={'Litter Size (Born Alive)'} data={lsba} />
       <SwineInfoRow label={'Birth Weight'} data={birth_weight} />
       <SwineInfoRow label={'House Type'} data={
-        house_type === 'tunnelventilated' 
-          ? 'Tunnel Ventilated'
-          : 'Open Sided'
+        house_type
+          ?
+            house_type === 'tunnelventilated'
+              ? 'Tunnel Ventilated'
+              : 'Open Sided'
+          : null
       } />
     </Block>
   );

@@ -13,26 +13,29 @@ function ProductInfo({ name, type, breed, age, breederName, farmLocation }) {
         {capitalizeWords(type)} - {breed}
       </Text>
       {
-        age &&
-        <Text normal size={12}>
-          {`${pluralize(age, 'day')} old`}
-        </Text>
+        age
+          ? <Text normal size={12}>{`${pluralize(age, 'day')} old`}</Text>
+          : <Text italic size={12} color='gray5'>Birthdate not indicated</Text>
       }
       {
-        !age &&
-        <Text italic size={12} color='gray5'>Birthdate not indicated</Text>
+        breederName
+          ?
+            (
+              <Text bold color='black1' size={14} marginTop={0.5}>
+              {breederName}
+              </Text>
+            )
+          : []
       }
       {
-        breederName &&
-        <Text bold color='black1' size={14} marginTop={0.5}>
-          {breederName}
-        </Text>
-      }
-      {
-        farmLocation &&
-        <Text normal size={12}>
-          {capitalizeWords(farmLocation)}
-        </Text>
+        farmLocation
+          ?
+            (
+              <Text normal size={12}>
+                {capitalizeWords(farmLocation)}
+              </Text>
+            )
+          : []
       }
     </Block>
   );

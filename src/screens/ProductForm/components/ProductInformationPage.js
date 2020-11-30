@@ -18,7 +18,11 @@ function ProductInformationPage({ formik }) {
       setFieldValue('quantity', 1);
     }
 
-  }, [ values['isUnique'], touched['isUnique'] ]);
+    if (values['type'] && values['type'].key === 'semen') {
+      setFieldValue('quantity', null);
+    }
+
+  }, [ values['isUnique'], touched['isUnique'], values['type'] ]);
 
   return (
     <Fragment>

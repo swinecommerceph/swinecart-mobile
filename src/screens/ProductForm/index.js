@@ -11,12 +11,10 @@ import {
 
 function Container({ route }) {
 
-  useEffect(() => {
-    getFarms();
-  }, []);
-
   useFocusEffect(
     useCallback(() => {
+
+      getFarms();
 
       const { mode, id } = route.params;
 
@@ -25,30 +23,39 @@ function Container({ route }) {
       if (mode === 'edit') {
         getProductDetails(id);
       }
-      else {
-
-      }
 
       return () => {
-
+        setLoadingFarms(false);
+        resetForm();
       };
 
     }, [route.params])
   );
 
 
-  const isLoading = useStoreState(state => state.productForm.isLoading);
+  const {
+    isLoading,
+    isFetchingDetails
+  } = useStoreState(state => state.productForm);
+
   const isFetchingFarms = useStoreState(state => state.farms.isLoading);
 
   const {
     setMode,
     getProductDetails,
+    resetForm,
   } = useStoreActions(actions => actions.productForm);
 
-  const getFarms = useStoreActions(actions => actions.farms.getItems);
+  const {
+    getItems: getFarms,
+    setLoading: setLoadingFarms,
+  } = useStoreActions(actions => actions.farms);
 
   return (
-    <StateScreen isLoading={isFetchingFarms} hasError={false}>
+    <StateScreen
+      isLoading={isFetchingFarms || isFetchingDetails}
+      hasError={false}
+    >
       <LoadingOverlay show={isLoading} />
       <FormHeader />
       <Wizard />

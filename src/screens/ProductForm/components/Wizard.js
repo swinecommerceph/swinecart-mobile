@@ -16,17 +16,26 @@ function Wizard() {
     mode,
   } = useStoreState(state => state.productForm);
 
-  const addProduct = useStoreActions(actions => actions.productForm.addProduct);
+  const {
+    addProduct,
+    editProduct,
+  } = useStoreActions(actions => actions.productForm);
 
   const formik = useFormik({
     initialValues: data,
     validationSchema: ProductFormSchema,
     onSubmit: (values) => {
       if (mode === 'add') {
-        addProduct(values);
+        addProduct({
+          values,
+          resetForm: formik.resetForm
+        });
       }
       else {
-
+        editProduct({
+          values,
+          resetForm: formik.resetForm
+        });
       }
     },
   });

@@ -5,6 +5,7 @@ import { useStoreState } from 'easy-peasy';
 import { Input, ContainerView, Select, DateInput } from 'molecules'
 import { Block, Button, Text, Divider } from 'atoms';
 
+const epoch = new Date(1970, 1, 1);
 const today = new Date();
 
 function SwineInformationPage({ formik }) {
@@ -82,6 +83,7 @@ function SwineInformationPage({ formik }) {
             name='birthDate'
             label='Birth Date'
             placeholder='Choose Birth Date'
+            min={epoch}
             max={today}
             optional={true}
             formControl={formik}
@@ -161,6 +163,31 @@ function SwineInformationPage({ formik }) {
             formControl={formik}
           />
         </Block>
+        {
+          (values['type'] && values['type'].key === 'gilt') &&
+          <Block row>
+            <Block marginRight={1}>
+              <Input
+                label='Left Teats'
+                name='leftTeats'
+                keyboardType='numeric'
+                optional={true}
+                width={128}
+                formControl={formik}
+              />
+            </Block>
+            <Block>
+              <Input
+                label='Right Teats'
+                name='rightTeats'
+                keyboardType='numeric'
+                optional={true}
+                width={128}
+                formControl={formik}
+              />
+            </Block>
+          </Block>
+        }
 
         <Divider />
 
