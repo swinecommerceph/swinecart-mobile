@@ -4,7 +4,7 @@ import { sizes, colors } from 'constants/theme';
 
 function Icon(props) {
 
-  const { 
+  const {
     name, size = 26, color,
     padding, paddingBottom, paddingLeft, paddingRight, paddingTop, paddingHorizontal, paddingVertical,
     margin, marginBottom, marginLeft, marginRight, marginTop, marginHorizontal, marginVertical,

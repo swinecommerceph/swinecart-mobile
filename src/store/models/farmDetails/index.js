@@ -10,6 +10,13 @@ import { BaseModel } from '../../utils';
 export default {
 
   ...BaseModel(),
+
+  data: null,
+
+  setData: action((state, payload) => {
+    state.data = payload;
+  }),
+
   getItem: thunk(async (actions, payload) => {
 
     actions.setLoading(true);
@@ -20,7 +27,8 @@ export default {
       actions.hasFetchingError(false);
     }
     else {
-        console.log(data);
+      const { farm } = data.data;
+      actions.setData(farm);
     }
 
     actions.setLoading(false);

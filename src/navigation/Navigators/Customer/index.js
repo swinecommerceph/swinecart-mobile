@@ -11,6 +11,7 @@ import {
     OrderDetailsScreen,
     HistoryDetailsScreen,
     FarmsScreen,
+    FarmDetailsScreen,
     ProfileScreen,
 } from 'screens';
 
@@ -47,6 +48,7 @@ function Navigator() {
             <Drawer.Screen name='ProductView' component={ProductViewScreen} />
             <Drawer.Screen name='OrderDetails' component={OrderDetailsScreen} />
             <Drawer.Screen name='HistoryDetails' component={HistoryDetailsScreen} />
+            <Drawer.Screen name='FarmDetails' component={FarmDetailsScreen} />
         </Drawer.Navigator>
     );
 }

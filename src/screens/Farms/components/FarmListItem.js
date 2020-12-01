@@ -2,7 +2,7 @@ import React from 'react';
 
 import { capitalizeWords } from 'utils/formatters';
 
-import { ModalService } from 'services';
+import { ModalService, NavigationService } from 'services';
 
 import { Card } from 'molecules';
 
@@ -12,10 +12,10 @@ import {
 
 function FarmListItem({ data }) {
 
-  const { name, province } = data;
+  const { id, name, province } = data;
 
   const onPressView = () => {
-
+    NavigationService.navigate('FarmDetails', { id });
   };
 
   const onPressDelete = () => {
