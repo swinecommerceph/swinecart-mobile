@@ -11,7 +11,7 @@ function ProductInfo({ data, breeder, farm }) {
   const { name: farmName, province: farmProvince } = farm;
 
   return (
-    <Block marginTop={1} backgroundColor='white1'>
+    <Block backgroundColor='white1'>
       <Block paddingHorizontal={1} >
         <Text bold size={18} marginBottom={0.5} color='primary'>
           Product Information

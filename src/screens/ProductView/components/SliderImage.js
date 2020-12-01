@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { useWindowDimensions  } from 'react-native';
 import { withStyles } from '@ui-kitten/components';
 import { Block, Image } from 'atoms';
 
@@ -10,12 +9,10 @@ const fallbackUrls = {
   'gilt': 'https://swinecart.work/images/product/medium/gilt_default.jpg',
 };
 
-function ProductPrimaryImage({ eva, photoURL, type }) {
-
-  const height = ~~(useWindowDimensions().width / 2);
+function SliderImage({ eva, imageUrl, type, height }) {
 
   const imageSource = {
-    uri: photoURL
+    uri: imageUrl
   };
 
   const fallbackSource = {
@@ -46,7 +43,7 @@ function ProductPrimaryImage({ eva, photoURL, type }) {
 }
 
 
-export default withStyles(memo(ProductPrimaryImage, () => true), () => ({
+export default withStyles(memo(SliderImage, () => true), () => ({
   imageStyle: {
     flex: 1,
     width: null,

@@ -1,17 +1,45 @@
-import React, { memo } from 'react';
+import React, { memo, useState, Fragment } from 'react';
 import { useWindowDimensions  } from 'react-native';
+import { ViewPager } from '@ui-kitten/components';
+import Dots from 'react-native-dots-pagination';
 
-import { Block, Text } from 'atoms';
+import { colors } from 'constants/theme';
 
-function Images({ data }) {
+import SliderImage from './SliderImage';
 
-  const height = ~~(useWindowDimensions().width / 2);
+function Images({ data: images, type }) {
 
-  const imageUrls = data.map(i => i.link);
+  const { width } = useWindowDimensions();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const imageHeight = ~~(width / 2);
+
+  const onSelect = index => setSelectedIndex(index);
 
   return (
-    <Block backgroundColor='white1'>
-    </Block>
+    <Fragment>
+      <ViewPager
+        selectedIndex={selectedIndex}
+        onSelect={onSelect}
+      >
+        {images.map(image => (
+          <SliderImage
+            imageUrl={image.link}
+            height={imageHeight}
+            type={type}
+            key={image.id}
+          />
+        ))}
+      </ViewPager>
+      <Dots
+        length={images.length}
+        active={selectedIndex}
+        activeColor={colors.primary}
+        passiveColor={colors.gray7}
+        activeDotWidth={12}
+        activeDotHeight={12}
+      />
+    </Fragment>
   );
 }
 

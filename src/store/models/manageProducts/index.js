@@ -69,7 +69,7 @@ export default {
 
     const { isRefresh } = payload;
 
-    isRefresh 
+    isRefresh
       ? actions.setRefreshing(true)
       : actions.setLoading(true);
 
