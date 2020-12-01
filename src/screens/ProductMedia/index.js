@@ -1,26 +1,54 @@
-import React, { Fragment, memo, useEffect } from 'react';
+import React, { Fragment, memo, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { Block, Text } from 'atoms';
+import { StateScreen } from 'organisms';
+import { HeaderBar, BackButton } from 'molecules';
+import { LoadingOverlay } from 'atoms';
 
 import {
-  MediaList, AddPhoto
+  MediaList,
+  AddPhoto
 } from './components'
 
-function Container() {
+function Container({ route }) {
 
-  const getItems = useStoreActions(actions => actions.productMedia.getItems);
+  const productId = route.params.id;
 
-  useEffect(() => {
-    getItems({ isRefresh: false });
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      setId(productId);
+      getItems({ isRefresh: false });
+      return () => {
+        setLoading(true);
+      };
+    }, [ route.params.id ])
+  );
+
+  const {
+    isLoading,
+    isUploading,
+  } = useStoreState(state => state.productMedia);
+
+  const {
+    setId,
+    getItems,
+    setLoading,
+  } = useStoreActions(actions => actions.productMedia);
 
   return (
     <Fragment>
-      <AddPhoto />
-      <MediaList />
+      <LoadingOverlay show={isUploading} />
+      <HeaderBar
+        title='Edit Product Media'
+        accessoryLeft={BackButton}
+      />
+      <StateScreen isLoading={isLoading} hasError={false}>
+        <AddPhoto />
+        <MediaList />
+      </StateScreen>
     </Fragment>
   );
 }
 
-export default memo(Container, () => true);
+export default memo(Container);

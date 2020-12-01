@@ -12,7 +12,7 @@ function Images({ data: images, type }) {
   const { width } = useWindowDimensions();
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const imageHeight = ~~(width / 2);
+  const imageHeight = ~~(width);
 
   const onSelect = index => setSelectedIndex(index);
 

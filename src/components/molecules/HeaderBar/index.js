@@ -33,4 +33,4 @@ function HeaderBar(props) {
 
 }
 
-export default memo(HeaderBar, () => true);
+export default memo(HeaderBar);

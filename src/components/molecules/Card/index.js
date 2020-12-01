@@ -18,4 +18,4 @@ function Card({ children }) {
   );
 }
 
-export default memo(Card, () => true);
+export default memo(Card);

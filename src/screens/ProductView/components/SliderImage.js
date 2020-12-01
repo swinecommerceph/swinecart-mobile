@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { withStyles } from '@ui-kitten/components';
+
 import { Block, Image } from 'atoms';
 
 const fallbackUrls = {
@@ -32,11 +33,11 @@ function SliderImage({ eva, imageUrl, type, height }) {
         backgroundColor='gray7'
       >
         <Image
-          style={imageStyle}
-          imageSource={imageSource}
-          fallbackSource={fallbackSource}
-          resizeMode='contain'
-        />
+            style={imageStyle}
+            imageSource={imageSource}
+            fallbackSource={fallbackSource}
+            resizeMode='contain'
+          />
       </Block>
     </Block>
   );

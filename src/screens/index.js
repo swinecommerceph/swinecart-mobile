@@ -2,6 +2,7 @@
 
 export { default as InboxScreen } from './Inbox';
 export { default as ProductViewScreen } from './ProductView';
+export { default as ProductMediaScreen } from './ProductMedia';
 export { default as OrderDetailsScreen } from './OrderDetails';
 export { default as HistoryDetailsScreen } from './HistoryDetails';
 export { default as FarmsScreen } from './Farms';

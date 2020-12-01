@@ -24,4 +24,4 @@ function HeaderBarButton(props) {
 
 }
 
-export default memo(HeaderBarButton, () => true);
+export default memo(HeaderBarButton);

@@ -6,8 +6,8 @@ import { List } from 'organisms';
 import ProductListItem from './ProductListItem';
 
 function ProductList() {
-  
-  const { 
+
+  const {
     getItems,
     getMoreItems
   } = useStoreActions(actions => actions.manageProducts);

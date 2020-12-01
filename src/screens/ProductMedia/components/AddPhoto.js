@@ -19,7 +19,6 @@ function AddPhoto() {
 
   const onPressOpenPicker = () => {
     ImagePicker.showImagePicker(options, (response) => {
-
       if (response.error) {
         // console.log('ImagePicker Error: ', response.error);
       } else {
@@ -29,9 +28,9 @@ function AddPhoto() {
   };
 
   return (
-    <Block height={150} padding center middle backgroundColor='white1'>
+    <Block height={100} padding center middle backgroundColor='white1'>
       <Button size='small' status='primary' onPress={onPressOpenPicker}>
-        Open File Picker
+        Add Photo
       </Button>
     </Block>
   );

@@ -1,37 +1,66 @@
 import React, { memo } from 'react';
-import { useStoreActions } from 'easy-peasy';
+import { useWindowDimensions  } from 'react-native';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
-import { Card, ProductAvatar } from 'molecules';
 import { Block, Button } from 'atoms';
 
-function MediaItem({ data }) {
+import SliderImage from './SliderImage';
 
-  const {  
+function MediaItem({ data: { id, link } }) {
+
+  const { width } = useWindowDimensions();
+
+  const imageHeight = ~~(width / 2);
+
+  const {
+    primaryImageId
+  } = useStoreState(state => state.productMedia);
+
+  const {
     deletePhoto
   } = useStoreActions(actions => actions.productMedia);
 
-  const { id, link } = data;
+  const onPressSet = () => {
 
-  const onPressDeletePhoto = () => {
+  };
+
+  const onPressDelete = () => {
     deletePhoto(id);
   };
-  
+
+  const isPrimaryImage = id === primaryImageId;
+
   return (
-    <Card>
-      <ProductAvatar shape='square' image={link} size={160} />
-      <Block marginLeft={1}>
-        <Block flex={1}>
-          <Block alignSelf='flex-start'>
-            <Button size='small' status='primary' onPress={null}>
-              Set as Primary Photo
-            </Button>
-            <Button size='small' status='basic' onPress={onPressDeletePhoto} marginTop={0.5}>
-              Delete Photo
-            </Button>
-          </Block>
-        </Block>
+    <Block
+      flex={1}
+      backgroundColor='white1'
+      borderTopWidth={0.5}
+      borderTopColor='gray8'
+    >
+      <SliderImage
+        imageUrl={link}
+        height={imageHeight}
+      />
+      <Block row padding={0.5} alignSelf='center'>
+        <Button
+          size='small'
+          status='primary'
+          onPress={onPressSet}
+          disabled={isPrimaryImage}
+          marginRight={1}
+        >
+          Set Primary
+        </Button>
+        <Button
+          size='small'
+          status={isPrimaryImage ? 'primary' : 'basic'}
+          onPress={onPressDelete}
+          disabled={isPrimaryImage}
+        >
+          Delete Photo
+        </Button>
       </Block>
-    </Card>
+    </Block>
   );
 }
 

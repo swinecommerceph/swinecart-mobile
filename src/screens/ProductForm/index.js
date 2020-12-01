@@ -14,7 +14,7 @@ function Container({ route }) {
   useFocusEffect(
     useCallback(() => {
 
-      getFarms();
+      getFarms({ isRefresh: false });
 
       const { mode, id } = route.params;
 

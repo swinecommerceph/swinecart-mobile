@@ -1,7 +1,7 @@
 import API from '../api';
 
 
-const URL_PREFIX = '/breeder/products'
+const URL_PREFIX = '/breeder/products';
 
 const service = {
   getProducts(page, limit = 1000) {
@@ -29,10 +29,19 @@ const service = {
     return API.get(`${URL_PREFIX}/${id}/media`);
   },
   addMedia(id, photo) {
-    const data = new FormData();
-    data.append('file', photo);
-    return API.post(`${URL_PREFIX}/${id}/media`, { file: data }, {
-      headers: { 'Content-Type': 'multipart/form-data' }
+    const formData = new FormData();
+
+    formData.append('file', {
+      name: photo.fileName,
+      type: photo.type,
+      uri: photo.uri,
+    });
+
+    return API.post(`${URL_PREFIX}/${id}/media`, formData, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data;'
+      }
     });
   },
   setPrimaryPicture(id, data) {
