@@ -12,7 +12,7 @@ import {
 function Container() {
 
   useEffect(() => {
-    getItems();
+    getItems({ isRefresh: false });
   }, []);
 
   const { isLoading } = useStoreState(state => state.farms);

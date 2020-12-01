@@ -13,12 +13,16 @@ export default {
 
   getItems: thunk(async (actions, payload) => {
 
-    actions.setLoading(true);
+    const { isRefresh } = payload;
+
+    isRefresh
+      ? actions.setRefreshing(true)
+      : actions.setLoading(true);
 
     const [error, data] = await to(FarmService.getFarms());
 
     if (error) {
-      actions.hasFetchingError(false);
+      actions.hasFetchingError(true);
     }
     else {
       const { farms } = data.data;
@@ -31,7 +35,9 @@ export default {
       actions.setItems({ items, page: 1 });
     }
 
-    actions.setLoading(false);
+    isRefresh
+      ? actions.setRefreshing(false)
+      : actions.setLoading(false);
 
   })
 };

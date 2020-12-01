@@ -7,7 +7,7 @@ import { ModalService, NavigationService } from 'services';
 import { Card } from 'molecules';
 
 import {
-  Block, Text, Button
+  Block, Text, Button, Icon
 } from 'atoms';
 
 function FarmListItem({ data }) {
@@ -25,6 +25,11 @@ function FarmListItem({ data }) {
   return (
     <Card>
       <Block>
+        <Icon
+          name='home'
+          color='primary'
+          size={30}
+        />
       </Block>
       <Block flex={1} paddingHorizontal={1}>
         <Text bold color='black1' size={16}>
