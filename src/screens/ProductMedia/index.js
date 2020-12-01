@@ -42,9 +42,9 @@ function Container({ route }) {
       <HeaderBar
         title='Edit Product Media'
         accessoryLeft={BackButton}
+        accessoryRight={AddPhoto}
       />
       <StateScreen isLoading={isLoading} hasError={false}>
-        <AddPhoto />
         <MediaList />
       </StateScreen>
     </Fragment>

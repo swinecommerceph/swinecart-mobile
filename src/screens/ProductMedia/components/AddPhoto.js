@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import ImagePicker from 'react-native-image-picker';
 import { useStoreActions } from 'easy-peasy';
 
-import { Block, Button } from 'atoms';
+import { HeaderBarButton } from 'molecules';
 
 const options = {
   title: 'Select Photo',
@@ -12,7 +12,6 @@ const options = {
   },
 };
 
-
 function AddPhoto() {
 
   const uploadPhoto = useStoreActions(actions => actions.productMedia.uploadPhoto);
@@ -20,19 +19,21 @@ function AddPhoto() {
   const onPressOpenPicker = () => {
     ImagePicker.showImagePicker(options, (response) => {
       if (response.error) {
-        // console.log('ImagePicker Error: ', response.error);
-      } else {
+      }
+      else if (response.didCancel) {
+
+      }
+      else {
         uploadPhoto(response);
       }
     });
   };
 
   return (
-    <Block height={100} padding center middle backgroundColor='white1'>
-      <Button size='small' status='primary' onPress={onPressOpenPicker}>
-        Add Photo
-      </Button>
-    </Block>
+    <HeaderBarButton
+      iconName='plus'
+      onPress={onPressOpenPicker}
+    />
   );
 }
 
