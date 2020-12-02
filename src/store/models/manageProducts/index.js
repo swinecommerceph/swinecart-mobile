@@ -102,10 +102,15 @@ export default {
       actions.setFetchingError(true);
     }
     else {
-      actions.setItems({
-        items: [...(currentItems), ...data.data.products],
-        page: currentPage + 1
-      });
+
+      const { products } = data.data;
+
+      if (products.length > 0) {
+        actions.setItems({
+          items: [...(currentItems), ...products],
+          page: currentPage + 1
+        });
+      }
     }
 
     actions.setLoadingMore(false);

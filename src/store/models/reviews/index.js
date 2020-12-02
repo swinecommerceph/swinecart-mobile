@@ -16,8 +16,6 @@ export default {
 
   totalCount: 0,
 
-  sampleReviews: computed(state => state.items ? take(state.items, 3) : []),
-
   setTotalCount: action((state, payload) => {
     state.totalCount = payload;
   }),
@@ -51,7 +49,7 @@ export default {
 
   }),
 
-  getMoreItems: thunk(async (actions, payload, { getStoreState, getState }) => {
+  getMoreItems: thunk(async (actions, payload, { getState }) => {
 
     const { page: currentPage, items: currentItems } = getState();
 
@@ -70,9 +68,6 @@ export default {
           items: [...(currentItems || []), ...reviews],
           page: currentPage + 1
         });
-      }
-      else {
-        ToastService.show('No more reviews to load!', null);
       }
 
     }

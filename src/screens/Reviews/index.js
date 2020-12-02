@@ -1,6 +1,8 @@
-import React, { Fragment, memo, useEffect } from 'react';
-import { useStoreActions } from 'easy-peasy';
+import React, { Fragment, memo, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
+import { StateScreen } from 'organisms';
 import { HeaderBar, BackButton } from 'molecules';
 
 import {
@@ -9,18 +11,30 @@ import {
 
 function Container() {
 
-  const getItems = useStoreActions(actions => actions.reviews.getItems);
+  useFocusEffect(
+    useCallback(() => {
+      getItems({ isRefresh: false })
+      return () => {
+        setLoading(true);
+      }
+    }, [])
+  );
 
-  useEffect(() => {
-    getItems({ isRefresh: false });
-  }, []);
+  const isLoading = useStoreState(state => state.reviews.isLoading);
+
+  const {
+    getItems,
+    setLoading,
+  } = useStoreActions(actions => actions.reviews);
 
   return (
     <Fragment>
       <HeaderBar title='Reviews' accessoryLeft={BackButton} />
-      <ReviewList />
+      <StateScreen isLoading={isLoading} hasError={false}>
+        <ReviewList />
+      </StateScreen>
     </Fragment>
   );
 }
 
-export default memo(Container, () => true);
+export default memo(Container);

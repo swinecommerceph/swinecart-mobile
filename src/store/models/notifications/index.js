@@ -145,10 +145,12 @@ export default {
     else {
       const { notifications } = data.data;
 
-      actions.setItems({
-        items: [...(currentItems || []), ...notifications],
-        page: currentPage + 1
-      });
+      if (notifications.length > 0) {
+        actions.setItems({
+          items: [...(currentItems || []), ...notifications],
+          page: currentPage + 1
+        });
+      }
 
     }
 

@@ -68,9 +68,6 @@ export default {
           page: currentPage + 1
         });
       }
-      else {
-        ToastService.show('No more chat threads to load!', null);
-      }
 
     }
 

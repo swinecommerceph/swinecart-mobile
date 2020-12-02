@@ -69,16 +69,17 @@ export default {
 
     if (error) {
       actions.setFetchingError(true);
-      console.log(error);
     }
     else {
       const { requests } = data.data;
       const items = map(requests, requestMapper);
 
-      actions.setItems({
-        items: [...(currentItems || []), ...items],
-        page: currentPage + 1
-      });
+      if (requests.length > 0) {
+        actions.setItems({
+          items: [...(currentItems || []), ...items],
+          page: currentPage + 1
+        });
+      }
 
     }
 

@@ -1,19 +1,21 @@
 import React, { memo } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { LoadingView, BlankScreen } from 'molecules';
 import { List } from 'organisms';
 
-import ReviewItem from './ReviewItem';
+import ReviewListItem from './ReviewListItem';
 
 function ReviewList() {
 
-  const { 
-    getItems, getMoreItems
+  const {
+    getItems,
+    getMoreItems
   } = useStoreActions(actions => actions.reviews);
 
   const {
-    items, isRefreshing, isLoadingMore, isLoading
+    items,
+    isRefreshing,
+    isLoadingMore,
   } = useStoreState(state => state.reviews);
 
   const keyExtractor = item => `${item.id}`;
@@ -26,30 +28,18 @@ function ReviewList() {
     getItems({ isRefresh: true });
   };
 
-  if (isLoading) {
-    return (
-      <LoadingView />
-    );
-  }
-  else if (!isLoading && items) {
-    return (
-      <List
-        data={items}
-        Component={ReviewItem}
-        keyExtractor={keyExtractor}
-        emptyListMessage={'There are no reviews yet.'}
-        isRefreshing={isRefreshing}
-        onPressLoadMore={onPressLoadMore}
-        onRefresh={onRefresh}
-        isLoadingMore={isLoadingMore}
-      />
-    );
-  }
-  else {
-    return (
-      <BlankScreen />
-    );
-  }
+  return (
+    <List
+      data={items}
+      Component={ReviewListItem}
+      keyExtractor={keyExtractor}
+      emptyListMessage={'There are no reviews yet.'}
+      isRefreshing={isRefreshing}
+      onPressLoadMore={onPressLoadMore}
+      onRefresh={onRefresh}
+      isLoadingMore={isLoadingMore}
+    />
+  );
 }
 
 export default memo(ReviewList);

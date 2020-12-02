@@ -84,10 +84,6 @@ export default {
           page: currentPage + 1
         });
       }
-      else {
-        ToastService.show('No more items to load!', null);
-      }
-
     }
 
     actions.setLoadingMore(false);
