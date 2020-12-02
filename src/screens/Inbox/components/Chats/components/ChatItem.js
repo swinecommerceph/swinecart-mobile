@@ -25,7 +25,7 @@ function ChatItem({ data }) {
       activeOpacity={0.90}
       onPress={onPressConversation}
     >
-      <Block 
+      <Block
         row center padding={1}
         backgroundColor='white1'
         borderBottomWidth={1}

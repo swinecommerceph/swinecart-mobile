@@ -1,77 +1,62 @@
-import React, { PureComponent } from 'react';
-import { withStyles } from '@ui-kitten/components';
-import { Dimensions } from 'react-native';
+import React, { useState, useMemo, } from 'react';
+import { useWindowDimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-
-import { EmptyListMessage } from 'molecules';
+import { withStyles } from '@ui-kitten/components';
 
 import { shadows, colors } from 'constants/theme';
 
-import ChatList from './ChatList';
-import NotificationList from './NotificationList';
+import Chats from './Chats';
+import Notifications from './Notifications';
 
-class InboxTabView extends PureComponent {
+function InboxTabView({ eva: { style } }) {
 
-  state = {
-    index: 0,
-    routes: [
-      { key: 'chatList', title: 'Chats', },
-      { key: 'notificationList', title: 'Notifications', },
-    ]
-  };
+  const { width } = useWindowDimensions();
 
-  chatListRoute = () => <ChatList />;
-  notificationListRoute = () => <NotificationList />;
+  const [ index, setIndex ] = useState(0);
+  const [ routes ] = useState([
+    { key: 'Chats', title: 'Chats', },
+    { key: 'Notifications', title: 'Notifications', },
+  ]);
 
-  getLabelText = ({ route }) => route.title;
+  const navigationState = useMemo(
+    () => ({ index, routes })
+  , [ index ]);
 
-  initialLayout = {
-    height: 0,
-    width: Dimensions.get('window').width
-  };
+  const getLabelText = ({ route }) => route.title;
 
-  renderTabBar = (props) => {
-    return (
-      <TabBar
-        {...props}
-        useNativeDriver={true}
-        getLabelText={this.getLabelText}
-        labelStyle={this.props.eva.style.labelStyle}
-        indicatorStyle={this.props.eva.style.indicatorStyle}
-        style={this.props.eva.style.tabBarStyle}
-        tabStyle={this.props.eva.style.tabStyle}
-      />
-    )
-  }
+  const initialLayout = useMemo(
+    () => ({ width })
+  , [ width ]);
 
-  renderScene = SceneMap({
-    chatList: this.chatListRoute,
-    notificationList: this.notificationListRoute,
-  });
+  const renderScene = useMemo(() => SceneMap({
+    Chats,
+    Notifications,
+  }), []);
 
-  renderLazyPlaceholder = () => {
-    return (
-      <EmptyListMessage title='Loading...' />
-    );
-  }
+  const renderTabBar = props => (
+    <TabBar
+      {...props}
+      useNativeDriver={true}
+      getLabelText={getLabelText}
+      labelStyle={style.labelStyle}
+      indicatorStyle={style.indicatorStyle}
+      style={style.tabBarStyle}
+      tabStyle={style.tabStyle}
+    />
+  );
 
-  onIndexChange = index => this.setState({ index });
-
-  render() {
-    return (
-      <TabView
-        navigationState={this.state}
-        renderScene={this.renderScene}
-        onIndexChange={this.onIndexChange}
-        initialLayout={this.initialLayout}
-        renderTabBar={this.renderTabBar}
-        renderLazyPlaceholder={this.renderLazyPlaceholder}
-        lazy={true}
-        lazyPreloadDistance={0}
-        swipeEnabled={false}
-      />
-    );
-  }
+  return (
+    <TabView
+      navigationState={navigationState}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={initialLayout}
+      renderTabBar={renderTabBar}
+      lazy={true}
+      lazyPreloadDistance={0}
+      swipeEnabled={false}
+    />
+  );
 }
 
 export default withStyles(InboxTabView, () => ({
