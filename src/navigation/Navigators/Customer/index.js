@@ -13,6 +13,7 @@ import {
   FarmsScreen,
   FarmDetailsScreen,
   ProfileScreen,
+  ConversationScreen,
 } from 'screens';
 
 import DrawerContent from 'organisms/Drawer';
@@ -54,6 +55,7 @@ function Navigator() {
       <Drawer.Screen name='OrderDetails' component={OrderDetailsScreen} />
       <Drawer.Screen name='HistoryDetails' component={HistoryDetailsScreen} />
       <Drawer.Screen name='FarmDetails' component={FarmDetailsScreen} />
+      <Drawer.Screen name='Conversation' component={ConversationScreen} />
     </Drawer.Navigator>
   );
 }

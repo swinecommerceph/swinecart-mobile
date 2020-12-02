@@ -8,6 +8,7 @@ export { default as HistoryDetailsScreen } from './HistoryDetails';
 export { default as FarmsScreen } from './Farms';
 export { default as FarmDetailsScreen } from './FarmDetails';
 export { default as ProfileScreen } from './Profile';
+export { default as ConversationScreen } from './Conversation';
 
 // Breeder Screens
 export { default as ManageProductsScreen } from './ManageProducts';

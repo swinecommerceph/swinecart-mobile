@@ -37,7 +37,6 @@ export default {
 
     if (error) {
       actions.setFetchingError(true);
-      console.log(error);
     }
     else {
       const { requests } = data.data;

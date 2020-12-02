@@ -35,7 +35,6 @@ export default {
     const [error, data] = await to(ProductsService.getProductDetails(payload));
 
     if (error) {
-      console.log(error);
       actions.setHasFetchingError(true);
     }
     else {

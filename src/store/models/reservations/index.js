@@ -30,7 +30,6 @@ export default {
     const [error, data] = await to(OrderService.removeRequest(swineCartId));
 
     if (error) {
-      console.log(error);
       ToastService.show('Please try again later!', null);
       actions.setLoading(false);
     }

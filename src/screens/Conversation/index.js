@@ -20,9 +20,9 @@ function Container() {
         !currentUser && <LoadingView />
       }
       {
-        currentUser && 
+        currentUser &&
         <Fragment>
-          <HeaderBar title={`${currentUser.name}`} leftControl={<BackButton />} />
+          <HeaderBar title={`${currentUser.name}`} accessoryLeft={BackButton} />
           <ChatView />
         </Fragment>
       }

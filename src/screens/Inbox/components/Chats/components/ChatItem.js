@@ -2,22 +2,24 @@ import React, { memo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-import { Block, Text } from 'atoms';
 import { formatMessageDate } from 'utils/formatters';
 import { NavigationService } from 'services';
 
+import { UserAvatar } from 'molecules';
+import { Block, Text } from 'atoms';
+
 function ChatItem({ data }) {
+
+  const messages = useStoreState(state => state.chat.items);
+  const setCurrentUser = useStoreActions(actions => actions.chat.setCurrentUser);
 
   const { message, user } = data;
   const { name } = user;
   const { content, created_at, read_at } = message;
 
-  const messages = useStoreState(state => state.chat.items);
-  const setCurrentUser = useStoreActions(actions => actions.chat.setCurrentUser);
-
   const onPressConversation = () => {
     setCurrentUser(user);
-    NavigationService.navigate('Chat');
+    NavigationService.navigate('Conversation');
   };
 
   return (
@@ -31,7 +33,7 @@ function ChatItem({ data }) {
         borderBottomWidth={1}
         borderBottomColor='gray1'
       >
-        {/* <UserAvatar userName={name} size={48} textSize={18} /> */}
+        <UserAvatar userName={name} size={48} textSize={18} />
         <Block flex={1} paddingHorizontal>
           <Text
             semibold
