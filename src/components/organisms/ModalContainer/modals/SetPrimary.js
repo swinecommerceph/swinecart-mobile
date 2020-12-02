@@ -3,17 +3,18 @@ import { useStoreActions } from 'easy-peasy';
 
 import { Block, Button, Text } from 'atoms';
 
-function DeleteProduct(props) {
+function SetPrimary(props) {
 
   // Props
   const { data, hideModal } = props;
-  const { product } = data;
-  const { name } = product;
+  const { id } = data;
 
-  const deleteProduct = useStoreActions(actions => actions.manageProducts.deleteProduct);
+  const setPrimary = useStoreActions(
+    actions => actions.productMedia.setPrimary
+  );
 
   const onPressPrimaryAction = () => {
-    deleteProduct(product);
+    setPrimary(id);
     hideModal();
   };
 
@@ -25,11 +26,7 @@ function DeleteProduct(props) {
     <Block backgroundColor='white1' borderRadius={5}>
       <Block padding={1}>
         <Text normal size={18} textAlign='center'>
-          Are you sure you want to delete product:
-          <Text bold size={18} textAlign='center'>
-            {` ${name} `}
-          </Text>
-          ?
+          Set this photo as primary photo?
         </Text>
       </Block>
       <Block row center right padding={1} >
@@ -40,7 +37,7 @@ function DeleteProduct(props) {
         </Block>
         <Block flex={1}>
           <Button size='tiny' status='primary' onPress={onPressPrimaryAction}>
-            Yes, delete it
+            Yes, Set this
           </Button>
         </Block>
       </Block>
@@ -48,4 +45,4 @@ function DeleteProduct(props) {
   );
 }
 
-export default memo(DeleteProduct);
+export default memo(SetPrimary);

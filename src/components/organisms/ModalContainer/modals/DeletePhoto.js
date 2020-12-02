@@ -3,17 +3,18 @@ import { useStoreActions } from 'easy-peasy';
 
 import { Block, Button, Text } from 'atoms';
 
-function DeleteProduct(props) {
+function DeletePhoto(props) {
 
   // Props
   const { data, hideModal } = props;
-  const { product } = data;
-  const { name } = product;
+  const { id } = data;
 
-  const deleteProduct = useStoreActions(actions => actions.manageProducts.deleteProduct);
+  const deletePhoto = useStoreActions(
+    actions => actions.productMedia.deletePhoto
+  );
 
   const onPressPrimaryAction = () => {
-    deleteProduct(product);
+    deletePhoto(id);
     hideModal();
   };
 
@@ -25,11 +26,7 @@ function DeleteProduct(props) {
     <Block backgroundColor='white1' borderRadius={5}>
       <Block padding={1}>
         <Text normal size={18} textAlign='center'>
-          Are you sure you want to delete product:
-          <Text bold size={18} textAlign='center'>
-            {` ${name} `}
-          </Text>
-          ?
+          Are you sure you want to delete this photo?
         </Text>
       </Block>
       <Block row center right padding={1} >
@@ -48,4 +45,4 @@ function DeleteProduct(props) {
   );
 }
 
-export default memo(DeleteProduct);
+export default memo(DeletePhoto);

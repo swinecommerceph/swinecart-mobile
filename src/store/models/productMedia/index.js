@@ -14,6 +14,8 @@ export default {
   primaryImageId: null,
 
   isUploading: false,
+  isDeleting: false,
+  isSetting: false,
   // Computed Values
 
   // Actions
@@ -29,6 +31,13 @@ export default {
   setIsUploading: action((state, payload) => {
     state.isUploading = payload;
   }),
+  setIsDeleting: action((state, payload) => {
+    state.isDeleting = payload;
+  }),
+  setIsSetting: action((state, payload) => {
+    state.isSetting = payload;
+  }),
+
 
   removeItem: action((state, payload) => {
     state.items = state.items.filter(item => item.id !== payload);
@@ -37,19 +46,23 @@ export default {
   // Side Effects
   deletePhoto: thunk(async (actions, payload, { getState }) => {
 
-    const { currentProduct: { id } } = getState();
+    actions.setIsDeleting(true);
 
-    const [error, data] = await to(ProductsService.deleteMedia(id, {
+    const { id: productId } = getState();
+
+    const [error, data] = await to(ProductsService.deleteMedia(productId, {
       mediaId: payload
     }));
 
     if (error) {
-
+      actions.setIsDeleting(false);
     }
     else {
-      actions.removeItem(payload);
+      ToastService.show('Photo Successfully deleted!', () => {
+        actions.removeItem(payload);
+        actions.setIsDeleting(false);
+      });
     }
-
 
   }),
   uploadPhoto: thunk(async (actions, payload, { getState }) => {
@@ -61,16 +74,36 @@ export default {
     const [error, data] = await to(ProductsService.addMedia(id, payload));
 
     if (error) {
-      console.log(error);
       actions.setIsUploading(false);
     }
     else {
-      ToastService.show('Upload success!', () => {
+      ToastService.show('Photo Successfully uploaded!', () => {
         actions.getItems({ isRefresh: false });
         actions.setIsUploading(false);
       });
     }
 
+  }),
+  setPrimary: thunk(async (actions, payload, { getState }) => {
+
+    actions.setIsSetting(true);
+
+    const { id } = getState();
+
+    const [error, data] = await to(
+      ProductsService.setPrimaryPicture(id, {
+        imageId: payload
+      })
+    );
+
+    if (error) {
+      actions.setIsUploading(false);
+    }
+    else {
+      actions.setPrimaryImageId(payload);
+    }
+
+    actions.setIsSetting(false);
   }),
   getItems: thunk(async (actions, payload, { getState }) => {
 
@@ -85,7 +118,7 @@ export default {
     const [error, data] = await to(ProductsService.getProductMedia(id));
 
     if (error) {
-      console.log(error);
+      actions.setFetchingError(true);
     }
     else {
       const { images, primaryImageId } = data.data;

@@ -45,6 +45,7 @@ const promiseHandler = response => {
 
   return new Promise((resolve, reject) => {
     if (!ok && problem) {
+      console.log(response);
       reject({ problem, status, data });
     }
     else {

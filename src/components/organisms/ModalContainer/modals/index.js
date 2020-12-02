@@ -8,3 +8,5 @@ export { default as AddToCart } from './AddToCart';
 export { default as RateBreeder } from './RateBreeder';
 export { default as ApproveRequest } from './ApproveRequest';
 export { default as DisapproveRequest } from './DisapproveRequest';
+export { default as DeletePhoto } from './DeletePhoto';
+export { default as SetPrimary } from './SetPrimary';

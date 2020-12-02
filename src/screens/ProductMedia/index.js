@@ -28,6 +28,8 @@ function Container({ route }) {
   const {
     isLoading,
     isUploading,
+    isDeleting,
+    isSetting,
   } = useStoreState(state => state.productMedia);
 
   const {
@@ -38,7 +40,9 @@ function Container({ route }) {
 
   return (
     <Fragment>
-      <LoadingOverlay show={isUploading} />
+      <LoadingOverlay
+        show={isUploading || isDeleting || isSetting}
+      />
       <HeaderBar
         title='Edit Product Media'
         accessoryLeft={BackButton}

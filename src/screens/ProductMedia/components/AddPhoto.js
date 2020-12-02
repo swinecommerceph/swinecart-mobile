@@ -18,12 +18,7 @@ function AddPhoto() {
 
   const onPressOpenPicker = () => {
     ImagePicker.showImagePicker(options, (response) => {
-      if (response.error) {
-      }
-      else if (response.didCancel) {
-
-      }
-      else {
+      if (!response.error && !response.didCancel) {
         uploadPhoto(response);
       }
     });

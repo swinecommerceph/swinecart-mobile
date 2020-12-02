@@ -2,6 +2,8 @@ import React, { memo } from 'react';
 import { useWindowDimensions  } from 'react-native';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
+import { ModalService } from 'services';
+
 import { Block, Button } from 'atoms';
 
 import SliderImage from './SliderImage';
@@ -12,23 +14,17 @@ function MediaItem({ data: { id, link } }) {
 
   const imageHeight = ~~(width / 2);
 
-  const {
-    primaryImageId
-  } = useStoreState(state => state.productMedia);
-
-  const {
-    deletePhoto
-  } = useStoreActions(actions => actions.productMedia);
+  const priImageId = useStoreState(state => state.productMedia.primaryImageId);
 
   const onPressSet = () => {
-
+    ModalService.showModal('SetPrimary', { id });
   };
 
   const onPressDelete = () => {
-    deletePhoto(id);
+    ModalService.showModal('DeletePhoto', { id });
   };
 
-  const isPrimaryImage = id === primaryImageId;
+  const isPrimaryImage = id === priImageId;
 
   return (
     <Block
@@ -64,4 +60,4 @@ function MediaItem({ data: { id, link } }) {
   );
 }
 
-export default memo(MediaItem, () => true);
+export default memo(MediaItem);
