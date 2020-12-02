@@ -3,7 +3,7 @@ import { useStoreState } from 'easy-peasy';
 
 import { NavigationService } from 'services';
 
-import { Text } from 'atoms';
+import { Text, Block } from 'atoms';
 
 import StatCard from './StatCard';
 
@@ -17,12 +17,17 @@ function ProductManagementStats() {
 
   return (
     <Fragment>
-      <Text bold size={18} textAlign='center' color='primary'>
+      <Text bold size={18} textAlign='center'  marginTop={1}  color='primary'>
         Product Management
       </Text>
-      <StatCard title='Hidden' data={stats.hidden} onPress={onPressHidden} />
-      <StatCard title='Displayed' data={stats.displayed} onPress={onPressHidden} />
-      <StatCard title='Available Products' data={stats.available} onPress={onPressHidden} />
+      <Block row paddingHorizontal={1} marginTop={1}>
+        <Block flex={1} marginRight={1}>
+          <StatCard title='Hidden' data={stats.hidden} onPress={onPressHidden} />
+        </Block>
+        <Block flex={1}>
+          <StatCard title='Displayed' data={stats.displayed} onPress={onPressHidden} />
+        </Block>
+      </Block>
     </Fragment>
   )
 }

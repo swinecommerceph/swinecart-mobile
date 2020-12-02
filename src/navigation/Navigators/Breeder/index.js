@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import BreederScreen from 'screens/BreederScreen';
@@ -35,6 +35,11 @@ const drawerContent = props => (
 );
 
 function Navigator() {
+
+  useEffect(() => {
+
+  }, []);
+
   return (
     <Drawer.Navigator
       initialRouteName='Home'

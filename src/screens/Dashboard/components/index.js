@@ -1,2 +1,2 @@
-export { default as StatCard } from './StatCard';
-export { default as DashboardStats } from './DashboardStats';
+export { default as ProductManagementStats } from './ProductManagementStats';
+export { default as ProductInventoryStats } from './ProductInventoryStats';

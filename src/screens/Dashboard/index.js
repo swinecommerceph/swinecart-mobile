@@ -1,18 +1,49 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment, memo, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { HeaderBar, DrawerButton } from 'molecules';
+import { StateScreen } from 'organisms';
 
 import {
-  DashboardStats
+  HeaderBar,
+  DrawerButton,
+  ContainerView
+} from 'molecules';
+
+import {
+  ProductInventoryStats,
+  ProductManagementStats,
 } from './components';
 
 function Container() {
+
+  useFocusEffect(
+    useCallback(() => {
+      getData();
+      return () => {
+        setLoading(true);
+      }
+    }, [])
+  );
+
+  const isLoading = useStoreState(state => state.stats.isLoading);
+
+  const {
+    getData,
+    setLoading,
+  } = useStoreActions(actions => actions.stats);
+
   return (
     <Fragment>
       <HeaderBar title='Dashboard' accessoryLeft={DrawerButton} />
-      <DashboardStats />
+      <StateScreen isLoading={isLoading} hasError={false}>
+        <ContainerView>
+          <ProductInventoryStats />
+          <ProductManagementStats />
+        </ContainerView>
+      </StateScreen>
     </Fragment>
   );
 }
 
-export default memo(Container, () => true);
+export default memo(Container);
