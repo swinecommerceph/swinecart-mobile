@@ -19,16 +19,16 @@ function FarmListItem({ data }) {
   };
 
   const onPressDelete = () => {
-
+    ModalService.showModal('DeleteFarm');
   };
 
   return (
     <Card>
-      <Block>
+      <Block center>
         <Icon
           name='home'
           color='primary'
-          size={30}
+          size={60}
         />
       </Block>
       <Block flex={1} paddingHorizontal={1}>
@@ -48,7 +48,7 @@ function FarmListItem({ data }) {
             View Details
           </Button>
           <Button size='tiny' status='basic' onPress={onPressDelete}>
-            Delete Farm
+            Remove Farm
           </Button>
         </Block>
       </Block>

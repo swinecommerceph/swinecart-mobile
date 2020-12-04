@@ -16,6 +16,7 @@ function Container() {
   }, []);
 
   const { isLoading } = useStoreState(state => state.farms);
+  const accountType = useStoreState(state => state.user.accountType);
   const { getItems } = useStoreActions(actions => actions.farms);
 
   return (
@@ -23,7 +24,11 @@ function Container() {
       <HeaderBar
         title='Farms'
         accessoryLeft={BackButton}
-        accessoryRight={AddButton}
+        accessoryRight={
+          accountType === 'Customer'
+            ? AddButton
+            : null
+        }
       />
       <StateScreen isLoading={isLoading} hasError={false}>
         <FarmList />

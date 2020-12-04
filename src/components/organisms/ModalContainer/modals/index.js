@@ -10,3 +10,4 @@ export { default as ApproveRequest } from './ApproveRequest';
 export { default as DisapproveRequest } from './DisapproveRequest';
 export { default as DeletePhoto } from './DeletePhoto';
 export { default as SetPrimary } from './SetPrimary';
+export { default as DeleteFarm } from './DeleteFarm';

@@ -15,6 +15,7 @@ import {
   HistoryDetailsScreen,
   FarmsScreen,
   FarmDetailsScreen,
+  FarmFormScreen,
   ProfileScreen,
   ConversationScreen,
 } from 'screens';
@@ -70,6 +71,7 @@ function Navigator() {
       <Drawer.Screen name='OrderDetails' component={OrderDetailsScreen} />
       <Drawer.Screen name='HistoryDetails' component={HistoryDetailsScreen} />
       <Drawer.Screen name='FarmDetails' component={FarmDetailsScreen} />
+      <Drawer.Screen name='FarmForm' component={FarmFormScreen} />
       <Drawer.Screen name='Conversation' component={ConversationScreen} />
     </Drawer.Navigator>
   );
