@@ -2,7 +2,11 @@ import { action, thunk } from 'easy-peasy';
 import map from 'lodash/map';
 import to from 'await-to-js';
 
-import { ToastService, MessagingService, ChatClient } from 'services';
+import {
+  ToastService,
+  ChatService,
+  ChatClient
+} from 'services';
 
 import { BaseModel } from '../../utils';
 
@@ -12,21 +16,11 @@ export default {
   // State
   ...BaseModel(),
 
-  currentUser: null,
-
   // Computed Values
 
   // Actions
 
-  setCurrentUser: action((state, payload) => {
-    const { id, name } = payload;
-    state.currentUser = {
-      _id: id,
-      name
-    };
-  }),
-
-  addMessage: thunk((actions, payload, { getState }) => {
+  addMessages: thunk((actions, payload, { getState }) => {
     const { items, page } = getState();
     actions.setItems({
       items: [...payload, ...(items || [])],
@@ -34,85 +28,84 @@ export default {
     });
   }),
 
-  sendMessage: thunk((actions, payload, { getStoreState, getState }) => {
-
-    const { accountType } = getStoreState().user;
-    const { currentUser } = getState();
-
-    payload.map(message => {
-
-      const {
-        text, user
-      } = message;
-
-      ChatClient.send({
-        from: user. _id,
-        to: currentUser._id,
-        direction: accountType === 'Breeder' ? 1 : 0,
-        message: text
-      });
-    });
-
-    actions.addMessage(payload);
-
-  }),
-
-  onMessage: thunk((actions, payload, { getStoreState, getState }) => {
-
-    const { currentUserGCFormat } = getStoreState().user;
+  sendMessage: thunk((actions, payload, { getStoreState }) => {
 
     const {
-      id, created_at, message, from_id, from, to, to_id, direction,
+      data: user,
+      accountType
+    } = getStoreState().user;
+
+    const {
+      otherUser,
+      messages,
     } = payload;
 
-    const user = direction === 0
-      ? { name: from, _id: from_id }
-      : currentUserGCFormat;
+    messages.map(message => {
 
-    const newMessage = {
-      _id: id,
-      text: message,
-      createdAt: created_at,
-      user
-    };
+      const outgoingMessage = {
+        from_id: user.id,
+        to_id: otherUser.id,
+        message: message.text,
+        direction: accountType === 'Breeder' ? 1 : 0,
+        media_url: "",
+        media_type: "",
+      };
 
-    actions.addMessage([newMessage]);
+      ChatClient.send(outgoingMessage);
 
+    });
+
+    actions.addMessages(messages);
   }),
 
-  getItems: thunk(async (actions, payload, { getStoreState, getState }) => {
+  onMessage: thunk((actions, payload, { getStoreState }) => {
 
-    const { isRefresh } = payload;
-    const { currentUserGCFormat, accountType } = getStoreState().user;
-    const { currentUser } = getState();
+    const user = getStoreState().user.data;
+
+    const message = {
+      _id: payload.id,
+      id: payload.id,
+      content: payload.message,
+      text: payload.message,
+      user: {
+        _id: payload.from_id === user.id ? user.id: payload.to_id,
+        id: payload.from_id === user.id ? user.id: payload.to_id,
+      }
+    };
+
+    actions.addMessages([ message ]);
+  }),
+
+  getItems: thunk(async (actions, payload, { getStoreState }) => {
+
+    const user = getStoreState().user.data;
+
+    const { isRefresh, otherUser } = payload;
 
     isRefresh
       ? actions.setRefreshing(true)
       : actions.setLoading(true);
 
-    const [error, data] = await to(MessagingService.getMessages(accountType, currentUser._id, 1, LIMIT));
+    const [error, data] = await to(ChatService.getMessages(otherUser.id, 1, 1000));
 
     if (error) {
-
+      actions.setFetchingError(false);
     }
     else {
       const { messages } = data.data;
 
-      const convertedMessages = map(messages, message => {
-        const {
-          id, content, created_at, from_id
-        } = message;
+      const convertedMessages = messages.map(message => {
 
-        const messageUser = from_id === currentUserGCFormat._id 
-          ? currentUserGCFormat 
-          : currentUser;
+        message._id = message.id;
+        message.text = message.content;
 
-          return {
-          _id: id,
-          text: content,
-          createdAt: created_at,
-          user: messageUser
+        message.user = {
+          _id: message.fromId === user.id ? user.id: otherUser.id,
+          id: message.fromId === user.id ? user.id: otherUser.id,
+          name: message.fromId === user.id ? user.name: otherUser.name,
         };
+
+        return message;
       });
 
       actions.setItems({
@@ -120,7 +113,6 @@ export default {
         page: 2
       });
     }
-
 
     isRefresh
       ? actions.setRefreshing(false)

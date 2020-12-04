@@ -1,31 +1,40 @@
-import React, { Fragment, memo, useEffect } from 'react';
+import React, { Fragment, memo, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { HeaderBar, BackButton, LoadingView } from 'molecules';
+import { StateScreen } from 'organisms';
+import { HeaderBar, BackButton } from 'molecules';
 
 import { ChatView } from './components';
 
-function Container() {
+function Container({ route }) {
 
-  const getMessages = useStoreActions(actions => actions.chat.getItems);
-  const currentUser = useStoreState(state => state.chat.currentUser);
+  useFocusEffect(
+    useCallback(() => {
+      getItems({ otherUser, isRefresh: false });
+      return () => {
+        setLoading(true);
+      };
+    }, [])
+  );
 
-  useEffect(() => {
-    getMessages({ isRefresh: false });
-  }, [currentUser]);
+  const { otherUser } = route.params;
+
+  const {
+    isLoading,
+  } = useStoreState(state => state.chat);
+
+  const {
+    getItems,
+    setLoading,
+  } = useStoreActions(actions => actions.chat);
 
   return (
     <Fragment>
-      {
-        !currentUser && <LoadingView />
-      }
-      {
-        currentUser &&
-        <Fragment>
-          <HeaderBar title={`${currentUser.name}`} accessoryLeft={BackButton} />
-          <ChatView />
-        </Fragment>
-      }
+      <HeaderBar title={`${otherUser.name}`} accessoryLeft={BackButton} />
+      <StateScreen isLoading={isLoading} hasError={false}>
+        <ChatView otherUser={otherUser} />
+      </StateScreen>
     </Fragment>
   );
 }

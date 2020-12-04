@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import { formatMessageDate } from 'utils/formatters';
 import { NavigationService } from 'services';
@@ -10,16 +9,12 @@ import { Block, Text } from 'atoms';
 
 function ChatItem({ data }) {
 
-  const messages = useStoreState(state => state.chat.items);
-  const setCurrentUser = useStoreActions(actions => actions.chat.setCurrentUser);
-
   const { message, user } = data;
   const { name } = user;
-  const { content, created_at, read_at } = message;
+  const { content, createdAt, readAt } = message;
 
   const onPressConversation = () => {
-    setCurrentUser(user);
-    NavigationService.navigate('Conversation');
+    NavigationService.navigate('Conversation', { otherUser: user });
   };
 
   return (
@@ -42,14 +37,14 @@ function ChatItem({ data }) {
             numberOfLines={1}
           >
             {name}
-          </Text> 
+          </Text>
           <Text
             semibold
-            color={ read_at ? 'gray5' : 'black1' }
+            color={ readAt ? 'gray5' : 'black1' }
             size={12}
             numberOfLines={1}
           >
-            {messages ? messages[0].text : content}
+            {content}
           </Text>
         </Block>
         <Text
@@ -58,17 +53,21 @@ function ChatItem({ data }) {
           size={12}
           numberOfLines={1}
         >
-          {formatMessageDate(created_at)}
+          {formatMessageDate(createdAt)}
         </Text>
         {
-          !read_at && 
-          <Block flex={false} 
-            width={15}
-            height={15}
-            borderRadius={8}
-            backgroundColor='primary'
-            marginLeft={0.5}
-          />
+          !readAt
+            ?
+              (
+                <Block flex={false}
+                  width={15}
+                  height={15}
+                  borderRadius={8}
+                  backgroundColor='primary'
+                  marginLeft={0.5}
+                />
+              )
+            : []
         }
       </Block>
     </TouchableOpacity>

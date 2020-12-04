@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+
+import { ChatClient } from 'services';
 
 import CustomerScreen from 'screens/CustomerScreen';
 
@@ -36,8 +39,20 @@ const drawerContent = props => (
 function Navigator() {
 
   useEffect(() => {
+    const socket = ChatClient.connect(user);
+
+    socket.addEventListener('message', ({ data }) => {
+      onMessage(JSON.parse(data));
+    });
+
+    return () => {
+      socket.close();
+    };
 
   }, []);
+
+  const user = useStoreState(state => state.user.data);
+  const onMessage = useStoreActions(actions => actions.chat.onMessage);
 
   return (
     <Drawer.Navigator

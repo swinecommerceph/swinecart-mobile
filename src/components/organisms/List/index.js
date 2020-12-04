@@ -33,8 +33,8 @@ function List(props) {
         {
           data.length > 0 &&
           <ListFooter
-            isLoadingMore={isLoadingMore} 
-            onPressLoadMore={onPressLoadMore} 
+            isLoadingMore={isLoadingMore}
+            onPressLoadMore={onPressLoadMore}
           />
         }
       </Fragment>

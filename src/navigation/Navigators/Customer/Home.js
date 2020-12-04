@@ -26,7 +26,7 @@ const tabBar = props => (
 function Navigator() {
   return (
     <Tab.Navigator
-      initialRouteName='Shop'
+      initialRouteName='Inbox'
       tabBar={tabBar}
       lazy='true'
     >

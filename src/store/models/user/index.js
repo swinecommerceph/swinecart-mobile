@@ -23,7 +23,6 @@ export default {
 
     state.data = data;
     state.accountType = accountType;
-    state.currentUserGCFormat = { _id: id, name };
   }),
 
   // Thunk

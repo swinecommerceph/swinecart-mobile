@@ -9,7 +9,7 @@ export { default as ChatClient } from './chatclient';
 
 export { default as Api } from './api/api';
 export { default as AuthService } from './api/auth';
-export { default as MessagingService } from './api/messaging';
+export { default as ChatService } from './api/chat';
 export { default as NotificationService } from './api/notifications';
 export { default as FarmService } from './api/farms';
 export { default as ProfileService } from './api/profile';
