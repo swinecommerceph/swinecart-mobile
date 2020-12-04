@@ -38,6 +38,13 @@ class ChatClient {
     }
   }
 
+  closeConnection() {
+    if (this.socket) {
+      this.socket.removeEventListener('close');
+      this.socket.close();
+    }
+  }
+
 }
 
 export default new ChatClient();

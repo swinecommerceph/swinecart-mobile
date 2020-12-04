@@ -1,8 +1,8 @@
-import React, { Fragment, memo } from 'react';
+import React, { memo } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { LoadingView, UserAvatar } from 'molecules';
+import { LoadingView } from 'molecules';
 
 function ChatView({ otherUser }) {
 

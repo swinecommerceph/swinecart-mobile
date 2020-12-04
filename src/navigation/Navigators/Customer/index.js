@@ -46,7 +46,7 @@ function Navigator() {
     });
 
     return () => {
-      socket.close();
+      ChatClient.closeConnection();
     };
 
   }, []);

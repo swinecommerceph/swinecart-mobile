@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
 import { formatMessageDate } from 'utils/formatters';
 import { NavigationService } from 'services';
@@ -8,6 +9,8 @@ import { UserAvatar } from 'molecules';
 import { Block, Text } from 'atoms';
 
 function ChatItem({ data }) {
+
+  const messages = useStoreState(state => state.chat.items);
 
   const { message, user } = data;
   const { name } = user;
@@ -44,7 +47,7 @@ function ChatItem({ data }) {
             size={12}
             numberOfLines={1}
           >
-            {content}
+            {messages ? messages[0].text : content}
           </Text>
         </Block>
         <Text

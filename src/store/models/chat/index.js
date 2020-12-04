@@ -1,5 +1,4 @@
 import { action, thunk } from 'easy-peasy';
-import map from 'lodash/map';
 import to from 'await-to-js';
 
 import {
