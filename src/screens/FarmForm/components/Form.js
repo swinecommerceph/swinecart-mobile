@@ -1,21 +1,46 @@
-import React, { Fragment, memo, useEffect } from 'react';
+import React, { Fragment, memo, useEffect, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useFormik } from 'formik';
+
+import { FarmFormSchema } from 'schemas';
 
 import { Input, Select, ContainerView } from 'molecules';
 import { Block, Button } from 'atoms';
 
-function Form() {
+function Form({ mode }) {
 
   const accountType = useStoreState(state => state.user.accountType);
 
+  const farmDetails = useStoreState(state => state.farmDetails.data);
+  const data = useStoreState(state => state.farmForm.data);
+
+  const initialValues = {
+    accountType,
+    ...data,
+  };
+
   const { handleSubmit, ...formControl } = useFormik({
-    initialValues: {
-      accountType,
-    },
+    initialValues,
+    validationSchema: FarmFormSchema,
     onSubmit: (values) => {
+      console.log(values);
     },
   });
+
+  useFocusEffect(
+    useCallback(() => {
+      if (mode === 'edit') {
+        formControl.setValues({
+          accountType,
+          ...farmDetails
+        }, true);
+      }
+      else {
+        formControl.setValues(initialValues, true);
+      }
+    }, [ mode, farmDetails ])
+  );
 
   return (
     <ContainerView
@@ -61,7 +86,7 @@ function Form() {
         name='zipCode'
         label='Postal/ZIP code'
         required={true}
-        width={128}
+        width={160}
         formControl={formControl}
       />
       <Block row>
@@ -71,7 +96,7 @@ function Form() {
             label='Landline'
             keyboardType='numeric'
             optional={true}
-            width={128}
+            width={160}
             formControl={formControl}
           />
         </Block>
@@ -81,13 +106,13 @@ function Form() {
             label='Mobile'
             keyboardType='numeric'
             required={true}
-            width={128}
+            width={160}
             formControl={formControl}
           />
         </Block>
       </Block>
       <Block>
-        <Button>
+        <Button onPress={handleSubmit}>
           Submit
         </Button>
       </Block>
@@ -96,4 +121,4 @@ function Form() {
 
 }
 
-export default Form;
+export default memo(Form);

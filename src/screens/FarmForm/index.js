@@ -1,4 +1,5 @@
-import React, { Fragment, memo, useEffect } from 'react';
+import React, { Fragment, memo, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import { StateScreen } from 'organisms';
@@ -13,6 +14,26 @@ function FarmForm({ route }) {
 
   const { mode } = route.params;
 
+  useFocusEffect(
+    useCallback(() => {
+      setLoading(false);
+      return () => {
+        setLoading(true);
+        resetForm();
+      };
+
+    }, [ route.params ])
+  );
+
+  const {
+    isLoading
+  } = useStoreState(state => state.farmForm);
+
+  const {
+    setLoading,
+    resetForm,
+  } = useStoreActions(actions => actions.farmForm);
+
   return (
     <Fragment>
       <LoadingOverlay show={false} />
@@ -20,8 +41,8 @@ function FarmForm({ route }) {
         title={mode === 'add' ? 'Add Farm' : 'Edit Farm Details'}
         accessoryLeft={BackButton}
       />
-      <StateScreen isLoading={false} hasError={false}>
-        <Form />
+      <StateScreen isLoading={isLoading} hasError={false}>
+        <Form mode={mode} />
       </StateScreen>
     </Fragment>
   );
