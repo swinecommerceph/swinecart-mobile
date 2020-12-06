@@ -3,6 +3,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useFormik } from 'formik';
 
+import kebabCase from 'lodash/kebabCase';
+
 import { FarmFormSchema } from 'schemas';
 
 import { Input, Select, ContainerView } from 'molecules';
@@ -14,17 +16,34 @@ function Form({ mode }) {
 
   const farmDetails = useStoreState(state => state.farmDetails.data);
   const data = useStoreState(state => state.farmForm.data);
+  const provinceOptions = useStoreState(state => state.province.items);
+
+  const {
+    addFarm,
+    updateFarm,
+  } = useStoreActions(actions => actions.farmForm);
 
   const initialValues = {
     accountType,
     ...data,
   };
 
-  const { handleSubmit, ...formControl } = useFormik({
+  const { handleSubmit, resetForm, ...formControl } = useFormik({
     initialValues,
     validationSchema: FarmFormSchema,
     onSubmit: (values) => {
-      console.log(values);
+      if (mode === 'add') {
+        addFarm({
+          values,
+          resetForm
+        });
+      }
+      else {
+        updateFarm({
+          values,
+          resetForm
+        });
+      }
     },
   });
 
@@ -33,7 +52,7 @@ function Form({ mode }) {
       if (mode === 'edit') {
         formControl.setValues({
           accountType,
-          ...farmDetails
+          ...farmDetails,
         }, true);
       }
       else {
@@ -71,8 +90,8 @@ function Form({ mode }) {
         label='Province'
         placeholder='Select Province'
         required={true}
-        options={[{ title: 'Abra', key: 'abra' }]}
-        valueProp='title'
+        options={provinceOptions}
+        valueProp='text'
         uniqueId='key'
         formControl={formControl}
       />
@@ -85,6 +104,7 @@ function Form({ mode }) {
       <Input
         name='zipCode'
         label='Postal/ZIP code'
+        keyboardType='numeric'
         required={true}
         width={160}
         formControl={formControl}

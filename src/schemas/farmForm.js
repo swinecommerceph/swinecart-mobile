@@ -21,9 +21,18 @@ const schema = Yup.object().shape({
     .trim()
     .required('Please enter the farm type')
     .nullable(),
+  zipCode: Yup
+    .string()
+    .trim()
+    .required('Please enter the farm postal/zip code')
+    .nullable(),
   province: Yup
     .object()
     .required('Please select the farm province')
+    .nullable(),
+  landline: Yup
+    .string()
+    .trim()
     .nullable(),
   landline: Yup
     .string()

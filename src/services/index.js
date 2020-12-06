@@ -13,6 +13,7 @@ export { default as ChatService } from './api/chat';
 export { default as NotificationService } from './api/notifications';
 export { default as FarmService } from './api/farms';
 export { default as ProfileService } from './api/profile';
+export { default as ProvinceService } from './api/province';
 
 export { default as OrderService } from './api/breeder/orders';
 export { default as ProductsService } from './api/breeder/products';

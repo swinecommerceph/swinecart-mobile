@@ -16,6 +16,7 @@ function FarmForm({ route }) {
 
   useFocusEffect(
     useCallback(() => {
+      getProvinces();
       setLoading(false);
       return () => {
         setLoading(true);
@@ -30,9 +31,17 @@ function FarmForm({ route }) {
   } = useStoreState(state => state.farmForm);
 
   const {
+    isLoading: isFetchingProvinces,
+  } = useStoreState(state => state.province);
+
+  const {
     setLoading,
     resetForm,
   } = useStoreActions(actions => actions.farmForm);
+
+  const {
+    getItems: getProvinces,
+  } = useStoreActions(actions => actions.province);
 
   return (
     <Fragment>
@@ -41,7 +50,10 @@ function FarmForm({ route }) {
         title={mode === 'add' ? 'Add Farm' : 'Edit Farm Details'}
         accessoryLeft={BackButton}
       />
-      <StateScreen isLoading={isLoading} hasError={false}>
+      <StateScreen
+        isLoading={isLoading || isFetchingProvinces}
+        hasError={false}
+      >
         <Form mode={mode} />
       </StateScreen>
     </Fragment>

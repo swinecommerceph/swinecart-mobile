@@ -1,5 +1,7 @@
 import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
+import kebabCase from 'lodash/kebabCase';
+import startCase from 'lodash/startCase';
 
 import {
   ToastService, FarmService
@@ -28,7 +30,13 @@ export default {
     }
     else {
       const { farm } = data.data;
-      actions.setData(farm);
+      actions.setData({
+        ...farm,
+        province: {
+          text: farm.province,
+          key: kebabCase(farm.province),
+        }
+      });
     }
 
     actions.setLoading(false);

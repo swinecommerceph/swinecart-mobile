@@ -31,7 +31,7 @@ function Details(props) {
         <TextGroup label='Address Line 1' data={farm.addressLine1} />
         <TextGroup label='Address Line 2' data={farm.addressLine2} />
         <TextGroup label='Farm Type' data={farm.farmType} />
-        <TextGroup label='Province' data={farm.province} />
+        <TextGroup label='Province' data={farm.province.text} />
         <TextGroup label='Postal / Zip Code' data={farm.zipCode} />
         <TextGroup label='Landline' data={farm.landline} />
         <TextGroup label='Mobile' data={farm.mobile} />
