@@ -19,7 +19,7 @@ function FarmListItem({ data }) {
   };
 
   const onPressDelete = () => {
-    ModalService.showModal('DeleteFarm');
+    ModalService.showModal('DeleteFarm', { id });
   };
 
   return (

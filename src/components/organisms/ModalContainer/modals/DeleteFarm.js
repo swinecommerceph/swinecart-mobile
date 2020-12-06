@@ -7,14 +7,14 @@ function DeleteFarm(props) {
 
   // Props
   const { data, hideModal } = props;
-  // const { id } = data;
+  const { id } = data;
 
-  // const deletePhoto = useStoreActions(
-  //   actions => actions.productMedia.deletePhoto
-  // );
+  const deleteFarm = useStoreActions(
+    actions => actions.farms.deleteFarm
+  );
 
   const onPressPrimaryAction = () => {
-    // deletePhoto(id);
+    deleteFarm(id);
     hideModal();
   };
 

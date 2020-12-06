@@ -11,6 +11,23 @@ export default {
 
   ...BaseModel(),
 
+  removeItem: action((state, payload) => {
+    state.items = state.items.filter(item => item.id !== payload);
+  }),
+
+  deleteFarm: thunk(async (actions, payload) => {
+    const [ error, data ] = await to(FarmService.deleteFarm(payload));
+
+    if (error) {
+
+    }
+    else {
+      ToastService.show('Delete success!', null);
+      actions.removeItem(payload);
+    }
+
+  }),
+
   getItems: thunk(async (actions, payload) => {
 
     const { isRefresh } = payload;
