@@ -40,10 +40,9 @@ const drawerContent = props => (
 function Navigator() {
 
   useEffect(() => {
-    const socket = ChatClient.connect(user);
 
-    socket.addEventListener('message', ({ data }) => {
-      onMessage(JSON.parse(data));
+    ChatClient.connect(user, message => {
+      onMessage(message);
     });
 
     return () => {

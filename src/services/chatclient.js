@@ -2,18 +2,23 @@ import { CHAT_URL } from 'react-native-dotenv';
 
 class ChatClient {
 
-  connect(user) {
+  user;
+  socket;
+  callback;
+
+  connect(user, callback) {
     this.socket = new WebSocket(CHAT_URL);
     this.user = user;
+    this.callback = callback;
 
     this.socket.addEventListener('open', this.onOpen.bind(this));
     this.socket.addEventListener('close', this.onClose.bind(this));
+    this.socket.addEventListener('message', this.onMessage.bind(this));
     this.socket.addEventListener('error', this.onError.bind(this));
-
-    return this.socket;
   }
 
   onOpen() {
+    console.log('Open');
     const message = {
       connect: true,
       userId: this.user.id,
@@ -21,15 +26,19 @@ class ChatClient {
     this.send(message);
   }
 
-  onClose(data) {
-    console.log('Close', data);
+  onClose() {
+    console.log('Close');
+    console.log('Reconnect')
+    this.connect(this.user, this.callback);
   }
 
-  onError(data) {
-    console.log('Error', data);
+  onError() {
+    console.log('Error');
   }
 
   onMessage({ data }) {
+    const message = JSON.parse(data);
+    this.callback(message);
   }
 
   send(data) {

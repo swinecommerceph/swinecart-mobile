@@ -1,5 +1,6 @@
 import { action, thunk } from 'easy-peasy';
 import to from 'await-to-js';
+import toString from 'lodash/toString';
 
 import {
   ToastService,
@@ -61,14 +62,18 @@ export default {
 
     const user = getStoreState().user.data;
 
+    const messageId = toString(payload.from_id) === toString(user.id)
+      ? user.id
+      : payload.to_id;
+
     const message = {
       _id: payload.id,
       id: payload.id,
       content: payload.message,
       text: payload.message,
       user: {
-        _id: payload.from_id === user.id ? user.id: payload.to_id,
-        id: payload.from_id === user.id ? user.id: payload.to_id,
+        _id: messageId,
+        id: messageId,
       }
     };
 
