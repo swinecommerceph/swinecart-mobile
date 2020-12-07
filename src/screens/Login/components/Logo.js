@@ -15,4 +15,4 @@ function Logo() {
   );
 }
 
-export default memo(Logo, () => true);
+export default memo(Logo);

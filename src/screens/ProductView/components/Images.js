@@ -43,4 +43,4 @@ function Images({ data: images, type }) {
   );
 }
 
-export default memo(Images, () => true);
+export default memo(Images);

@@ -30,4 +30,4 @@ function ShopItem({ data }) {
 
 }
 
-export default memo(ShopItem, () => true);
+export default memo(ShopItem);

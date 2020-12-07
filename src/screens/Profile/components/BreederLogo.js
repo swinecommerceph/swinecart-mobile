@@ -29,7 +29,7 @@ function BreederLogo(props) {
   );
 }
 
-export default withStyles(memo(BreederLogo, () => true), () => ({
+export default withStyles(memo(BreederLogo), () => ({
   avatarStyle: { 
     width: 144, 
     height: 144 

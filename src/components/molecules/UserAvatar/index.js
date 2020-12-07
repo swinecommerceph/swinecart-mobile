@@ -27,4 +27,4 @@ function UserAvatar({ userName, size = 64, textSize = 24 }) {
   );
 }
 
-export default memo(UserAvatar, () => true);
+export default memo(UserAvatar);

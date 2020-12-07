@@ -54,4 +54,4 @@ function Details() {
   );
 }
 
-export default memo(Details, () => true);
+export default memo(Details);

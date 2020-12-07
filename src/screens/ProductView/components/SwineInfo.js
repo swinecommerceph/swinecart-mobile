@@ -79,4 +79,4 @@ function SwineInfo({ data, type }) {
 }
 
 
-export default memo(SwineInfo, () => true);
+export default memo(SwineInfo);

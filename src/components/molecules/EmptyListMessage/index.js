@@ -12,4 +12,4 @@ function EmptyListMessage({ message }) {
   );
 }
 
-export default memo(EmptyListMessage, () => true);
+export default memo(EmptyListMessage);

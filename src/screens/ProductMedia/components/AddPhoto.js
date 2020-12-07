@@ -32,4 +32,4 @@ function AddPhoto() {
   );
 }
 
-export default memo(AddPhoto, () => true);
+export default memo(AddPhoto);

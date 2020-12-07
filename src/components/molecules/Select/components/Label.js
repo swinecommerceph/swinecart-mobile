@@ -12,4 +12,4 @@ function Label({ label, required = false, optional = false }) {
   );
 }
 
-export default memo(Label, () => true);
+export default memo(Label);

@@ -91,4 +91,4 @@ function ReviewListItem({ data }) {
 
 }
 
-export default memo(ReviewListItem, () => true);
+export default memo(ReviewListItem);

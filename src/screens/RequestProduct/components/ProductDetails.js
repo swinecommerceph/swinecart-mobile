@@ -33,4 +33,4 @@ function ProductDetails({ product }) {
   );
 }
 
-export default memo(ProductDetails, () => true);
+export default memo(ProductDetails);

@@ -79,4 +79,4 @@ function RequestItem({ data }) {
   );
 }
 
-export default memo(RequestItem, () => true);
+export default memo(RequestItem);

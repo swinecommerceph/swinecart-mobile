@@ -9,4 +9,4 @@ function Loader({...props}) {
 
 }
 
-export default memo(Loader, () => true);
+export default memo(Loader);

@@ -20,4 +20,4 @@ function MessageBox({ status, children, ...otherProps }) {
   );
 }
 
-export default memo(MessageBox, () => true);
+export default memo(MessageBox);

@@ -52,4 +52,4 @@ function ProductInfo({ data, breeder, farm }) {
   );
 }
 
-export default memo(ProductInfo, () => true);
+export default memo(ProductInfo);

@@ -19,4 +19,4 @@ function BackButton() {
 
 }
 
-export default memo(BackButton, () => true);
+export default memo(BackButton);

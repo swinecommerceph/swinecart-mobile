@@ -16,4 +16,4 @@ function ProductInfo({ name, type, breed }) {
   );
 }
 
-export default memo(ProductInfo, () => true);
+export default memo(ProductInfo);

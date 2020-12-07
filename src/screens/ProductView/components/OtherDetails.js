@@ -21,4 +21,4 @@ function OtherDetails({ data }) {
   );
 }
 
-export default memo(OtherDetails, () => true);
+export default memo(OtherDetails);

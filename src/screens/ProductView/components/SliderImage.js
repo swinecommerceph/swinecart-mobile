@@ -44,7 +44,7 @@ function SliderImage({ eva, imageUrl, type, height }) {
 }
 
 
-export default withStyles(memo(SliderImage, () => true), () => ({
+export default withStyles(memo(SliderImage), () => ({
   imageStyle: {
     flex: 1,
     width: null,

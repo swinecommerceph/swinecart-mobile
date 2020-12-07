@@ -38,4 +38,4 @@ function HistoryDetails({ route }) {
   );
 }
 
-export default memo(HistoryDetails, () => true);
+export default memo(HistoryDetails);

@@ -53,4 +53,4 @@ function OrderActions(props) {
   }
 }
 
-export default memo(OrderActions, () => true);
+export default memo(OrderActions);

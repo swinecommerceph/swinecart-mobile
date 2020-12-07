@@ -12,4 +12,4 @@ function LoadingView() {
   );
 }
 
-export default memo(LoadingView, () => true);
+export default memo(LoadingView);

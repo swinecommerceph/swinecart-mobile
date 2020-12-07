@@ -8,4 +8,4 @@ function BlankScreen() {
   );
 }
 
-export default memo(BlankScreen, () => true);
+export default memo(BlankScreen);

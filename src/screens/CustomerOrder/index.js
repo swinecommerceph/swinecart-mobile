@@ -13,4 +13,4 @@ function Container() {
   );
 }
 
-export default memo(Container, () => true);
+export default memo(Container);
