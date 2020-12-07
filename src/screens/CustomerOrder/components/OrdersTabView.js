@@ -1,65 +1,57 @@
-import React, { PureComponent } from 'react';
-import { Dimensions } from 'react-native';
+import React, { useState, useMemo } from 'react';
+import { useWindowDimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
-
-import { EmptyListMessage } from 'molecules';
 
 import OrdersList from './OrdersList';
 import StatusPicker from './StatusPicker';
 
-import routes from 'constants/routes';
+import orderRoutes from 'constants/routes';
 
-class OrdersTabView extends PureComponent {
+const requestedRoute = () => <OrdersList status='requested' />;
+const reservedRoute = () => <OrdersList status='reserved' />;
+const onDeliveryRoute = () => <OrdersList status='onDelivery' />;
+const soldRoute = () => <OrdersList status='sold' />;
 
-  state = {
-    index: 0,
-    routes
-  };
+function OrdersTabView() {
 
-  requestedRoute = () => <OrdersList status='requested' />;
-  reservedRoute = () => <OrdersList status='reserved' />;
-  onDeliveryRoute = () => <OrdersList status='onDelivery' />;
-  soldRoute = () => <OrdersList status='sold' />;
+  const { width } = useWindowDimensions();
 
-  initialLayout = {
-    height: 0, 
-    width: Dimensions.get('window').width
-  };
+  const [ index, setIndex ] = useState(0);
+  const [ routes ] = useState(orderRoutes);
 
-  renderTabBar = ({ jumpTo }) => (
+  const navigationState = useMemo(
+    () => ({ index, routes })
+  , [ index ]);
+
+  const renderScene = SceneMap({
+    requested: requestedRoute,
+    reserved: reservedRoute,
+    onDelivery: onDeliveryRoute,
+    sold: soldRoute,
+  });
+
+  const renderTabBar = ({ jumpTo }) => (
     <StatusPicker jumpTo={jumpTo} />
   );
 
-  renderScene = SceneMap({
-    requested: this.requestedRoute,
-    reserved: this.reservedRoute,
-    onDelivery: this.onDeliveryRoute,
-    sold: this.soldRoute,
-  });
+  const initialLayout = useMemo(
+    () => ({ width })
+  , [ width ]);
 
-  renderLazyPlaceholder = () => {
-    return (
-      <EmptyListMessage title='Loading Orders...' />
-    );
-  }
+  return (
+    <TabView
+      navigationState={navigationState}
+      renderScene={renderScene}
+      renderTabBar={renderTabBar}
+      onIndexChange={setIndex}
+      initialLayout={initialLayout}
+      lazy={true}
+      lazyPreloadDistance={0}
+      swipeEnabled={false}
+    />
+  );
 
-  onIndexChange = index => this.setState({ index });
 
-  render() {
-    return (
-      <TabView
-        navigationState={this.state}
-        renderScene={this.renderScene}
-        renderTabBar={this.renderTabBar}
-        onIndexChange={this.onIndexChange}
-        initialLayout={this.initialLayout}
-        renderLazyPlaceholder={this.renderLazyPlaceholder}
-        lazy={true}
-        lazyPreloadDistance={0}
-        swipeEnabled={false}
-      />
-    );
-  }
 }
 
 export default OrdersTabView;
