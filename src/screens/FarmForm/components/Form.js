@@ -3,8 +3,6 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useFormik } from 'formik';
 
-import kebabCase from 'lodash/kebabCase';
-
 import { FarmFormSchema } from 'schemas';
 
 import { Input, Select, ContainerView } from 'molecules';
