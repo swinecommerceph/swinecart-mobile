@@ -1,29 +1,35 @@
 import React, { Fragment, memo } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { useFormik } from 'formik';
 
 import { Input } from 'molecules';
-
-import { LoginSchema } from 'schemas';
 
 import LoginButton from './LoginButton';
 
 function LoginForm() {
 
-  const isLoggingIn = useStoreState(state => state.auth.isLoggingIn);
-  const loginUser = useStoreActions(actions => actions.auth.login);
+  const {
+    values,
+    errors,
+    touched,
+  } = useStoreState(state => state.loginForm);
 
-  const { handleSubmit, ...formControl } = useFormik({
-    initialValues: {
-      // email: 'ykautzer@steuber.com', // breeder
-      email: 'patsy84@ullrich.net', // customer
-      password: 'secret12',
-    },
-    validationSchema: LoginSchema,
-    onSubmit: ({ email, password }) => {
-      loginUser({ email, password });
-    },
-  });
+  const {
+    submit,
+    setFieldValue,
+    setFieldTouched,
+  } = useStoreActions(actions => actions.loginForm);
+
+  const onPressSubmit = () => {
+    submit();
+  };
+
+  const formControl = {
+    values,
+    errors,
+    touched,
+    setFieldValue,
+    setFieldTouched,
+  };
 
   return (
     <Fragment>
@@ -41,8 +47,7 @@ function LoginForm() {
         formControl={formControl}
       />
       <LoginButton
-        disabled={isLoggingIn}
-        onSubmit={handleSubmit}
+        onSubmit={onPressSubmit}
       />
     </Fragment>
   );

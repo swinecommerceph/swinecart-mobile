@@ -47,11 +47,11 @@ function Input(props) {
   );
 
   const onChangeText = useCallback(value => {
-    setFieldValue(name, value);
+    setFieldValue({ name, value });
   }, [ values[name] ]);
 
   const onBlur = useCallback(() => {
-    setFieldTouched(name, true);
+    setFieldTouched({ name, value: true });
   }, []);
 
   const onIconPress = useCallback(() => {
