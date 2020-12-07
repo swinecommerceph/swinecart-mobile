@@ -1,49 +1,47 @@
 import React, { Fragment, memo, useEffect } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-import { NavigationService } from 'services';
-
-import { HeaderBar, HeaderBarButton, DrawerButton } from 'molecules';
+import { StateScreen } from 'organisms';
+import { HeaderBar, DrawerButton } from 'molecules';
 import { LoadingOverlay } from 'atoms';
 
 import {
-  ShopList
+  ShopList,
+  FilterItemsButton,
 } from './components';
 
-const accessoryRight = () => {
-
-  const onPress = () => {
-    NavigationService.navigate('FilterItems');
-  };
-
-  return (
-    <HeaderBarButton
-      iconName='search'
-      onPress={onPress}
-    />
-  );
-};
-
 function Container() {
-
-  const getItems = useStoreActions(actions => actions.shop.getItems);
-  const isLoading = useStoreState(state => state.cart.isAddingItem);
 
   useEffect(() => {
     getItems({ isRefresh: false });
   }, []);
 
+  const isAddingItem = useStoreState(state => state.cart.isAddingItem);
+
+  const {
+    isLoading,
+  } = useStoreState(state => state.shop);
+
+  const {
+    getItems,
+  } = useStoreActions(actions => actions.shop);
+
   return (
     <Fragment>
-      <LoadingOverlay show={isLoading} />
+      <LoadingOverlay show={isAddingItem} />
       <HeaderBar
         title='Shop'
         accessoryLeft={DrawerButton}
-        accessoryRight={accessoryRight}
+        accessoryRight={FilterItemsButton}
       />
-      <ShopList />
+      <StateScreen
+        isLoading={isLoading}
+        hasError={false}
+      >
+        <ShopList />
+      </StateScreen>
     </Fragment>
   );
 }
 
-export default memo(Container, () => true);
+export default memo(Container);
