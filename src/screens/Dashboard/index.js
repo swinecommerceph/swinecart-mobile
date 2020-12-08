@@ -11,8 +11,8 @@ import {
 } from 'molecules';
 
 import {
-  ProductInventoryStats,
-  ProductManagementStats,
+  OrderOverview,
+  ProductInventory,
 } from './components';
 
 function Container() {
@@ -38,8 +38,8 @@ function Container() {
       <HeaderBar title='Dashboard' accessoryLeft={DrawerButton} />
       <StateScreen isLoading={isLoading} hasError={false}>
         <ContainerView>
-          <ProductInventoryStats />
-          <ProductManagementStats />
+          <OrderOverview />
+          <ProductInventory />
         </ContainerView>
       </StateScreen>
     </Fragment>

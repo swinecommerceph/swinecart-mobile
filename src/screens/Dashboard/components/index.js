@@ -1,2 +1,2 @@
-export { default as ProductManagementStats } from './ProductManagementStats';
-export { default as ProductInventoryStats } from './ProductInventoryStats';
+export { default as OrderOverview } from './OrderOverview';
+export { default as ProductInventory } from './ProductInventory';

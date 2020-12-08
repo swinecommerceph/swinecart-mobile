@@ -6,7 +6,7 @@ import { Block, Text } from 'atoms';
 
 import StatCard from './StatCard';
 
-function ProductInventoryStats() {
+function OrderOverview() {
 
   const stats = useStoreState(state => state.stats.data);
   const setIndex = useStoreActions(actions => actions.orders.setIndex);
@@ -34,7 +34,7 @@ function ProductInventoryStats() {
   return (
     <Fragment>
       <Text bold size={18} textAlign='center' marginTop={1} color='primary'>
-        Product Inventory and Status
+        Order Overview
       </Text>
       <Block row paddingHorizontal={1} marginTop={1}>
         <Block flex={1} marginRight={1}>
@@ -72,4 +72,4 @@ function ProductInventoryStats() {
   )
 }
 
-export default memo(ProductInventoryStats);
+export default memo(OrderOverview);

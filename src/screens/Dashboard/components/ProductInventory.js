@@ -7,29 +7,37 @@ import { Text, Block } from 'atoms';
 
 import StatCard from './StatCard';
 
-function ProductManagementStats() {
+function ProductInventory() {
 
   const stats = useStoreState(state => state.stats.data);
 
-  const onPressHidden = () => {
-    NavigationService.navigate('BreederProducts');
+  const onPress = () => {
+    NavigationService.navigate('Products');
   };
 
   return (
     <Fragment>
       <Text bold size={18} textAlign='center'  marginTop={1}  color='primary'>
-        Product Management
+        Product Inventory
       </Text>
       <Block row paddingHorizontal={1} marginTop={1}>
         <Block flex={1} marginRight={1}>
-          <StatCard title='Hidden' data={stats.hidden} onPress={onPressHidden} />
+          <StatCard
+            title='Displayed'
+            data={stats.displayed}
+            onPress={onPress}
+          />
         </Block>
         <Block flex={1}>
-          <StatCard title='Displayed' data={stats.displayed} onPress={onPressHidden} />
+          <StatCard
+            title='Hidden'
+            data={stats.hidden}
+            onPress={onPress}
+          />
         </Block>
       </Block>
     </Fragment>
   )
 }
 
-export default memo(ProductManagementStats);
+export default memo(ProductInventory);
