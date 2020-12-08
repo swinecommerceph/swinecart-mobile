@@ -39,10 +39,6 @@ export default {
     state.mode = payload;
   }),
 
-  setLoading: action((state, payload) => {
-    state.isLoading = { ...state.isLoading, ...payload };
-  }),
-
   // thunks
 
   resetForm: thunk(async (actions, payload) => {

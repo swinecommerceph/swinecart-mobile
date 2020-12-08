@@ -48,14 +48,10 @@ function Select(props) {
   } = formControl;
 
   useEffect(() => {
-
-    if (touched[name]) {
-      if (values[name] === null) {
-        setSelectedIndex(null);
-      }
+    if (values[name] === null) {
+      setSelectedIndex(null);
     }
-
-  }, [values[name], touched[name]]);
+  }, [values[name]]);
 
   const hasError = useMemo(
     () => !!errors[name] && !!touched[name],

@@ -1,49 +1,41 @@
 import React, { memo } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { useFormik } from 'formik';
-
-import { NavigationService } from 'services';
-
-import { SearchShopSchema } from 'schemas';
 
 import { Select, Input } from 'molecules';
 import { Block, Button, Divider } from 'atoms';
 
-const initialValues = {
-  keyword: null,
-  type: null,
-  breed: null,
-  breeder: null,
-};
-
 function Form() {
 
   const {
-    breederOptions,
-    breedOptions,
+    values,
+    errors,
+    touched,
     typeOptions,
-  } = useStoreState(state => state.filterItems);
+    breedOptions,
+    breederOptions,
+  } = useStoreState(state => state.searchShopForm);
 
   const {
-    setFilter
-  } = useStoreActions(actions => actions.filterItems);
+    submit,
+    clear,
+    setFieldValue,
+    setFieldTouched,
+  } = useStoreActions(actions => actions.searchShopForm);
 
-  const getItems = useStoreActions(actions => actions.shop.getItems);
+  const formControl = {
+    values,
+    errors,
+    touched,
+    setFieldValue,
+    setFieldTouched,
+  };
 
-  const { handleSubmit, resetForm, ...formControl } = useFormik({
-    initialValues,
-    validationSchema: SearchShopSchema,
-    onSubmit: (values) => {
-      setFilter(values);
-      getItems({ isRefresh: false });
-      NavigationService.back();
-    },
-  });
+  const onPressSubmit = () => {
+    submit();
+  };
 
   const onPressClear = () => {
-    resetForm();
-    setFilter(initialValues);
-    getItems({ isRefresh: false });
+    clear();
   };
 
   return (
@@ -94,7 +86,7 @@ function Form() {
         />
       </Block>
       <Block marginTop={1}>
-        <Button size='tiny' onPress={handleSubmit}>
+        <Button size='tiny' onPress={onPressSubmit}>
           Submit
         </Button>
         <Button size='tiny' status='basic' onPress={onPressClear} marginTop={1}>

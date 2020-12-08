@@ -57,6 +57,10 @@ export const BaseForm = () => ({
     state.touched[name] = value;
   }),
 
+  setLoading: action((state, payload) => {
+    state.isLoading = { ...state.isLoading, ...payload };
+  }),
+
   validateField: thunk(async (actions, payload, { getState }) => {
 
     const { schema, values } = getState();

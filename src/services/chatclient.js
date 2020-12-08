@@ -42,7 +42,7 @@ class ChatClient {
   }
 
   send(data) {
-    if (this.socket) {
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
       this.socket.send(JSON.stringify(data));
     }
   }

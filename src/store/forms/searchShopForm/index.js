@@ -1,12 +1,12 @@
 import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 
-import { provinces } from 'constants/enums';
+import { types } from 'constants/enums';
 
 import {
   ToastService,
   NavigationService,
-  FarmService,
+  ShopService,
 } from 'services';
 
 import {
@@ -15,7 +15,6 @@ import {
 } from '../utils';
 
 import {
-  toRequestFormat,
   initialState,
   schema,
 } from './utils';
@@ -27,33 +26,48 @@ export default {
   // state
   schema,
   values: { ...initialState },
-  mode: 'add',
 
-  provinceOptions: provinces,
+  filters: {},
+
+  typeOptions: types,
+  breedOptions: null,
+  breederOptions: null,
 
   isLoading: {
     isSubmitting: false,
+    isFetchingOptions: true,
   },
 
-  setMode: action((state, payload) => {
-    state.mode = payload;
+
+  setFilterOptions: action((state, payload) => {
+    state.breedOptions = payload.breedOptions;
+    state.breederOptions = payload.breederOptions;
   }),
 
-  setLoading: action((state, payload) => {
-    state.isLoading = { ...state.isLoading, ...payload };
+  setFilters: action((state, payload) => {
+    const { keyword, type, breed, breeder } = payload;
+
+    state.filters = {
+      q: keyword,
+      type: type && type.map(t => t.key).join(','),
+      breed: breed && breed.map(t => t.id).join(','),
+      breeder: breeder && breeder.map(t => t.id).join(','),
+    }
+
   }),
 
   // thunks
 
   resetForm: thunk(async (actions, payload) => {
     actions.setValues(initialState);
+    actions.setFilters(initialState);
     actions.setTouched({});
     actions.setErrors({});
   }),
 
-  submit: thunk(async (actions, payload, { getState }) => {
+  submit: thunk(async (actions, payload, { getState, getStoreActions }) => {
 
-    const { values, mode } = getState();
+    const { values } = getState();
 
     const yupErrors = await validate(schema, values);
 
@@ -61,27 +75,39 @@ export default {
 
     if (!yupErrors) {
       actions.setLoading({ isSubmitting: true });
-
-      const [ error, data ] = await to(
-        mode === 'add'
-          ? FarmService.addFarm(toRequestFormat(values))
-          : FarmService.updateFarm(values.id, toRequestFormat(values))
-      );
-
-      if (error) {
-        ToastService.show('Please try again later!');
-        actions.setLoading({ isSubmitting: false });
-      }
-      else {
-        ToastService.show(
-          mode === 'add' ? 'Farm added!' : 'Farm updated!',
-          () => {
-            NavigationService.back();
-            actions.setLoading({ isSubmitting: false });
-            mode === 'add' && actions.resetValues();
-          }
-        );
-      }
+      actions.setFilters(values);
+      getStoreActions().shop.getItems({ isRefresh: true });
+      actions.setLoading({ isSubmitting: false });
     }
   }),
+
+  clear: thunk(async (actions, payload, { getState, getStoreActions }) => {
+    actions.setLoading({ isSubmitting: true });
+    actions.resetForm();
+    getStoreActions().shop.getItems({ isRefresh: true });
+    actions.setLoading({ isSubmitting: false });
+  }),
+
+  getFilterOptions: thunk(async (actions, payload) => {
+
+    actions.setLoading({ isFetchingOptions: true });
+
+    const [ error, data ] = await to(ShopService.getFilters());
+
+    if (error) {
+
+    }
+    else {
+      const { breeders, breeds } = data.data;
+
+      actions.setFilterOptions({
+        breederOptions: breeders,
+        breedOptions: breeds
+      });
+    }
+
+    actions.setLoading({ isFetchingOptions: false });
+
+  }),
+
 };

@@ -21,7 +21,7 @@ export default {
 
   getItems: thunk(async (actions, payload, { getStoreState }) => {
 
-    const filters = getStoreState().filterItems.filters;
+    const filters = getStoreState().searchShopForm.filters;
 
     const { isRefresh } = payload;
 

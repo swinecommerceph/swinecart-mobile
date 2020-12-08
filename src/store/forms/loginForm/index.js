@@ -30,10 +30,6 @@ export default {
     isSubmitting: false,
   },
 
-  setLoading: action((state, payload) => {
-    state.isLoading = { ...state.isLoading, ...payload };
-  }),
-
   // thunks
 
   resetForm: thunk(async (actions, payload) => {
