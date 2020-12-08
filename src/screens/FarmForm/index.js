@@ -16,49 +16,50 @@ function FarmForm({ route }) {
 
   useFocusEffect(
     useCallback(() => {
-      getProvinces();
-      setLoading(false);
-      return () => {
-        setLoading(true);
-        resetForm();
-      };
+      setMode(mode);
 
+      if (mode === 'edit') {
+        setValues(farmDetails);
+      }
+
+      return () => {
+        resetValues();
+      }
     }, [ route.params ])
   );
 
   const {
-    isLoading
+    isLoading: {
+      isSubmitting
+    },
   } = useStoreState(state => state.farmForm);
 
-  const {
-    isLoading: isFetchingProvinces,
-  } = useStoreState(state => state.province);
+  const farmDetails = useStoreState(state => state.farmDetails.data);
 
   const {
-    setLoading,
-    resetForm,
+    setValues,
+    setMode,
+    resetValues,
   } = useStoreActions(actions => actions.farmForm);
-
-  const {
-    getItems: getProvinces,
-  } = useStoreActions(actions => actions.province);
 
   return (
     <Fragment>
-      <LoadingOverlay show={false} />
+      <LoadingOverlay show={isSubmitting} />
       <HeaderBar
         title={mode === 'add' ? 'Add Farm' : 'Edit Farm Details'}
         accessoryLeft={BackButton}
       />
       <StateScreen
-        isLoading={isLoading || isFetchingProvinces}
+        isLoading={false}
         hasError={false}
       >
-        <Form mode={mode} />
+        <Form
+          mode={mode}
+        />
       </StateScreen>
     </Fragment>
   );
 
 }
 
-export default FarmForm;
+export default memo(FarmForm);

@@ -1,63 +1,35 @@
-import React, { Fragment, memo, useEffect, useCallback } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import React, { memo } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { useFormik } from 'formik';
-
-import { FarmFormSchema } from 'schemas';
 
 import { Input, Select, ContainerView } from 'molecules';
 import { Block, Button } from 'atoms';
 
-function Form({ mode }) {
-
-  const accountType = useStoreState(state => state.user.accountType);
-
-  const farmDetails = useStoreState(state => state.farmDetails.data);
-  const data = useStoreState(state => state.farmForm.data);
-  const provinceOptions = useStoreState(state => state.province.items);
+function Form() {
 
   const {
-    addFarm,
-    updateFarm,
+    values,
+    errors,
+    touched,
+    provinceOptions,
+  } = useStoreState(state => state.farmForm);
+
+  const {
+    submit,
+    setFieldValue,
+    setFieldTouched,
   } = useStoreActions(actions => actions.farmForm);
 
-  const initialValues = {
-    accountType,
-    ...data,
+  const formControl = {
+    values,
+    errors,
+    touched,
+    setFieldValue,
+    setFieldTouched,
   };
 
-  const { handleSubmit, resetForm, ...formControl } = useFormik({
-    initialValues,
-    validationSchema: FarmFormSchema,
-    onSubmit: (values) => {
-      if (mode === 'add') {
-        addFarm({
-          values,
-          resetForm
-        });
-      }
-      else {
-        updateFarm({
-          values,
-          resetForm
-        });
-      }
-    },
-  });
-
-  useFocusEffect(
-    useCallback(() => {
-      if (mode === 'edit') {
-        formControl.setValues({
-          accountType,
-          ...farmDetails,
-        }, true);
-      }
-      else {
-        formControl.setValues(initialValues, true);
-      }
-    }, [ mode, farmDetails ])
-  );
+  const onPressSubmit = () => {
+    submit();
+  };
 
   return (
     <ContainerView
@@ -130,7 +102,7 @@ function Form({ mode }) {
         </Block>
       </Block>
       <Block>
-        <Button onPress={handleSubmit}>
+        <Button onPress={onPressSubmit}>
           Submit
         </Button>
       </Block>

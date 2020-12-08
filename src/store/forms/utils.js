@@ -1,3 +1,4 @@
+import { action, thunkOn, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 
 const validateOptions = {
@@ -19,3 +20,63 @@ export async function validate(schema, values) {
   return null;
 
 }
+
+export const BaseForm = () => ({
+
+  // state
+
+  errors: {},
+  touched: {},
+
+  // actions
+
+  setErrors: action((state, payload) => {
+    state.errors = { ...payload };
+  }),
+
+  setValues: action((state, payload) => {
+    state.values = { ...payload };
+  }),
+
+  setFieldError: action((state, payload) => {
+    const { name, value } = payload;
+    state.errors[name] = value;
+  }),
+
+  setFieldValue: action((state, payload) => {
+    const { name, value } = payload;
+    state.values[name] = value;
+  }),
+
+  setFieldTouched: action((state, payload) => {
+    const { name, value } = payload;
+    state.touched[name] = value;
+  }),
+
+  validateField: thunk(async (actions, payload, { getState }) => {
+
+    const { schema, values } = getState();
+
+    const [ error ] = await to(schema.validateAt(payload, values));
+
+    if (error) {
+      const { message } = error;
+      return message;
+    }
+
+    return null;
+  }),
+
+  checkFieldError: thunkOn(
+    actions => [
+      actions.setFieldValue,
+      actions.setFieldTouched,
+    ],
+    async (actions, { payload }) => {
+      const { name } = payload;
+      const error = await actions.validateField(name);
+      actions.setFieldError({ name, value: error });
+    }
+  ),
+
+});

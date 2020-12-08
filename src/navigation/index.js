@@ -16,45 +16,49 @@ const Stack = createStackNavigator();
 
 function RootNavigation(props) {
 
-    useEffect(() => {
-        getTokenFromStorage();
-    }, []);
+  useEffect(() => {
+    getTokenFromStorage();
+  }, []);
 
-    const { isLoading, isLoggedIn } = useStoreState(state => state.auth);
-    const getTokenFromStorage = useStoreActions(
-        actions => actions.auth.getTokenFromStorage
-    );
+  const {
+    isLoading,
+    isLoggedIn,
+  } = useStoreState(state => state.auth);
 
-    if (isLoading) {
-        return <LoadingScreen />
-    };
+  const getTokenFromStorage = useStoreActions(
+    actions => actions.auth.getTokenFromStorage
+  );
 
-    return (
-        <Fragment>
-            <ModalContainer ref={ModalService.setModalContainerRef} />
-            <NavigationContainer ref={NavigationService.setNavigatorRef}>
-                <Stack.Navigator headerMode='none' animationEnabled={false}>
-                    {
-                        isLoggedIn
-                            ?
-                                (
-                                    <Stack.Screen
-                                        name='MainApp'
-                                        component={MainAppStack}
-                                    />
-                                )
-                            :
-                                (
-                                    <Stack.Screen
-                                        name='Public'
-                                        component={PublicStack}
-                                    />
-                                )
-                    }
-                </Stack.Navigator>
-            </NavigationContainer>
-        </Fragment>
-    );
+  if (isLoading.isCheckingToken) {
+    return <LoadingScreen />
+  };
+
+  return (
+    <Fragment>
+      <ModalContainer ref={ModalService.setModalContainerRef} />
+      <NavigationContainer ref={NavigationService.setNavigatorRef}>
+        <Stack.Navigator headerMode='none' animationEnabled={false}>
+          {
+            isLoggedIn
+              ?
+                (
+                  <Stack.Screen
+                      name='MainApp'
+                      component={MainAppStack}
+                  />
+                )
+              :
+                (
+                  <Stack.Screen
+                      name='Public'
+                      component={PublicStack}
+                  />
+                )
+          }
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Fragment>
+  );
 }
 
 

@@ -3,73 +3,43 @@ import to from 'await-to-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
-  AuthService, Api, NavigationService, ToastService
+  Api
 } from 'services';
-
-import { apiErrors } from 'constants/enums';
 
 export default {
   // State
-  isLoading: true,
+
   isLoggedIn: false,
-  isLoggingIn: false,
-  isLoggingOut: false,
   token: null,
   hasError: false,
+
+  isLoading: {
+    isCheckingToken: true,
+  },
 
   // Computed Values
 
   // Actions
-  setIsLoading: action((state, payload) => {
-    state.isLoading = payload;
-  }),
-  setLoggingIn: action((state, payload) => {
-    state.isLoggingIn = payload;
-  }),
-
-  setLoggingOut: action((state, payload) => {
-    state.isLoggingOut = payload;
-  }),
-
   setIsLoggedIn: action((state, payload) => {
     state.isLoggedIn = payload;
   }),
 
-  // Side Effects
-  login: thunk(async (actions, payload) => {
-    const { email, password } = payload;
-
-    actions.setLoggingIn(true);
-
-    const [ error, data ] = await to(AuthService.login({ email, password }));
-
-    if (error) {
-      const { problem } = error;
-      if (problem === 'CLIENT_ERROR') {
-        ToastService.show('Invalid Email or Password!', null);
-      }
-      else if (apiErrors[problem]) {
-        ToastService.show('Something went wrong!', null);
-      }
-    }
-    else {
-      ToastService.show('Successfully logged in!', null);
-      actions.setTokenData(data.data.token);
-    }
-    actions.setLoggingIn(false);
+  setLoading: action((state, payload) => {
+    state.isLoading = { ...state.isLoading, ...payload };
   }),
 
+  // Side Effects
   logout: thunk(async (actions, payload) => {
 
   }),
 
   getTokenFromStorage: thunk(async (actions, payload) => {
-    actions.setIsLoading(true);
+    actions.setLoading({ isCheckingToken: true });
 
     const token = await AsyncStorage.getItem('token');
     actions.setTokenData(token);
 
-    actions.setIsLoading(false);
+    actions.setLoading({ isCheckingToken: false });
   }),
 
   setTokenData: thunk(async (actions, payload) => {

@@ -1,75 +1,78 @@
 import { action, computed, thunk } from 'easy-peasy';
+import to from 'await-to-js';
 
 import {
-  validate
+  AuthService,
+  ToastService
+} from 'services';
+
+import { apiErrors } from 'constants/enums';
+
+import {
+  validate,
+  BaseForm,
 } from '../utils';
 
 import {
   initialState,
-  schema
+  schema,
 } from './utils';
 
 export default {
 
-  // state
+  ...(BaseForm()),
 
+  // state
+  schema,
   values: { ...initialState },
-  errors: {},
-  touched: {},
 
   isLoading: {
     isSubmitting: false,
   },
 
-  // actions
-
-  setErrors: action((state, payload) => {
-    state.errors = { ...payload };
-  }),
-
-  setValues: action((state, payload) => {
-    state.values = { ...payload };
-  }),
-
-  setFieldValue: action((state, payload) => {
-    const { name, value } = payload;
-    state.values[name] = value;
-  }),
-
-  setFieldTouched: action((state, payload) => {
-    const { name, value } = payload;
-    state.touched[name] = value;
-  }),
-
-  // Usage: setLoading({
-  //   flag: 'isSubmitting',
-  //   value: true
-  // })
-
   setLoading: action((state, payload) => {
-    const { flag, value } = payload;
-    state.isLoading[flag] = value;
+    state.isLoading = { ...state.isLoading, ...payload };
   }),
 
   // thunks
 
+  resetValues: thunk(async (actions, payload) => {
+    actions.setValues(initialState);
+  }),
+
   submit: thunk(async (actions, payload, { getState, getStoreActions }) => {
 
     const { values } = getState();
-    const { login } = getStoreActions().auth;
+    const { setTokenData } = getStoreActions().auth;
 
-    const errors = await validate(schema, values);
+    const yupErrors = await validate(schema, values);
 
-    actions.setErrors(errors);
+    actions.setErrors(yupErrors);
 
-    if (!errors) {
-      login(values);
+    if (!yupErrors) {
+
+      actions.setLoading({ isSubmitting: true });
+
+      const [ error, data ] = await to(AuthService.login(values));
+
+      if (error) {
+        const { problem } = error;
+
+        if (problem === 'CLIENT_ERROR') {
+          ToastService.show('Invalid Email or Password!', null);
+        }
+        else if (apiErrors[problem]) {
+          ToastService.show('Something went wrong!', null);
+        }
+      }
+      else {
+        setTokenData(data.data.token);
+        actions.setValues(initialState);
+      }
+
+      actions.setLoading({ isSubmitting: false });
     }
 
-  }),
-
-  resetValues: thunk(async (actions, payload) => {
-    actions.setValues(initialState);
   }),
 
 };

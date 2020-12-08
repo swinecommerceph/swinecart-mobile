@@ -7,7 +7,6 @@ export { default as notifications } from './notifications';
 export { default as productView } from './productView';
 export { default as farms } from './farms';
 export { default as farmDetails } from './farmDetails';
-export { default as farmForm } from './farmForm';
 export { default as profile } from './profile';
 export { default as province } from './province';
 

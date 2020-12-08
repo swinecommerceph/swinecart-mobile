@@ -3,7 +3,7 @@ import API from './api';
 const URL_PREFIX = '/auth';
 
 export default {
-  login({email, password}) {
+  login({ email, password }) {
     return API.post(`${URL_PREFIX}/login`, { email, password });
   },
   getLoggedInUser() {

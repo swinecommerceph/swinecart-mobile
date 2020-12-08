@@ -38,7 +38,7 @@ function Select(props) {
     errors,
     setFieldValue,
     setFieldTouched,
-   } = formControl;
+  } = formControl;
 
   const hasError = useMemo(
     () => !!errors[name] && !!touched[name],
@@ -60,7 +60,7 @@ function Select(props) {
         index
           ? options[index.row]
           : null;
-    setFieldValue(name, value);
+    setFieldValue({ name, value });
 
   };
 

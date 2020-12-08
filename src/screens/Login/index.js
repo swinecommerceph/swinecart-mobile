@@ -11,11 +11,13 @@ import {
 
 function Container() {
 
-  const isLoggingIn = useStoreState(state => state.auth.isLoggingIn);
+  const {
+    isSubmitting
+  } = useStoreState(state => state.loginForm.isLoading);
 
   return (
     <Fragment>
-      <LoadingOverlay show={isLoggingIn} />
+      <LoadingOverlay show={isSubmitting} />
       <Block flex={1} backgroundColor='white1'>
         <Block flex={1} middle padding={1}>
           <Logo />
