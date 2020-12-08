@@ -1,9 +1,13 @@
 import React, { memo } from 'react';
 
+import { NavigationService } from 'services';
+
 import { Card, ProductInfo, ProductAvatar, MessageBox } from 'molecules';
 import { Block } from 'atoms';
 
-import { ProductActions } from './components';
+import {
+  ProductActions
+} from './components';
 
 function CartItem({ data }) {
 
@@ -13,8 +17,15 @@ function CartItem({ data }) {
     imageUrl, name, type, breed, age, breederName, farmLocation, isDeleted
   } = product;
 
+  const onPress = () => {
+    NavigationService.navigate('ProductView', { id: product.id });
+  };
+
   return (
-    <Card>
+    <Card
+      isPressable={true}
+      onPress={onPress}
+    >
       <ProductAvatar shape='rounded' type={type} image={imageUrl} size={96} />
       <Block flex={1} marginLeft={1}>
         <ProductInfo

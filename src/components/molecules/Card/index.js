@@ -1,10 +1,16 @@
 import React, { memo } from 'react';
+import { TouchableOpacity } from 'react-native';
 
 import { Block } from 'atoms';
 
-function Card({ children }) {
+function Card({ children, isPressable, onPress }) {
   return (
-    <Block
+    <TouchableOpacity
+      activeOpacity={0.30}
+      disabled={!isPressable}
+      onPress={onPress}
+    >
+      <Block
       flex={1}
       row padding={1}
       backgroundColor='white1'
@@ -15,6 +21,7 @@ function Card({ children }) {
     >
       {children}
     </Block>
+    </TouchableOpacity>
   );
 }
 

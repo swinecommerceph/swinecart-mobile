@@ -6,7 +6,7 @@ import { ModalService, NavigationService } from 'services';
 import { Block, Button } from 'atoms';
 
 function ProductActions({ data }) {
-  
+
   const { product } = data;
   const { isDeleted } = product;
 
