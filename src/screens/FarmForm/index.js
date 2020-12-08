@@ -23,7 +23,7 @@ function FarmForm({ route }) {
       }
 
       return () => {
-        resetValues();
+        resetForm();
       }
     }, [ route.params ])
   );
@@ -39,7 +39,7 @@ function FarmForm({ route }) {
   const {
     setValues,
     setMode,
-    resetValues,
+    resetForm,
   } = useStoreActions(actions => actions.farmForm);
 
   return (

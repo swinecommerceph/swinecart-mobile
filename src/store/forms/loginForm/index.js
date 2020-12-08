@@ -36,8 +36,10 @@ export default {
 
   // thunks
 
-  resetValues: thunk(async (actions, payload) => {
+  resetForm: thunk(async (actions, payload) => {
     actions.setValues(initialState);
+    actions.setTouched({});
+    actions.setErrors({});
   }),
 
   submit: thunk(async (actions, payload, { getState, getStoreActions }) => {

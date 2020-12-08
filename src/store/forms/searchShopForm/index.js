@@ -78,7 +78,7 @@ export default {
           () => {
             NavigationService.back();
             actions.setLoading({ isSubmitting: false });
-            mode === 'add' && actions.resetForm();
+            mode === 'add' && actions.resetValues();
           }
         );
       }

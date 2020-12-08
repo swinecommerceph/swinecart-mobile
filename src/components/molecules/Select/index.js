@@ -1,4 +1,11 @@
-import React, { Fragment, memo, useMemo, useCallback, useState } from 'react';
+import React, {
+  Fragment,
+  memo,
+  useMemo,
+  useCallback,
+  useState,
+  useEffect
+} from 'react';
 import isEqual from 'react-fast-compare';
 import {
   Select as UKSelect,
@@ -40,13 +47,23 @@ function Select(props) {
     setFieldTouched,
   } = formControl;
 
+  useEffect(() => {
+
+    if (touched[name]) {
+      if (values[name] === null) {
+        setSelectedIndex(null);
+      }
+    }
+
+  }, [values[name], touched[name]]);
+
   const hasError = useMemo(
     () => !!errors[name] && !!touched[name],
     [touched[name], errors[name]]
   );
 
   const onBlur = useCallback(() => {
-    setFieldTouched(name, true);
+    setFieldTouched({ name, value: true });
   }, []);
 
   const onSelect = index => {
@@ -61,7 +78,6 @@ function Select(props) {
           ? options[index.row]
           : null;
     setFieldValue({ name, value });
-
   };
 
   const displayValue = multiSelect

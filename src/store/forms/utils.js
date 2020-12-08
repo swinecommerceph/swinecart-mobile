@@ -38,6 +38,10 @@ export const BaseForm = () => ({
     state.values = { ...payload };
   }),
 
+  setTouched: action((state, payload) => {
+    state.touched = { ...payload };
+  }),
+
   setFieldError: action((state, payload) => {
     const { name, value } = payload;
     state.errors[name] = value;
