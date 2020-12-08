@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
+import { ChatClient } from 'services';
 
 import BreederScreen from 'screens/BreederScreen';
 
@@ -13,6 +16,7 @@ import {
   ProfileScreen,
   FarmsScreen,
   FarmDetailsScreen,
+  FarmFormScreen,
   ProductMediaScreen,
   ConversationScreen,
 } from 'screens';
@@ -39,7 +43,18 @@ function Navigator() {
 
   useEffect(() => {
 
+    ChatClient.connect(user, message => {
+      onMessage(message);
+    });
+
+    return () => {
+      ChatClient.closeConnection();
+    };
+
   }, []);
+
+  const user = useStoreState(state => state.user.data);
+  const onMessage = useStoreActions(actions => actions.chat.onMessage);
 
   return (
     <Drawer.Navigator
@@ -57,6 +72,7 @@ function Navigator() {
       <Drawer.Screen name='ProductForm' component={ProductFormScreen} />
       <Drawer.Screen name='ProductMedia' component={ProductMediaScreen} />
       <Drawer.Screen name='FarmDetails' component={FarmDetailsScreen} />
+      <Drawer.Screen name='FarmForm' component={FarmFormScreen} />
       <Drawer.Screen name='Conversation' component={ConversationScreen} />
   </Drawer.Navigator>
   );

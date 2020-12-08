@@ -47,16 +47,15 @@ export default {
     actions.setErrors({});
   }),
 
-  submit: thunk(async (actions, payload, { getState }) => {
+  submit: thunk(async (actions, payload, { getState, getStoreActions }) => {
+
+    actions.setLoading({ isSubmitting: true });
 
     const { values, mode } = getState();
 
-    const yupErrors = await validate(schema, values);
+    const formErrors = await actions.validateForm();
 
-    actions.setErrors(yupErrors);
-
-    if (!yupErrors) {
-      actions.setLoading({ isSubmitting: true });
+    if (!formErrors) {
 
       const [ error, data ] = await to(
         mode === 'add'
@@ -67,17 +66,20 @@ export default {
       if (error) {
         ToastService.show('Please try again later!');
         actions.setLoading({ isSubmitting: false });
+        return;
       }
       else {
+        getStoreActions().farms.getItems({ isRefresh: false });
+        NavigationService.back();
         ToastService.show(
           mode === 'add' ? 'Farm added!' : 'Farm updated!',
           () => {
-            NavigationService.back();
             actions.setLoading({ isSubmitting: false });
-            mode === 'add' && actions.resetForm();
           }
         );
       }
     }
+
+    actions.setLoading({ isSubmitting: false });
   }),
 };

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect } from 'react';
+import React, { Fragment, memo, useCallback, useEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
@@ -6,17 +6,20 @@ import { StateScreen } from 'organisms';
 import { LoadingOverlay } from 'atoms';
 
 import {
-  Wizard, FormHeader
+  Wizard,
+  FormHeader
 } from './components';
 
 function Container({ route }) {
 
+  const { mode, id } = route.params;
+
+  useEffect(() => {
+    getFarms({ isRefresh: false });
+  }, []);
+
   useFocusEffect(
     useCallback(() => {
-
-      getFarms({ isRefresh: false });
-
-      const { mode, id } = route.params;
 
       setMode(mode);
 
@@ -25,17 +28,16 @@ function Container({ route }) {
       }
 
       return () => {
-        setLoadingFarms(false);
         resetForm();
       };
-
-    }, [route.params])
+    }, [ route.params ])
   );
 
-
   const {
-    isLoading,
-    isFetchingDetails
+    isLoading: {
+      isFetchingDetails,
+      isSubmitting,
+    }
   } = useStoreState(state => state.productForm);
 
   const isFetchingFarms = useStoreState(state => state.farms.isLoading);
@@ -46,20 +48,19 @@ function Container({ route }) {
     resetForm,
   } = useStoreActions(actions => actions.productForm);
 
-  const {
-    getItems: getFarms,
-    setLoading: setLoadingFarms,
-  } = useStoreActions(actions => actions.farms);
+  const getFarms = useStoreActions(actions => actions.farms.getItems);
 
   return (
-    <StateScreen
-      isLoading={isFetchingFarms || isFetchingDetails}
-      hasError={false}
-    >
-      <LoadingOverlay show={isLoading} />
-      <FormHeader />
-      <Wizard />
-    </StateScreen>
+    <Fragment>
+      <LoadingOverlay show={isSubmitting} />
+      <StateScreen
+        isLoading={isFetchingFarms || isFetchingDetails}
+        hasError={false}
+      >
+        <FormHeader />
+        <Wizard />
+      </StateScreen>
+    </Fragment>
   );
 }
 

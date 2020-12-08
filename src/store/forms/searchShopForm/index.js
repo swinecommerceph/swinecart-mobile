@@ -65,21 +65,19 @@ export default {
     actions.setErrors({});
   }),
 
-  submit: thunk(async (actions, payload, { getState, getStoreActions }) => {
+  submit: thunk(async (actions, payload, { getStoreActions }) => {
 
-    const { values } = getState();
+    actions.setLoading({ isSubmitting: true });
 
-    const yupErrors = await validate(schema, values);
+    const formErrors = await actions.validateForm();
 
-    actions.setErrors(yupErrors);
-
-    if (!yupErrors) {
-      actions.setLoading({ isSubmitting: true });
+    if (!formErrors) {
       actions.setFilters(values);
       getStoreActions().shop.getItems({ isRefresh: true });
       NavigationService.back();
-      actions.setLoading({ isSubmitting: false });
     }
+
+    actions.setLoading({ isSubmitting: false });
   }),
 
   clear: thunk(async (actions, payload, { getState, getStoreActions }) => {

@@ -75,6 +75,18 @@ export const BaseForm = () => ({
     return null;
   }),
 
+  validateForm: thunk(async (actions, payload, { getState }) => {
+
+    const { schema, values } = getState();
+
+    const formErrors = await validate(schema, values);
+
+    actions.setErrors(formErrors);
+
+    return formErrors;
+
+  }),
+
   checkFieldError: thunkOn(
     actions => [
       actions.setFieldValue,

@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useEffect, useState } from 'react';
+import React, { Fragment, memo } from 'react';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
@@ -17,14 +17,19 @@ const fields = [
   ],
 ];
 
-function FormFooter({ onSubmit, validateForm }) {
+function FormFooter({ onSubmit }) {
 
-  const nextStep = useStoreActions(actions => actions.productForm.nextStep);
-  const prevStep = useStoreActions(actions => actions.productForm.prevStep);
+  const {
+    currentStep,
+    isFirstStep,
+    isLastStep,
+  } = useStoreState(state => state.productForm);
 
-  const currentStep = useStoreState(state => state.productForm.currentStep);
-  const isLastStep = useStoreState(state => state.productForm.isLastStep);
-  const isFirstStep = useStoreState(state => state.productForm.isFirstStep);
+  const {
+    nextStep,
+    prevStep,
+    validateForm,
+  } = useStoreActions(actions => actions.productForm);
 
   const checkForErrors = errors => {
     return (fields[currentStep - 1].some(field => {
@@ -36,7 +41,7 @@ function FormFooter({ onSubmit, validateForm }) {
 
     const errors = await validateForm();
 
-    if (checkForErrors(errors)) {
+    if (errors && checkForErrors(errors)) {
       ToastService.show('Please fill up the required fields!', null);
     }
     else {

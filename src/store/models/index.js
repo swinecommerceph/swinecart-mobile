@@ -8,10 +8,8 @@ export { default as productView } from './productView';
 export { default as farms } from './farms';
 export { default as farmDetails } from './farmDetails';
 export { default as profile } from './profile';
-export { default as province } from './province';
 
 // Breeder Stores
-export { default as productForm } from './productForm';
 export { default as productMedia } from './productMedia';
 
 export { default as stats } from './stats';

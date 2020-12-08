@@ -40,16 +40,14 @@ export default {
 
   submit: thunk(async (actions, payload, { getState, getStoreActions }) => {
 
+    actions.setLoading({ isSubmitting: true });
+
     const { values } = getState();
     const { setTokenData } = getStoreActions().auth;
 
-    const yupErrors = await validate(schema, values);
+    const formErrors = await actions.validateForm();
 
-    actions.setErrors(yupErrors);
-
-    if (!yupErrors) {
-
-      actions.setLoading({ isSubmitting: true });
+    if (!formErrors) {
 
       const [ error, data ] = await to(AuthService.login(values));
 
@@ -67,9 +65,9 @@ export default {
         setTokenData(data.data.token);
         actions.setValues(initialState);
       }
-
-      actions.setLoading({ isSubmitting: false });
     }
+
+    actions.setLoading({ isSubmitting: false });
 
   }),
 

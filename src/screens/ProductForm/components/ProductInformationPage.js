@@ -6,11 +6,9 @@ import { Input, ContainerView, Select, MessageBox } from 'molecules';
 
 import { Block, Text, Checkbox } from 'atoms';
 
-function ProductInformationPage({ formik }) {
+function ProductInformationPage({ formControl }) {
 
-  const typeOptions = useStoreState(state => state.productForm.typeOptions);
-
-  const { values, setFieldValue, touched } = formik;
+  const { values, setFieldValue, touched } = formControl;
 
   useEffect(() => {
 
@@ -23,6 +21,8 @@ function ProductInformationPage({ formik }) {
     }
 
   }, [ values['isUnique'], touched['isUnique'], values['type'] ]);
+
+  const typeOptions = useStoreState(state => state.productForm.typeOptions);
 
   return (
     <Fragment>
@@ -37,7 +37,7 @@ function ProductInformationPage({ formik }) {
             label='Name'
             placeholder='Enter Product Name here'
             required={true}
-            formControl={formik}
+            formControl={formControl}
           />
         </Block>
         <Block marginTop={0.5}>
@@ -49,7 +49,7 @@ function ProductInformationPage({ formik }) {
             options={typeOptions}
             valueProp='title'
             uniqueId='key'
-            formControl={formik}
+            formControl={formControl}
           />
         </Block>
         <Block marginVertical={0.5}>
@@ -67,7 +67,7 @@ function ProductInformationPage({ formik }) {
               label='From'
               placeholder='100'
               keyboardType='numeric'
-              formControl={formik}
+              formControl={formControl}
               width={128}
             />
           </Block>
@@ -77,7 +77,7 @@ function ProductInformationPage({ formik }) {
               label='To'
               placeholder='1000'
               keyboardType='numeric'
-              formControl={formik}
+              formControl={formControl}
               width={128}
             />
           </Block>
@@ -93,7 +93,7 @@ function ProductInformationPage({ formik }) {
             </MessageBox>
             <Checkbox
               name='isUnique'
-              formControl={formik}
+              formControl={formControl}
             >
               <Text semibold size={14}>
                 Yes, it is unique.
@@ -106,7 +106,7 @@ function ProductInformationPage({ formik }) {
                 label='Quantity'
                 placeholder='10'
                 keyboardType='numeric'
-                formControl={formik}
+                formControl={formControl}
                 width={96}
               />
             </Block>
@@ -118,8 +118,8 @@ function ProductInformationPage({ formik }) {
 }
 
 export default memo(ProductInformationPage, (props, nextProps) => {
-  const valResult = isEqual(props.formik.values, nextProps.formik.values);
-  const errResult = isEqual(props.formik.errors, nextProps.formik.errors);
-  const touResult = isEqual(props.formik.touched, nextProps.formik.touched);
+  const valResult = isEqual(props.formControl.values, nextProps.formControl.values);
+  const errResult = isEqual(props.formControl.errors, nextProps.formControl.errors);
+  const touResult = isEqual(props.formControl.touched, nextProps.formControl.touched);
   return valResult && errResult && touResult;
 });

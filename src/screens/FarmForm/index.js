@@ -12,8 +12,6 @@ import {
 
 function FarmForm({ route }) {
 
-  const { mode } = route.params;
-
   useFocusEffect(
     useCallback(() => {
       setMode(mode);
@@ -27,6 +25,8 @@ function FarmForm({ route }) {
       }
     }, [ route.params ])
   );
+
+  const { mode } = route.params;
 
   const {
     isLoading: {

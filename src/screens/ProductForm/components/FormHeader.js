@@ -2,15 +2,20 @@ import React, { memo } from 'react';
 import { useStoreState } from 'easy-peasy';
 import { Block, Text } from 'atoms';
 
+const titles = [
+  'Product Information',
+  'Swine Information',
+];
+
 function FormHeader() {
 
-  const currentTitle = useStoreState(state => state.productForm.currentTitle);
+  const currentStep = useStoreState(state => state.productForm.currentStep);
 
   return (
     <Block padding backgroundColor='white1'>
       <Block>
         <Text bold size={22}>
-          {currentTitle}
+          {titles[currentStep - 1]}
         </Text>
       </Block>
     </Block>

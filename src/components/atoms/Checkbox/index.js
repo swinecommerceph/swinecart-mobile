@@ -13,8 +13,8 @@ function Checkbox(props) {
     setFieldValue,
    } = formControl;
 
-  const onChange = checked => {
-    setFieldValue(name, checked);
+  const onChange = value => {
+    setFieldValue({ name, value });
   };
 
   return (

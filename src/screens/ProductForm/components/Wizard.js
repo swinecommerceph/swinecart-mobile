@@ -1,52 +1,49 @@
-import React, { Fragment, memo, useEffect } from 'react';
+import React, { Fragment, memo } from 'react';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { useFormik } from 'formik';
 
 import SwineInformationPage from './SwineInformationPage';
 import ProductInformationPage from './ProductInformationPage';
 import FormFooter from './FormFooter';
 
-import { ProductFormSchema } from 'schemas';
-
 function Wizard() {
 
   const {
     currentStep,
-    data,
-    mode,
+    values,
+    errors,
+    touched,
   } = useStoreState(state => state.productForm);
 
   const {
-    addProduct,
-    editProduct,
+    submit,
+    setFieldValue,
+    setFieldTouched,
   } = useStoreActions(actions => actions.productForm);
 
-  const formik = useFormik({
-    initialValues: data,
-    validationSchema: ProductFormSchema,
-    onSubmit: (values) => {
-      if (mode === 'add') {
-        addProduct({
-          values,
-          resetForm: formik.resetForm
-        });
-      }
-      else {
-        editProduct({
-          values,
-          resetForm: formik.resetForm
-        });
-      }
-    },
-  });
+  const formControl = {
+    values,
+    errors,
+    touched,
+    setFieldValue,
+    setFieldTouched,
+  };
+
+  const onSubmit = () => {
+    submit();
+  };
 
   return (
     <Fragment>
-      {currentStep === 1 && <ProductInformationPage formik={formik} /> }
-      {currentStep === 2 && <SwineInformationPage formik={formik} /> }
+      {
+        currentStep === 1 &&
+        <ProductInformationPage formControl={formControl} />
+      }
+      {
+        currentStep === 2 &&
+        <SwineInformationPage formControl={formControl} />
+      }
       <FormFooter
-        onSubmit={formik.handleSubmit}
-        validateForm={formik.validateForm}
+        onSubmit={onSubmit}
       />
     </Fragment>
   );

@@ -2,55 +2,55 @@ import { action, computed, thunk } from 'easy-peasy';
 import clamp from 'lodash/clamp';
 import to from 'await-to-js';
 
-import { ProductsService, NavigationService, ToastService } from 'services';
-
 import { types, houseTypes } from 'constants/enums';
 
 import { findElement } from 'utils/helpers';
 
-import { formInitialState, toRequestDataFormat } from './utils';
+import {
+  ToastService,
+  NavigationService,
+  ProductsService,
+} from 'services';
 
-const titles = [
-  'Product Information',
-  'Swine Information',
-];
+import {
+  validate,
+  BaseForm,
+} from '../utils';
+
+import {
+  toRequestFormat,
+  initialState,
+  schema,
+} from './utils';
 
 export default {
-  // State
-  isLoading: false,
-  isFetchingDetails: false,
+
+  ...(BaseForm()),
+
+  // state
+  schema,
+  values: { ...initialState },
+  mode: 'add',
+
   currentStep: 1,
   maxSteps: 2,
-  mode: 'add',
-  data: { ...formInitialState },
+
   typeOptions: types,
   houseOptions: houseTypes,
 
-  // Computed
-  currentTitle: computed(state => titles[state.currentStep - 1]),
+  isLoading: {
+    isSubmitting: false,
+    isFetchingDetails: false,
+  },
+
+  // computed
   isFirstStep: computed(state => state.currentStep === 1),
   isLastStep: computed(state => state.currentStep === state.maxSteps),
 
-  // Actions
-
-  resetForm: action((state, payload) => {
-    state.data = { ...formInitialState };
-  }),
+  // actions
 
   setMode: action((state, payload) => {
     state.mode = payload;
-  }),
-
-  setLoading: action((state, payload) => {
-    state.isLoading = payload;
-  }),
-
-  setFetchingDetails: action((state, payload) => {
-    state.isFetchingDetails = payload;
-  }),
-
-  setData: action((state, payload) => {
-    state.data = { ...payload };
   }),
 
   setStep: action((state, payload) => {
@@ -65,64 +65,56 @@ export default {
     state.currentStep = clamp(state.currentStep - 1, 0, state.maxSteps);
   }),
 
-  // Thunk
+  // thunks
 
-  addProduct: thunk(async (actions, payload, { getStoreActions }) => {
-
-    const { values, resetForm: resetFormikForm } = payload;
-
-    const requestData = toRequestDataFormat(values);
-
-    actions.setLoading(true);
-
-    const [error, data] = await to(ProductsService.addProduct(requestData));
-
-    if (error) {
-      actions.setLoading(false);
-    }
-    else {
-      ToastService.show('Product successfully added!', () => {
-        actions.resetForm();
-        resetFormikForm();
-        getStoreActions().manageProducts.getItems({ isRefresh: false });
-        actions.setStep(1);
-        actions.setLoading(false);
-        NavigationService.back();
-      });
-    }
-
+  resetForm: thunk(async (actions, payload) => {
+    actions.setValues(initialState);
+    actions.setStep(1);
+    actions.setTouched({});
+    actions.setErrors({});
   }),
 
-  editProduct: thunk(async (actions, payload, { getStoreActions, getState }) => {
+  submit: thunk(async (actions, payload, { getState, getStoreActions }) => {
 
-    const id = getState().data.id;
-    const { values, resetForm: resetFormikForm } = payload;
+    actions.setLoading({ isSubmitting: true });
 
-    const requestData = toRequestDataFormat(values);
+    const { values, mode } = getState();
 
-    actions.setLoading(true);
+    const formErrors = await actions.validateForm();
 
-    const [error, data] = await to(ProductsService.updateProduct(id, requestData));
+    if (!formErrors) {
 
-    if (error) {
-      actions.setLoading(false);
-    }
-    else {
-      ToastService.show('Product successfully edited!', () => {
-        actions.resetForm();
-        resetFormikForm();
+      const requestData = toRequestFormat(values);
+
+      const [ error, data ] = await to(
+        mode === 'add'
+          ? ProductsService.addProduct(requestData)
+          : ProductsService.updateProduct(values.id, requestData)
+      );
+
+      if (error) {
+        ToastService.show('Please try again later!');
+        actions.setLoading({ isSubmitting: false });
+      }
+      else {
         getStoreActions().manageProducts.getItems({ isRefresh: false });
-        actions.setStep(1);
-        actions.setLoading(false);
         NavigationService.back();
-      });
+        ToastService.show(
+          mode === 'add' ? 'Product added!' : 'Product updated!',
+          () => {
+            actions.setLoading({ isSubmitting: false });
+          }
+        );
+      }
     }
+
+    actions.setLoading({ isSubmitting: false });
 
   }),
 
   getProductDetails: thunk(async (actions, payload, { getState, getStoreState }) => {
 
-    actions.setFetchingDetails(true);
+    actions.setLoading({ isFetchingDetails: true });
 
     const [error, data] = await to(ProductsService.getProductDetails(payload));
 
@@ -163,7 +155,7 @@ export default {
       const breedArray = breed.split(' x ');
       const isPureBreed = breedArray.length === 1;
 
-      actions.setData({
+      actions.setValues({
         id: payload,
         name: name,
         type: findElement(typeOptions, { key: type }),
@@ -189,7 +181,7 @@ export default {
       });
     }
 
-    actions.setFetchingDetails(false);
+    actions.setLoading({ isFetchingDetails: false });
 
   }),
 

@@ -2,25 +2,25 @@ import React, { Fragment, memo } from 'react';
 import isEqual from 'react-fast-compare';
 import { useStoreState } from 'easy-peasy';
 
-import { Input, ContainerView, Select, DateInput } from 'molecules'
+import { Input, ContainerView, Select, DateInput } from 'molecules';
 import { Block, Button, Text, Divider } from 'atoms';
 
 const epoch = new Date(1970, 1, 1);
 const today = new Date();
 
-function SwineInformationPage({ formik }) {
+function SwineInformationPage({ formControl }) {
 
   const farms = useStoreState(state => state.farms.items);
   const { houseOptions } = useStoreState(state => state.productForm);
 
-  const { values, setFieldValue } = formik;
+  const { values, setFieldValue } = formControl;
 
   const onPressPureBreed = () => {
-    setFieldValue('isPureBreed', true);
+    setFieldValue({ name: 'isPureBreed', value: true });
   };
 
   const onPressCrossBreed = () => {
-    setFieldValue('isPureBreed', false);
+    setFieldValue({ name: 'isPureBreed', value: false });
   };
 
   return (
@@ -56,7 +56,7 @@ function SwineInformationPage({ formik }) {
               name='breed'
               label="Breed"
               required={true}
-              formControl={formik}
+              formControl={formControl}
             />
           </Block>
         }
@@ -66,13 +66,13 @@ function SwineInformationPage({ formik }) {
               name='fatherBreed'
               label="Father's Breed"
               required={true}
-              formControl={formik}
+              formControl={formControl}
             />
             <Input
               name='motherBreed'
               label="Mother's Breed"
               required={true}
-              formControl={formik}
+              formControl={formControl}
             />
           </Block>
         }
@@ -86,7 +86,7 @@ function SwineInformationPage({ formik }) {
             min={epoch}
             max={today}
             optional={true}
-            formControl={formik}
+            formControl={formControl}
           />
         </Block>
         <Block>
@@ -98,7 +98,7 @@ function SwineInformationPage({ formik }) {
             options={farms}
             valueProp='displayName'
             uniqueId='id'
-            formControl={formik}
+            formControl={formControl}
           />
         </Block>
         <Block>
@@ -110,7 +110,7 @@ function SwineInformationPage({ formik }) {
             options={houseOptions}
             valueProp='text'
             uniqueId='key'
-            formControl={formik}
+            formControl={formControl}
           />
         </Block>
         <Block>
@@ -120,7 +120,7 @@ function SwineInformationPage({ formik }) {
             keyboardType='numeric'
             optional={true}
             width={128}
-            formControl={formik}
+            formControl={formControl}
           />
         </Block>
         <Block>
@@ -130,7 +130,7 @@ function SwineInformationPage({ formik }) {
             keyboardType='numeric'
             optional={true}
             width={128}
-            formControl={formik}
+            formControl={formControl}
           />
         </Block>
         <Block>
@@ -140,7 +140,7 @@ function SwineInformationPage({ formik }) {
             keyboardType='numeric'
             optional={true}
             width={128}
-            formControl={formik}
+            formControl={formControl}
           />
         </Block>
         <Block>
@@ -150,7 +150,7 @@ function SwineInformationPage({ formik }) {
             keyboardType='numeric'
             optional={true}
             width={128}
-            formControl={formik}
+            formControl={formControl}
           />
         </Block>
         <Block>
@@ -160,7 +160,7 @@ function SwineInformationPage({ formik }) {
             keyboardType='numeric'
             optional={true}
             width={128}
-            formControl={formik}
+            formControl={formControl}
           />
         </Block>
         {
@@ -173,7 +173,7 @@ function SwineInformationPage({ formik }) {
                 keyboardType='numeric'
                 optional={true}
                 width={128}
-                formControl={formik}
+                formControl={formControl}
               />
             </Block>
             <Block>
@@ -183,7 +183,7 @@ function SwineInformationPage({ formik }) {
                 keyboardType='numeric'
                 optional={true}
                 width={128}
-                formControl={formik}
+                formControl={formControl}
               />
             </Block>
           </Block>
@@ -199,7 +199,7 @@ function SwineInformationPage({ formik }) {
             numberOfLines={5}
             textAlignVertical='top'
             optional={true}
-            formControl={formik}
+            formControl={formControl}
           />
         </Block>
       </ContainerView>
@@ -208,8 +208,8 @@ function SwineInformationPage({ formik }) {
 }
 
 export default memo(SwineInformationPage,  (props, nextProps) => {
-  const valResult = isEqual(props.formik.values, nextProps.formik.values);
-  const errResult = isEqual(props.formik.errors, nextProps.formik.errors);
-  const touResult = isEqual(props.formik.touched, nextProps.formik.touched);
+  const valResult = isEqual(props.formControl.values, nextProps.formControl.values);
+  const errResult = isEqual(props.formControl.errors, nextProps.formControl.errors);
+  const touResult = isEqual(props.formControl.touched, nextProps.formControl.touched);
   return valResult && errResult && touResult;
 });
