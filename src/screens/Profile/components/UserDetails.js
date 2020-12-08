@@ -13,9 +13,9 @@ function UserDetails() {
 
   return (
     <ContainerView backgroundColor='white1'>
-      {/* <Block marginBottom={1}>
+      <Block marginTop={1}>
         <BreederLogo logoURL={profile.logoUrl} />
-      </Block> */}
+      </Block>
       <Block marginTop={1} backgroundColor='white1'>
         <TextGroup label='Address Line 1' data={profile.addressLine1} />
         <TextGroup label='Address Line 2' data={profile.addressLine2} />
@@ -28,8 +28,14 @@ function UserDetails() {
         accountType === 'Breeder' &&
         <Fragment>
           <Block marginTop={1} backgroundColor='white1'>
-            <TextGroup label='Contact Person Name' data={profile.contactPerson.name} />
-            <TextGroup label='Contact Person Mobile' data={profile.contactPerson.mobile} />
+            <TextGroup
+              label='Contact Person Name'
+              data={profile.contactPerson.name}
+            />
+            <TextGroup
+              label='Contact Person Mobile'
+              data={profile.contactPerson.mobile}
+            />
           </Block>
           <Block marginTop={1} backgroundColor='white1'>
             <TextGroup label='Website' data={profile.website} />

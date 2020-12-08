@@ -8,7 +8,7 @@ function BreederLogo(props) {
 
   const {
     logoURL,
-    themedStyle
+    eva: { style }
   } = props;
 
   const source = useMemo(() => {
@@ -22,7 +22,7 @@ function BreederLogo(props) {
         <Avatar
           shape='rounded'
           source={source}
-          style={themedStyle.avatarStyle}
+          style={style.avatarStyle}
         />
       {/* </Block> */}
     </Block>
@@ -30,8 +30,8 @@ function BreederLogo(props) {
 }
 
 export default withStyles(memo(BreederLogo), () => ({
-  avatarStyle: { 
-    width: 144, 
-    height: 144 
-  } 
+  avatarStyle: {
+    width: 144,
+    height: 144
+  }
 }));
