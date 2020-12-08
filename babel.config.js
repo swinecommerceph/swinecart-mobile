@@ -6,14 +6,12 @@ module.exports = {
       'alias': {
         'features': './src/features',
         'services': './src/services',
-        'shared': './src/shared',
         'navigation': './src/navigation',
         'utils': './src/utils',
         'constants': './src/constants',
         'atoms': './src/components/atoms',
         'molecules': './src/components/molecules',
         'organisms': './src/components/organisms',
-        'schemas': './src/schemas',
       }
     }]
   ],

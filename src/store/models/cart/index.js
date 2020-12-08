@@ -1,10 +1,12 @@
 import { action, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 
-import { CartService, ToastService } from 'services';
+import {
+  CartService,
+  ToastService,
+} from 'services';
 
 import { BaseModel } from '../../utils';
-
 
 const LIMIT = 5;
 
@@ -12,18 +14,22 @@ export default {
   // State
   ...BaseModel(),
 
-  isAddingItem: false,
-  isRemovingItem: false,
+  isLoading: {
+    isFetching: true,
+    isFetchingMore: false,
+    isRefreshing: false,
+
+    isAddingItem: false,
+    isFetchingItem: false,
+    isUpdatingItem: false,
+    isRemovingItem: false,
+  },
   // Computed Values
 
   // Actions
 
-  setIsAddingItem: action((state, payload) => {
-    state.isAddingItem = payload;
-  }),
-
-  setIsRemovingItem: action((state, payload) => {
-    state.isRemovingItem = payload;
+  setLoading: action((state, payload) => {
+    state.isLoading = { ...state.isLoading, ...payload };
   }),
 
   addItem: action((state, payload) => {
@@ -42,48 +48,46 @@ export default {
 
   addToCart: thunk(async (actions, payload) => {
 
-    actions.setIsAddingItem(true);
+    actions.setLoading({ isAddingItem: true });
 
     const [error, data] = await to(CartService.addItem(payload));
 
     if (error) {
       const { data, problem } = error;
       if (problem === 'CLIENT_ERROR') {
-        ToastService.show(data.error, () => {
-        });
-        actions.setIsAddingItem(false);
+        ToastService.show(data.error);
       }
+      actions.setLoading({ isAddingItem: false });
     }
     else {
       const { item } = data.data;
 
-      ToastService.show('Product added to your SwineCart', () => {
-        actions.addItem(item);
-        actions.setIsAddingItem(false);
+      actions.addItem(item);
+      ToastService.show('Product added!', () => {
+        actions.setLoading({ isAddingItem: false });
       });
     }
 
 
   }),
+
   removeFromCart: thunk(async (actions, payload) => {
 
-    actions.setIsRemovingItem(true);
+    actions.setLoading({ isRemovingItem: true });
 
     const [error, data] = await to(CartService.removeItem(payload));
 
     if (error) {
       const { data, problem } = error;
       if (problem === 'CLIENT_ERROR') {
-        ToastService.show(data.error, () => {
-        });
-        actions.setIsRemovingItem(false);
+        ToastService.show(data.error);
       }
+      actions.setLoading({ isRemovingItem: false });
     }
     else {
-
+      actions.removeItem(payload);
       ToastService.show('Product removed from your SwineCart!', () => {
-        actions.removeItem(payload);
-        actions.setIsRemovingItem(false);
+        actions.setLoading({ isRemovingItem: false });
       });
 
     }
@@ -95,9 +99,9 @@ export default {
 
     const { isRefresh } = payload;
 
-    isRefresh
-      ? actions.setRefreshing(true)
-      : actions.setLoading(true);
+    actions.setLoading({
+      [ isRefresh ? 'isRefreshing' : 'isFetching' ]: true
+    });
 
     const [error, data] = await to(CartService.getItems(1, LIMIT));
 
@@ -114,9 +118,9 @@ export default {
 
     }
 
-    isRefresh
-      ? actions.setRefreshing(false)
-      : actions.setLoading(false);
+    actions.setLoading({
+      [ isRefresh ? 'isRefreshing' : 'isFetching' ]: false
+    });
 
   }),
 
@@ -124,7 +128,7 @@ export default {
 
     const { page: currentPage, items: currentItems } = getState();
 
-    actions.setLoadingMore(true);
+    actions.setLoading({ isFetchingMore: true });
 
     const [error, data] = await to(CartService.getItems(currentPage, LIMIT));
 
@@ -143,13 +147,9 @@ export default {
           page: currentPage + 1
         });
       }
-      else {
-        ToastService.show('No more items to load!', null);
-      }
-
     }
 
-    actions.setLoadingMore(false);
+    actions.setLoading({ isFetchingMore: false });
   }),
 
 };

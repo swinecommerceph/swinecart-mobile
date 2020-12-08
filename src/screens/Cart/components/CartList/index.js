@@ -14,8 +14,10 @@ function CartList() {
 
   const {
     items,
-    isRefreshing,
-    isLoadingMore
+    isLoading: {
+      isFetchingMore,
+      isRefreshing,
+    }
   } = useStoreState(state => state.cart);
 
   const keyExtractor = item => `${item.id}`;
@@ -31,7 +33,7 @@ function CartList() {
       isRefreshing={isRefreshing}
       onPressLoadMore={onPressLoadMore}
       onRefresh={onRefresh}
-      isLoadingMore={isLoadingMore}
+      isLoadingMore={isFetchingMore}
     />
   );
 }

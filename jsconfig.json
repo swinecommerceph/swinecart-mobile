@@ -32,12 +32,6 @@
       "utils": [
         "src/utils/*"
       ],
-      "shared": [
-        "src/shared/*"
-      ],
-      "schemas": [
-        "src/schemas/*"
-      ]
     }
   }
 }

@@ -16,7 +16,11 @@ function Container() {
     getItems({ isRefresh: false });
   }, []);
 
-  const isAddingItem = useStoreState(state => state.cart.isAddingItem);
+  const {
+    isLoading: {
+      isAddingItem
+    }
+  } = useStoreState(state => state.cart);
 
   const {
     isLoading,

@@ -16,8 +16,10 @@ function Container() {
   }, []);
 
   const {
-    isRemovingItem,
-    isLoading,
+    isLoading: {
+      isFetching,
+      isRemovingItem,
+    },
   } = useStoreState(state => state.cart);
 
   const {
@@ -28,7 +30,7 @@ function Container() {
     <Fragment>
       <LoadingOverlay show={isRemovingItem} />
       <HeaderBar title='SwineCart' accessoryLeft={DrawerButton} />
-      <StateScreen isLoading={isLoading} hasError={false}>
+      <StateScreen isLoading={isFetching} hasError={false}>
         <CartList />
       </StateScreen>
     </Fragment>
