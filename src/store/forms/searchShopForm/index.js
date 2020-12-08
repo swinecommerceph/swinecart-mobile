@@ -77,6 +77,7 @@ export default {
       actions.setLoading({ isSubmitting: true });
       actions.setFilters(values);
       getStoreActions().shop.getItems({ isRefresh: true });
+      NavigationService.back();
       actions.setLoading({ isSubmitting: false });
     }
   }),
@@ -85,6 +86,7 @@ export default {
     actions.setLoading({ isSubmitting: true });
     actions.resetForm();
     getStoreActions().shop.getItems({ isRefresh: true });
+    NavigationService.back();
     actions.setLoading({ isSubmitting: false });
   }),
 

@@ -25,7 +25,6 @@ export { default as reservations } from './reservations';
 // Customer Stores
 export { default as shop } from './shop';
 export { default as cart } from './cart';
-export { default as filterItems } from './filterItems';
 export { default as orderDetails } from './orderDetails';
 export { default as customerOrders } from './customerOrders';
 export { default as customerOrderHistory } from './customerOrderHistory';

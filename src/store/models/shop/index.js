@@ -59,7 +59,7 @@ export default {
 
   getMoreItems: thunk(async (actions, payload, { getState, getStoreState }) => {
 
-    const filters = getStoreState().filterItems.filters;
+    const filters = getStoreState().searchShopForm.filters;
     const { page: currentPage, items: currentItems } = getState();
 
     actions.setLoadingMore(true);
