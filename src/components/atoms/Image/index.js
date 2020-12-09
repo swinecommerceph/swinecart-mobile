@@ -1,21 +1,26 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { Image as RNImage } from 'react-native';
 
 function Image(props) {
 
   const {
-    imageSource, fallbackSource,
+    imageSource,
+    fallbackSource,
     ...otherProps
   } = props;
 
+  useEffect(() => {
+    setSource(imageSource);
+  }, [ imageSource ]);
+
   const [ source, setSource ] = useState(imageSource);
 
-  const onError = ({ nativeEvent: { error } } )=> {
+  const onError = ()=> {
     setSource(fallbackSource);
   };
 
   return (
-    <RNImage 
+    <RNImage
       source={source}
       onError={onError}
       {...otherProps}

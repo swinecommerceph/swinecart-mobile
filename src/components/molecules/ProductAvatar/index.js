@@ -17,7 +17,7 @@ const fallbackUrls = {
 
 function ProductAvatar(props) {
 
-  const { 
+  const {
     image: productImageUrl,
     type = 'boar',
     shape = 'rounded',
@@ -38,7 +38,7 @@ function ProductAvatar(props) {
   );
 
   const imageSource = useMemo(
-    () => ({ uri: productImageUrl }), 
+    () => ({ uri: productImageUrl }),
     [ productImageUrl ]
   );
 

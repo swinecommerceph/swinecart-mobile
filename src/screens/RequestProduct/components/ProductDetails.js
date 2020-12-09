@@ -11,7 +11,7 @@ function ProductDetails({ product }) {
 
   return (
     <Fragment>
-      <Block row flex={1} marginBottom={2}>
+      <Block row flex={1} marginVertical={1}>
         <ProductAvatar
           type={type}
           shape='rounded'

@@ -6,10 +6,10 @@ import { HeaderBar, BackButton } from 'molecules';
 import { LoadingOverlay } from 'atoms';
 
 import {
-  RequestProductForm,
+  Form,
 } from './components';
 
-function Container({ route, navigation }) {
+function Container({ route }) {
 
   const isLoading = useStoreState(state => state.customerOrders.isRequestingItem);
 
@@ -19,7 +19,7 @@ function Container({ route, navigation }) {
     <Fragment>
       <LoadingOverlay show={isLoading} />
       <HeaderBar title='Request Product' accessoryLeft={BackButton} />
-      <RequestProductForm data={data} />
+      <Form data={data} />
     </Fragment>
   );
 }
