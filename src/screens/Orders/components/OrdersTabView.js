@@ -23,7 +23,7 @@ class OrdersTabView extends PureComponent {
   soldRoute = () => <OrdersList status='sold' />;
 
   initialLayout = {
-    height: 0, 
+    height: 0,
     width: Dimensions.get('window').width
   };
 

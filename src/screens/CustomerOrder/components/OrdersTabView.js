@@ -38,7 +38,6 @@ function OrdersTabView() {
       renderScene={renderScene}
       renderTabBar={renderTabBar}
       onIndexChange={setIndex}
-      initialLayout={initialLayout}
       lazy={true}
       lazyPreloadDistance={0}
       swipeEnabled={false}
