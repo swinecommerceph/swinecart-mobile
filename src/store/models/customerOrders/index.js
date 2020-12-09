@@ -10,7 +10,7 @@ const LIMIT = 5;
 export default {
   // State
   currentIndex: new IndexPath(0),
-  isRequestingItem: false, 
+  isRequestingItem: false,
   ordersById: {
 
   },
@@ -96,14 +96,20 @@ export default {
 
     const { removeItem: removeCartItem } = getStoreActions().cart;
 
-    const { 
-      cartItemId, type, currentQuantity, currentDate, currentRequest 
+    const {
+      cartItemId, type, quantity, date, specialRequest, isUnique
     } = payload;
 
     const requestData = {
-      requestQuantity: type === 'semen' ? currentQuantity : 1,
-      dateNeeded: type === 'semen' ? currentDate : '',
-      specialRequest: currentRequest
+      requestQuantity:
+        type === 'semen'
+          ? quantity
+          :
+            isUnique
+              ? 1
+              : quantity,
+      dateNeeded: type === 'semen' ? date : '',
+      specialRequest
     };
 
     const [error, data] = await to(TransactionService.requestItem(cartItemId, requestData));
@@ -113,13 +119,9 @@ export default {
     }
 
     else {
-
-      const { item } = data.data;
-
+      actions.getItems({ status: 'requested', isRefresh: true });
       ToastService.show('Product successfully requested!', () => {
-        // actions.addItem({ item, status: 'requested' });
         removeCartItem(cartItemId);
-        actions.getItems({ status: 'requested', isRefresh: true });
         actions.setIsRequestingItem(false);
         NavigationService.back();
       });

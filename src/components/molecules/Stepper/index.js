@@ -1,19 +1,52 @@
-import React, { Fragment, memo } from 'react';
+import React, { memo } from 'react';
+import clamp from 'lodash/clamp';
 
-import { colors } from 'constants/theme';
+import {
+  Block,
+  Icon,
+  Button
+} from 'atoms';
+
+const AddIcon = () => (
+  <Icon name='plus' color='white1' size={20} />
+);
+
+const MinusIcon = () => (
+  <Icon name='minus' color='white1' size={20}/>
+);
 
 function Stepper(props) {
 
+  const {
+    value,
+    setValue,
+    maxValue,
+    minValue,
+    step,
+  } = props;
+
+  const onPressIncre = () => {
+    setValue(clamp(value + step, minValue, maxValue));
+  };
+
+  const onPressDecre = () => {
+    setValue(clamp(value - step, minValue, maxValue));
+  };
+
   return (
-    <Fragment>
-      {/* <NumberStepper
-        {...props}
-        maxValue={10000}
-        buttonsFontSize={25}
-        buttonsBackgroundColor={colors.primary}
-        // labelBackgroundColor={colors.primary}
-      /> */}
-    </Fragment>
+    <Block row center>
+      <Button
+        size='tiny'
+        accessoryLeft={AddIcon}
+        onPress={onPressIncre}
+        marginRight={0.5}
+      />
+      <Button
+        size='tiny'
+        accessoryLeft={MinusIcon}
+        onPress={onPressDecre}
+      />
+    </Block>
   );
 }
 

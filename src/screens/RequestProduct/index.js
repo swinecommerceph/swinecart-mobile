@@ -11,13 +11,15 @@ import {
 
 function Container({ route }) {
 
-  const isLoading = useStoreState(state => state.customerOrders.isRequestingItem);
+  const isRequestingItem = useStoreState(
+    state => state.customerOrders.isRequestingItem
+  );
 
   const data = route.params;
 
   return (
     <Fragment>
-      <LoadingOverlay show={isLoading} />
+      <LoadingOverlay show={isRequestingItem} />
       <HeaderBar title='Request Product' accessoryLeft={BackButton} />
       <Form data={data} />
     </Fragment>

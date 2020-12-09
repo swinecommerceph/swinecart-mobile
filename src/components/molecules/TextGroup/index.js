@@ -7,13 +7,18 @@ import {
 
 function TextGroup(props) {
 
-  const { label, data, isItalicized = false } = props;
+  const {
+    label,
+    data,
+    isItalicized = false,
+    hasBorder = true
+  } = props;
 
   return (
     <Block
       paddingVertical={0.5}
       paddingHorizontal={1}
-      borderBottomWidth={1}
+      borderBottomWidth={hasBorder ? 1 : 0}
       borderBottomColor='gray2'
     >
       <Text semibold color='gray5' size={14}>

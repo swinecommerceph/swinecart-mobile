@@ -1,16 +1,22 @@
 import React, { Fragment, memo, useState } from 'react';
-import { Dimensions } from 'react-native';
 import { useStoreActions } from 'easy-peasy';
-import { Calendar } from '@ui-kitten/components';
 
 import { formatDeliveryDate } from 'utils/formatters';
 
-import { Stepper, TextArea, ContainerView } from 'molecules';
-import { Block, Button, Text } from 'atoms';
+import {
+  Stepper,
+  Calendar,
+  TextArea,
+  ContainerView,
+  TextGroup,
+} from 'molecules';
+
+import {
+  Block,
+  Button
+} from 'atoms';
 
 import ProductDetails from './ProductDetails';
-
-const screenWidth = Math.round(Dimensions.get('window').width);
 
 function Form({ data }) {
 
@@ -19,64 +25,102 @@ function Form({ data }) {
   );
 
   const today = new Date();
-  const [currentQuantity, setQuantity] = useState(2);
-  const [currentDate, setDate] = useState(today);
-  const [currentRequest, setRequest] = useState('');
+  const [quantity, setQuantity ] = useState(0);
+  const [date, setDate] = useState(today);
+  const [specialRequest, setSpecialRequest] = useState(null);
 
   const { id: cartItemId, product } = data;
-  const { type } = product;
-
-  console.log('Product:', product);
+  const { type, isUnique } = product;
 
   const onPressPrimaryAction = () => {
     requestItem({
-      cartItemId, type, currentQuantity, currentDate, currentRequest
+      cartItemId,
+      type,
+      quantity,
+      date,
+      specialRequest,
+      isUnique,
     });
   };
 
-  const onChangeDate = date => {
-    setDate(date);
-  };
-
-  // formatDeliveryDate(currentDate)
-  // Estimated Date of Delivery
+  const onSelect = date => setDate(date);
 
   return (
     <ContainerView
       showsVerticalScrollIndicator={true}
       backgroundColor='white1'
-      paddingHorizontal={1}
     >
       <ProductDetails product={product} />
         {
-          type === 'semen' &&
-          <Fragment>
-            <Block row center marginBottom={1}>
-              <Text bold size={14} textAlign='left'>
-                Quantity: {currentQuantity}
-              </Text>
-              <Block marginLeft={2}>
-              </Block>
-            </Block>
-            <Block marginBottom={1}>
-              <Block center>
-                <Calendar
-                  date={currentDate}
-                  onSelect={onChangeDate}
-                  style={{ width: screenWidth - 32, minWidth: screenWidth - 32 }}
-                />
-              </Block>
-            </Block>
-          </Fragment>
+          type === 'semen'
+            ?
+              (
+                <Fragment>
+                  <Block row center>
+                    <TextGroup
+                      hasBorder={false}
+                      label='Quantity'
+                      data={quantity}
+                    />
+                    <Block paddingHorizontal={1}>
+                      <Stepper
+                        step={2}
+                        maxValue={50000}
+                        minValue={2}
+                        value={quantity}
+                        setValue={setQuantity}
+                      />
+                    </Block>
+                  </Block>
+                  <Block>
+                    <TextGroup
+                      hasBorder={false}
+                      label='Estimated Date of Delivery'
+                      data={formatDeliveryDate(date)}
+                    />
+                    <Block center >
+                      <Calendar
+                        date={date}
+                        onSelect={onSelect}
+                        min={today}
+                      />
+                    </Block>
+                  </Block>
+                </Fragment>
+              )
+            : []
         }
-        <Block marginTop={1}>
+        {
+          !isUnique
+            ?
+              (
+                <Block row center>
+                  <TextGroup
+                    hasBorder={false}
+                    label='Quantity'
+                    data={quantity}
+                  />
+                  <Block paddingHorizontal={1}>
+                    <Stepper
+                      step={1}
+                      maxValue={50000}
+                      minValue={1}
+                      value={quantity}
+                      setValue={setQuantity}
+                    />
+                  </Block>
+                </Block>
+              )
+            : []
+        }
+        <Block marginTop={1} paddingHorizontal={1}>
           <TextArea
             label='Special Request'
-            value={currentRequest}
-            onChangeText={setRequest}
+            value={specialRequest}
+            onChangeText={setSpecialRequest}
           />
         </Block>
-        <Block row center marginTop={1}>
+        <Block row center marginTop={1} paddingHorizontal={1}>
           <Block flex={1}>
             <Button size='small' onPress={onPressPrimaryAction}>
               Submit

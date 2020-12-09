@@ -46,10 +46,14 @@ function Button(props) {
     <UKButton
       appearance={appearance}
       status={status}
-      style={buttonStyle} 
+      style={buttonStyle}
       {...otherProps}
     >
-      <Text semibold color={color} size={16}>{children}</Text>
+      {
+        children
+          ? <Text semibold color={color} size={16}>{children}</Text>
+          : null
+      }
     </UKButton>
   );
 }

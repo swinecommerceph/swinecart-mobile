@@ -15,7 +15,7 @@ function TextArea(props) {
     <Input
       textAlignVertical='top'
       multiline
-      label={<Text bold color='gray8' size={12}>{label}</Text>}
+      label={<Text semibold color='gray5' size={12}>{label}</Text>}
       textStyle={eva.style.textStyle}
       {...otherProps}
     />
