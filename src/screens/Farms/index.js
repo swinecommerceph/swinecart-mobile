@@ -15,8 +15,9 @@ function Container() {
     getItems({ isRefresh: false });
   }, []);
 
-  const { isLoading } = useStoreState(state => state.farms);
   const accountType = useStoreState(state => state.user.accountType);
+
+  const { isLoading } = useStoreState(state => state.farms);
   const { getItems } = useStoreActions(actions => actions.farms);
 
   return (

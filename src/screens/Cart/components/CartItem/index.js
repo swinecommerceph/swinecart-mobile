@@ -37,12 +37,16 @@ function CartItem({ data }) {
           farmLocation={farmLocation}
         />
         {
-          isDeleted &&
-          <MessageBox
-            marginTop={1}
-            status='info'
-            message='This product has been deleted by the Breeder.'
-          />
+          isDeleted
+            ?
+              (
+                <MessageBox
+                  marginTop={1}
+                  status='info'
+                  message='This product has been deleted by the Breeder.'
+                />
+              )
+            : []
         }
         <ProductActions data={data} />
       </Block>
