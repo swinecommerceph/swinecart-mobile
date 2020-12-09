@@ -14,8 +14,6 @@ const soldRoute = () => <OrdersList status='sold' />;
 
 function OrdersTabView() {
 
-  const { width } = useWindowDimensions();
-
   const [ index, setIndex ] = useState(0);
   const [ routes ] = useState(orderRoutes);
 
@@ -33,10 +31,6 @@ function OrdersTabView() {
   const renderTabBar = ({ jumpTo }) => (
     <StatusPicker jumpTo={jumpTo} />
   );
-
-  const initialLayout = useMemo(
-    () => ({ width })
-  , [ width ]);
 
   return (
     <TabView

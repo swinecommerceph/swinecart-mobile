@@ -10,8 +10,6 @@ import Notifications from './Notifications';
 
 function InboxTabView({ eva: { style } }) {
 
-  const { width } = useWindowDimensions();
-
   const [ index, setIndex ] = useState(0);
   const [ routes ] = useState([
     { key: 'Chats', title: 'Chats', },
@@ -23,10 +21,6 @@ function InboxTabView({ eva: { style } }) {
   , [ index ]);
 
   const getLabelText = ({ route }) => route.title;
-
-  const initialLayout = useMemo(
-    () => ({ width })
-  , [ width ]);
 
   const renderScene = useMemo(() => SceneMap({
     Chats,
@@ -50,7 +44,6 @@ function InboxTabView({ eva: { style } }) {
       navigationState={navigationState}
       renderScene={renderScene}
       onIndexChange={setIndex}
-      initialLayout={initialLayout}
       renderTabBar={renderTabBar}
       lazy={true}
       lazyPreloadDistance={0}
