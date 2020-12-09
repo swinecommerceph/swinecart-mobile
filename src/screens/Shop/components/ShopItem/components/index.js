@@ -1,1 +1,1 @@
-export { default as ProductActions } from './ProductActions';
+export { default as CardActions } from './CardActions';

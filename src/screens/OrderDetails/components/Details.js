@@ -23,7 +23,7 @@ function Details({ status, statusTime }) {
 
   return (
     <Fragment>
-      <ContainerView flex={1} backgroundColor='white1'>
+      <ContainerView flex={1} paddingHorizontal={1} backgroundColor='white1'>
         <DetailBlock>
           <DetailRow
             label='Order No.'

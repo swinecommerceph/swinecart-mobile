@@ -1,19 +1,37 @@
 import React, { memo } from 'react';
 
-import { Block } from 'atoms';
-import { Card, ProductInfo, ProductAvatar } from 'molecules';
+import { NavigationService } from 'services';
 
-import { ProductActions } from './components';
+import {
+  Card,
+  ProductInfo,
+  ProductAvatar,
+} from 'molecules';
+import { Block } from 'atoms';
+
+import { CardActions } from './components';
 
 function ShopItem({ data }) {
 
   const {
-    imageUrl, name, type, breed, age, breederName, farmLocation
+    id, imageUrl, name, type, breed, age, breederName, farmLocation
   } = data;
 
+  const onPress = () => {
+    NavigationService.navigate('ProductView', { id });
+  };
+
   return (
-    <Card>
-      <ProductAvatar shape='rounded' image={imageUrl} size={112} type={type} />
+    <Card
+      isPressable={true}
+      onPress={onPress}
+    >
+      <ProductAvatar
+        shape='rounded'
+        image={imageUrl}
+        size={112}
+        type={type}
+      />
       <Block marginLeft={1}>
         <ProductInfo
           name={name}
@@ -23,7 +41,7 @@ function ShopItem({ data }) {
           breederName={breederName}
           farmLocation={farmLocation}
         />
-        <ProductActions data={data} />
+        <CardActions data={data} />
       </Block>
     </Card>
   );

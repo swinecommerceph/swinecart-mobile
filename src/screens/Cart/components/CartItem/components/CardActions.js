@@ -4,7 +4,7 @@ import { ModalService, NavigationService } from 'services';
 
 import { Block, Button } from 'atoms';
 
-function ProductActions({ data }) {
+function CardActions({ data }) {
 
   const { product } = data;
   const { isDeleted } = product;
@@ -55,4 +55,4 @@ function ProductActions({ data }) {
 
 }
 
-export default memo(ProductActions);
+export default memo(CardActions);

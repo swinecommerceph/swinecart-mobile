@@ -65,27 +65,37 @@ export default {
     actions.setErrors({});
   }),
 
-  submit: thunk(async (actions, payload, { getStoreActions }) => {
+  submit: thunk(async (actions, payload, { getState, getStoreActions }) => {
 
     actions.setLoading({ isSubmitting: true });
+
+    const { values } = getState();
 
     const formErrors = await actions.validateForm();
 
     if (!formErrors) {
       actions.setFilters(values);
       getStoreActions().shop.getItems({ isRefresh: true });
-      NavigationService.back();
+      ToastService.show('Searching...', () => {
+          actions.setLoading({ isSubmitting: false });
+          NavigationService.back();
+        }
+      );
+      return;
     }
 
     actions.setLoading({ isSubmitting: false });
   }),
 
-  clear: thunk(async (actions, payload, { getState, getStoreActions }) => {
+  clear: thunk(async (actions, payload, { getStoreActions }) => {
     actions.setLoading({ isSubmitting: true });
     actions.resetForm();
     getStoreActions().shop.getItems({ isRefresh: true });
-    NavigationService.back();
-    actions.setLoading({ isSubmitting: false });
+    ToastService.show('Clearing filters...', () => {
+        actions.setLoading({ isSubmitting: false });
+        NavigationService.back();
+      }
+    );
   }),
 
   getFilterOptions: thunk(async (actions, payload) => {

@@ -5,8 +5,7 @@ function DetailBlock({ children }) {
   return (
     <Block
       backgroundColor='white1'
-      padding={1}
-      marginBottom={1}
+      marginTop={1}
     >
       {children}
     </Block>

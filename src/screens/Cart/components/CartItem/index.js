@@ -2,11 +2,16 @@ import React, { memo } from 'react';
 
 import { NavigationService } from 'services';
 
-import { Card, ProductInfo, ProductAvatar, MessageBox } from 'molecules';
+import {
+  Card,
+  ProductInfo,
+  ProductAvatar,
+  MessageBox,
+} from 'molecules';
 import { Block } from 'atoms';
 
 import {
-  ProductActions
+  CardActions
 } from './components';
 
 function CartItem({ data }) {
@@ -14,11 +19,11 @@ function CartItem({ data }) {
   const { product } = data;
 
   const {
-    imageUrl, name, type, breed, age, breederName, farmLocation, isDeleted
+    id, imageUrl, name, type, breed, age, breederName, farmLocation, isDeleted
   } = product;
 
   const onPress = () => {
-    NavigationService.navigate('ProductView', { id: product.id });
+    NavigationService.navigate('ProductView', { id });
   };
 
   return (
@@ -26,7 +31,12 @@ function CartItem({ data }) {
       isPressable={true}
       onPress={onPress}
     >
-      <ProductAvatar shape='rounded' type={type} image={imageUrl} size={96} />
+      <ProductAvatar
+        shape='rounded'
+        image={imageUrl}
+        size={96}
+        type={type}
+      />
       <Block flex={1} marginLeft={1}>
         <ProductInfo
           name={name}
@@ -48,7 +58,7 @@ function CartItem({ data }) {
               )
             : []
         }
-        <ProductActions data={data} />
+        <CardActions data={data} />
       </Block>
     </Card>
   );

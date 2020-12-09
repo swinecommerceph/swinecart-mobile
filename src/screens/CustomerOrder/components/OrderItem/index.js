@@ -1,7 +1,11 @@
 import React, { memo } from 'react';
 
-import { Card, ProductAvatar } from 'molecules';
+import { NavigationService } from 'services';
 
+import {
+  Card,
+  ProductAvatar
+} from 'molecules';
 import { Block } from 'atoms';
 
 import {
@@ -18,8 +22,15 @@ function OrderItem({ data }) {
     imageUrl, name, type, breed, age, breederName, farmLocation
   } = product;
 
+  const onPress = () => {
+    NavigationService.navigate('OrderDetails', { order: data })
+  };
+
   return (
-    <Card>
+    <Card
+      isPressable={true}
+      onPress={onPress}
+    >
       <ProductAvatar
         shape='rounded'
         image={imageUrl}
