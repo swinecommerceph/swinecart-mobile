@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import { useWindowDimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
 import OrdersList from './OrdersList';
