@@ -5,7 +5,8 @@ import { StateScreen } from 'organisms';
 import { HeaderBar, BackButton } from 'molecules';
 
 import {
-  UserDetails
+  UserDetails,
+  EditButton,
 } from './components';
 
 function Container() {
@@ -19,7 +20,11 @@ function Container() {
 
   return (
     <Fragment>
-      <HeaderBar title='Profile' accessoryLeft={BackButton} />
+      <HeaderBar
+        title='Profile'
+        accessoryLeft={BackButton}
+        accessoryRight={EditButton}
+      />
       <StateScreen isLoading={isLoading} hasError={false}>
         <UserDetails />
       </StateScreen>

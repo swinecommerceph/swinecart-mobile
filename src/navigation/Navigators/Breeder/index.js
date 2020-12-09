@@ -19,6 +19,7 @@ import {
   FarmFormScreen,
   ProductMediaScreen,
   ConversationScreen,
+  ProfileFormScreen,
 } from 'screens';
 
 import DrawerContent from 'organisms/Drawer';
@@ -73,6 +74,7 @@ function Navigator() {
       <Drawer.Screen name='ProductMedia' component={ProductMediaScreen} />
       <Drawer.Screen name='FarmDetails' component={FarmDetailsScreen} />
       <Drawer.Screen name='FarmForm' component={FarmFormScreen} />
+      <Drawer.Screen name='ProfileForm' component={ProfileFormScreen} />
       <Drawer.Screen name='Conversation' component={ConversationScreen} />
   </Drawer.Navigator>
   );

@@ -1,5 +1,6 @@
 import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
+import kebabCase from 'lodash/kebabCase';
 
 import {
   ToastService, ProfileService
@@ -28,7 +29,13 @@ export default {
     }
     else {
       const { profile } = data.data;
-      actions.setData(profile);
+      actions.setData({
+        ...profile,
+        province: {
+          text: profile.province,
+          key: kebabCase(profile.province),
+        }
+      });
     }
 
     actions.setLoading(false);

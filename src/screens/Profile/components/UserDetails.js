@@ -19,7 +19,7 @@ function UserDetails() {
       <Block marginTop={1} backgroundColor='white1'>
         <TextGroup label='Address Line 1' data={profile.addressLine1} />
         <TextGroup label='Address Line 2' data={profile.addressLine2} />
-        <TextGroup label='Province' data={profile.province} />
+        <TextGroup label='Province' data={profile.province.text} />
         <TextGroup label='Postal / Zip Code' data={profile.zipCode} />
         <TextGroup label='Landline' data={profile.landline} />
         <TextGroup label='Mobile' data={profile.mobile} />
