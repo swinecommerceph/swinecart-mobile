@@ -3,6 +3,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import { StateScreen } from 'organisms';
 import { HeaderBar, BackButton } from 'molecules';
+import { LoadingOverlay } from 'atoms';
 
 import {
   FarmList,
@@ -17,11 +18,20 @@ function Container() {
 
   const accountType = useStoreState(state => state.user.accountType);
 
-  const { isLoading } = useStoreState(state => state.farms);
-  const { getItems } = useStoreActions(actions => actions.farms);
+  const {
+    isLoading: {
+      isFetching,
+      isRemovingItem,
+    }
+  } = useStoreState(state => state.farms);
+
+  const {
+    getItems
+  } = useStoreActions(actions => actions.farms);
 
   return (
     <Fragment>
+      <LoadingOverlay show={isRemovingItem} />
       <HeaderBar
         title='Farms'
         accessoryLeft={BackButton}
@@ -31,7 +41,7 @@ function Container() {
             : null
         }
       />
-      <StateScreen isLoading={isLoading} hasError={false}>
+      <StateScreen isLoading={isFetching} hasError={false}>
         <FarmList />
       </StateScreen>
     </Fragment>

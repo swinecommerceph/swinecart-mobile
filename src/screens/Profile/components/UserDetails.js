@@ -13,9 +13,16 @@ function UserDetails() {
 
   return (
     <ContainerView backgroundColor='white1'>
-      <Block marginTop={1}>
-        <BreederLogo logoURL={profile.logoUrl} />
-      </Block>
+      {
+        accountType === 'Breeder'
+          ?
+            (
+              <Block marginTop={1}>
+                <BreederLogo logoURL={profile.logoUrl} />
+              </Block>
+            )
+          : []
+      }
       <Block marginTop={1} backgroundColor='white1'>
         <TextGroup label='Address Line 1' data={profile.addressLine1} />
         <TextGroup label='Address Line 2' data={profile.addressLine2} />
@@ -25,23 +32,27 @@ function UserDetails() {
         <TextGroup label='Mobile' data={profile.mobile} />
       </Block>
       {
-        accountType === 'Breeder' &&
-        <Fragment>
-          <Block marginTop={1} backgroundColor='white1'>
-            <TextGroup
-              label='Contact Person Name'
-              data={profile.contactPerson.name}
-            />
-            <TextGroup
-              label='Contact Person Mobile'
-              data={profile.contactPerson.mobile}
-            />
-          </Block>
-          <Block marginTop={1} backgroundColor='white1'>
-            <TextGroup label='Website' data={profile.website} />
-            <TextGroup label='Produce' data={profile.produce} />
-          </Block>
-        </Fragment>
+        accountType === 'Breeder'
+          ?
+            (
+              <Fragment>
+                <Block marginTop={1} backgroundColor='white1'>
+                  <TextGroup
+                    label='Contact Person Name'
+                    data={profile.contactPerson.name}
+                  />
+                  <TextGroup
+                    label='Contact Person Mobile'
+                    data={profile.contactPerson.mobile}
+                  />
+                </Block>
+                <Block marginTop={1} backgroundColor='white1'>
+                  <TextGroup label='Website' data={profile.website} />
+                  <TextGroup label='Produce' data={profile.produce} />
+                </Block>
+              </Fragment>
+            )
+        : []
       }
     </ContainerView>
   );

@@ -2,23 +2,31 @@ import React, { memo } from 'react';
 
 import { NavigationService } from 'services';
 
-import { Card, ProductInfo, ProductAvatar } from 'molecules';
-import { Block, Button } from 'atoms';
+import {
+  Card,
+  ProductInfo,
+  ProductAvatar
+} from 'molecules';
+
+import { Block } from 'atoms';
 
 function HistoryItem({ data }) {
 
-  const { product, logs } = data;
+  const { product, id } = data;
 
   const {
     imageUrl, name, type, breed, age, breederName, farmLocation
   } = product;
 
-  const onPressView = () => {
-    NavigationService.navigate('HistoryDetails', { logs });
+  const onPress = () => {
+    NavigationService.navigate('OrderDetails', { order: data });
   };
 
   return (
-    <Card>
+    <Card
+      isPressable={true}
+      onPress={onPress}
+    >
       <ProductAvatar
         shape='rounded'
         image={imageUrl}
@@ -34,11 +42,6 @@ function HistoryItem({ data }) {
           breederName={breederName}
           farmLocation={farmLocation}
         />
-        <Block marginTop={1} alignSelf='flex-start'>
-          <Button size='small' status='basic' onPress={onPressView}>
-            View Order Details
-          </Button>
-        </Block>
       </Block>
     </Card>
   );

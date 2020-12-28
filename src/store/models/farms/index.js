@@ -2,7 +2,8 @@ import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 
 import {
-  ToastService, FarmService
+  ToastService,
+  FarmService,
 } from 'services';
 
 import { BaseModel } from '../../utils';
@@ -11,19 +12,39 @@ export default {
 
   ...BaseModel(),
 
+  isLoading: {
+    isFetching: true,
+    isFetchingMore: false,
+    isRefreshing: false,
+
+    isAddingItem: false,
+    isFetchingItem: false,
+    isUpdatingItem: false,
+    isRemovingItem: false,
+  },
+
+  setLoading: action((state, payload) => {
+    state.isLoading = { ...state.isLoading, ...payload };
+  }),
+
   removeItem: action((state, payload) => {
     state.items = state.items.filter(item => item.id !== payload);
   }),
 
   deleteFarm: thunk(async (actions, payload) => {
+
+    actions.setLoading({ isRemovingItem: true });
+
     const [ error, data ] = await to(FarmService.deleteFarm(payload));
 
     if (error) {
-
+      actions.setLoading({ isRemovingItem: false });
     }
     else {
-      ToastService.show('Delete success!', null);
       actions.removeItem(payload);
+      ToastService.show('Delete success!', () => {
+        actions.setLoading({ isRemovingItem: false });
+      });
     }
 
   }),
@@ -32,9 +53,9 @@ export default {
 
     const { isRefresh } = payload;
 
-    isRefresh
-      ? actions.setRefreshing(true)
-      : actions.setLoading(true);
+    actions.setLoading({
+      [ isRefresh ? 'isRefreshing' : 'isFetching' ]: true
+    });
 
     const [error, data] = await to(FarmService.getFarms());
 
@@ -52,9 +73,9 @@ export default {
       actions.setItems({ items, page: 1 });
     }
 
-    isRefresh
-      ? actions.setRefreshing(false)
-      : actions.setLoading(false);
+    actions.setLoading({
+      [ isRefresh ? 'isRefreshing' : 'isFetching' ]: false
+    });
 
   })
 };

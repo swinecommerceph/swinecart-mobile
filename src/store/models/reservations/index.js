@@ -1,7 +1,7 @@
 import { action, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 
-import { OrderService, NavigationService, ToastService } from 'services';
+import { OrderService, NavigationService, TransactionService, ToastService } from 'services';
 
 import routes from 'constants/routes';
 
@@ -20,6 +20,46 @@ export default {
   }),
 
   // Side Effects
+
+  requestItem: thunk(async (actions, payload, { getStoreActions }) => {
+
+    actions.setLoading(true);
+
+    const { removeItem: removeCartItem } = getStoreActions().cart;
+
+    const {
+      cartItemId, type, quantity, date, specialRequest, isUnique
+    } = payload;
+
+    const requestData = {
+      quantity:
+        type === 'semen'
+          ? quantity
+          :
+            isUnique
+              ? 1
+              : quantity,
+      dateNeeded: type === 'semen' ? date : null,
+      specialRequest
+    };
+
+    const [error, data] = await to(TransactionService.requestItem(cartItemId, requestData));
+
+    if (error) {
+      ToastService.show('Please try again later!', null);
+      actions.setLoading(false);
+    }
+
+    else {
+      getStoreActions().customerOrders.getItems({ status: 'requested', isRefresh: true });
+      ToastService.show('Product successfully requested!', () => {
+        removeCartItem(cartItemId);
+        actions.setLoading(false);
+        NavigationService.back();
+      });
+    }
+
+  }),
 
   disapproveRequest: thunk(async (actions, payload, { getStoreActions }) => {
 

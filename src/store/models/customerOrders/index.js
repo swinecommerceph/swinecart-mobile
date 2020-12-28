@@ -10,7 +10,6 @@ const LIMIT = 5;
 export default {
   // State
   currentIndex: new IndexPath(0),
-  isRequestingItem: false,
   ordersById: {
 
   },
@@ -84,50 +83,7 @@ export default {
     getOrderObject(state, status).hasError = hasError;
   }),
 
-  setIsRequestingItem: action((state, payload) => {
-    state.isRequestingItem = payload;
-  }),
-
   // Side Effects
-
-  requestItem: thunk(async (actions, payload, { getStoreActions }) => {
-
-    actions.setIsRequestingItem(true);
-
-    const { removeItem: removeCartItem } = getStoreActions().cart;
-
-    const {
-      cartItemId, type, quantity, date, specialRequest, isUnique
-    } = payload;
-
-    const requestData = {
-      requestQuantity:
-        type === 'semen'
-          ? quantity
-          :
-            isUnique
-              ? 1
-              : quantity,
-      dateNeeded: type === 'semen' ? date : '',
-      specialRequest
-    };
-
-    const [error, data] = await to(TransactionService.requestItem(cartItemId, requestData));
-
-    if (error) {
-      ToastService.show('Please try again later!', null);
-    }
-
-    else {
-      actions.getItems({ status: 'requested', isRefresh: true });
-      ToastService.show('Product successfully requested!', () => {
-        removeCartItem(cartItemId);
-        actions.setIsRequestingItem(false);
-        NavigationService.back();
-      });
-    }
-
-  }),
 
   getItems: thunk(async (actions, payload) => {
 

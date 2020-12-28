@@ -13,8 +13,10 @@ function FarmList() {
 
   const {
     items,
-    isRefreshing,
-    isLoadingMore,
+    isLoading: {
+      isFetchingMore,
+      isRefreshing,
+    }
   } = useStoreState(state => state.farms);
 
   const keyExtractor = item => `${item.id}`;
@@ -32,7 +34,7 @@ function FarmList() {
       isRefreshing={isRefreshing}
       onPressLoadMore={onPressLoadMore}
       onRefresh={onRefresh}
-      isLoadingMore={isLoadingMore}
+      isLoadingMore={isFetchingMore}
     />
   );
 }

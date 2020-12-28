@@ -14,13 +14,22 @@ function Container() {
 
   useFocusEffect(
     useCallback(() => {
-      setValues({
+
+      const values = {
+        accountType,
         ...profileDetails,
-        contactPersonName: profileDetails.contactPerson.name,
-        contactPersonMobile: profileDetails.contactPerson.mobile,
-      });
+        ...accountType === 'Breeder'
+          ? {
+            contactPersonName: profileDetails.contactPerson.name,
+            contactPersonMobile: profileDetails.contactPerson.mobile,
+          } : {} ,
+      }
+
+      setValues(values);
     }, [])
   );
+
+  const accountType = useStoreState(state => state.user.accountType);
 
   const profileDetails = useStoreState(state => state.profile.data);
 

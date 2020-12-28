@@ -21,7 +21,7 @@ import ProductDetails from './ProductDetails';
 function Form({ data }) {
 
   const requestItem = useStoreActions(
-    actions => actions.customerOrders.requestItem
+    actions => actions.reservations.requestItem
   );
 
   const today = new Date();
@@ -91,7 +91,7 @@ function Form({ data }) {
             : []
         }
         {
-          !isUnique
+          !isUnique && ! (type === 'semen')
             ?
               (
                 <Block row center>

@@ -21,6 +21,8 @@ function Container({ route }) {
     [route.params.order]
   );
 
+  console.log(route.params.order);
+
   useFocusEffect(
     useCallback(() => {
       getOrder(id);
@@ -36,12 +38,12 @@ function Container({ route }) {
         title='Order Details'
         accessoryLeft={BackButton}
       />
-      <StateScreen isLoading={isLoading}>
+      {/* <StateScreen isLoading={isLoading}>
         <Details
           status={status}
           statusTime={statusTime}
         />
-      </StateScreen>
+      </StateScreen> */}
     </Fragment>
   );
 }
