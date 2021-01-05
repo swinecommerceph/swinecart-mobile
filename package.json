@@ -23,7 +23,7 @@
     "@ui-kitten/eva-icons": "5.0.0",
     "apisauce": "1.1.1",
     "await-to-js": "2.1.1",
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "date-fns": "2.9.0",
     "easy-peasy": "4.0.1",
     "lodash": "4.17.15",
