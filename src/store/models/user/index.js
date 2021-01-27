@@ -1,8 +1,9 @@
 import { action, thunk } from 'easy-peasy';
 import last from 'lodash/last';
 import to from 'await-to-js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { AuthService, ToastService, ChatClient } from 'services';
+import { AuthService, ToastService } from 'services';
 
 import { apiErrors } from 'constants/enums';
 
@@ -18,29 +19,34 @@ export default {
 
   setUserData: action((state, payload) => {
 
-    const { accountType, data } = payload;
-    const { id, name } = data;
+    const { accountType } = payload;
 
-    state.data = data;
+    state.data = payload;
     state.accountType = accountType;
   }),
 
   // Thunk
   getUserData: thunk(async (actions, payload, { getStoreActions }) => {
 
-    const [error, data] = await to(AuthService.getLoggedInUser());
+    const userData = await AsyncStorage.getItem('user');
 
-    if (error) {
-      const { problem } = error;
+    if (userData) {
+      actions.setUserData(JSON.parse(userData));
+    }
 
-      if (apiErrors[problem]) {
-        getStoreActions().auth.setTokenData(null);
-      }
+  }),
+
+  saveUserData: thunk(async (actions, payload) => {
+    const userData = payload;
+
+    if (userData) {
+
+      const userString = JSON.stringify(userData);
+
+      await AsyncStorage.setItem('user', userString);
     }
     else {
-      const { user, topic } = data.data;
-      const accountType = last(user.userable_type.split('\\'));
-      actions.setUserData({ data: user, accountType });
+      await AsyncStorage.removeItem('user');
     }
 
   }),

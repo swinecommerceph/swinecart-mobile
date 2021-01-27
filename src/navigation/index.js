@@ -43,8 +43,8 @@ function RootNavigation(props) {
               ?
                 (
                   <Stack.Screen
-                      name='MainApp'
-                      component={MainAppStack}
+                    name='MainApp'
+                    component={MainAppStack}
                   />
                 )
               :

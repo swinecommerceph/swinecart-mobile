@@ -44,6 +44,7 @@ export default {
 
     const { values } = getState();
     const { setTokenData } = getStoreActions().auth;
+    const { setUserData, saveUserData } = getStoreActions().user;
 
     const formErrors = await actions.validateForm();
 
@@ -62,7 +63,11 @@ export default {
         }
       }
       else {
-        setTokenData(data.data.token);
+
+        const { token, user } = data.data;
+        setTokenData(token);
+        setUserData(user);
+        saveUserData(user);
         actions.setValues(initialState);
       }
     }

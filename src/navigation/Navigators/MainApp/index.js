@@ -11,41 +11,42 @@ const Stack = createStackNavigator();
 
 function Navigator() {
 
-    useEffect(() => {
-        getUserData();
-    }, []);
+  useEffect(() => {
+    getUserData();
+  }, []);
 
-    const accountType = useStoreState(state => state.user.accountType);
-    const getUserData = useStoreActions(actions => actions.user.getUserData);
+  const accountType = useStoreState(state => state.user.accountType);
+  const getUserData = useStoreActions(actions => actions.user.getUserData);
 
-    return (
-        <Stack.Navigator headerMode='none' animationEnabled={false}>
-            { accountType
-                ?
-                    accountType === 'Breeder'
-                        ?
-                            (
-                                <Stack.Screen
-                                    name='BreederNavigator'
-                                    component={BreederNavigator}
-                                />
-                            )
-                        :   (
-                                <Stack.Screen
-                                    name='CustomerNavigator'
-                                    component={CustomerNavigator}
-                                />
-                            )
-                :
-                    (
-                        <Stack.Screen
-                            name='LoadingScreen'
-                            component={LoadingScreen}
-                        />
-                    )
-            }
-        </Stack.Navigator>
-    );
+  return (
+    <Stack.Navigator headerMode='none' animationEnabled={false}>
+      { accountType
+        ?
+          accountType === 'Breeder'
+            ?
+              (
+                <Stack.Screen
+                  name='BreederNavigator'
+                  component={BreederNavigator}
+                />
+              )
+            :
+              (
+                <Stack.Screen
+                  name='CustomerNavigator'
+                  component={CustomerNavigator}
+                />
+              )
+        :
+          (
+            <Stack.Screen
+              name='LoadingScreen'
+              component={LoadingScreen}
+            />
+          )
+      }
+    </Stack.Navigator>
+  );
 }
 
 export default Navigator;

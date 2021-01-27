@@ -18,7 +18,7 @@ class ChatClient {
   }
 
   onOpen() {
-    console.log('Open');
+    // console.log('Open');
     const message = {
       connect: true,
       userId: this.user.id,
@@ -27,13 +27,13 @@ class ChatClient {
   }
 
   onClose() {
-    console.log('Close');
-    console.log('Reconnect')
+    // console.log('Close');
+    // console.log('Reconnect')
     this.connect(this.user, this.callback);
   }
 
   onError() {
-    console.log('Error');
+    // console.log('Error');
   }
 
   onMessage({ data }) {
